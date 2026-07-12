@@ -1,0 +1,8 @@
+[
+  {
+    "levelId": "nivel-1",
+    "title": "Examen — Nivel 1",
+    "description": "Demuestra lo aprendido sobre raciones, gramos y alimentos básicos. Necesitas al menos 60% para aprobar y desbloquear el modo libre.",
+    "exerciseIds": ["n1-ex1", "n1-ex2", "n1-ex4", "n1-ex6"]
+  }
+]

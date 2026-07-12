@@ -3,17 +3,27 @@ import type { UserProgress } from "@/lib/domain/progress";
 
 export const PROGRESS_COOKIE = "migajas_progress";
 
-const EMPTY: UserProgress = { completions: [] };
+export const EMPTY_PROGRESS: UserProgress = {
+  completions: [],
+  completedLessons: [],
+  completedPracticeSteps: [],
+  freeModeUnlocked: false,
+};
 
 export async function getStoredProgress(): Promise<UserProgress> {
   const cookieStore = await cookies();
   const raw = cookieStore.get(PROGRESS_COOKIE)?.value;
-  if (!raw) return EMPTY;
+  if (!raw) return { ...EMPTY_PROGRESS };
   try {
-    const parsed = JSON.parse(raw) as UserProgress;
-    return parsed?.completions ? parsed : EMPTY;
+    const parsed = JSON.parse(raw) as Partial<UserProgress>;
+    return {
+      completions: parsed.completions ?? [],
+      completedLessons: parsed.completedLessons ?? [],
+      completedPracticeSteps: parsed.completedPracticeSteps ?? [],
+      freeModeUnlocked: parsed.freeModeUnlocked ?? false,
+    };
   } catch {
-    return EMPTY;
+    return { ...EMPTY_PROGRESS };
   }
 }
 

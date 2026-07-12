@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { NavBar } from "@/components/NavBar";
+import { AppNavBar } from "@/components/AppNavBar";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
 import { Button } from "@/components/Button";
 import {
@@ -11,6 +11,7 @@ import {
 import { isLevelUnlocked, getFailedExerciseIds } from "@/lib/domain/progress";
 import { getStoredProgress } from "@/lib/progress-storage";
 import { getStoredAttempts } from "@/lib/attempts-storage";
+import { requireFreeMode } from "@/lib/free-mode";
 
 interface LevelPageProps {
   params: Promise<{ id: string }>;
@@ -27,6 +28,7 @@ export default async function LevelPage({
   params,
   searchParams,
 }: LevelPageProps) {
+  await requireFreeMode();
   const { id } = await params;
   const { retry } = await searchParams;
   const retryMode = retry === "1";
@@ -47,7 +49,7 @@ export default async function LevelPage({
   if (!unlocked) {
     return (
       <>
-        <NavBar />
+        <AppNavBar />
         <main className="mx-auto max-w-3xl flex-1 px-4 py-12 text-center">
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
             <p className="text-4xl">🔒</p>
@@ -83,7 +85,7 @@ export default async function LevelPage({
 
   return (
     <>
-      <NavBar />
+      <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
         <header className="mb-8">
           <p className="text-sm font-medium text-emerald-600">

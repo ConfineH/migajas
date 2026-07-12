@@ -1,0 +1,89 @@
+[
+  {
+    "id": "l1-lesson-1",
+    "levelId": "nivel-1",
+    "orderIndex": 1,
+    "title": "¿Qué es una ración?",
+    "summary": "Aprende la unidad básica del conteo de carbohidratos en España.",
+    "steps": [
+      {
+        "id": "l1-1-s1",
+        "type": "explanation",
+        "title": "La unidad de trabajo",
+        "body": "En España, una ración de carbohidratos equivale a 10 gramos de HC. No es el peso del alimento, sino los carbohidratos que aporta."
+      },
+      {
+        "id": "l1-1-s2",
+        "type": "example",
+        "title": "Ejemplo: pan blanco",
+        "body": "1 rebanada de pan blanco pesa 25 g, pero aporta 10 g de carbohidratos. Eso son 1,0 ración.",
+        "foodId": "pan-blanco"
+      },
+      {
+        "id": "l1-1-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Comprueba si has entendido la unidad de ración con un ejercicio rápido.",
+        "exerciseId": "n1-ex1"
+      }
+    ]
+  },
+  {
+    "id": "l1-lesson-2",
+    "levelId": "nivel-1",
+    "orderIndex": 2,
+    "title": "Gramos y carbohidratos",
+    "summary": "El peso del alimento no es lo mismo que los carbohidratos.",
+    "steps": [
+      {
+        "id": "l1-2-s1",
+        "type": "explanation",
+        "title": "Dos números distintos",
+        "body": "Siempre verás dos cifras: los gramos del alimento (cuánto pesa la porción) y los gramos de carbohidratos (cuánto HC aporta). Las raciones se calculan solo con los HC."
+      },
+      {
+        "id": "l1-2-s2",
+        "type": "example",
+        "title": "Ejemplo: manzana",
+        "body": "Una manzana pequeña pesa 120 g pero aporta 15 g de HC. Eso son 1,5 raciones — no 12 raciones.",
+        "foodId": "manzana"
+      },
+      {
+        "id": "l1-2-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Calcula las raciones a partir de los gramos de carbohidratos.",
+        "exerciseId": "n1-ex2"
+      }
+    ]
+  },
+  {
+    "id": "l1-lesson-3",
+    "levelId": "nivel-1",
+    "orderIndex": 3,
+    "title": "Alimentos básicos del día a día",
+    "summary": "Pan, fruta y lácteos: los primeros alimentos que debes reconocer.",
+    "steps": [
+      {
+        "id": "l1-3-s1",
+        "type": "explanation",
+        "title": "Empieza por lo sencillo",
+        "body": "Antes de platos combinados, domina alimentos base: pan, frutas y lácteos. Son los que más repetirás."
+      },
+      {
+        "id": "l1-3-s2",
+        "type": "example",
+        "title": "Ejemplo: leche",
+        "body": "1 taza de leche (250 ml) aporta 12 g de HC = 1,2 raciones. El yogur natural aporta menos: 5 g = 0,5 raciones.",
+        "foodId": "leche"
+      },
+      {
+        "id": "l1-3-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Identifica alimentos básicos y sus raciones.",
+        "exerciseId": "n1-ex3"
+      }
+    ]
+  }
+]

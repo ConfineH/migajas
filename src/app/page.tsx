@@ -1,10 +1,10 @@
+import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
-import { NavBar } from "@/components/NavBar";
 
 export default function Home() {
   return (
     <>
-      <NavBar />
+      <AppNavBar />
       <main className="mx-auto flex max-w-3xl flex-1 flex-col px-4 py-12">
         <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
           <div className="space-y-4">
@@ -15,17 +15,17 @@ export default function Home() {
               Migajas
             </h1>
             <p className="mx-auto max-w-md text-lg text-gray-600">
-              Practica con alimentos y platos de tu día a día. Aprende a
-              relacionar gramos, carbohidratos y raciones paso a paso.
+              Un curso breve guiado para aprender a relacionar gramos,
+              carbohidratos y raciones con comida real de España.
             </p>
           </div>
 
           <div className="flex w-full max-w-sm flex-col gap-3 sm:flex-row sm:justify-center">
             <Button href="/onboarding" className="w-full sm:w-auto">
-              Empezar
+              Empezar curso
             </Button>
-            <Button href="/levels" variant="secondary" className="w-full sm:w-auto">
-              Practicar
+            <Button href="/learn" variant="secondary" className="w-full sm:w-auto">
+              Continuar
             </Button>
           </div>
 
@@ -40,18 +40,18 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Elige tu país",
-                desc: "Contenido adaptado a la comida cotidiana española.",
+                title: "Lecciones cortas",
+                desc: "Conceptos claros con ejemplos de alimentos reales.",
               },
               {
                 step: "2",
-                title: "Explora alimentos",
-                desc: "Ve porciones, gramos, carbohidratos y raciones.",
+                title: "Práctica y examen",
+                desc: "Ejercicios entre lecciones y examen al final del nivel.",
               },
               {
                 step: "3",
-                title: "Practica",
-                desc: "Ejercicios con feedback inmediato para afianzar el aprendizaje.",
+                title: "Modo libre",
+                desc: "Tras aprobar, desbloqueas catálogo y práctica libre.",
               },
             ].map((item) => (
               <li

@@ -1,14 +1,23 @@
 import Link from "next/link";
 
-const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/levels", label: "Practicar" },
-  { href: "/progress", label: "Progreso" },
-  { href: "/catalog", label: "Catálogo" },
-  { href: "/onboarding", label: "Configuración" },
-];
+interface NavBarProps {
+  freeMode?: boolean;
+}
 
-export function NavBar() {
+export function NavBar({ freeMode = false }: NavBarProps) {
+  const links = [
+    { href: "/", label: "Inicio" },
+    { href: "/learn", label: "Curso" },
+    ...(freeMode
+      ? [
+          { href: "/levels", label: "Practicar" },
+          { href: "/catalog", label: "Catálogo" },
+        ]
+      : []),
+    { href: "/progress", label: "Progreso" },
+    { href: "/onboarding", label: "Configuración" },
+  ];
+
   return (
     <header className="sticky top-0 z-10 border-b border-emerald-100 bg-white/95 backdrop-blur">
       <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
@@ -18,7 +27,7 @@ export function NavBar() {
         >
           Migajas
         </Link>
-        <ul className="flex gap-4 text-sm font-medium text-emerald-700">
+        <ul className="flex flex-wrap gap-3 text-sm font-medium text-emerald-700">
           {links.map((link) => (
             <li key={link.href}>
               <Link

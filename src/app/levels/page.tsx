@@ -1,19 +1,21 @@
-import { NavBar } from "@/components/NavBar";
+import { AppNavBar } from "@/components/AppNavBar";
 import { LevelsList } from "@/components/LevelsList";
 import { getStoredProgress } from "@/lib/progress-storage";
 import { getStoredAttempts } from "@/lib/attempts-storage";
+import { requireFreeMode } from "@/lib/free-mode";
 
 export const metadata = {
   title: "Practicar — Migajas",
 };
 
 export default async function LevelsPage() {
+  await requireFreeMode();
   const progress = await getStoredProgress();
   const attempts = await getStoredAttempts();
 
   return (
     <>
-      <NavBar />
+      <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Practicar</h1>

@@ -2,6 +2,7 @@ schema: spec-driven
 project: migajas
 language: es
 strict_tdd: true
+product_model: guided-course-first
 testing:
   runner: vitest
   command: npm test
@@ -16,3 +17,5 @@ rules:
     - Content in Spanish for UI; technical artifacts in English
     - 10g carbs = 1 ration for Spain
     - Always show grams and carbs; rations are derived
+    - Guided flow before free mode: lessons → practice → exam → catalog
+    - Catalog is reference support, not primary entry

@@ -21,7 +21,7 @@ export function OnboardingFlow() {
         completed: true,
       }),
     });
-    router.push("/catalog");
+    router.push("/learn/nivel-1");
   }
 
   return (
@@ -120,7 +120,7 @@ export function OnboardingFlow() {
             <Button variant="ghost" onClick={() => setStep("mode")}>
               Atrás
             </Button>
-            <Button onClick={completeOnboarding}>Ver catálogo</Button>
+            <Button onClick={completeOnboarding}>Empezar el curso</Button>
           </div>
         </section>
       )}

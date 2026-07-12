@@ -52,6 +52,9 @@ describe("isLevelUnlocked", () => {
           passed: true,
         },
       ],
+      completedLessons: [],
+      completedPracticeSteps: [],
+      freeModeUnlocked: false,
     };
     expect(isLevelUnlocked(2, progress.completions, levels)).toBe(true);
   });
@@ -68,17 +71,32 @@ describe("isLevelUnlocked", () => {
           passed: false,
         },
       ],
+      completedLessons: [],
+      completedPracticeSteps: [],
+      freeModeUnlocked: false,
     };
     expect(isLevelUnlocked(2, progress.completions, levels)).toBe(false);
   });
 });
 
 describe("completeLevel", () => {
+  const empty: UserProgress = {
+    completions: [],
+    completedLessons: [],
+    completedPracticeSteps: [],
+    freeModeUnlocked: false,
+  };
+
   it("records completion with mastery score", () => {
-    const result = completeLevel({ completions: [] }, "nivel-1", 5, 6);
+    const result = completeLevel(empty, "nivel-1", 5, 6);
     const completion = getLevelCompletion(result, "nivel-1");
     expect(completion?.masteryScore).toBe(83);
     expect(completion?.passed).toBe(true);
+  });
+
+  it("unlocks free mode when nivel-1 exam is passed", () => {
+    const result = completeLevel(empty, "nivel-1", 4, 4);
+    expect(result.freeModeUnlocked).toBe(true);
   });
 });
 

@@ -12,6 +12,9 @@ export interface LevelCompletion {
 
 export interface UserProgress {
   completions: LevelCompletion[];
+  completedLessons: string[];
+  completedPracticeSteps: string[];
+  freeModeUnlocked: boolean;
 }
 
 export interface LevelRef {
@@ -52,7 +55,12 @@ export function completeLevel(
   const passed = hasPassed(masteryScore);
   const filtered = progress.completions.filter((c) => c.levelId !== levelId);
 
+  const unlockFree =
+    levelId === "nivel-1" && passed ? true : progress.freeModeUnlocked;
+
   return {
+    ...progress,
+    freeModeUnlocked: unlockFree,
     completions: [
       ...filtered,
       {

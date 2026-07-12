@@ -1,0 +1,43 @@
+import { NextResponse } from "next/server";
+import {
+  completeLesson,
+  completePracticeStep,
+  toGuidedProgress,
+  mergeGuidedIntoUserProgress,
+} from "@/lib/domain/guided-flow";
+import {
+  PROGRESS_COOKIE,
+  getStoredProgress,
+  serializeProgress,
+} from "@/lib/progress-storage";
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { action, id } = body as {
+    action: "complete-lesson" | "complete-practice";
+    id: string;
+  };
+
+  const stored = await getStoredProgress();
+  let guided = toGuidedProgress(stored);
+
+  if (action === "complete-lesson") {
+    guided = completeLesson(guided, id);
+  } else if (action === "complete-practice") {
+    guided = completePracticeStep(guided, id);
+  } else {
+    return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+  }
+
+  const updated = mergeGuidedIntoUserProgress(stored, guided);
+  const response = NextResponse.json({ ok: true, progress: updated });
+
+  response.cookies.set(PROGRESS_COOKIE, serializeProgress(updated), {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 365,
+    path: "/",
+  });
+
+  return response;
+}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NavBar } from "@/components/NavBar";
+import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
 import {
   getLevels,
@@ -15,6 +15,11 @@ import {
 import { accuracyRate } from "@/lib/domain/attempts";
 import { getStoredProgress } from "@/lib/progress-storage";
 import { getStoredAttempts } from "@/lib/attempts-storage";
+import {
+  toGuidedProgress,
+  getLessonProgressPercent,
+  isFreeModeUnlocked,
+} from "@/lib/domain/guided-flow";
 
 export const metadata = {
   title: "Mi progreso — Migajas",
@@ -23,9 +28,12 @@ export const metadata = {
 export default async function ProgressPage() {
   const progress = await getStoredProgress();
   const attempts = await getStoredAttempts();
+  const guided = toGuidedProgress(progress);
   const levels = getLevels();
   const passed = countPassedLevels(progress);
   const overallAccuracy = accuracyRate(attempts);
+  const coursePct = getLessonProgressPercent(guided, "nivel-1");
+  const freeMode = isFreeModeUnlocked(guided);
 
   const allFailed = getFailedExerciseIds(
     attempts,
@@ -36,14 +44,29 @@ export default async function ProgressPage() {
 
   return (
     <>
-      <NavBar />
+      <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Mi progreso</h1>
           <p className="mt-2 text-gray-600">
-            Niveles completados, tasa de acierto y ejercicios para repasar.
+            Curso guiado, niveles aprobados y ejercicios para repasar.
           </p>
         </header>
+
+        <div className="mb-8 rounded-2xl border border-emerald-100 bg-emerald-50 p-5">
+          <p className="text-sm font-medium text-emerald-700">Curso Nivel 1</p>
+          <p className="mt-1 text-2xl font-bold text-emerald-800">{coursePct}%</p>
+          <p className="mt-1 text-sm text-emerald-600">
+            {guided.completedLessons.length} lecciones ·{" "}
+            {guided.completedPracticeSteps.length} prácticas
+            {freeMode ? " · Modo libre activo" : " · Modo libre bloqueado"}
+          </p>
+          {!freeMode && (
+            <Link href="/learn/nivel-1" className="mt-3 inline-block text-sm font-semibold text-emerald-700">
+              Continuar curso →
+            </Link>
+          )}
+        </div>
 
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border border-emerald-100 bg-white p-4 text-center">
