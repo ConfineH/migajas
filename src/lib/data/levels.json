@@ -5,5 +5,33 @@
     "name": "Nivel 1 — Lo básico",
     "description": "Pan, fruta y lácteos. Aprende a reconocer porciones y raciones en alimentos sencillos.",
     "country": "España"
+  },
+  {
+    "id": "nivel-2",
+    "orderIndex": 2,
+    "name": "Nivel 2 — Cereales y tubérculos",
+    "description": "Arroz, pasta y patata. Alimentos base de muchos platos cotidianos.",
+    "country": "España"
+  },
+  {
+    "id": "nivel-3",
+    "orderIndex": 3,
+    "name": "Nivel 3 — Legumbres y verduras",
+    "description": "Lentejas, garbanzos y verduras con más contenido de HC.",
+    "country": "España"
+  },
+  {
+    "id": "nivel-4",
+    "orderIndex": 4,
+    "name": "Nivel 4 — Platos mixtos",
+    "description": "Tortilla, paella, bocadillo y otros platos compuestos.",
+    "country": "España"
+  },
+  {
+    "id": "nivel-5",
+    "orderIndex": 5,
+    "name": "Nivel 5 — Casos reales",
+    "description": "Combinaciones y situaciones del día a día para afianzar lo aprendido.",
+    "country": "España"
   }
 ]

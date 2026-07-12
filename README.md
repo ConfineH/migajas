@@ -41,7 +41,9 @@ openspec/        # artefactos SDD
 - [x] Motor de raciones (10g = 1 ración)
 - [x] Ejercicios interactivos con feedback (Sprint 3)
 - [x] Registro de intentos (cookies)
-- [ ] Niveles 2–5 y desbloqueo (Sprint 4)
+- [x] Niveles 1–5 con desbloqueo progresivo (Sprint 4)
+- [x] Pantalla de progreso y repaso de errores
+- [ ] Platos mixtos avanzados (Sprint 5)
 - [ ] Supabase / PostgreSQL (Sprint 2+)
 
 ## Repositorio

@@ -6,10 +6,13 @@ import {
   exerciseTypeLabels,
   type Exercise,
 } from "@/lib/domain/exercises";
+import { PASS_THRESHOLD } from "@/lib/domain/progress";
 
 interface ExerciseRunnerProps {
   exercises: Exercise[];
+  levelId: string;
   levelName: string;
+  retryMode?: boolean;
 }
 
 type Feedback = {
@@ -17,13 +20,24 @@ type Feedback = {
   explanation: string;
 } | null;
 
-export function ExerciseRunner({ exercises, levelName }: ExerciseRunnerProps) {
+type CompletionResult = {
+  passed: boolean;
+  masteryScore: number;
+} | null;
+
+export function ExerciseRunner({
+  exercises,
+  levelId,
+  levelName,
+  retryMode = false,
+}: ExerciseRunnerProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<Feedback>(null);
   const [submitting, setSubmitting] = useState(false);
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
+  const [completion, setCompletion] = useState<CompletionResult>(null);
   const startTime = useRef<number | null>(null);
 
   const exercise = exercises[index];
@@ -60,9 +74,32 @@ export function ExerciseRunner({ exercises, levelName }: ExerciseRunnerProps) {
     setSubmitting(false);
   }
 
+  async function finishLevel(correct: number, total: number) {
+    if (!retryMode) {
+      const res = await fetch("/api/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          levelId,
+          correctCount: correct,
+          totalCount: total,
+        }),
+      });
+      const data = await res.json();
+      setCompletion({
+        passed: data.completion.passed,
+        masteryScore: data.completion.masteryScore,
+      });
+    } else {
+      const masteryScore = Math.round((correct / total) * 100);
+      setCompletion({ passed: masteryScore >= PASS_THRESHOLD, masteryScore });
+    }
+    setFinished(true);
+  }
+
   function nextExercise() {
     if (index + 1 >= exercises.length) {
-      setFinished(true);
+      finishLevel(score.correct, score.total);
       return;
     }
     setIndex((i) => i + 1);
@@ -71,23 +108,51 @@ export function ExerciseRunner({ exercises, levelName }: ExerciseRunnerProps) {
     startTime.current = null;
   }
 
-  if (finished) {
-    const pct = Math.round((score.correct / score.total) * 100);
+  if (finished && completion) {
+    const pct = completion.masteryScore;
+    const passed = completion.passed;
+    const nextLevelNum = parseInt(levelId.replace("nivel-", ""), 10) + 1;
+    const hasNext = nextLevelNum <= 5 && passed;
+
     return (
       <div className="space-y-6 text-center">
-        <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-8">
-          <p className="text-sm font-medium text-emerald-600 uppercase tracking-wide">
-            {levelName} completado
+        <div
+          className={`rounded-2xl border p-8 ${
+            passed
+              ? "bg-emerald-50 border-emerald-200"
+              : "bg-amber-50 border-amber-200"
+          }`}
+        >
+          <p className="text-sm font-medium uppercase tracking-wide text-gray-600">
+            {retryMode ? "Repaso completado" : `${levelName} completado`}
           </p>
-          <p className="mt-4 text-5xl font-bold text-emerald-700">
+          <p
+            className={`mt-4 text-5xl font-bold ${
+              passed ? "text-emerald-700" : "text-amber-700"
+            }`}
+          >
             {score.correct}/{score.total}
           </p>
           <p className="mt-2 text-lg text-gray-600">{pct}% de aciertos</p>
+          <p className="mt-4 text-sm font-medium text-gray-700">
+            {passed
+              ? "¡Nivel aprobado! Puedes continuar al siguiente."
+              : `Necesitas al menos ${PASS_THRESHOLD}% para desbloquear el siguiente nivel.`}
+          </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button href="/levels">Ver niveles</Button>
-          <Button href="/catalog" variant="secondary">
-            Repasar catálogo
+          {hasNext && (
+            <Button href={`/levels/nivel-${nextLevelNum}`}>
+              Siguiente nivel
+            </Button>
+          )}
+          {!passed && (
+            <Button href={`/levels/${levelId}?retry=1`} variant="secondary">
+              Repasar errores
+            </Button>
+          )}
+          <Button href="/progress" variant={hasNext || !passed ? "ghost" : "primary"}>
+            Ver progreso
           </Button>
         </div>
       </div>
@@ -96,6 +161,12 @@ export function ExerciseRunner({ exercises, levelName }: ExerciseRunnerProps) {
 
   return (
     <div className="space-y-6">
+      {retryMode && (
+        <p className="rounded-xl bg-amber-50 px-4 py-2 text-sm font-medium text-amber-800">
+          Modo repaso — solo ejercicios fallados
+        </p>
+      )}
+
       <div>
         <div className="mb-2 flex justify-between text-sm text-gray-500">
           <span>
@@ -163,7 +234,9 @@ export function ExerciseRunner({ exercises, levelName }: ExerciseRunnerProps) {
         {!feedback ? (
           <Button
             onClick={submitAnswer}
-            className={!selected || submitting ? "opacity-50 pointer-events-none" : ""}
+            className={
+              !selected || submitting ? "opacity-50 pointer-events-none" : ""
+            }
           >
             {submitting ? "Comprobando…" : "Comprobar"}
           </Button>

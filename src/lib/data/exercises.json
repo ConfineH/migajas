@@ -89,5 +89,258 @@
       { "id": "b", "label": "Fresas (1 taza)", "value": "fresas", "isCorrect": false },
       { "id": "c", "label": "Naranja pequeña", "value": "naranja", "isCorrect": false }
     ]
+  },
+  {
+    "id": "n2-ex1",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "1/3 taza de arroz cocido (50 g) aporta 15 g de HC. ¿Raciones?",
+    "explanation": "15 g ÷ 10 = 1,5 raciones. El arroz es un cereal base muy común.",
+    "difficulty": "Baja",
+    "foodId": "arroz-cocido",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "2,0", "value": "2.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n2-ex2",
+    "levelId": "nivel-2",
+    "type": "multiple_choice",
+    "prompt": "¿Cuántas raciones aporta 1/3 taza de pasta cocida (15 g HC)?",
+    "explanation": "Pasta y arroz en porción similar aportan unos 15 g de HC = 1,5 raciones.",
+    "difficulty": "Baja",
+    "foodId": "pasta-cocida",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "2,5", "value": "2.5", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n2-ex3",
+    "levelId": "nivel-2",
+    "type": "identify_portion",
+    "prompt": "¿Qué tubérculo aporta 15 g de HC en «1/2 taza» (75 g)?",
+    "explanation": "La patata cocida en media taza es una porción estándar de 1,5 raciones.",
+    "difficulty": "Baja",
+    "foodId": "patata-cocida",
+    "correctAnswer": "patata-cocida",
+    "options": [
+      { "id": "a", "label": "Boniato", "value": "boniato", "isCorrect": false },
+      { "id": "b", "label": "Patata cocida/asada", "value": "patata-cocida", "isCorrect": true },
+      { "id": "c", "label": "Patata frita", "value": "patata-frita", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n2-ex4",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "1/2 taza de boniato (70 g) tiene 15 g de HC. ¿Raciones?",
+    "explanation": "15 g de carbohidratos = 1,5 raciones, igual que la patata en porción similar.",
+    "difficulty": "Media",
+    "foodId": "boniato",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "2,0", "value": "2.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n3-ex1",
+    "levelId": "nivel-3",
+    "type": "count_rations",
+    "prompt": "1/2 taza de lentejas cocidas (100 g) aporta 15 g de HC. ¿Raciones?",
+    "explanation": "Las legumbres en porción estándar suelen aportar unos 15 g de HC = 1,5 raciones.",
+    "difficulty": "Media",
+    "foodId": "lentejas-cocidas",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "3,0", "value": "3.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n3-ex2",
+    "levelId": "nivel-3",
+    "type": "identify_portion",
+    "prompt": "¿Qué legumbre aporta 15 g de HC en «1/2 taza»?",
+    "explanation": "Garbanzos y lentejas tienen porciones similares en HC.",
+    "difficulty": "Media",
+    "foodId": "garbanzos-cocidos",
+    "correctAnswer": "garbanzos-cocidos",
+    "options": [
+      { "id": "a", "label": "Garbanzos cocidos", "value": "garbanzos-cocidos", "isCorrect": true },
+      { "id": "b", "label": "Huevo", "value": "huevo", "isCorrect": false },
+      { "id": "c", "label": "Pollo", "value": "pollo", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n3-ex3",
+    "levelId": "nivel-3",
+    "type": "multiple_choice",
+    "prompt": "1 taza de calabaza (200 g) aporta 15 g de HC. ¿Raciones?",
+    "explanation": "Algunas verduras aportan más HC que otras. Calabaza: 15 g = 1,5 raciones.",
+    "difficulty": "Media",
+    "foodId": "calabaza",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "2,0", "value": "2.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n3-ex4",
+    "levelId": "nivel-3",
+    "type": "count_rations",
+    "prompt": "1/2 taza de zanahoria cocida tiene 10 g de HC. ¿Raciones?",
+    "explanation": "10 g ÷ 10 = 1,0 ración exacta.",
+    "difficulty": "Media",
+    "foodId": "zanahoria",
+    "correctAnswer": "1.0",
+    "options": [
+      { "id": "a", "label": "0,5", "value": "0.5", "isCorrect": false },
+      { "id": "b", "label": "1,0", "value": "1.0", "isCorrect": true },
+      { "id": "c", "label": "1,5", "value": "1.5", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n4-ex1",
+    "levelId": "nivel-4",
+    "type": "multiple_choice",
+    "prompt": "Una porción de tortilla de patata (20 g HC). ¿Raciones?",
+    "explanation": "20 g ÷ 10 = 2,0 raciones. Los platos mixtos combinan varios ingredientes.",
+    "difficulty": "Alta",
+    "foodId": "tortilla-patata",
+    "correctAnswer": "2.0",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "2,0", "value": "2.0", "isCorrect": true },
+      { "id": "c", "label": "3,0", "value": "3.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n4-ex2",
+    "levelId": "nivel-4",
+    "type": "count_rations",
+    "prompt": "Un bocadillo (150 g) aporta 30 g de HC. ¿Raciones?",
+    "explanation": "30 g ÷ 10 = 3,0 raciones. El pan del bocadillo concentra los HC.",
+    "difficulty": "Alta",
+    "foodId": "bocadillo",
+    "correctAnswer": "3.0",
+    "options": [
+      { "id": "a", "label": "2,0", "value": "2.0", "isCorrect": false },
+      { "id": "b", "label": "3,0", "value": "3.0", "isCorrect": true },
+      { "id": "c", "label": "4,5", "value": "4.5", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n4-ex3",
+    "levelId": "nivel-4",
+    "type": "identify_portion",
+    "prompt": "¿Qué plato mixto aporta 45 g de HC en «1 plato» (300 g)?",
+    "explanation": "La paella es un plato combinado con arroz como principal fuente de HC.",
+    "difficulty": "Alta",
+    "foodId": "paella",
+    "correctAnswer": "paella",
+    "options": [
+      { "id": "a", "label": "Pizza", "value": "pizza", "isCorrect": false },
+      { "id": "b", "label": "Paella", "value": "paella", "isCorrect": true },
+      { "id": "c", "label": "Tortilla de patata", "value": "tortilla-patata", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n4-ex4",
+    "levelId": "nivel-4",
+    "type": "multiple_choice",
+    "prompt": "1 porción de pizza (25 g HC). ¿Raciones?",
+    "explanation": "25 g ÷ 10 = 2,5 raciones.",
+    "difficulty": "Alta",
+    "foodId": "pizza",
+    "correctAnswer": "2.5",
+    "options": [
+      { "id": "a", "label": "1,5", "value": "1.5", "isCorrect": false },
+      { "id": "b", "label": "2,5", "value": "2.5", "isCorrect": true },
+      { "id": "c", "label": "4,0", "value": "4.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n5-ex1",
+    "levelId": "nivel-5",
+    "type": "multiple_choice",
+    "prompt": "Desayuno: 1 rebanada de pan (10 g HC) + 1 vaso de leche (12 g HC). ¿Raciones totales?",
+    "explanation": "10 + 12 = 22 g de HC → 2,2 raciones. Suma los HC de cada alimento.",
+    "difficulty": "Alta",
+    "correctAnswer": "2.2",
+    "options": [
+      { "id": "a", "label": "1,2", "value": "1.2", "isCorrect": false },
+      { "id": "b", "label": "2,2", "value": "2.2", "isCorrect": true },
+      { "id": "c", "label": "3,0", "value": "3.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n5-ex2",
+    "levelId": "nivel-5",
+    "type": "count_rations",
+    "prompt": "Comida: 1/3 taza de arroz (15 g HC) + 1 porción de pollo (0 g HC). ¿Raciones de HC?",
+    "explanation": "El pollo es un modulador: 0 g de HC. Solo cuentan los 15 g del arroz = 1,5 raciones.",
+    "difficulty": "Alta",
+    "foodId": "pollo",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "0", "value": "0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "3,0", "value": "3.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n5-ex3",
+    "levelId": "nivel-5",
+    "type": "identify_portion",
+    "prompt": "¿Cuál de estos NO aporta raciones de carbohidratos?",
+    "explanation": "Pollo, carne, pescado y huevo son moduladores: 0 g de HC, 0 raciones.",
+    "difficulty": "Alta",
+    "foodId": "pescado",
+    "correctAnswer": "pescado",
+    "options": [
+      { "id": "a", "label": "Pasta cocida", "value": "pasta-cocida", "isCorrect": false },
+      { "id": "b", "label": "Pescado", "value": "pescado", "isCorrect": true },
+      { "id": "c", "label": "Manzana pequeña", "value": "manzana", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n5-ex4",
+    "levelId": "nivel-5",
+    "type": "multiple_choice",
+    "prompt": "Merienda: 1 plátano (15 g HC) + 1 yogur natural (5 g HC). ¿Raciones totales?",
+    "explanation": "15 + 5 = 20 g de HC → 2,0 raciones.",
+    "difficulty": "Alta",
+    "correctAnswer": "2.0",
+    "options": [
+      { "id": "a", "label": "1,5", "value": "1.5", "isCorrect": false },
+      { "id": "b", "label": "2,0", "value": "2.0", "isCorrect": true },
+      { "id": "c", "label": "2,5", "value": "2.5", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n5-ex5",
+    "levelId": "nivel-5",
+    "type": "count_rations",
+    "prompt": "1 plato de lentejas estofadas (30 g HC). ¿Raciones?",
+    "explanation": "30 g ÷ 10 = 3,0 raciones. Un plato completo con más legumbre concentra más HC.",
+    "difficulty": "Alta",
+    "foodId": "lentejas-estofadas",
+    "correctAnswer": "3.0",
+    "options": [
+      { "id": "a", "label": "1,5", "value": "1.5", "isCorrect": false },
+      { "id": "b", "label": "3,0", "value": "3.0", "isCorrect": true },
+      { "id": "c", "label": "4,5", "value": "4.5", "isCorrect": false }
+    ]
   }
 ]

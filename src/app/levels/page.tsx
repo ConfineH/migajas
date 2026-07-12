@@ -1,11 +1,16 @@
 import { NavBar } from "@/components/NavBar";
 import { LevelsList } from "@/components/LevelsList";
+import { getStoredProgress } from "@/lib/progress-storage";
+import { getStoredAttempts } from "@/lib/attempts-storage";
 
 export const metadata = {
   title: "Practicar — Migajas",
 };
 
-export default function LevelsPage() {
+export default async function LevelsPage() {
+  const progress = await getStoredProgress();
+  const attempts = await getStoredAttempts();
+
   return (
     <>
       <NavBar />
@@ -13,11 +18,11 @@ export default function LevelsPage() {
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Practicar</h1>
           <p className="mt-2 text-gray-600">
-            Ejercicios interactivos para aprender a contar carbohidratos. Recibirás
-            feedback inmediato en cada respuesta.
+            Avanza por niveles. Necesitas al menos 60% de aciertos para
+            desbloquear el siguiente.
           </p>
         </header>
-        <LevelsList />
+        <LevelsList progress={progress} attempts={attempts} />
       </main>
     </>
   );

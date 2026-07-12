@@ -1,0 +1,45 @@
+import { NextResponse } from "next/server";
+import { completeLevel } from "@/lib/domain/progress";
+import {
+  PROGRESS_COOKIE,
+  getStoredProgress,
+  serializeProgress,
+} from "@/lib/progress-storage";
+import { getLevelById } from "@/lib/domain/exercises";
+
+export async function GET() {
+  const progress = await getStoredProgress();
+  return NextResponse.json(progress);
+}
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { levelId, correctCount, totalCount } = body as {
+    levelId: string;
+    correctCount: number;
+    totalCount: number;
+  };
+
+  const level = getLevelById(levelId);
+  if (!level) {
+    return NextResponse.json({ error: "Level not found" }, { status: 404 });
+  }
+
+  const existing = await getStoredProgress();
+  const updated = completeLevel(existing, levelId, correctCount, totalCount);
+  const completion = updated.completions.find((c) => c.levelId === levelId)!;
+
+  const response = NextResponse.json({
+    completion,
+    nextLevelUnlocked: completion.passed,
+  });
+
+  response.cookies.set(PROGRESS_COOKIE, serializeProgress(updated), {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24 * 365,
+    path: "/",
+  });
+
+  return response;
+}
