@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Migajas
 
-## Getting Started
+App educativa web para aprender a contar carbohidratos por niveles, empezando por España.
 
-First, run the development server:
+**Unidad base:** 10 g de carbohidratos = 1 ración
+
+## Stack
+
+- Next.js 16 + TypeScript + Tailwind CSS
+- Vitest (TDD en carpeta `test/`)
+- SDD (Spec-Driven Development) con `openspec/`
+
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm test         # tests unitarios
+npm run build    # build de producción
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estructura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/           # páginas (home, onboarding, catálogo)
+  components/    # UI reutilizable
+  lib/
+    domain/      # lógica de negocio (raciones, alimentos)
+    data/        # seed de alimentos españoles
+test/
+  domain/        # tests TDD del dominio
+openspec/        # artefactos SDD
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## MVP (Fase 1)
 
-## Learn More
+- [x] Home con CTA principal
+- [x] Onboarding (España, modo invitado, intro a raciones)
+- [x] Catálogo con búsqueda y filtro por categoría
+- [x] Motor de raciones (10g = 1 ración)
+- [x] Ejercicios interactivos con feedback (Sprint 3)
+- [x] Registro de intentos (cookies)
+- [ ] Niveles 2–5 y desbloqueo (Sprint 4)
+- [ ] Supabase / PostgreSQL (Sprint 2+)
 
-To learn more about Next.js, take a look at the following resources:
+## Repositorio
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+https://github.com/ConfineH/migajas

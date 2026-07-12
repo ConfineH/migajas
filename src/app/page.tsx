@@ -1,65 +1,75 @@
-import Image from "next/image";
+import { Button } from "@/components/Button";
+import { NavBar } from "@/components/NavBar";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <NavBar />
+      <main className="mx-auto flex max-w-3xl flex-1 flex-col px-4 py-12">
+        <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
+          <div className="space-y-4">
+            <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600">
+              Aprende contando carbohidratos
+            </p>
+            <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
+              Migajas
+            </h1>
+            <p className="mx-auto max-w-md text-lg text-gray-600">
+              Practica con alimentos y platos de tu día a día. Aprende a
+              relacionar gramos, carbohidratos y raciones paso a paso.
+            </p>
+          </div>
+
+          <div className="flex w-full max-w-sm flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button href="/onboarding" className="w-full sm:w-auto">
+              Empezar
+            </Button>
+            <Button href="/levels" variant="secondary" className="w-full sm:w-auto">
+              Practicar
+            </Button>
+          </div>
+
+          <div className="mt-8 rounded-2xl bg-emerald-50 px-6 py-4 text-sm text-emerald-800">
+            <strong>España</strong> · 10 g de carbohidratos = 1 ración
+          </div>
+        </section>
+
+        <section className="mt-16 space-y-6 border-t border-gray-100 pt-12">
+          <h2 className="text-xl font-bold text-gray-900">¿Cómo funciona?</h2>
+          <ol className="grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                step: "1",
+                title: "Elige tu país",
+                desc: "Contenido adaptado a la comida cotidiana española.",
+              },
+              {
+                step: "2",
+                title: "Explora alimentos",
+                desc: "Ve porciones, gramos, carbohidratos y raciones.",
+              },
+              {
+                step: "3",
+                title: "Practica",
+                desc: "Ejercicios con feedback inmediato para afianzar el aprendizaje.",
+              },
+            ].map((item) => (
+              <li
+                key={item.step}
+                className="rounded-2xl border border-gray-100 p-5"
+              >
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
+                  {item.step}
+                </span>
+                <h3 className="mt-3 font-semibold text-gray-900">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-sm text-gray-600">{item.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
       </main>
-    </div>
+    </>
   );
 }

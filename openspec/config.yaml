@@ -1,0 +1,18 @@
+schema: spec-driven
+project: migajas
+language: es
+strict_tdd: true
+testing:
+  runner: vitest
+  command: npm test
+  layers:
+    - unit
+    - component
+  coverage: false
+rules:
+  apply:
+    - Follow TDD: RED → GREEN → REFACTOR
+    - Mobile-first responsive design
+    - Content in Spanish for UI; technical artifacts in English
+    - 10g carbs = 1 ration for Spain
+    - Always show grams and carbs; rations are derived

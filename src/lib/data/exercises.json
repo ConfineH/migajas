@@ -1,0 +1,93 @@
+[
+  {
+    "id": "n1-ex1",
+    "levelId": "nivel-1",
+    "type": "multiple_choice",
+    "prompt": "¿Cuántas raciones de carbohidratos aporta 1 rebanada de pan blanco? (10 g HC)",
+    "explanation": "10 g de carbohidratos ÷ 10 = 1,0 ración. El pan blanco es un alimento base muy habitual.",
+    "difficulty": "Baja",
+    "foodId": "pan-blanco",
+    "correctAnswer": "1.0",
+    "options": [
+      { "id": "a", "label": "0,5 raciones", "value": "0.5", "isCorrect": false },
+      { "id": "b", "label": "1,0 ración", "value": "1.0", "isCorrect": true },
+      { "id": "c", "label": "1,5 raciones", "value": "1.5", "isCorrect": false },
+      { "id": "d", "label": "2,0 raciones", "value": "2.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n1-ex2",
+    "levelId": "nivel-1",
+    "type": "count_rations",
+    "prompt": "Una manzana pequeña aporta 15 g de carbohidratos. ¿Cuántas raciones son?",
+    "explanation": "15 g ÷ 10 = 1,5 raciones. Recuerda: siempre divide los gramos de HC entre 10.",
+    "difficulty": "Baja",
+    "foodId": "manzana",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "b", "label": "1,5", "value": "1.5", "isCorrect": true },
+      { "id": "c", "label": "2,0", "value": "2.0", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n1-ex3",
+    "levelId": "nivel-1",
+    "type": "identify_portion",
+    "prompt": "¿Qué alimento corresponde a «1 taza / 250 ml» con 12 g de carbohidratos?",
+    "explanation": "La leche en una taza estándar aporta unos 12 g de HC, es decir 1,2 raciones.",
+    "difficulty": "Baja",
+    "foodId": "leche",
+    "correctAnswer": "leche",
+    "options": [
+      { "id": "a", "label": "Yogur natural", "value": "yogur-natural", "isCorrect": false },
+      { "id": "b", "label": "Leche", "value": "leche", "isCorrect": true },
+      { "id": "c", "label": "Leche (1/2 taza)", "value": "leche-media", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n1-ex4",
+    "levelId": "nivel-1",
+    "type": "multiple_choice",
+    "prompt": "Un plátano pequeño (90 g) aporta 15 g de HC. ¿Cuántas raciones?",
+    "explanation": "15 g de carbohidratos = 1,5 raciones. El peso del alimento (90 g) no es lo mismo que los HC.",
+    "difficulty": "Baja",
+    "foodId": "platano",
+    "correctAnswer": "1.5",
+    "options": [
+      { "id": "a", "label": "0,5", "value": "0.5", "isCorrect": false },
+      { "id": "b", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "c", "label": "1,5", "value": "1.5", "isCorrect": true }
+    ]
+  },
+  {
+    "id": "n1-ex5",
+    "levelId": "nivel-1",
+    "type": "count_rations",
+    "prompt": "Un yogur natural (125 g) tiene 5 g de carbohidratos. ¿Raciones?",
+    "explanation": "5 g ÷ 10 = 0,5 raciones. Los lácteos sin azúcar suelen aportar menos HC.",
+    "difficulty": "Baja",
+    "foodId": "yogur-natural",
+    "correctAnswer": "0.5",
+    "options": [
+      { "id": "a", "label": "0,5", "value": "0.5", "isCorrect": true },
+      { "id": "b", "label": "1,0", "value": "1.0", "isCorrect": false },
+      { "id": "c", "label": "1,5", "value": "1.5", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "n1-ex6",
+    "levelId": "nivel-1",
+    "type": "identify_portion",
+    "prompt": "¿Qué fruta aporta 15 g de HC en «1 unidad» de unos 120 g?",
+    "explanation": "La manzana pequeña es un ejemplo clásico: 120 g de alimento, 15 g de carbohidratos.",
+    "difficulty": "Baja",
+    "foodId": "manzana",
+    "correctAnswer": "manzana",
+    "options": [
+      { "id": "a", "label": "Manzana pequeña", "value": "manzana", "isCorrect": true },
+      { "id": "b", "label": "Fresas (1 taza)", "value": "fresas", "isCorrect": false },
+      { "id": "c", "label": "Naranja pequeña", "value": "naranja", "isCorrect": false }
+    ]
+  }
+]
