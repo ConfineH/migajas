@@ -85,5 +85,266 @@
         "exerciseId": "n1-ex3"
       }
     ]
+  },
+  {
+    "id": "l2-lesson-1",
+    "levelId": "nivel-2",
+    "orderIndex": 1,
+    "title": "Arroz y pasta",
+    "summary": "Cereales cocidos: porciones habituales y raciones.",
+    "steps": [
+      {
+        "id": "l2-1-s1",
+        "type": "explanation",
+        "title": "Porciones de cereales",
+        "body": "El arroz y la pasta se miden en tazas cuando están cocidos. Una porción típica (1/3 taza) aporta unos 15 g de HC = 1,5 raciones."
+      },
+      {
+        "id": "l2-1-s2",
+        "type": "example",
+        "title": "Ejemplo: arroz cocido",
+        "body": "1/3 taza de arroz (50 g) aporta 15 g de HC. Divide entre 10: 1,5 raciones.",
+        "foodId": "arroz-cocido"
+      },
+      {
+        "id": "l2-1-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Calcula raciones de cereales cocidos.",
+        "exerciseId": "n2-ex1"
+      }
+    ]
+  },
+  {
+    "id": "l2-lesson-2",
+    "levelId": "nivel-2",
+    "orderIndex": 2,
+    "title": "Patata y boniato",
+    "summary": "Tubérculos en el plato diario.",
+    "steps": [
+      {
+        "id": "l2-2-s1",
+        "type": "explanation",
+        "title": "Tubérculos",
+        "body": "Patata y boniato aportan HC en porciones de media taza. El peso del tubérculo no coincide con los gramos de carbohidratos."
+      },
+      {
+        "id": "l2-2-s2",
+        "type": "example",
+        "title": "Ejemplo: patata cocida",
+        "body": "1/2 taza de patata (75 g) aporta 15 g de HC = 1,5 raciones.",
+        "foodId": "patata-cocida"
+      },
+      {
+        "id": "l2-2-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Identifica tubérculos y sus raciones.",
+        "exerciseId": "n2-ex3"
+      }
+    ]
+  },
+  {
+    "id": "l3-lesson-1",
+    "levelId": "nivel-3",
+    "orderIndex": 1,
+    "title": "Legumbres",
+    "summary": "Lentejas, garbanzos y alubias en porción habitual.",
+    "steps": [
+      {
+        "id": "l3-1-s1",
+        "type": "explanation",
+        "title": "Legumbres cocidas",
+        "body": "Media taza de legumbres cocidas suele aportar unos 15 g de HC. Son alimento base, aunque a veces van en platos mixtos."
+      },
+      {
+        "id": "l3-1-s2",
+        "type": "example",
+        "title": "Ejemplo: lentejas",
+        "body": "1/2 taza de lentejas (100 g) = 15 g HC = 1,5 raciones.",
+        "foodId": "lentejas-cocidas"
+      },
+      {
+        "id": "l3-1-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Cuenta raciones de legumbres.",
+        "exerciseId": "n3-ex1"
+      }
+    ]
+  },
+  {
+    "id": "l3-lesson-2",
+    "levelId": "nivel-3",
+    "orderIndex": 2,
+    "title": "Verduras con más HC",
+    "summary": "No todas las verduras aportan igual.",
+    "steps": [
+      {
+        "id": "l3-2-s1",
+        "type": "explanation",
+        "title": "Verduras que cuentan",
+        "body": "Zanahoria, calabaza o cebolla aportan más HC que lechuga o pepino. Hay que conocer las que sí suman raciones."
+      },
+      {
+        "id": "l3-2-s2",
+        "type": "example",
+        "title": "Ejemplo: calabaza",
+        "body": "1 taza de calabaza aporta 15 g de HC = 1,5 raciones.",
+        "foodId": "calabaza"
+      },
+      {
+        "id": "l3-2-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Distingue verduras por su aporte de HC.",
+        "exerciseId": "n3-ex3"
+      }
+    ]
+  },
+  {
+    "id": "l4-lesson-1",
+    "levelId": "nivel-4",
+    "orderIndex": 1,
+    "title": "¿Qué es un plato mixto?",
+    "summary": "Cuando un plato combina varios ingredientes.",
+    "steps": [
+      {
+        "id": "l4-1-s1",
+        "type": "explanation",
+        "title": "Platos compuestos",
+        "body": "Un plato mixto mezcla carbohidratos, proteínas y grasas. Los HC vienen del pan, arroz, patata u otros ingredientes base."
+      },
+      {
+        "id": "l4-1-s2",
+        "type": "example",
+        "title": "Ejemplo: tortilla de patata",
+        "body": "La tortilla combina huevo (modulador) y patata (HC). Una porción puede aportar unos 20 g de HC = 2,0 raciones.",
+        "foodId": "tortilla-patata"
+      },
+      {
+        "id": "l4-1-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Calcula raciones en un plato mixto.",
+        "exerciseId": "n4-ex1"
+      }
+    ]
+  },
+  {
+    "id": "l4-lesson-2",
+    "levelId": "nivel-4",
+    "orderIndex": 2,
+    "title": "Platos españoles habituales",
+    "summary": "Paella, bocadillo y pizza en la vida real.",
+    "steps": [
+      {
+        "id": "l4-2-s1",
+        "type": "explanation",
+        "title": "Comida cotidiana",
+        "body": "Paella, bocadillos y pizza son platos frecuentes. Cada uno concentra HC de forma distinta según la porción."
+      },
+      {
+        "id": "l4-2-s2",
+        "type": "example",
+        "title": "Ejemplo: paella",
+        "body": "1 plato de paella (300 g) puede aportar 45 g de HC = 4,5 raciones, principalmente del arroz.",
+        "foodId": "paella"
+      },
+      {
+        "id": "l4-2-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Identifica platos mixtos españoles.",
+        "exerciseId": "n4-ex3"
+      }
+    ]
+  },
+  {
+    "id": "l5-lesson-1",
+    "levelId": "nivel-5",
+    "orderIndex": 1,
+    "title": "Combinar en una comida",
+    "summary": "Suma los HC de cada alimento.",
+    "steps": [
+      {
+        "id": "l5-1-s1",
+        "type": "explanation",
+        "title": "Raciones totales",
+        "body": "En un desayuno o comida real, suma los gramos de HC de cada alimento y divide entre 10 para obtener las raciones totales."
+      },
+      {
+        "id": "l5-1-s2",
+        "type": "example",
+        "title": "Ejemplo: desayuno",
+        "body": "Pan (10 g HC) + leche (12 g HC) = 22 g HC total = 2,2 raciones.",
+        "foodId": "pan-blanco"
+      },
+      {
+        "id": "l5-1-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Suma raciones de una comida combinada.",
+        "exerciseId": "n5-ex1"
+      }
+    ]
+  },
+  {
+    "id": "l5-lesson-2",
+    "levelId": "nivel-5",
+    "orderIndex": 2,
+    "title": "Moduladores: proteína sin HC",
+    "summary": "Pollo, pescado y huevo no aportan raciones de HC.",
+    "steps": [
+      {
+        "id": "l5-2-s1",
+        "type": "explanation",
+        "title": "Qué son los moduladores",
+        "body": "Las proteínas (pollo, carne, pescado, huevo) tienen 0 g de HC y 0 raciones. Acompañan pero no suman carbohidratos."
+      },
+      {
+        "id": "l5-2-s2",
+        "type": "example",
+        "title": "Ejemplo: pollo con arroz",
+        "body": "Arroz (15 g HC) + pollo (0 g HC) = solo 1,5 raciones de HC. El pollo es modulador.",
+        "foodId": "pollo"
+      },
+      {
+        "id": "l5-2-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Identifica qué alimentos no aportan raciones.",
+        "exerciseId": "n5-ex2"
+      }
+    ]
+  },
+  {
+    "id": "l5-lesson-3",
+    "levelId": "nivel-5",
+    "orderIndex": 3,
+    "title": "Casos del día a día",
+    "summary": "Meriendas y platos completos.",
+    "steps": [
+      {
+        "id": "l5-3-s1",
+        "type": "explanation",
+        "title": "Situaciones reales",
+        "body": "Plátano con yogur, lentejas estofadas o pasta con tomate son situaciones que encontrarás a menudo. Practica con porciones reales."
+      },
+      {
+        "id": "l5-3-s2",
+        "type": "example",
+        "title": "Ejemplo: lentejas estofadas",
+        "body": "1 plato completo (300 g) puede aportar 30 g de HC = 3,0 raciones.",
+        "foodId": "lentejas-estofadas"
+      },
+      {
+        "id": "l5-3-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Resuelve un caso real de comida española.",
+        "exerciseId": "n5-ex4"
+      }
+    ]
   }
 ]

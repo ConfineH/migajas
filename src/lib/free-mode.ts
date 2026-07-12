@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getStoredProgress } from "@/lib/progress-storage";
 import { isFreeModeUnlocked, toGuidedProgress } from "@/lib/domain/guided-flow";
 
-export async function requireFreeMode(redirectTo = "/learn/nivel-1") {
+export async function requireFreeMode(redirectTo = "/learn") {
   const progress = await getStoredProgress();
   if (!isFreeModeUnlocked(toGuidedProgress(progress))) {
     redirect(redirectTo);

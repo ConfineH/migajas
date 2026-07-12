@@ -21,7 +21,7 @@ export function OnboardingFlow() {
         completed: true,
       }),
     });
-    router.push("/learn/nivel-1");
+    router.push("/learn");
   }
 
   return (

@@ -18,7 +18,6 @@ import { getStoredAttempts } from "@/lib/attempts-storage";
 import {
   toGuidedProgress,
   getLessonProgressPercent,
-  isFreeModeUnlocked,
 } from "@/lib/domain/guided-flow";
 
 export const metadata = {
@@ -32,8 +31,6 @@ export default async function ProgressPage() {
   const levels = getLevels();
   const passed = countPassedLevels(progress);
   const overallAccuracy = accuracyRate(attempts);
-  const coursePct = getLessonProgressPercent(guided, "nivel-1");
-  const freeMode = isFreeModeUnlocked(guided);
 
   const allFailed = getFailedExerciseIds(
     attempts,
@@ -53,19 +50,38 @@ export default async function ProgressPage() {
           </p>
         </header>
 
-        <div className="mb-8 rounded-2xl border border-emerald-100 bg-emerald-50 p-5">
-          <p className="text-sm font-medium text-emerald-700">Curso Nivel 1</p>
-          <p className="mt-1 text-2xl font-bold text-emerald-800">{coursePct}%</p>
-          <p className="mt-1 text-sm text-emerald-600">
-            {guided.completedLessons.length} lecciones ·{" "}
-            {guided.completedPracticeSteps.length} prácticas
-            {freeMode ? " · Modo libre activo" : " · Modo libre bloqueado"}
-          </p>
-          {!freeMode && (
-            <Link href="/learn/nivel-1" className="mt-3 inline-block text-sm font-semibold text-emerald-700">
-              Continuar curso →
-            </Link>
-          )}
+        <div className="mb-8 space-y-3">
+          <h2 className="text-lg font-bold text-gray-900">Curso guiado</h2>
+          {levels.map((level) => {
+            const pct = getLessonProgressPercent(guided, level.id);
+            const completion = getLevelCompletion(progress, level.id);
+            return (
+              <div
+                key={level.id}
+                className="rounded-xl border border-emerald-100 bg-white p-4"
+              >
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium text-gray-900">{level.name}</span>
+                  <span className="text-emerald-600">{pct}%</span>
+                </div>
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100">
+                  <div
+                    className="h-full rounded-full bg-emerald-500"
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+                {completion && (
+                  <p className="mt-1 text-xs text-gray-500">
+                    Examen: {completion.masteryScore}%{" "}
+                    {completion.passed ? "✓" : "(no aprobado)"}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+          <Link href="/learn" className="inline-block text-sm font-semibold text-emerald-700">
+            Ir al curso →
+          </Link>
         </div>
 
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -166,7 +182,7 @@ export default async function ProgressPage() {
         </section>
 
         <div className="mt-8 text-center">
-          <Button href="/levels">Ir a practicar</Button>
+          <Button href="/learn">Ir al curso</Button>
         </div>
       </main>
     </>

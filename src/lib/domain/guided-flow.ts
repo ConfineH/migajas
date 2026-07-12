@@ -1,10 +1,13 @@
 import type { LevelCompletion } from "./progress";
+import { isLevelUnlocked } from "./progress";
 import {
   getLessonsForLevel,
   getLessonById,
+  getAllLessons,
   getPracticeStepIds,
   getExamForLevel,
 } from "./lessons";
+import { getLevels } from "./exercises";
 
 export type GuidedItemType = "lesson" | "practice" | "exam";
 
@@ -124,6 +127,20 @@ export function canStartExam(
   return allLessonsDone && allPracticeDone;
 }
 
+export function isGuidedLevelUnlocked(
+  levelId: string,
+  progress: GuidedProgress,
+  allLevels = getLevels(),
+): boolean {
+  const level = allLevels.find((l) => l.id === levelId);
+  if (!level) return false;
+  return isLevelUnlocked(
+    level.orderIndex,
+    progress.levelCompletions,
+    allLevels,
+  );
+}
+
 export function isFreeModeUnlocked(progress: GuidedProgress): boolean {
   if (progress.freeModeUnlocked) return true;
   const n1 = progress.levelCompletions.find(
@@ -188,8 +205,10 @@ export function mergeGuidedIntoUserProgress(
   };
 }
 
-export function getLessonForPracticeStep(stepId: string) {
-  const lessons = getLessonsForLevel("nivel-1");
+export function getLessonForPracticeStep(stepId: string, levelId?: string) {
+  const lessons = levelId
+    ? getLessonsForLevel(levelId)
+    : getAllLessons();
   for (const lesson of lessons) {
     const step = lesson.steps.find((s) => s.id === stepId);
     if (step) return { lesson, step };

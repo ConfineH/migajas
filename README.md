@@ -44,8 +44,7 @@ openspec/        # artefactos SDD
 - [x] Niveles 1–5 con desbloqueo progresivo (Sprint 4)
 - [x] Pantalla de progreso y repaso de errores
 - [x] Curso guiado: lecciones + práctica + examen (pivot pedagógico)
-- [x] Modo libre desbloqueado tras aprobar examen Nivel 1
-- [ ] Lecciones guiadas niveles 2–5
+- [x] Lecciones guiadas niveles 1–5
 - [ ] Supabase / PostgreSQL (Sprint 2+)
 
 ## Repositorio

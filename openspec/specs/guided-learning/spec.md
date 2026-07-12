@@ -39,11 +39,16 @@ The system SHALL track completed lessons and practice steps separately from exam
 - **WHEN** they mark the lesson complete
 - **THEN** the lesson id is stored in progress
 
-### Requirement: Exam gate
+### Requirement: Multi-level course
 
-The exam SHALL only be available after all lessons and practices in the level are completed.
+The system SHALL provide guided lessons for levels 1 through 5, each with lessons, practice, and an exam.
 
-#### Scenario: Exam blocked early
-- **GIVEN** incomplete lessons
-- **WHEN** user tries the exam
-- **THEN** they see a message to complete the course first
+#### Scenario: Level 2 unlock
+- **GIVEN** a user who passed the nivel-1 exam
+- **WHEN** they open `/learn`
+- **THEN** nivel-2 is available
+
+#### Scenario: Level content
+- **GIVEN** any level from 1 to 5
+- **WHEN** lessons are loaded
+- **THEN** at least 2 lessons exist with linked practice and an exam

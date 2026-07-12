@@ -12,6 +12,7 @@ interface ExamRunnerProps {
   exercises: Exercise[];
   levelId: string;
   levelName: string;
+  nextLevelId?: string;
 }
 
 type Feedback = { isCorrect: boolean; explanation: string } | null;
@@ -20,6 +21,7 @@ export function ExamRunner({
   exercises,
   levelId,
   levelName,
+  nextLevelId,
 }: ExamRunnerProps) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -109,14 +111,16 @@ export function ExamRunner({
           <p className="mt-2 text-lg text-gray-600">{pct}% de aciertos</p>
           <p className="mt-4 text-sm font-medium text-gray-700">
             {passed
-              ? freeModeUnlocked
+              ? levelId === "nivel-1"
                 ? "¡Aprobado! Modo libre desbloqueado: catálogo y práctica libre."
-                : "¡Nivel aprobado!"
+                : levelId === "nivel-5"
+                  ? "¡Enhorabuena! Has completado todo el curso guiado."
+                  : "¡Nivel aprobado! Puedes continuar al siguiente."
               : `Necesitas al menos ${PASS_THRESHOLD}%. Repasa las lecciones e inténtalo de nuevo.`}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          {freeModeUnlocked && (
+          {passed && freeModeUnlocked && (
             <>
               <Button href="/catalog">Explorar catálogo</Button>
               <Button href="/levels" variant="secondary">
@@ -124,13 +128,18 @@ export function ExamRunner({
               </Button>
             </>
           )}
+          {passed && nextLevelId && (
+            <Button href={`/learn/${nextLevelId}`}>
+              Siguiente nivel
+            </Button>
+          )}
           {!passed && (
-            <Button href="/learn/nivel-1" variant="secondary">
+            <Button href={`/learn/${levelId}`} variant="secondary">
               Repasar curso
             </Button>
           )}
-          <Button href="/learn/nivel-1" variant="ghost">
-            Volver al curso
+          <Button href="/learn" variant="ghost">
+            Todos los niveles
           </Button>
         </div>
       </div>
