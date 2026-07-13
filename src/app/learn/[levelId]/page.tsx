@@ -10,6 +10,7 @@ import {
   getNextGuidedItem,
   isGuidedLevelUnlocked,
 } from "@/lib/domain/guided-flow";
+import { getLevelById, getLevels } from "@/lib/domain/exercises";
 
 interface Props {
   params: Promise<{ levelId: string }>;
