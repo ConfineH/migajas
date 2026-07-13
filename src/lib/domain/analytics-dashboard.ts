@@ -139,3 +139,58 @@ export function aggregateAnalyticsDashboard(
     timeline,
   };
 }
+
+export function enrichDashboardWithProgress(
+  dashboard: AnalyticsDashboard,
+  progress: {
+    completedLessons: string[];
+    freeModeUnlocked: boolean;
+    completions: {
+      levelId: string;
+      masteryScore: number;
+      passed: boolean;
+    }[];
+  },
+  lessonIdsByLevel: Record<string, string[]>,
+): AnalyticsDashboard {
+  const mergedFunnel = dashboard.levelFunnel.map((level) => {
+    const lessonIds = lessonIdsByLevel[level.levelId] ?? [];
+    const fromProgress = progress.completedLessons.filter((id) =>
+      lessonIds.includes(id),
+    ).length;
+    const lessonsCompleted = Math.max(level.lessonsCompleted, fromProgress);
+
+    const completion = progress.completions.find(
+      (c) => c.levelId === level.levelId && c.passed,
+    );
+    const bestMasteryScore =
+      completion?.masteryScore ?? level.bestMasteryScore ?? null;
+    const examPassed = level.examPassed || completion?.passed === true;
+
+    const lessonProgress =
+      level.totalLessons > 0
+        ? Math.round((lessonsCompleted / level.totalLessons) * 100)
+        : 0;
+    const progressPercent = examPassed ? 100 : lessonProgress;
+
+    return {
+      ...level,
+      lessonsCompleted,
+      examPassed,
+      bestMasteryScore,
+      progressPercent,
+    };
+  });
+
+  const lessonsFromProgress = new Set(progress.completedLessons).size;
+  const examsFromProgress = progress.completions.filter((c) => c.passed).length;
+
+  return {
+    ...dashboard,
+    lessonsCompleted: Math.max(dashboard.lessonsCompleted, lessonsFromProgress),
+    examsPassed: Math.max(dashboard.examsPassed, examsFromProgress),
+    freeModeUnlocked:
+      dashboard.freeModeUnlocked || progress.freeModeUnlocked,
+    levelFunnel: mergedFunnel,
+  };
+}

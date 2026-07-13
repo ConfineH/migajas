@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   aggregateAnalyticsDashboard,
+  enrichDashboardWithProgress,
   formatEventLabel,
   type StoredLearningEvent,
 } from "@/lib/domain/analytics-dashboard";
@@ -95,6 +96,33 @@ describe("aggregateAnalyticsDashboard", () => {
       ),
     ];
     expect(aggregateAnalyticsDashboard(events, levels).lessonsCompleted).toBe(1);
+  });
+});
+
+describe("enrichDashboardWithProgress", () => {
+  it("fills funnel from synced progress when events are empty", () => {
+    const dash = aggregateAnalyticsDashboard([], levels);
+    const enriched = enrichDashboardWithProgress(
+      dash,
+      {
+        completedLessons: ["l1-lesson-1", "l1-lesson-2", "l1-lesson-3"],
+        freeModeUnlocked: true,
+        completions: [
+          {
+            levelId: "nivel-1",
+            masteryScore: 100,
+            passed: true,
+          },
+        ],
+      },
+      {
+        "nivel-1": ["l1-lesson-1", "l1-lesson-2", "l1-lesson-3"],
+        "nivel-2": ["l2-lesson-1", "l2-lesson-2"],
+      },
+    );
+    expect(enriched.levelFunnel[0].progressPercent).toBe(100);
+    expect(enriched.lessonsCompleted).toBe(3);
+    expect(enriched.freeModeUnlocked).toBe(true);
   });
 });
 

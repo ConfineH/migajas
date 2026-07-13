@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
-import { aggregateAnalyticsDashboard } from "@/lib/domain/analytics-dashboard";
+import {
+  aggregateAnalyticsDashboard,
+  enrichDashboardWithProgress,
+} from "@/lib/domain/analytics-dashboard";
 import { getLessonsForLevel } from "@/lib/domain/lessons";
 import { getLevels } from "@/lib/domain/exercises";
 import { getAuthUser } from "@/lib/supabase/auth";
 import { getUserLearningEvents } from "@/lib/supabase/analytics-events";
+import { resolveProgress } from "@/lib/learning-state";
 
 export const metadata = {
   title: "Mi actividad — Migajas",
@@ -51,7 +55,18 @@ export default async function AnalyticsPage() {
   }));
 
   const events = await getUserLearningEvents(user.id);
-  const dashboard = aggregateAnalyticsDashboard(events, levelMeta);
+  const progress = await resolveProgress();
+  const lessonIdsByLevel = Object.fromEntries(
+    levels.map((level) => [
+      level.id,
+      getLessonsForLevel(level.id).map((lesson) => lesson.id),
+    ]),
+  );
+  const dashboard = enrichDashboardWithProgress(
+    aggregateAnalyticsDashboard(events, levelMeta),
+    progress,
+    lessonIdsByLevel,
+  );
 
   return (
     <>
@@ -112,11 +127,12 @@ export default async function AnalyticsPage() {
           <h2 className="text-lg font-bold text-gray-900">Hitos recientes</h2>
           {dashboard.timeline.length === 0 ? (
             <p className="rounded-xl border border-dashed border-gray-200 p-6 text-center text-sm text-gray-500">
-              Aún no hay eventos guardados. Completa lecciones del{" "}
+              Aún no hay hitos registrados con tu cuenta. El embudo refleja tu
+              progreso actual del curso. Completa lecciones en{" "}
               <Link href="/learn" className="font-semibold text-emerald-700">
-                curso guiado
+                el curso guiado
               </Link>{" "}
-              con tu cuenta iniciada.
+              para generar eventos.
             </p>
           ) : (
             <ul className="space-y-2">
