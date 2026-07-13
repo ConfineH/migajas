@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import { completeLevel } from "@/lib/domain/progress";
 import {
+  buildExamPassedEvent,
+  buildFreeModeUnlockedEvent,
+  shouldEmitExamPassed,
+  shouldEmitFreeModeUnlocked,
+} from "@/lib/domain/analytics";
+import { trackLearningEvent } from "@/lib/analytics-server";
+import {
   PROGRESS_COOKIE,
   getStoredProgress,
   serializeProgress,
@@ -26,8 +33,24 @@ export async function POST(request: Request) {
   }
 
   const existing = await getStoredProgress();
+  const wasFreeModeUnlocked = existing.freeModeUnlocked;
   const updated = completeLevel(existing, levelId, correctCount, totalCount);
   const completion = updated.completions.find((c) => c.levelId === levelId)!;
+
+  if (shouldEmitExamPassed(completion.passed)) {
+    trackLearningEvent(
+      buildExamPassedEvent(levelId, completion.masteryScore),
+    );
+  }
+  if (
+    shouldEmitFreeModeUnlocked(
+      levelId,
+      completion.passed,
+      wasFreeModeUnlocked,
+    )
+  ) {
+    trackLearningEvent(buildFreeModeUnlockedEvent());
+  }
 
   const response = NextResponse.json({
     completion,

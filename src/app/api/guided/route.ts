@@ -5,6 +5,9 @@ import {
   toGuidedProgress,
   mergeGuidedIntoUserProgress,
 } from "@/lib/domain/guided-flow";
+import { getLessonById } from "@/lib/domain/lessons";
+import { buildLessonCompletedEvent } from "@/lib/domain/analytics";
+import { trackLearningEvent } from "@/lib/analytics-server";
 import {
   PROGRESS_COOKIE,
   getStoredProgress,
@@ -23,6 +26,12 @@ export async function POST(request: Request) {
 
   if (action === "complete-lesson") {
     guided = completeLesson(guided, id);
+    const lesson = getLessonById(id);
+    if (lesson) {
+      trackLearningEvent(
+        buildLessonCompletedEvent(lesson.id, lesson.levelId),
+      );
+    }
   } else if (action === "complete-practice") {
     guided = completePracticeStep(guided, id);
   } else {
