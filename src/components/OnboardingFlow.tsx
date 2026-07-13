@@ -78,7 +78,7 @@ export function OnboardingFlow() {
             >
               <p className="font-semibold text-gray-900">Crear cuenta</p>
               <p className="mt-1 text-sm text-gray-600">
-                Próximamente — por ahora usa modo invitado.
+                Inicia sesión con Google y guarda tu progreso.
               </p>
             </button>
           </div>
@@ -86,7 +86,15 @@ export function OnboardingFlow() {
             <Button variant="ghost" onClick={() => setStep("country")}>
               Atrás
             </Button>
-            <Button onClick={() => setStep("rations")}>Continuar</Button>
+            <Button
+              onClick={() =>
+                guestMode
+                  ? setStep("rations")
+                  : router.push("/login?next=/onboarding")
+              }
+            >
+              Continuar
+            </Button>
           </div>
         </section>
       )}

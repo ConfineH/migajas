@@ -45,7 +45,9 @@ openspec/        # artefactos SDD
 - [x] Pantalla de progreso y repaso de errores
 - [x] Curso guiado: lecciones + práctica + examen (pivot pedagógico)
 - [x] Lecciones guiadas niveles 1–5
-- [ ] Supabase / PostgreSQL (Sprint 2+)
+- [x] Inicio de sesión con Google (Supabase Auth)
+- [ ] Sincronizar progreso con cuenta (post-login)
+- [ ] Supabase / PostgreSQL para datos (Sprint 2+)
 
 ## Repositorio
 
