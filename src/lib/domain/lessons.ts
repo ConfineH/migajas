@@ -1,3 +1,5 @@
+import { getContentCache } from "@/lib/content-cache";
+
 export type LessonStepType = "explanation" | "example" | "practice";
 
 export interface LessonStep {
@@ -25,11 +27,8 @@ export interface LevelExam {
   exerciseIds: string[];
 }
 
-import lessonsData from "@/lib/data/lessons.json";
-import examsData from "@/lib/data/exams.json";
-
 export function getAllLessons(): Lesson[] {
-  return lessonsData as Lesson[];
+  return getContentCache().lessons;
 }
 
 export function getLessonsForLevel(levelId: string): Lesson[] {
@@ -57,7 +56,7 @@ export function getPracticeSteps(lesson: Lesson): LessonStep[] {
 }
 
 export function getAllExams(): LevelExam[] {
-  return examsData as LevelExam[];
+  return getContentCache().exams;
 }
 
 export function getExamForLevel(levelId: string): LevelExam | undefined {

@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     guided = completeLesson(guided, id);
     const lesson = getLessonById(id);
     if (lesson) {
-      trackLearningEvent(
+      await trackLearningEvent(
         buildLessonCompletedEvent(lesson.id, lesson.levelId),
       );
     }

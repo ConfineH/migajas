@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   const completion = updated.completions.find((c) => c.levelId === levelId)!;
 
   if (shouldEmitExamPassed(completion.passed)) {
-    trackLearningEvent(
+    await trackLearningEvent(
       buildExamPassedEvent(levelId, completion.masteryScore),
     );
   }
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       wasFreeModeUnlocked,
     )
   ) {
-    trackLearningEvent(buildFreeModeUnlockedEvent());
+    await trackLearningEvent(buildFreeModeUnlockedEvent());
   }
 
   const response = NextResponse.json({

@@ -1,8 +1,8 @@
-import foodsData from "@/lib/data/foods.json";
 import type { FoodItem } from "@/lib/domain/foods";
+import { getContentCache } from "@/lib/content-cache";
 
 export function getFoods(): FoodItem[] {
-  return foodsData as FoodItem[];
+  return getContentCache().foods;
 }
 
 export function getFoodById(id: string): FoodItem | undefined {

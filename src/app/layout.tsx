@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { hydrateContentFromSupabase } from "@/lib/content-server";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,11 +19,13 @@ export const metadata: Metadata = {
     "App educativa para aprender conteo de carbohidratos por niveles, empezando por España.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await hydrateContentFromSupabase();
+
   return (
     <html
       lang="es"

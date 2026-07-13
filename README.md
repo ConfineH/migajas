@@ -47,7 +47,10 @@ openspec/        # artefactos SDD
 - [x] Lecciones guiadas niveles 1–5
 - [x] Inicio de sesión con Google (Supabase Auth)
 - [x] Sincronizar progreso con cuenta (post-login)
-- [ ] Supabase / PostgreSQL para datos (Sprint 2+)
+- [x] Contenido en Supabase (alimentos, lecciones, exámenes)
+- [x] Analytics con user_id en Supabase
+- [ ] Dashboard de analytics (Sprint 6)
+- [ ] Admin UI para editar contenido
 
 ## Repositorio
 
