@@ -18,6 +18,7 @@ export function NavBar({ freeMode = false, user = null }: NavBarProps) {
         ]
       : []),
     { href: "/progress", label: "Progreso" },
+    { href: "/analytics", label: "Actividad" },
     { href: "/onboarding", label: "Configuración" },
   ];
 

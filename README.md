@@ -49,7 +49,7 @@ openspec/        # artefactos SDD
 - [x] Sincronizar progreso con cuenta (post-login)
 - [x] Contenido en Supabase (alimentos, lecciones, exámenes)
 - [x] Analytics con user_id en Supabase
-- [ ] Dashboard de analytics (Sprint 6)
+- [x] Dashboard de analytics (Sprint 6)
 - [ ] Admin UI para editar contenido
 
 ## Repositorio

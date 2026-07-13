@@ -38,3 +38,12 @@ The system SHALL emit `free_mode_unlocked` once when nivel-1 exam is passed for 
 - **GIVEN** free mode was already unlocked
 - **WHEN** nivel-1 exam is passed again
 - **THEN** no duplicate `free_mode_unlocked` event is emitted
+
+### Requirement: User analytics dashboard
+
+The system MUST show an analytics dashboard at `/analytics` for authenticated users based on their stored learning events.
+
+#### Scenario: Signed-in user views dashboard
+- **GIVEN** an authenticated user with learning events
+- **WHEN** they open `/analytics`
+- **THEN** they see funnel per level and recent milestone timeline
