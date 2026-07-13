@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import { gradeAnswer, getExerciseById } from "@/lib/domain/exercises";
 import { recordAttempt } from "@/lib/domain/attempts";
-import {
-  ATTEMPTS_COOKIE,
-  getStoredAttempts,
-  serializeAttempts,
-} from "@/lib/attempts-storage";
+import { persistAttempts, resolveAttempts } from "@/lib/learning-state";
 
 export async function GET() {
-  const attempts = await getStoredAttempts();
+  const attempts = await resolveAttempts();
   return NextResponse.json({ attempts });
 }
 
@@ -26,7 +22,7 @@ export async function POST(request: Request) {
   }
 
   const isCorrect = gradeAnswer(exercise, selectedAnswer);
-  const existing = await getStoredAttempts();
+  const existing = await resolveAttempts();
   const updated = recordAttempt(existing, {
     exerciseId,
     selectedAnswer,
@@ -40,12 +36,7 @@ export async function POST(request: Request) {
     correctAnswer: exercise.correctAnswer,
   });
 
-  response.cookies.set(ATTEMPTS_COOKIE, serializeAttempts(updated), {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  });
+  await persistAttempts(updated, response);
 
   return response;
 }

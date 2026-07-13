@@ -7,15 +7,11 @@ import {
   shouldEmitFreeModeUnlocked,
 } from "@/lib/domain/analytics";
 import { trackLearningEvent } from "@/lib/analytics-server";
-import {
-  PROGRESS_COOKIE,
-  getStoredProgress,
-  serializeProgress,
-} from "@/lib/progress-storage";
+import { persistProgress, resolveProgress } from "@/lib/learning-state";
 import { getLevelById } from "@/lib/domain/exercises";
 
 export async function GET() {
-  const progress = await getStoredProgress();
+  const progress = await resolveProgress();
   return NextResponse.json(progress);
 }
 
@@ -32,7 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Level not found" }, { status: 404 });
   }
 
-  const existing = await getStoredProgress();
+  const existing = await resolveProgress();
   const wasFreeModeUnlocked = existing.freeModeUnlocked;
   const updated = completeLevel(existing, levelId, correctCount, totalCount);
   const completion = updated.completions.find((c) => c.levelId === levelId)!;
@@ -57,12 +53,7 @@ export async function POST(request: Request) {
     nextLevelUnlocked: completion.passed,
   });
 
-  response.cookies.set(PROGRESS_COOKIE, serializeProgress(updated), {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  });
+  await persistProgress(updated, response);
 
   return response;
 }

@@ -1,7 +1,6 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { LevelsList } from "@/components/LevelsList";
-import { getStoredProgress } from "@/lib/progress-storage";
-import { getStoredAttempts } from "@/lib/attempts-storage";
+import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
 export const metadata = {
@@ -10,8 +9,8 @@ export const metadata = {
 
 export default async function LevelsPage() {
   await requireFreeMode();
-  const progress = await getStoredProgress();
-  const attempts = await getStoredAttempts();
+  const progress = await resolveProgress();
+  const attempts = await resolveAttempts();
 
   return (
     <>

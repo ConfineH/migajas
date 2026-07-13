@@ -1,6 +1,6 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { CourseLevelList } from "@/components/CourseLevelList";
-import { getStoredProgress } from "@/lib/progress-storage";
+import { resolveProgress } from "@/lib/learning-state";
 import { toGuidedProgress, isFreeModeUnlocked } from "@/lib/domain/guided-flow";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function LearnPage() {
-  const stored = await getStoredProgress();
+  const stored = await resolveProgress();
   const progress = toGuidedProgress(stored);
   const freeMode = isFreeModeUnlocked(progress);
 

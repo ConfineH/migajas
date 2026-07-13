@@ -13,8 +13,7 @@ import {
   PASS_THRESHOLD,
 } from "@/lib/domain/progress";
 import { accuracyRate } from "@/lib/domain/attempts";
-import { getStoredProgress } from "@/lib/progress-storage";
-import { getStoredAttempts } from "@/lib/attempts-storage";
+import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
   getLessonProgressPercent,
@@ -25,8 +24,8 @@ export const metadata = {
 };
 
 export default async function ProgressPage() {
-  const progress = await getStoredProgress();
-  const attempts = await getStoredAttempts();
+  const progress = await resolveProgress();
+  const attempts = await resolveAttempts();
   const guided = toGuidedProgress(progress);
   const levels = getLevels();
   const passed = countPassedLevels(progress);

@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { sanitizePostAuthRedirect } from "@/lib/domain/auth";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
+import {
+  applyLearningStateCookies,
+  syncGuestLearningState,
+} from "@/lib/learning-state";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -16,7 +20,18 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const response = NextResponse.redirect(`${origin}${next}`);
+
+      if (user) {
+        const merged = await syncGuestLearningState(user.id);
+        applyLearningStateCookies(response, merged);
+      }
+
+      return response;
     }
   }
 

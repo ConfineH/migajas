@@ -4,7 +4,7 @@ import { ExamRunner } from "@/components/ExamRunner";
 import { Button } from "@/components/Button";
 import { getExamForLevel } from "@/lib/domain/lessons";
 import { getExerciseById, getLevelById, getLevels } from "@/lib/domain/exercises";
-import { getStoredProgress } from "@/lib/progress-storage";
+import { resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
   canStartExam,
@@ -20,7 +20,7 @@ export default async function ExamPage({ params }: Props) {
   const level = getLevelById(levelId);
   if (!level) notFound();
 
-  const stored = await getStoredProgress();
+  const stored = await resolveProgress();
   const progress = toGuidedProgress(stored);
   const levels = getLevels();
 

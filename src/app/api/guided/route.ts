@@ -8,11 +8,7 @@ import {
 import { getLessonById } from "@/lib/domain/lessons";
 import { buildLessonCompletedEvent } from "@/lib/domain/analytics";
 import { trackLearningEvent } from "@/lib/analytics-server";
-import {
-  PROGRESS_COOKIE,
-  getStoredProgress,
-  serializeProgress,
-} from "@/lib/progress-storage";
+import { persistProgress, resolveProgress } from "@/lib/learning-state";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -21,7 +17,7 @@ export async function POST(request: Request) {
     id: string;
   };
 
-  const stored = await getStoredProgress();
+  const stored = await resolveProgress();
   let guided = toGuidedProgress(stored);
 
   if (action === "complete-lesson") {
@@ -41,12 +37,7 @@ export async function POST(request: Request) {
   const updated = mergeGuidedIntoUserProgress(stored, guided);
   const response = NextResponse.json({ ok: true, progress: updated });
 
-  response.cookies.set(PROGRESS_COOKIE, serializeProgress(updated), {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  });
+  await persistProgress(updated, response);
 
   return response;
 }

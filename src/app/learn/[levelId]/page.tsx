@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { GuidedPathList } from "@/components/GuidedPathList";
 import { Button } from "@/components/Button";
-import { getStoredProgress } from "@/lib/progress-storage";
+import { resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
   getLessonProgressPercent,
@@ -27,7 +27,7 @@ export default async function LearnLevelPage({ params }: Props) {
   const level = getLevelById(levelId);
   if (!level) notFound();
 
-  const stored = await getStoredProgress();
+  const stored = await resolveProgress();
   const progress = toGuidedProgress(stored);
   const levels = getLevels();
 

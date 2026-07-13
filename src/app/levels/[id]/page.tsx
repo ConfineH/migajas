@@ -9,8 +9,7 @@ import {
   getLevels,
 } from "@/lib/domain/exercises";
 import { isLevelUnlocked, getFailedExerciseIds } from "@/lib/domain/progress";
-import { getStoredProgress } from "@/lib/progress-storage";
-import { getStoredAttempts } from "@/lib/attempts-storage";
+import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
 interface LevelPageProps {
@@ -36,8 +35,8 @@ export default async function LevelPage({
   const level = getLevelById(id);
   if (!level) notFound();
 
-  const progress = await getStoredProgress();
-  const attempts = await getStoredAttempts();
+  const progress = await resolveProgress();
+  const attempts = await resolveAttempts();
   const levels = getLevels();
 
   const unlocked = isLevelUnlocked(
