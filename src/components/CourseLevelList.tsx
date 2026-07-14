@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import {
   getLessonProgressPercent,
   isGuidedLevelUnlocked,
@@ -31,14 +32,12 @@ export function CourseLevelList({ progress }: CourseLevelListProps) {
               key={level.id}
               className="rounded-2xl border border-gray-200 bg-gray-50 p-6 opacity-75"
             >
-              <div className="flex justify-between gap-4">
+              <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 className="font-bold text-gray-500">{level.name}</h2>
                   <p className="mt-1 text-sm text-gray-400">{level.description}</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-500">
-                  Bloqueado
-                </span>
+                <StatusBadge variant="locked">Bloqueado</StatusBadge>
               </div>
               <p className="mt-3 text-sm text-gray-400">
                 Aprueba el examen del nivel anterior para continuar.
@@ -62,9 +61,7 @@ export function CourseLevelList({ progress }: CourseLevelListProps) {
                 </p>
               </div>
               {completion?.passed ? (
-                <span className="shrink-0 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">
-                  ✓ {completion.masteryScore}%
-                </span>
+                <StatusBadge variant="success">✓ {completion.masteryScore}%</StatusBadge>
               ) : (
                 <span className="shrink-0 text-sm font-semibold text-emerald-600">
                   Entrar →

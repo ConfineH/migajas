@@ -3,6 +3,8 @@ import {
   resolveAuthMode,
   sanitizePostAuthRedirect,
   buildOAuthCallbackUrl,
+  getAuthSiteOrigin,
+  resolveAuthCallbackRedirect,
   formatUserDisplayName,
   type AuthUserSummary,
 } from "@/lib/domain/auth";
@@ -52,6 +54,40 @@ describe("buildOAuthCallbackUrl", () => {
     expect(buildOAuthCallbackUrl("https://migajas.app", "/learn")).toBe(
       "https://migajas.app/auth/callback",
     );
+  });
+});
+
+describe("getAuthSiteOrigin", () => {
+  it("trims trailing slash from site url", () => {
+    expect(getAuthSiteOrigin("https://migajas.vercel.app/")).toBe(
+      "https://migajas.vercel.app",
+    );
+  });
+
+  it("falls back when site url is missing", () => {
+    expect(getAuthSiteOrigin(null)).toBe("http://localhost:3000");
+  });
+});
+
+describe("resolveAuthCallbackRedirect", () => {
+  it("prefers explicit next path", () => {
+    expect(resolveAuthCallbackRedirect("/progress", "recovery")).toBe(
+      "/progress",
+    );
+  });
+
+  it("routes recovery flows to reset password", () => {
+    expect(resolveAuthCallbackRedirect(null, "recovery")).toBe(
+      "/auth/reset-password",
+    );
+  });
+
+  it("routes signup confirmation to confirmed page", () => {
+    expect(resolveAuthCallbackRedirect(null, "signup")).toBe("/auth/confirmed");
+  });
+
+  it("defaults to learn", () => {
+    expect(resolveAuthCallbackRedirect(null, null)).toBe("/learn");
   });
 });
 

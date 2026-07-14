@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Authenticated access via Google OAuth alongside existing guest mode.
+Authenticated access via Google OAuth and email/password alongside existing guest mode.
 
 ## Requirements
 
@@ -16,6 +16,49 @@ The system MUST allow users to start sign-in with Google from `/login`.
 - WHEN they tap "Continuar con Google"
 - THEN the system redirects to Google OAuth via Supabase
 - AND returns to `/auth/callback` after success
+
+### Requirement: Email and Password Auth
+
+The system MUST allow users to sign in or sign up with email and password from `/login`.
+
+#### Scenario: User signs in with email
+
+- GIVEN an existing account with confirmed email
+- WHEN they submit valid credentials on `/login`
+- THEN the system creates a Supabase session
+- AND syncs guest progress before redirecting to `/learn`
+
+#### Scenario: User signs up with email
+
+- GIVEN email confirmation is enabled in Supabase
+- WHEN they create an account with email and password
+- THEN the system sends a confirmation email
+- AND shows instructions to check the inbox
+
+#### Scenario: User confirms email
+
+- GIVEN a valid confirmation link from Supabase
+- WHEN the callback exchanges the auth code
+- THEN the user lands on `/auth/confirmed`
+- AND can continue to the course
+
+### Requirement: Password Recovery
+
+The system MUST allow users to request a password reset link.
+
+#### Scenario: User requests password reset
+
+- GIVEN a visitor on `/login/forgot-password`
+- WHEN they submit their email
+- THEN the system sends a recovery email via Supabase
+- AND shows a neutral success message
+
+#### Scenario: User sets a new password
+
+- GIVEN a valid recovery link
+- WHEN they submit a new password on `/auth/reset-password`
+- THEN the password is updated
+- AND the user is redirected to `/learn`
 
 ### Requirement: Guest Mode Coexistence
 

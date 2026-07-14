@@ -25,6 +25,14 @@ export function sanitizePostAuthRedirect(
   return next;
 }
 
+export function getAuthSiteOrigin(
+  siteUrl: string | null | undefined,
+  fallback = "http://localhost:3000",
+): string {
+  const trimmed = siteUrl?.trim().replace(/\/$/, "");
+  return trimmed || fallback;
+}
+
 export function buildOAuthCallbackUrl(
   origin: string,
   next: string = DEFAULT_POST_AUTH_PATH,
@@ -33,6 +41,16 @@ export function buildOAuthCallbackUrl(
   const base = `${origin.replace(/\/$/, "")}/auth/callback`;
   if (safeNext === DEFAULT_POST_AUTH_PATH) return base;
   return `${base}?next=${encodeURIComponent(safeNext)}`;
+}
+
+export function resolveAuthCallbackRedirect(
+  next: string | null | undefined,
+  type: string | null | undefined,
+): string {
+  if (next) return sanitizePostAuthRedirect(next);
+  if (type === "recovery") return "/auth/reset-password";
+  if (type === "signup" || type === "email") return "/auth/confirmed";
+  return DEFAULT_POST_AUTH_PATH;
 }
 
 export function formatUserDisplayName(user: AuthUserSummary): string {

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { formatUserDisplayName, type AuthUserSummary } from "@/lib/domain/auth";
-import { isContentAdmin } from "@/lib/domain/admin";
 import { signOut } from "@/app/login/actions";
 import { NavLink } from "@/components/ui/NavLink";
+import { NavMenu } from "@/components/ui/NavMenu";
 
 interface NavBarProps {
   freeMode?: boolean;
@@ -17,10 +17,8 @@ export function NavBar({
   showAdmin = false,
   showGuide = false,
 }: NavBarProps) {
-  const links = [
-    { href: "/", label: "Inicio" },
+  const primaryLinks = [
     { href: "/learn", label: "Curso" },
-    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
     ...(freeMode
       ? [
           { href: "/levels", label: "Practicar" },
@@ -28,6 +26,10 @@ export function NavBar({
         ]
       : []),
     { href: "/progress", label: "Progreso" },
+  ];
+
+  const moreLinks = [
+    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
     { href: "/analytics", label: "Actividad" },
     { href: "/onboarding", label: "Configuración" },
     ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
@@ -44,13 +46,16 @@ export function NavBar({
             Migajas
           </Link>
 
-          <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
-            <ul className="flex min-w-0 items-center gap-0.5 overflow-x-auto whitespace-nowrap text-sm font-medium text-emerald-700 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {links.map((link) => (
+          <div className="flex min-w-0 items-center justify-end gap-1 sm:gap-2">
+            <ul className="flex min-w-0 items-center gap-0.5 text-sm font-medium text-emerald-700">
+              {primaryLinks.map((link) => (
                 <li key={link.href} className="shrink-0">
                   <NavLink href={link.href}>{link.label}</NavLink>
                 </li>
               ))}
+              <li className="shrink-0">
+                <NavMenu label="Más" items={moreLinks} />
+              </li>
             </ul>
 
             <div className="shrink-0 border-l border-emerald-100 pl-2 sm:pl-3">

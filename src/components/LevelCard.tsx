@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { LevelCompletion } from "@/lib/domain/progress";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 
 export function LevelCard({
   id,
@@ -26,9 +27,7 @@ export function LevelCard({
             <h2 className="text-lg font-bold text-gray-500">{name}</h2>
             <p className="mt-2 text-sm text-gray-400">{description}</p>
           </div>
-          <span className="shrink-0 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-500">
-            Bloqueado
-          </span>
+          <StatusBadge variant="locked">Bloqueado</StatusBadge>
         </div>
         <p className="mt-4 text-sm text-gray-400">
           Completa el nivel anterior con ≥60% para desbloquear.
@@ -45,19 +44,11 @@ export function LevelCard({
           <p className="mt-2 text-sm text-gray-600">{description}</p>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
-          <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-            {exerciseCount} ejercicios
-          </span>
+          <StatusBadge variant="muted">{exerciseCount} ejercicios</StatusBadge>
           {completion && (
-            <span
-              className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                completion.passed
-                  ? "bg-emerald-600 text-white"
-                  : "bg-amber-100 text-amber-800"
-              }`}
-            >
+            <StatusBadge variant={completion.passed ? "success" : "warning"}>
               {completion.masteryScore}%
-            </span>
+            </StatusBadge>
           )}
         </div>
       </div>

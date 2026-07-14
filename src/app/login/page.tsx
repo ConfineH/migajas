@@ -1,5 +1,6 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
+import { EmailAuthForm } from "@/components/EmailAuthForm";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import { sanitizePostAuthRedirect } from "@/lib/domain/auth";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
@@ -28,8 +29,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <div className="space-y-3">
             <h1 className="text-2xl font-bold text-gray-900">Crear cuenta</h1>
             <p className="text-gray-600">
-              Inicia sesión con Google para guardar tu progreso entre
-              dispositivos.
+              Guarda tu progreso entre dispositivos con Google o con tu correo.
             </p>
           </div>
 
@@ -43,10 +43,18 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           )}
 
           {configured ? (
-            <GoogleSignInButton nextPath={nextPath} />
+            <div className="space-y-6">
+              <GoogleSignInButton nextPath={nextPath} />
+              <div className="flex items-center gap-3">
+                <div className="h-px flex-1 bg-gray-200" />
+                <span className="text-sm text-gray-500">o</span>
+                <div className="h-px flex-1 bg-gray-200" />
+              </div>
+              <EmailAuthForm nextPath={nextPath} />
+            </div>
           ) : (
             <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-              El inicio de sesión con Google requiere configurar Supabase en{" "}
+              El inicio de sesión requiere configurar Supabase en{" "}
               <code className="text-xs">.env.local</code>.
             </p>
           )}

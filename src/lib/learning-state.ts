@@ -96,26 +96,42 @@ export async function syncGuestLearningState(
   return merged;
 }
 
+const LEARNING_STATE_COOKIE_OPTIONS = {
+  httpOnly: true,
+  sameSite: "lax" as const,
+  maxAge: 60 * 60 * 24 * 365,
+  path: "/",
+};
+
 export function applyLearningStateCookies(
   response: NextResponse,
   state: UserLearningState,
 ): void {
-  const cookieOptions = {
-    httpOnly: true,
-    sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  };
-
   response.cookies.set(
     PROGRESS_COOKIE,
     serializeProgress(state.progress),
-    cookieOptions,
+    LEARNING_STATE_COOKIE_OPTIONS,
   );
   response.cookies.set(
     ATTEMPTS_COOKIE,
     serializeAttempts(state.attempts),
-    cookieOptions,
+    LEARNING_STATE_COOKIE_OPTIONS,
+  );
+}
+
+export async function applyLearningStateToStore(
+  state: UserLearningState,
+): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(
+    PROGRESS_COOKIE,
+    serializeProgress(state.progress),
+    LEARNING_STATE_COOKIE_OPTIONS,
+  );
+  cookieStore.set(
+    ATTEMPTS_COOKIE,
+    serializeAttempts(state.attempts),
+    LEARNING_STATE_COOKIE_OPTIONS,
   );
 }
 

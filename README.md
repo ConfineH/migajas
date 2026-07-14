@@ -19,11 +19,19 @@ npm test         # tests unitarios
 npm run build    # build de producción
 ```
 
-### Variables de entorno (admin)
+### Variables de entorno
 
 ```bash
-ADMIN_EMAILS=tu@email.com          # editores de contenido
-SUPABASE_SERVICE_ROLE_KEY=...      # escrituras en Supabase (solo servidor)
+NEXT_PUBLIC_SITE_URL=https://migajas.vercel.app   # enlaces de auth en producción
+ADMIN_EMAILS=tu@email.com                          # editores de contenido
+SUPABASE_SERVICE_ROLE_KEY=...                      # escrituras en Supabase (solo servidor)
+```
+
+Para alinear URLs de confirmación y recuperación en Supabase:
+
+```bash
+# .env.supabase con SUPABASE_ACCESS_TOKEN (no commitear)
+node scripts/configure-auth-urls.mjs
 ```
 
 ## Estructura
@@ -53,6 +61,8 @@ openspec/        # artefactos SDD
 - [x] Curso guiado: lecciones + práctica + examen (pivot pedagógico)
 - [x] Lecciones guiadas niveles 1–5
 - [x] Inicio de sesión con Google (Supabase Auth)
+- [x] Inicio de sesión con correo y contraseña
+- [x] Recuperación de contraseña y confirmación por email
 - [x] Sincronizar progreso con cuenta (post-login)
 - [x] Contenido en Supabase (alimentos, lecciones, exámenes)
 - [x] Analytics con user_id en Supabase

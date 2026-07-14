@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sanitizePostAuthRedirect } from "@/lib/domain/auth";
+import { resolveAuthCallbackRedirect } from "@/lib/domain/auth";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import {
@@ -12,7 +12,10 @@ import { backfillLearningEvents } from "@/lib/supabase/analytics-backfill";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = sanitizePostAuthRedirect(searchParams.get("next"));
+  const next = resolveAuthCallbackRedirect(
+    searchParams.get("next"),
+    searchParams.get("type"),
+  );
 
   if (!isSupabaseConfigured()) {
     return NextResponse.redirect(`${origin}/login?error=config`);
