@@ -9,7 +9,7 @@ export interface UserLearningState {
   attempts: Attempt[];
 }
 
-function parseProgress(raw: unknown): UserProgress {
+export function parseUserProgress(raw: unknown): UserProgress {
   if (!raw || typeof raw !== "object") return { ...EMPTY_PROGRESS };
   const p = raw as Partial<UserProgress>;
   return {
@@ -17,7 +17,17 @@ function parseProgress(raw: unknown): UserProgress {
     completedLessons: p.completedLessons ?? [],
     completedPracticeSteps: p.completedPracticeSteps ?? [],
     freeModeUnlocked: p.freeModeUnlocked ?? false,
+    activeExamSessions: Array.isArray(p.activeExamSessions)
+      ? p.activeExamSessions
+      : undefined,
+    completedFlashcardLevels: Array.isArray(p.completedFlashcardLevels)
+      ? p.completedFlashcardLevels
+      : undefined,
   };
+}
+
+function parseProgress(raw: unknown): UserProgress {
+  return parseUserProgress(raw);
 }
 
 function parseAttempts(raw: unknown): Attempt[] {

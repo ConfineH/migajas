@@ -70,6 +70,10 @@ export function mergeUserProgress(
       local.activeExamSessions,
       remote.activeExamSessions,
     ),
+    completedFlashcardLevels: unionIds(
+      local.completedFlashcardLevels ?? [],
+      remote.completedFlashcardLevels ?? [],
+    ),
   };
 }
 

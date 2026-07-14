@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
-import { gradeAnswer, type Exercise } from "@/lib/domain/exercises";
+import type { Exercise } from "@/lib/domain/exercises";
 
 interface SingleExerciseProps {
   exercise: Exercise;
@@ -35,7 +35,7 @@ export function SingleExercise({
     setSubmitting(true);
     const timeSpentMs = Date.now() - getStartTime();
 
-    await fetch("/api/attempts", {
+    const res = await fetch("/api/attempts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,8 +45,11 @@ export function SingleExercise({
       }),
     });
 
-    const isCorrect = gradeAnswer(exercise, selected);
-    setFeedback({ isCorrect, explanation: exercise.explanation });
+    const data = await res.json();
+    setFeedback({
+      isCorrect: Boolean(data.isCorrect),
+      explanation: data.explanation ?? exercise.explanation,
+    });
     setSubmitting(false);
   }
 
@@ -60,6 +63,12 @@ export function SingleExercise({
       }),
     });
     router.push(returnHref);
+  }
+
+  function retry() {
+    setSelected(null);
+    setFeedback(null);
+    startTime.current = null;
   }
 
   return (
@@ -107,6 +116,11 @@ export function SingleExercise({
               {feedback.isCorrect ? "¡Correcto!" : "Incorrecto"}
             </p>
             <p className="mt-2 text-gray-700">{feedback.explanation}</p>
+            {!feedback.isCorrect && (
+              <p className="mt-3 text-sm text-red-800">
+                Repasa la explicación e inténtalo de nuevo para continuar.
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -119,8 +133,12 @@ export function SingleExercise({
           >
             Comprobar
           </Button>
-        ) : (
+        ) : feedback.isCorrect ? (
           <Button onClick={completePractice}>Continuar el curso</Button>
+        ) : (
+          <Button onClick={retry} variant="secondary">
+            Reintentar
+          </Button>
         )}
       </div>
     </div>

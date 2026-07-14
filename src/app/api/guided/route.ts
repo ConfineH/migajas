@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
   completeLesson,
   completePracticeStep,
+  completeFlashcards,
   toGuidedProgress,
   mergeGuidedIntoUserProgress,
 } from "@/lib/domain/guided-flow";
@@ -13,7 +14,7 @@ import { persistProgress, resolveProgress } from "@/lib/learning-state";
 export async function POST(request: Request) {
   const body = await request.json();
   const { action, id } = body as {
-    action: "complete-lesson" | "complete-practice";
+    action: "complete-lesson" | "complete-practice" | "complete-flashcards";
     id: string;
   };
 
@@ -30,6 +31,8 @@ export async function POST(request: Request) {
     }
   } else if (action === "complete-practice") {
     guided = completePracticeStep(guided, id);
+  } else if (action === "complete-flashcards") {
+    guided = completeFlashcards(guided, id);
   } else {
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });
   }

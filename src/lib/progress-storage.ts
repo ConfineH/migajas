@@ -9,6 +9,7 @@ export const EMPTY_PROGRESS: UserProgress = {
   completedPracticeSteps: [],
   freeModeUnlocked: false,
   activeExamSessions: undefined,
+  completedFlashcardLevels: undefined,
 };
 
 export async function getStoredProgress(): Promise<UserProgress> {
@@ -23,6 +24,7 @@ export async function getStoredProgress(): Promise<UserProgress> {
       completedPracticeSteps: parsed.completedPracticeSteps ?? [],
       freeModeUnlocked: parsed.freeModeUnlocked ?? false,
       activeExamSessions: parsed.activeExamSessions,
+      completedFlashcardLevels: parsed.completedFlashcardLevels,
     };
   } catch {
     return { ...EMPTY_PROGRESS };

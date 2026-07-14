@@ -12,6 +12,7 @@ const emptyProgress: UserProgress = {
   completedLessons: [],
   completedPracticeSteps: [],
   freeModeUnlocked: false,
+  completedFlashcardLevels: [],
 };
 
 describe("pickBestCompletion", () => {

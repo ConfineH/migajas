@@ -4,7 +4,7 @@
 
 ### Requirement: Guided learning sequence
 
-The system SHALL present nivel-1 as an ordered sequence: lessons, linked practice steps, and a final exam.
+The system SHALL present each level as an ordered sequence: lessons, linked practice steps, level flashcards (fichas), and a final exam.
 
 #### Scenario: First visit
 - **GIVEN** a new user who completed onboarding
@@ -12,9 +12,23 @@ The system SHALL present nivel-1 as an ordered sequence: lessons, linked practic
 - **THEN** the first incomplete item is a lesson
 
 #### Scenario: Sequence order
-- **GIVEN** the nivel-1 guided path
+- **GIVEN** a guided level path
 - **WHEN** the sequence is built
-- **THEN** it alternates lessons and practices and ends with an exam
+- **THEN** it alternates lessons and practices, includes fichas before the exam, and ends with the exam
+
+### Requirement: Level flashcards before exam
+
+The system SHALL provide a **Fichas del nivel** step after lessons/practices and before the exam, covering essential foods from lessons and the exam pool.
+
+#### Scenario: Complete fichas
+- **GIVEN** a user who finishes all cards in the deck
+- **WHEN** they complete the fichas session
+- **THEN** the level is stored in `completedFlashcardLevels`
+
+#### Scenario: Soft exam recommendation
+- **GIVEN** fichas are incomplete
+- **WHEN** the user opens the exam
+- **THEN** they see a recommendation to complete fichas but can still take the exam
 
 ### Requirement: Free mode gate
 
@@ -52,3 +66,31 @@ The system SHALL provide guided lessons for levels 1 through 5, each with lesson
 - **GIVEN** any level from 1 to 5
 - **WHEN** lessons are loaded
 - **THEN** at least 2 lessons exist with linked practice and an exam
+
+### Requirement: Nivel 3 clinical mode unlock
+
+The system SHALL surface a clinical-mode opt-in prompt or settings entry only after the user has passed the nivel-3 guided exam (or higher). Enabling clinical mode MUST NOT bypass or replace the guided-course-first learning path.
+
+#### Scenario: Opt-in offered after nivel 3 pass
+
+- GIVEN an authenticated user who just passed the nivel-3 exam
+- WHEN they return to `/learn` or home
+- THEN they see a Spanish-language prompt or link to enable clinical mode in settings
+
+#### Scenario: Opt-in not shown before nivel 3
+
+- GIVEN an authenticated user who passed only nivel-2 exam
+- WHEN they browse the app
+- THEN no clinical-mode opt-in prompt or diary navigation is shown
+
+#### Scenario: Guided flow preserved
+
+- GIVEN a user at any learning stage
+- WHEN they open `/learn/nivel-{n}` for an unlocked level
+- THEN the lesson → practice → exam sequence remains the primary path and clinical features do not redirect them away from incomplete guided items
+
+#### Scenario: Catalog gate unchanged
+
+- GIVEN a user without free mode (nivel-1 exam not passed)
+- WHEN they visit `/catalog`
+- THEN they are still redirected to the guided course regardless of clinical mode settings

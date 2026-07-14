@@ -9,6 +9,7 @@ interface NavBarProps {
   user?: AuthUserSummary | null;
   showAdmin?: boolean;
   showGuide?: boolean;
+  showDiary?: boolean;
 }
 
 export function NavBar({
@@ -16,9 +17,11 @@ export function NavBar({
   user = null,
   showAdmin = false,
   showGuide = false,
+  showDiary = false,
 }: NavBarProps) {
   const primaryLinks = [
     { href: "/learn", label: "Curso" },
+    ...(showDiary ? [{ href: "/diario", label: "Diario" }] : []),
     ...(freeMode
       ? [
           { href: "/levels", label: "Practicar" },

@@ -10,11 +10,15 @@ import {
   type RegionProfile,
 } from "@/lib/domain/regions";
 
-type Step = "country" | "mode" | "rations";
+type Step = "country" | "mode" | "rations" | "clinical";
 
 interface OnboardingFlowProps {
   initialRegionId?: string;
   initialGuestMode?: boolean;
+  initialDailyCarbGoal?: number | null;
+  initialClinicalModeEnabled?: boolean;
+  isAuthenticated?: boolean;
+  canEnableClinicalMode?: boolean;
   settingsMode?: boolean;
 }
 
@@ -35,17 +39,45 @@ const REGION_EXAMPLES: Record<string, { food: string; detail: string; carbsG: nu
 export function OnboardingFlow({
   initialRegionId = "es",
   initialGuestMode = true,
+  initialDailyCarbGoal = null,
+  initialClinicalModeEnabled = false,
+  isAuthenticated = false,
+  canEnableClinicalMode = false,
   settingsMode = false,
 }: OnboardingFlowProps) {
   const router = useRouter();
   const [step, setStep] = useState<Step>("country");
   const [regionId, setRegionId] = useState(initialRegionId);
   const [guestMode, setGuestMode] = useState(initialGuestMode);
+  const [dailyCarbGoal, setDailyCarbGoal] = useState(
+    initialDailyCarbGoal?.toString() ?? "",
+  );
+  const [clinicalModeEnabled, setClinicalModeEnabled] = useState(
+    initialClinicalModeEnabled,
+  );
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const region = getRegionById(regionId);
   const example = REGION_EXAMPLES[region.id] ?? REGION_EXAMPLES.es;
 
+  function parseGoalInput(): number | null {
+    const trimmed = dailyCarbGoal.trim();
+    if (!trimmed) return null;
+    const value = Number(trimmed);
+    if (!Number.isInteger(value) || value <= 0) {
+      return null;
+    }
+    return value;
+  }
+
   async function completeOnboarding() {
+    setSaveError(null);
+    const goal = parseGoalInput();
+    if (dailyCarbGoal.trim() && goal === null) {
+      setSaveError("La meta diaria debe ser un número entero mayor que 0.");
+      return;
+    }
+
     await fetch("/api/onboarding", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,8 +85,28 @@ export function OnboardingFlow({
         regionId: region.id,
         guestMode,
         completed: true,
+        daily_carb_goal_g: goal,
       }),
     });
+
+    if (isAuthenticated) {
+      const profileResponse = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          region_id: region.id,
+          daily_carb_goal_g: goal,
+          clinical_mode_enabled: clinicalModeEnabled,
+        }),
+      });
+
+      if (!profileResponse.ok) {
+        const payload = (await profileResponse.json()) as { error?: string };
+        setSaveError(payload.error ?? "No se pudo guardar el perfil.");
+        return;
+      }
+    }
+
     router.push(settingsMode ? "/learn" : "/learn");
     router.refresh();
   }
@@ -63,7 +115,13 @@ export function OnboardingFlow({
     <div className="mx-auto max-w-lg space-y-8">
       {settingsMode ? (
         <p className="text-center text-sm text-gray-600">
-          Cambia la región de referencia para catálogo, guía y cálculo de raciones.
+          Cambia la región de referencia, tu meta diaria y el modo clínico.
+        </p>
+      ) : null}
+
+      {saveError ? (
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {saveError}
         </p>
       ) : null}
 
@@ -184,9 +242,75 @@ export function OnboardingFlow({
             >
               Atrás
             </Button>
-            <Button onClick={completeOnboarding}>
-              {settingsMode ? "Guardar cambios" : "Empezar el curso"}
+            <Button
+              onClick={() =>
+                settingsMode ? setStep("clinical") : completeOnboarding()
+              }
+            >
+              {settingsMode ? "Continuar" : "Empezar el curso"}
             </Button>
+          </div>
+        </section>
+      )}
+
+      {step === "clinical" && settingsMode && (
+        <section className="space-y-6">
+          <h1 className="text-center text-2xl font-bold text-gray-900">
+            Modo clínico
+          </h1>
+          <div className="space-y-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-gray-800">
+                Meta diaria de carbohidratos (g)
+              </span>
+              <input
+                type="number"
+                min={1}
+                step={1}
+                value={dailyCarbGoal}
+                onChange={(event) => setDailyCarbGoal(event.target.value)}
+                placeholder="Ej. 160"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3"
+              />
+              <span className="text-xs text-gray-600">
+                Opcional. Se usará en el diario y en los reportes para comparar
+                tu ingesta diaria.
+              </span>
+            </label>
+
+            {isAuthenticated ? (
+              <label className="flex items-start gap-3 rounded-xl bg-white p-4">
+                <input
+                  type="checkbox"
+                  checked={clinicalModeEnabled}
+                  disabled={!canEnableClinicalMode}
+                  onChange={(event) =>
+                    setClinicalModeEnabled(event.target.checked)
+                  }
+                  className="mt-1"
+                />
+                <span className="text-sm text-gray-700">
+                  <span className="font-medium text-gray-900">
+                    Activar modo clínico
+                  </span>
+                  <br />
+                  {canEnableClinicalMode
+                    ? "Podrás registrar tu ingesta desde el nivel 3 en adelante."
+                    : "Disponible tras aprobar el examen del nivel 3."}
+                </span>
+              </label>
+            ) : (
+              <p className="text-sm text-gray-600">
+                Inicia sesión para activar el modo clínico y sincronizar tu meta
+                entre dispositivos.
+              </p>
+            )}
+          </div>
+          <div className="flex justify-center gap-3">
+            <Button variant="ghost" onClick={() => setStep("rations")}>
+              Atrás
+            </Button>
+            <Button onClick={completeOnboarding}>Guardar cambios</Button>
           </div>
         </section>
       )}
