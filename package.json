@@ -9,12 +9,16 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:seed": "node scripts/generate-content-seed.mjs"
+    "db:seed": "node scripts/generate-content-seed.mjs",
+    "db:seed:remote": "node scripts/apply-remote-seed.mjs",
+    "ops:check": "node scripts/ops-check.mjs",
+    "ops:smoke:admin": "node scripts/ops-smoke-admin.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.2",
     "next": "16.2.10",
+    "pdfkit": "^0.19.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -23,6 +27,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
+    "@types/pdfkit": "^0.17.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.3",
