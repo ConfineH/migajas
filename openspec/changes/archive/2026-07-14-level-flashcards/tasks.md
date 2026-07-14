@@ -8,4 +8,4 @@
 - [x] `POST /api/guided` complete-flashcards
 - [x] `GuidedPathList` + exam soft warning
 - [x] Domain tests
-- [ ] Deploy to production (requiere `vercel login` — token expirado)
+- [x] Deploy to production — live at https://migajas.vercel.app (Vercel GitHub auto-deploy)
