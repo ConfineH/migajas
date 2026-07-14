@@ -16,6 +16,7 @@ export default async function CatalogPage() {
   const foods = enrichFoods(
     getFoodsForCountry(region.foodCountry),
     region.exchangeUnitG,
+    region.id,
   );
 
   return (
@@ -35,6 +36,7 @@ export default async function CatalogPage() {
           foods={foods}
           exchangeUnitG={region.exchangeUnitG}
           exchangeRuleLabel={formatExchangeRule(region)}
+          regionId={region.id}
         />
       </main>
     </>

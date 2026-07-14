@@ -21,6 +21,7 @@ export default async function ReferenceGuidePage() {
   const foods = enrichFoods(
     getFoodsForCountry(region.foodCountry),
     region.exchangeUnitG,
+    region.id,
   );
 
   return (
@@ -40,8 +41,9 @@ export default async function ReferenceGuidePage() {
           freeMode={freeMode}
           regionName={region.name}
           regionFlag={region.flag}
+          regionId={region.id}
           exchangeUnitG={region.exchangeUnitG}
-          tips={buildReferenceTips(region.exchangeUnitG, region.name)}
+          tips={buildReferenceTips(region.exchangeUnitG, region.name, region.id)}
         />
       </main>
     </>

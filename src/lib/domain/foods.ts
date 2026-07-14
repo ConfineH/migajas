@@ -1,4 +1,5 @@
 import { calculateRations, EXCHANGE_UNIT_G } from "./rations";
+import { applyPlainLanguageDo } from "./plain-language-do";
 
 export type Difficulty = "Baja" | "Media" | "Alta";
 export type ItemType = "base" | "mixed" | "modulator";
@@ -20,12 +21,26 @@ export interface EnrichedFoodItem extends FoodItem {
   rations: number;
 }
 
+export function localizeFoodDisplay(
+  item: FoodItem,
+  regionId: string,
+): FoodItem {
+  if (regionId !== "do") return item;
+  return {
+    ...item,
+    name: applyPlainLanguageDo(item.name),
+    category: applyPlainLanguageDo(item.category),
+  };
+}
+
 export function enrichFoodItem(
   item: FoodItem,
   exchangeUnitG: number = EXCHANGE_UNIT_G,
+  regionId?: string,
 ): EnrichedFoodItem {
+  const display = regionId ? localizeFoodDisplay(item, regionId) : item;
   return {
-    ...item,
+    ...display,
     rations: calculateRations(item.carbsG, exchangeUnitG),
   };
 }
@@ -33,8 +48,9 @@ export function enrichFoodItem(
 export function enrichFoods(
   items: FoodItem[],
   exchangeUnitG: number = EXCHANGE_UNIT_G,
+  regionId?: string,
 ): EnrichedFoodItem[] {
-  return items.map((item) => enrichFoodItem(item, exchangeUnitG));
+  return items.map((item) => enrichFoodItem(item, exchangeUnitG, regionId));
 }
 
 export function filterByRegion(items: FoodItem[], foodCountry: string): FoodItem[] {

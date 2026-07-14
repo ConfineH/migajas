@@ -32,8 +32,14 @@ describe("reference-guide", () => {
   });
 
   it("builds region-specific tips", () => {
-    const tips = buildReferenceTips(15, "República Dominicana");
-    expect(tips[1]).toContain("República Dominicana");
-    expect(tips[1]).toContain("15 g");
+    const esTips = buildReferenceTips(10, "España", "es");
+    expect(esTips[1]).toContain("España");
+    expect(esTips[1]).toContain("10 g de HC");
+
+    const doTips = buildReferenceTips(15, "República Dominicana", "do");
+    expect(doTips[1]).toContain("República Dominicana");
+    expect(doTips[1]).toContain("15 gramos de carbohidratos");
+    expect(doTips.join(" ")).not.toMatch(/\bHC\b/);
+    expect(doTips.join(" ")).not.toContain("moduladores");
   });
 });

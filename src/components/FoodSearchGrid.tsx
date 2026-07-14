@@ -13,12 +13,14 @@ interface FoodSearchGridProps {
   foods: EnrichedFoodItem[] | FoodItem[];
   exchangeUnitG: number;
   exchangeRuleLabel: string;
+  regionId?: string;
 }
 
 export function FoodSearchGrid({
   foods,
   exchangeUnitG,
   exchangeRuleLabel,
+  regionId = "es",
 }: FoodSearchGridProps) {
   const [category, setCategory] = useState("Todas");
   const [query, setQuery] = useState("");
@@ -27,6 +29,7 @@ export function FoodSearchGrid({
   const filtered = enrichFoods(
     filterAndSearch(foods, category, query),
     exchangeUnitG,
+    regionId,
   );
 
   return (
@@ -61,7 +64,7 @@ export function FoodSearchGrid({
 
       <div className="grid gap-4 sm:grid-cols-2">
         {filtered.map((food) => (
-          <FoodCard key={food.id} food={food} />
+          <FoodCard key={food.id} food={food} regionId={regionId} />
         ))}
       </div>
 

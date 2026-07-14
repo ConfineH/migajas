@@ -1,3 +1,5 @@
+import { buildReferenceTips as buildReferenceTipsFromGuide } from "./reference-guide";
+
 export interface RegionProfile {
   id: string;
   name: string;
@@ -40,12 +42,11 @@ export function formatHalfExchangeRule(region: RegionProfile): string {
 }
 
 export function buildReferenceTips(region: RegionProfile): string[] {
-  return [
-    "Cuenta solo carbohidratos (HC), no el peso total del alimento.",
-    `En ${region.name}: ${formatExchangeRule(region)}.`,
-    formatHalfExchangeRule(region),
-    "Los moduladores (pollo, huevo, pescado) aportan 0 raciones de HC.",
-  ];
+  return buildReferenceTipsFromGuide(
+    region.exchangeUnitG,
+    region.name,
+    region.id,
+  );
 }
 
 export function resolveRegionIdFromOnboarding(state: {

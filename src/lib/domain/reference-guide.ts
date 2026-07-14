@@ -1,3 +1,4 @@
+import { buildPlainReferenceTipsDo } from "@/lib/domain/plain-language-do";
 import { calculateRations, formatRations } from "@/lib/domain/rations";
 
 export interface ConversionRow {
@@ -5,7 +6,15 @@ export interface ConversionRow {
   carbsG: number;
 }
 
-export function buildReferenceTips(exchangeUnitG: number, regionName: string): string[] {
+export function buildReferenceTips(
+  exchangeUnitG: number,
+  regionName: string,
+  regionId = "es",
+): string[] {
+  if (regionId === "do") {
+    return buildPlainReferenceTipsDo(exchangeUnitG);
+  }
+
   const half = exchangeUnitG / 2;
   const oneAndHalf = exchangeUnitG * 1.5;
   return [

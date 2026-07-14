@@ -31,7 +31,7 @@ const REGION_EXAMPLES: Record<string, { food: string; detail: string; carbsG: nu
     },
     do: {
       food: "1 pieza de casabe",
-      detail: "30 g de alimento · 15 g de HC",
+      detail: "30 g de alimento · 15 g de carbohidratos",
       carbsG: 15,
     },
   };
@@ -230,8 +230,8 @@ export function OnboardingFlow({
             </p>
             {region.id === "do" ? (
               <p className="text-sm text-emerald-800">
-                El curso guiado usa alimentos y platos habituales de República
-                Dominicana con la regla de 15 g de HC por ración.
+                El curso usa palabras sencillas y comida dominicana de verdad, con
+                la regla de 15 gramos de carbohidratos por ración.
               </p>
             ) : null}
           </div>

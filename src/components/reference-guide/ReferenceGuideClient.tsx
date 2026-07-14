@@ -20,6 +20,7 @@ interface ReferenceGuideClientProps {
   freeMode: boolean;
   regionName: string;
   regionFlag: string;
+  regionId?: string;
   exchangeUnitG: number;
   tips: string[];
 }
@@ -29,6 +30,7 @@ export function ReferenceGuideClient({
   freeMode,
   regionName,
   regionFlag,
+  regionId = "es",
   exchangeUnitG,
   tips,
 }: ReferenceGuideClientProps) {
@@ -88,7 +90,9 @@ export function ReferenceGuideClient({
               <strong>{exchangeRuleLabel}</strong>
             </p>
             <p className="mt-2 text-sm text-emerald-700">
-              Divide los gramos de HC entre {exchangeUnitG} para obtener raciones.
+              {regionId === "do"
+                ? `Divide los gramos de carbohidratos entre ${exchangeUnitG} para obtener raciones.`
+                : `Divide los gramos de HC entre ${exchangeUnitG} para obtener raciones.`}
             </p>
           </div>
 
@@ -131,6 +135,7 @@ export function ReferenceGuideClient({
             foods={foods}
             exchangeUnitG={exchangeUnitG}
             exchangeRuleLabel={exchangeRuleLabel}
+            regionId={regionId}
           />
         </section>
       ) : null}

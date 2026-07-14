@@ -3,15 +3,23 @@ import { formatRations } from "@/lib/domain/rations";
 
 interface FoodCardProps {
   food: EnrichedFoodItem;
+  regionId?: string;
 }
 
-const typeLabels = {
+const typeLabelsEs = {
   base: "Base",
   mixed: "Plato mixto",
   modulator: "Modulador",
 };
 
-export function FoodCard({ food }: FoodCardProps) {
+const typeLabelsDo = {
+  base: "Base",
+  mixed: "Plato con varias cosas",
+  modulator: "No suma raciones",
+};
+
+export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
+  const typeLabels = regionId === "do" ? typeLabelsDo : typeLabelsEs;
   return (
     <article className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
       <div className="mb-2 flex items-start justify-between gap-2">

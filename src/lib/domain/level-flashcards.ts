@@ -1,6 +1,7 @@
 import { getExerciseById } from "./exercises";
 import type { EnrichedFoodItem, FoodItem } from "./foods";
 import { enrichFoodItem } from "./foods";
+import { applyPlainLanguageDo } from "@/lib/domain/plain-language-do";
 import { formatRations } from "./rations";
 import { getExamForLevel, getLessonsForLevel } from "./lessons";
 
@@ -68,26 +69,44 @@ export function getFlashcardFace(
   card: LevelFlashcard,
   food: FoodItem | EnrichedFoodItem,
   exchangeUnitG: number,
+  regionId = "es",
 ): FlashcardFace {
   const enriched = "rations" in food ? food : enrichFoodItem(food, exchangeUnitG);
   const rationsLabel = formatRations(enriched.rations).replace(".", ",");
+  const displayName =
+    regionId === "do" ? applyPlainLanguageDo(food.name) : food.name;
 
   switch (card.mode) {
     case "portion":
       return {
-        front: `¿Cuál es la porción estándar de ${food.name}?`,
+        front:
+          regionId === "do"
+            ? `¿Cuánto ${displayName.toLowerCase()} comes de costumbre?`
+            : `¿Cuál es la porción estándar de ${food.name}?`,
         back: `${food.portionText} (${food.grams} g)`,
-        hint: "Piensa en la medida habitual del catálogo",
+        hint:
+          regionId === "do"
+            ? "Piensa en la cantidad del catálogo"
+            : "Piensa en la medida habitual del catálogo",
       };
     case "carbs":
       return {
-        front: `¿Cuántos gramos de HC aporta la porción estándar de ${food.name}?`,
-        back: `${food.carbsG} g de HC`,
+        front:
+          regionId === "do"
+            ? `¿Cuántos gramos de carbohidratos tiene la cantidad normal de ${displayName.toLowerCase()}?`
+            : `¿Cuántos gramos de HC aporta la porción estándar de ${food.name}?`,
+        back:
+          regionId === "do"
+            ? `${food.carbsG} g de carbohidratos`
+            : `${food.carbsG} g de HC`,
         hint: `${food.portionText} · ${food.grams} g`,
       };
     case "rations":
       return {
-        front: `La porción estándar de ${food.name} aporta ${food.carbsG} g de HC. ¿Cuántas raciones son?`,
+        front:
+          regionId === "do"
+            ? `La cantidad normal de ${displayName.toLowerCase()} tiene ${food.carbsG} g de carbohidratos. ¿Cuántas raciones son?`
+            : `La porción estándar de ${food.name} aporta ${food.carbsG} g de HC. ¿Cuántas raciones son?`,
         back: `${rationsLabel} raciones`,
         hint: `Divide ${food.carbsG} entre ${exchangeUnitG}`,
       };

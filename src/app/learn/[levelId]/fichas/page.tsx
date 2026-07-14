@@ -69,7 +69,7 @@ export default async function LevelFlashcardsPage({ params }: Props) {
       .map((id) => {
         const item = foods.find((f) => f.id === id) ?? getFoodById(id);
         if (!item) return null;
-        return [id, enrichFoodItem(item, region.exchangeUnitG)] as const;
+        return [id, enrichFoodItem(item, region.exchangeUnitG, region.id)] as const;
       })
       .filter((entry): entry is [string, ReturnType<typeof enrichFoodItem>] =>
         Boolean(entry),
@@ -101,6 +101,7 @@ export default async function LevelFlashcardsPage({ params }: Props) {
           cards={cards}
           foodsById={foodsById}
           exchangeUnitG={region.exchangeUnitG}
+          regionId={region.id}
           returnHref={`/learn/${levelId}`}
         />
       </main>

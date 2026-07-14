@@ -65,6 +65,22 @@ describe("level-flashcards", () => {
     expect(rations.back).toContain("1,5");
   });
 
+  it("uses plain language for Dominican fichas", () => {
+    const food = getFoodById("casabe");
+    expect(food).toBeDefined();
+    const enriched = enrichFoodItem(food!, 15, "do");
+
+    const carbs = getFlashcardFace(
+      { foodId: "casabe", mode: "carbs" },
+      enriched,
+      15,
+      "do",
+    );
+    expect(carbs.front).toContain("carbohidratos");
+    expect(carbs.front).not.toContain("HC");
+    expect(carbs.back).toContain("carbohidratos");
+  });
+
   it("exam pool food ids are a subset of essential set", () => {
     const fromExam = collectExamPoolFoodIds("nivel-3");
     const essential = getEssentialFlashcardFoodIds("nivel-3");

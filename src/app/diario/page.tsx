@@ -6,7 +6,7 @@ import { DiaryClient, type DiaryEntryView } from "@/components/DiaryClient";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { requireClinicalAccess } from "@/lib/clinical-access";
 import { getFoodsForCountry, getFoodById } from "@/lib/data/foods";
-import { enrichFoods } from "@/lib/domain/foods";
+import { enrichFoods, localizeFoodDisplay } from "@/lib/domain/foods";
 import { formatExchangeRule, getRegionById } from "@/lib/domain/regions";
 import { listIntakeEntries } from "@/lib/supabase/intake";
 
@@ -61,13 +61,15 @@ export default async function DiaryPage() {
   const foods = enrichFoods(
     getFoodsForCountry(region.foodCountry),
     region.exchangeUnitG,
+    region.id,
   );
   const rawEntries = await listIntakeEntries(access.user.id, today, today);
   const entries: DiaryEntryView[] = rawEntries.map((entry) => {
     const food = getFoodById(entry.food_id);
+    const displayFood = food ? localizeFoodDisplay(food, region.id) : null;
     return {
       ...entry,
-      foodName: food?.name ?? entry.food_id,
+      foodName: displayFood?.name ?? entry.food_id,
       portionText: food?.portionText ?? "",
       editable: entry.local_date === today,
     };

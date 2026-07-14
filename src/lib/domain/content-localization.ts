@@ -4,6 +4,10 @@ import type { FoodItem } from "@/lib/domain/foods";
 import type { Lesson, LessonStep } from "@/lib/domain/lessons";
 import { calculateRations, formatRations } from "@/lib/domain/rations";
 import {
+  applyPlainLanguageDo,
+  formatCarbsDo,
+} from "@/lib/domain/plain-language-do";
+import {
   DEFAULT_REGION_ID,
   getRegionById,
   type RegionProfile,
@@ -52,72 +56,86 @@ const LESSON_TEXT_OVERRIDES: Record<
 > = {
   "l1-lesson-3:do:title": { title: "Alimentos básicos del día a día" },
   "l1-lesson-3:do:summary": {
-    summary: "Casabe, fruta tropical y lácteos: los primeros alimentos que debes reconocer.",
+    summary:
+      "Casabe, frutas como mango y plátano, y leche: lo primero que conviene aprender.",
   },
   "l1-3-s1:do:body": {
-    body: "Antes de platos combinados, domina alimentos base: casabe, frutas tropicales y lácteos. Son los que más repetirás.",
+    body: "Antes de platos con varias cosas, aprende lo básico: casabe, frutas de aquí y leche. Son los que más repites en el día a día.",
   },
-  "l2-lesson-1:do:title": { title: "Arroz y viandas" },
+  "l2-lesson-1:do:title": { title: "Arroz, yuca y plátano" },
   "l2-lesson-1:do:summary": {
-    summary: "Arroz blanco y viandas: porciones habituales y raciones.",
+    summary: "Cuánto arroz y cuánta yuca o plátano sueles poner en el plato.",
   },
   "l2-1-s1:do:body": {
-    body: "El arroz y las viandas (yautía, batata, plátano) se miden en tazas cuando están cocidos. Una porción típica suele aportar unos 15 g de HC.",
+    body: "El arroz, la yuca y el plátano se miden en tazas cuando están cocidos. Una cantidad normal suele tener unos 15 gramos de carbohidratos.",
   },
-  "l2-lesson-2:do:title": { title: "Yautía y batata" },
+  "l2-lesson-2:do:title": { title: "Yuca, batata y plátano" },
   "l2-lesson-2:do:summary": {
-    summary: "Viandas en el plato diario dominicano.",
+    summary: "Raíces que salen mucho en la comida dominicana.",
   },
   "l2-2-s1:do:body": {
-    body: "Yautía, batata y plátano aportan HC en porciones de media taza. El peso de la vianda no coincide con los gramos de carbohidratos.",
+    body: "La yuca, la batata y el plátano tienen carbohidratos. Media taza pesa más que los gramos de carbohidratos que aportan: cuenta los carbohidratos, no solo el peso.",
   },
   "l3-lesson-1:do:title": { title: "Habichuelas y guandules" },
   "l3-lesson-1:do:summary": {
-    summary: "Legumbres cocidas en porción habitual.",
+    summary: "Cuánto aportan las habichuelas en el plato de cada día.",
   },
   "l3-1-s2:do:body": {
-    body: "1/2 taza de habichuelas rojas (100 g) = 15 g HC = 1,0 ración con la regla dominicana.",
+    body: "Media taza de habichuelas rojas (100 g) tiene 15 gramos de carbohidratos = 1 ración.",
   },
   "l3-lesson-2:do:summary": {
-    summary: "Viandas y vegetales que sí aportan HC.",
+    summary: "Verduras que sí cuentan para las raciones.",
   },
   "l3-2-s1:do:body": {
-    body: "Guineo verde, batata o auyama aportan más HC que aguacate o berro. Hay que conocer las que sí suman raciones.",
+    body: "El guineo verde, la batata o la auyama tienen más carbohidratos que el aguacate. Hay que saber cuáles sí suman.",
   },
-  "l4-lesson-1:do:title": { title: "¿Qué es un plato mixto?" },
+  "l4-lesson-1:do:title": { title: "Cuando el plato trae varias cosas" },
+  "l4-lesson-1:do:summary": {
+    summary: "Mangú, arroz con habichuelas y otros platos del día a día.",
+  },
+  "l4-1-s1:do:body": {
+    body: "Un plato con varias cosas mezcla carbohidratos, proteína y grasa. Los carbohidratos vienen del arroz, la yuca, el plátano o el pan.",
+  },
   "l4-1-s2:do:body": {
-    body: "El mangú combina vianda (HC) y acompañamiento. Una porción puede aportar unos 30 g de HC = 2,0 raciones.",
+    body: "El mangú lleva plátano (carbohidratos) y huevo (casi no suma). Una porción puede tener unos 30 gramos de carbohidratos = 2 raciones.",
   },
-  "l4-lesson-2:do:title": { title: "Platos dominicanos habituales" },
+  "l4-lesson-2:do:title": { title: "Comidas dominicanas de cada día" },
   "l4-lesson-2:do:summary": {
-    summary: "Moro, mangú y la bandera en la vida real.",
+    summary: "Mangú, arroz con habichuelas y la bandera.",
   },
   "l4-2-s1:do:body": {
-    body: "Moro, mangú y la bandera son platos frecuentes. Cada uno concentra HC de forma distinta según la porción.",
+    body: "El arroz con habichuelas, el mangú y la bandera son platos muy comunes. Cada uno tiene distinta cantidad de carbohidratos según lo que sirvas.",
   },
   "l4-2-practice:do:body": {
-    body: "Identifica platos mixtos dominicanos.",
+    body: "Reconoce platos dominicanos con varias cosas en el mismo plato.",
+  },
+  "l5-lesson-2:do:title": { title: "Pollo, carne y huevo no cuentan" },
+  "l5-2-s1:do:body": {
+    body: "El pollo, la carne, el pescado y el huevo casi no tienen carbohidratos. Acompañan el plato pero no suman raciones.",
+  },
+  "l5-2-s2:do:body": {
+    body: "Arroz con 15 gramos de carbohidratos + pollo (0) = solo 1 ración. El pollo no suma.",
   },
   "l5-1-s1:do:body": {
-    body: "En un desayuno o comida real, suma los gramos de HC de cada alimento y divide entre 15 para obtener las raciones totales.",
+    body: "En un desayuno o almuerzo real, suma los gramos de carbohidratos de cada alimento y divide entre 15 para las raciones totales.",
   },
   "l5-3-s1:do:body": {
-    body: "Mango con leche, moro de habichuelas o mangú son situaciones que encontrarás a menudo. Practica con porciones reales.",
+    body: "Mango con leche, arroz con habichuelas o mangú son cosas que ves a menudo. Practica con lo que comes de verdad.",
   },
   "l5-3-practice:do:body": {
-    body: "Resuelve un caso real de comida dominicana.",
+    body: "Resuelve un ejemplo con comida dominicana de verdad.",
   },
 };
 
 const LEVEL_DESCRIPTION_OVERRIDES: Record<string, string> = {
   "nivel-1:do":
-    "Casabe, fruta tropical y lácteos. Aprende a reconocer porciones y raciones en alimentos sencillos.",
+    "Casabe, frutas como mango y plátano, y leche. Aprende cuánto comes de cada cosa.",
   "nivel-2:do":
-    "Arroz, viandas y plátano. Alimentos base de la cocina dominicana.",
+    "Arroz con yuca, plátano y batata. Lo que más sale en el plato dominicano.",
   "nivel-3:do":
-    "Habichuelas, guandules y viandas con más contenido de HC.",
+    "Habichuelas, guandules y verduras que sí cuentan para las raciones.",
   "nivel-4:do":
-    "Mangú, moro de habichuelas y la bandera: platos compuestos habituales.",
+    "Mangú, arroz con habichuelas y la bandera. Platos con varias cosas juntas.",
 };
 
 const COMBO_STEP_FOODS: Record<string, { primary: string; secondary: string }> =
@@ -140,7 +158,10 @@ export function localizeLevel(level: Level, region: RegionProfile): Level {
   const override = LEVEL_DESCRIPTION_OVERRIDES[`${level.id}:${region.id}`];
   return {
     ...level,
-    description: override ?? localizeLessonText(level.description, region),
+    description: finishRegionalText(
+      override ?? localizeLessonText(level.description, region),
+      region,
+    ),
   };
 }
 
@@ -155,12 +176,18 @@ export function localizeLesson(
 
   return {
     ...lesson,
-    title: overrideLessonField(lesson.id, region.id, "title", lesson.title),
-    summary: overrideLessonField(
-      lesson.id,
-      region.id,
-      "summary",
-      localizeLessonText(lesson.summary, region),
+    title: finishRegionalText(
+      overrideLessonField(lesson.id, region.id, "title", lesson.title),
+      region,
+    ),
+    summary: finishRegionalText(
+      overrideLessonField(
+        lesson.id,
+        region.id,
+        "summary",
+        localizeLessonText(lesson.summary, region),
+      ),
+      region,
     ),
     steps: lesson.steps.map((step) => localizeLessonStep(step, region, foodById)),
   };
@@ -178,8 +205,11 @@ export function localizeExercise(
   if (!canonicalFoodId) {
     return {
       ...exercise,
-      prompt: localizeLessonText(exercise.prompt, region),
-      explanation: localizeLessonText(exercise.explanation, region),
+      prompt: finishRegionalText(localizeLessonText(exercise.prompt, region), region),
+      explanation: finishRegionalText(
+        localizeLessonText(exercise.explanation, region),
+        region,
+      ),
     };
   }
 
@@ -197,8 +227,11 @@ export function localizeExercise(
     ...exercise,
     foodId: regionalFoodId,
     correctAnswer,
-    prompt: buildExercisePrompt(exercise, food, region),
-    explanation: buildExerciseExplanation(food, region),
+    prompt: finishRegionalText(buildExercisePrompt(exercise, food, region), region),
+    explanation: finishRegionalText(
+      buildExerciseExplanation(food, region),
+      region,
+    ),
     options: buildExerciseOptions(exercise, food, region, foodById, correctAnswer),
   };
 }
@@ -224,11 +257,13 @@ function localizeLessonStep(
 
   return {
     ...step,
-    title:
+    title: finishRegionalText(
       step.type === "example" && regionalFoodId
         ? `Ejemplo: ${foodById.get(regionalFoodId)?.name.toLowerCase() ?? title}`
         : title,
-    body,
+      region,
+    ),
+    body: finishRegionalText(body, region),
     foodId: regionalFoodId,
   };
 }
@@ -250,6 +285,11 @@ function buildExampleBody(
 
     const totalCarbs = primary.carbsG + secondary.carbsG;
     const totalRations = calculateRations(totalCarbs, region.exchangeUnitG);
+    if (region.id === "do") {
+      return applyPlainLanguageDo(
+        `${primary.name} (${formatCarbsDo(primary.carbsG)}) + ${secondary.name.toLowerCase()} (${formatCarbsDo(secondary.carbsG)}) = ${formatCarbsDo(totalCarbs)} en total = ${formatRations(totalRations)} raciones.`,
+      );
+    }
     return `${primary.name} (${primary.carbsG} g HC) + ${secondary.name.toLowerCase()} (${secondary.carbsG} g HC) = ${totalCarbs} g HC total = ${formatRations(totalRations)} raciones.`;
   }
 
@@ -259,6 +299,11 @@ function buildExampleBody(
   if (!food) return localizeLessonText(step.body, region);
 
   const rations = calculateRations(food.carbsG, region.exchangeUnitG);
+  if (region.id === "do") {
+    return applyPlainLanguageDo(
+      `${food.portionText} de ${food.name.toLowerCase()} (${food.grams} g) tiene ${formatCarbsDo(food.carbsG)} = ${formatRations(rations)} raciones.`,
+    );
+  }
   return `${food.portionText} de ${food.name.toLowerCase()} (${food.grams} g) aporta ${food.carbsG} g de HC = ${formatRations(rations)} raciones.`;
 }
 
@@ -274,7 +319,14 @@ function buildExercisePrompt(
   }
 
   if (exercise.type === "count_rations") {
+    if (region.id === "do") {
+      return `${food.name}: tiene ${food.carbsG} gramos de carbohidratos. ¿Cuántas raciones son?`;
+    }
     return `${food.name}: aporta ${food.carbsG} g de carbohidratos. ¿Cuántas raciones son?`;
+  }
+
+  if (region.id === "do") {
+    return `¿Cuántas raciones de carbohidratos tiene ${food.portionText.toLowerCase()} de ${food.name.toLowerCase()}? (${food.carbsG} gramos de carbohidratos)`;
   }
 
   return `¿Cuántas raciones de carbohidratos aporta ${food.portionText.toLowerCase()} de ${food.name.toLowerCase()}? (${food.carbsG} g HC)`;
@@ -282,6 +334,9 @@ function buildExercisePrompt(
 
 function buildExerciseExplanation(food: FoodItem, region: RegionProfile): string {
   const rations = calculateRations(food.carbsG, region.exchangeUnitG);
+  if (region.id === "do") {
+    return `${formatCarbsDo(food.carbsG)} ÷ ${region.exchangeUnitG} = ${formatRations(rations)} raciones. El ${food.name.toLowerCase()} es comida muy común aquí.`;
+  }
   return `${food.carbsG} g de carbohidratos ÷ ${region.exchangeUnitG} = ${formatRations(rations)} raciones. ${food.name} es un alimento habitual en ${region.name}.`;
 }
 
@@ -355,21 +410,27 @@ function localizeLessonText(text: string, region: RegionProfile): string {
 
   if (region.id === "do") {
     localized = localized
-      .replaceAll("pan, frutas y lácteos", "casabe, frutas tropicales y lácteos")
-      .replaceAll("Pan, fruta y lácteos", "Casabe, fruta tropical y lácteos")
-      .replaceAll("Arroz, pasta y patata", "Arroz, viandas y plátano")
+      .replaceAll("pan, frutas y lácteos", "casabe, frutas como mango y plátano, y leche")
+      .replaceAll("Pan, fruta y lácteos", "Casabe, frutas como mango y plátano, y leche")
+      .replaceAll("Arroz, pasta y patata", "Arroz, yuca, plátano y batata")
       .replaceAll("Lentejas, garbanzos", "Habichuelas y guandules")
-      .replaceAll("Tortilla, paella, bocadillo", "Mangú, moro y la bandera")
+      .replaceAll("Tortilla, paella, bocadillo", "Mangú, arroz con habichuelas y la bandera")
       .replaceAll("tortilla de patata", "mangú")
       .replaceAll("Tortilla de patata", "Mangú")
-      .replaceAll("paella", "moro de habichuelas")
-      .replaceAll("Paella", "Moro de habichuelas")
-      .replaceAll("patata y boniato", "yautía y batata")
-      .replaceAll("Patata y boniato", "Yautía y batata")
-      .replaceAll("Arroz y pasta", "Arroz y viandas");
+      .replaceAll("paella", "arroz con habichuelas")
+      .replaceAll("Paella", "Arroz con habichuelas")
+      .replaceAll("patata y boniato", "yuca, batata y plátano")
+      .replaceAll("Patata y boniato", "Yuca, batata y plátano")
+      .replaceAll("Arroz y pasta", "Arroz, yuca y plátano");
+    localized = applyPlainLanguageDo(localized);
   }
 
   return localized;
+}
+
+function finishRegionalText(text: string, region: RegionProfile): string {
+  if (region.id !== "do") return text;
+  return applyPlainLanguageDo(text);
 }
 
 function overrideLessonField(

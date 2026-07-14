@@ -14,6 +14,7 @@ interface FlashcardDeckProps {
   cards: LevelFlashcard[];
   foodsById: Record<string, EnrichedFoodItem>;
   exchangeUnitG: number;
+  regionId?: string;
   returnHref: string;
 }
 
@@ -22,6 +23,7 @@ export function FlashcardDeck({
   cards,
   foodsById,
   exchangeUnitG,
+  regionId = "es",
   returnHref,
 }: FlashcardDeckProps) {
   const router = useRouter();
@@ -32,7 +34,9 @@ export function FlashcardDeck({
   const card = cards[index];
   const food = card ? foodsById[card.foodId] : undefined;
   const face =
-    card && food ? getFlashcardFace(card, food, exchangeUnitG) : null;
+    card && food
+      ? getFlashcardFace(card, food, exchangeUnitG, regionId)
+      : null;
   const isLast = index >= cards.length - 1;
   const progressPct = cards.length
     ? ((index + (revealed ? 1 : 0)) / cards.length) * 100

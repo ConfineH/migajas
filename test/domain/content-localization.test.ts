@@ -51,13 +51,24 @@ describe("localizeLesson", () => {
     const localized = localizeLesson(lesson!, dominican, foods);
     const paellaStep = lesson!.steps.find((step) => step.foodId === "paella");
 
-    expect(localized.title).toBe("Platos dominicanos habituales");
+    expect(localized.title).toBe("Comidas dominicanas de cada día");
     expect(
       localized.steps.find((step) => step.id === paellaStep?.id)?.foodId,
     ).toBe("moro-habichuelas");
     expect(localized.steps.find((step) => step.id === paellaStep?.id)?.body).toContain(
-      "moro de habichuelas",
+      "arroz con habichuelas",
     );
+  });
+
+  it("avoids nutrition jargon in Dominican nivel 2 copy", () => {
+    const level = getLevels().find((item) => item.id === "nivel-2");
+    expect(level).toBeDefined();
+
+    const localized = localizeLevel(level!, dominican);
+
+    expect(localized.description.toLowerCase()).toContain("yuca");
+    expect(localized.description.toLowerCase()).not.toContain("viandas");
+    expect(localized.description).not.toMatch(/\bHC\b/);
   });
 
   it("localizes nivel 1 introduction for República Dominicana", () => {

@@ -95,8 +95,14 @@ async function main() {
   ok =
     check(
       "RD curriculum nivel 4",
-      learnHtml.includes("Mangú") || learnHtml.includes("moro"),
-      "localized platos mixtos",
+      learnHtml.includes("Mangú") || learnHtml.includes("habichuelas"),
+      "localized platos",
+    ) && ok;
+  ok =
+    check(
+      "RD plain language",
+      !learnHtml.toLowerCase().includes("viandas"),
+      "no viandas jargon",
     ) && ok;
 
   const guia = await fetch(`${site}/guia`, {
