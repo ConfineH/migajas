@@ -1,6 +1,8 @@
 import { AppNavBar } from "@/components/AppNavBar";
+import { ClinicalModePrompt } from "@/components/ClinicalModePrompt";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CourseLevelList } from "@/components/CourseLevelList";
+import { canShowClinicalPrompt } from "@/lib/clinical-access";
 import { resolveProgress } from "@/lib/learning-state";
 import { toGuidedProgress, isFreeModeUnlocked } from "@/lib/domain/guided-flow";
 import Link from "next/link";
@@ -10,7 +12,10 @@ export const metadata = {
 };
 
 export default async function LearnPage() {
-  const stored = await resolveProgress();
+  const [stored, clinicalPrompt] = await Promise.all([
+    resolveProgress(),
+    canShowClinicalPrompt(),
+  ]);
   const progress = toGuidedProgress(stored);
   const freeMode = isFreeModeUnlocked(progress);
 
@@ -22,6 +27,8 @@ export default async function LearnPage() {
           title="Curso guiado"
           description="Cinco niveles con lecciones, práctica y examen. Avanza paso a paso."
         />
+
+        {clinicalPrompt.show ? <ClinicalModePrompt /> : null}
 
         {freeMode && (
           <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">

@@ -7,6 +7,7 @@ import {
   applyLearningStateToStore,
   syncGuestLearningState,
 } from "@/lib/learning-state";
+import { syncGuestProfile } from "@/lib/profile-sync";
 
 export async function finalizeAuthenticatedSession(
   nextPath: string,
@@ -22,6 +23,7 @@ export async function finalizeAuthenticatedSession(
 
   const safeNext = sanitizePostAuthRedirect(nextPath);
   const merged = await syncGuestLearningState(user.id);
+  await syncGuestProfile(user.id);
   await backfillLearningEvents(
     user.id,
     merged.progress,

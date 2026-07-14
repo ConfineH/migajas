@@ -7,6 +7,7 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 const variants = {
@@ -24,9 +25,10 @@ export function Button({
   children,
   className = "",
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center rounded-xl px-6 py-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+    "inline-flex min-h-12 items-center justify-center rounded-xl px-6 py-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
   const classes = `${base} ${variants[variant]} ${className}`;
 
@@ -39,7 +41,7 @@ export function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classes} disabled={disabled}>
       {children}
     </button>
   );

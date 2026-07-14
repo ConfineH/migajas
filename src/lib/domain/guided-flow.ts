@@ -7,9 +7,10 @@ import {
   getPracticeStepIds,
   getExamForLevel,
 } from "./lessons";
+import { getFlashcardsStepId } from "./level-flashcards";
 import { getLevels } from "./exercises";
 
-export type GuidedItemType = "lesson" | "practice" | "exam";
+export type GuidedItemType = "lesson" | "practice" | "flashcards" | "exam";
 
 export interface GuidedItem {
   type: GuidedItemType;
@@ -22,6 +23,7 @@ export interface GuidedItem {
 export interface GuidedProgress {
   completedLessons: string[];
   completedPracticeSteps: string[];
+  completedFlashcardLevels: string[];
   levelCompletions: LevelCompletion[];
   freeModeUnlocked: boolean;
 }
@@ -52,6 +54,11 @@ export function buildGuidedSequence(levelId: string): GuidedItem[] {
   const exam = getExamForLevel(levelId);
   if (exam) {
     items.push({
+      type: "flashcards",
+      id: getFlashcardsStepId(levelId),
+      title: "Fichas del nivel",
+    });
+    items.push({
       type: "exam",
       id: `exam-${levelId}`,
       title: exam.title,
@@ -71,6 +78,9 @@ export function isGuidedItemComplete(
   }
   if (item.type === "practice") {
     return progress.completedPracticeSteps.includes(item.id);
+  }
+  if (item.type === "flashcards") {
+    return progress.completedFlashcardLevels.includes(levelId);
   }
   const completion = progress.levelCompletions.find(
     (c) => c.levelId === levelId,
@@ -109,6 +119,31 @@ export function completePracticeStep(
     ...progress,
     completedPracticeSteps: [...progress.completedPracticeSteps, stepId],
   };
+}
+
+export function completeFlashcards(
+  progress: GuidedProgress,
+  levelId: string,
+): GuidedProgress {
+  if (progress.completedFlashcardLevels.includes(levelId)) return progress;
+  return {
+    ...progress,
+    completedFlashcardLevels: [...progress.completedFlashcardLevels, levelId],
+  };
+}
+
+export function hasCompletedFlashcards(
+  progress: GuidedProgress,
+  levelId: string,
+): boolean {
+  return progress.completedFlashcardLevels.includes(levelId);
+}
+
+export function canAccessFlashcards(
+  progress: GuidedProgress,
+  levelId: string,
+): boolean {
+  return canStartExam(progress, levelId);
 }
 
 export function canStartExam(
@@ -173,11 +208,13 @@ export function toGuidedProgress(userProgress: {
   completions: LevelCompletion[];
   completedLessons?: string[];
   completedPracticeSteps?: string[];
+  completedFlashcardLevels?: string[];
   freeModeUnlocked?: boolean;
 }): GuidedProgress {
   return {
     completedLessons: userProgress.completedLessons ?? [],
     completedPracticeSteps: userProgress.completedPracticeSteps ?? [],
+    completedFlashcardLevels: userProgress.completedFlashcardLevels ?? [],
     levelCompletions: userProgress.completions,
     freeModeUnlocked: userProgress.freeModeUnlocked ?? false,
   };
@@ -188,6 +225,7 @@ export function mergeGuidedIntoUserProgress(
     completions: LevelCompletion[];
     completedLessons?: string[];
     completedPracticeSteps?: string[];
+    completedFlashcardLevels?: string[];
     freeModeUnlocked?: boolean;
   },
   guided: GuidedProgress,
@@ -195,12 +233,14 @@ export function mergeGuidedIntoUserProgress(
   completions: LevelCompletion[];
   completedLessons: string[];
   completedPracticeSteps: string[];
+  completedFlashcardLevels: string[];
   freeModeUnlocked: boolean;
 } {
   return {
     completions: guided.levelCompletions,
     completedLessons: guided.completedLessons,
     completedPracticeSteps: guided.completedPracticeSteps,
+    completedFlashcardLevels: guided.completedFlashcardLevels,
     freeModeUnlocked: guided.freeModeUnlocked,
   };
 }
@@ -214,6 +254,30 @@ export function getLessonForPracticeStep(stepId: string, levelId?: string) {
     if (step) return { lesson, step };
   }
   return undefined;
+}
+
+const NIVEL3_AND_ABOVE = ["nivel-3", "nivel-4", "nivel-5"] as const;
+
+export function hasPassedNivel3(progress: GuidedProgress): boolean {
+  return progress.levelCompletions.some(
+    (completion) =>
+      NIVEL3_AND_ABOVE.includes(
+        completion.levelId as (typeof NIVEL3_AND_ABOVE)[number],
+      ) && completion.passed,
+  );
+}
+
+export function canUseClinicalMode(
+  progress: GuidedProgress,
+  profile: { clinical_mode_enabled: boolean },
+  options?: { featureEnabled?: boolean },
+): boolean {
+  const featureEnabled = options?.featureEnabled ?? true;
+  return (
+    featureEnabled &&
+    profile.clinical_mode_enabled &&
+    hasPassedNivel3(progress)
+  );
 }
 
 export { getLessonById };

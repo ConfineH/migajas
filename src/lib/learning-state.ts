@@ -146,9 +146,13 @@ async function setProgressCookie(
     path: "/",
   };
 
+  if (response) {
+    response.cookies.set(PROGRESS_COOKIE, serialized, cookieOptions);
+    return;
+  }
+
   const cookieStore = await cookies();
   cookieStore.set(PROGRESS_COOKIE, serialized, cookieOptions);
-  response?.cookies.set(PROGRESS_COOKIE, serialized, cookieOptions);
 }
 
 async function setAttemptsCookie(
@@ -162,9 +166,13 @@ async function setAttemptsCookie(
     path: "/",
   };
 
+  if (response) {
+    response.cookies.set(ATTEMPTS_COOKIE, serialized, cookieOptions);
+    return;
+  }
+
   const cookieStore = await cookies();
   cookieStore.set(ATTEMPTS_COOKIE, serialized, cookieOptions);
-  response?.cookies.set(ATTEMPTS_COOKIE, serialized, cookieOptions);
 }
 
 export { EMPTY_PROGRESS, getStoredProgress, serializeProgress, PROGRESS_COOKIE };

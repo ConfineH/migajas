@@ -87,7 +87,9 @@ export default async function LearnLevelPage({ params }: Props) {
                   ? `/learn/${levelId}/lessons/${next.id}`
                   : next.type === "practice"
                     ? `/learn/${levelId}/practice/${next.id}`
-                    : `/learn/${levelId}/exam`
+                    : next.type === "flashcards"
+                      ? `/learn/${levelId}/fichas`
+                      : `/learn/${levelId}/exam`
               }
             >
               Continuar donde lo dejé

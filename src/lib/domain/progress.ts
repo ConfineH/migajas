@@ -18,6 +18,7 @@ export interface UserProgress {
   completedPracticeSteps: string[];
   freeModeUnlocked: boolean;
   activeExamSessions?: ExamSession[];
+  completedFlashcardLevels?: string[];
 }
 
 export interface LevelRef {

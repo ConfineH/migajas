@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
-import { AdminShell } from "@/app/admin/AdminShell";
+import { AdminOrgMetrics } from "@/app/admin/AdminOrgMetrics";
 import { AdminStatusBanner } from "@/app/admin/AdminStatusBanner";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { getContentCache } from "@/lib/content-cache";
@@ -30,6 +30,10 @@ export default async function AdminPage() {
           description="Edita alimentos, lecciones y exámenes en Supabase."
         />
         <AdminStatusBanner />
+
+        <div className="mb-8">
+          <AdminOrgMetrics />
+        </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
           <Link

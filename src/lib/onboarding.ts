@@ -9,6 +9,7 @@ export interface OnboardingState {
   country?: string;
   guestMode: boolean;
   completed: boolean;
+  daily_carb_goal_g?: number | null;
 }
 
 export async function getOnboardingState(): Promise<OnboardingState | null> {
