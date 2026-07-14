@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { gradeAnswer, getExerciseById } from "@/lib/domain/exercises";
 import { recordAttempt } from "@/lib/domain/attempts";
 import { persistAttempts, resolveAttempts } from "@/lib/learning-state";
+import { getRegionalContentContext } from "@/lib/content-for-region";
+import { localizeExercise } from "@/lib/domain/content-localization";
 
 export async function GET() {
   const attempts = await resolveAttempts();
@@ -21,7 +23,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Exercise not found" }, { status: 404 });
   }
 
-  const isCorrect = gradeAnswer(exercise, selectedAnswer);
+  const { region, foods } = await getRegionalContentContext();
+  const localizedExercise = localizeExercise(exercise, region, foods);
+
+  const isCorrect = gradeAnswer(localizedExercise, selectedAnswer);
   const existing = await resolveAttempts();
   const updated = recordAttempt(existing, {
     exerciseId,
@@ -32,8 +37,8 @@ export async function POST(request: Request) {
 
   const response = NextResponse.json({
     isCorrect,
-    explanation: exercise.explanation,
-    correctAnswer: exercise.correctAnswer,
+    explanation: localizedExercise.explanation,
+    correctAnswer: localizedExercise.correctAnswer,
   });
 
   await persistAttempts(updated, response);

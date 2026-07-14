@@ -4,6 +4,8 @@ import { ExamRunner } from "@/components/ExamRunner";
 import { Button } from "@/components/Button";
 import { getExamForLevel } from "@/lib/domain/lessons";
 import { getExerciseById, getLevelById, getLevels } from "@/lib/domain/exercises";
+import { getRegionalContentContext } from "@/lib/content-for-region";
+import { localizeExercise } from "@/lib/domain/content-localization";
 import { persistProgress, resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
@@ -85,9 +87,12 @@ export default async function ExamPage({ params, searchParams }: Props) {
     }
   }
 
+  const { region, foods } = await getRegionalContentContext();
+
   const exercises = session.exerciseIds
     .map((id) => getExerciseById(id))
-    .filter((e): e is NonNullable<typeof e> => !!e);
+    .filter((e): e is NonNullable<typeof e> => !!e)
+    .map((exercise) => localizeExercise(exercise, region, foods));
 
   const nextLevel = levels.find((l) => l.orderIndex === level.orderIndex + 1);
 

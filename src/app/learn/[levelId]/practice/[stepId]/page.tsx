@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
 import { SingleExercise } from "@/components/SingleExercise";
+import { getRegionalContentContext } from "@/lib/content-for-region";
+import { localizeExercise } from "@/lib/domain/content-localization";
 import { getLessonsForLevel } from "@/lib/domain/lessons";
 import { getExerciseById, getLevelById } from "@/lib/domain/exercises";
 
@@ -29,12 +31,15 @@ export default async function PracticePage({ params }: Props) {
   const exercise = getExerciseById(exerciseId);
   if (!exercise) notFound();
 
+  const { region, foods } = await getRegionalContentContext();
+  const localizedExercise = localizeExercise(exercise, region, foods);
+
   return (
     <>
       <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
         <SingleExercise
-          exercise={exercise}
+          exercise={localizedExercise}
           practiceStepId={stepId}
           returnHref={`/learn/${levelId}`}
         />

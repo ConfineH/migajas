@@ -6,14 +6,19 @@ import { Button } from "@/components/Button";
 import type { Lesson } from "@/lib/domain/lessons";
 import { getFoodById } from "@/lib/data/foods";
 import { enrichFoodItem } from "@/lib/domain/foods";
-import { EXCHANGE_UNIT_G, formatRations } from "@/lib/domain/rations";
+import { formatRations } from "@/lib/domain/rations";
 
 interface LessonViewerProps {
   lesson: Lesson;
   nextHref: string;
+  exchangeUnitG: number;
 }
 
-export function LessonViewer({ lesson, nextHref }: LessonViewerProps) {
+export function LessonViewer({
+  lesson,
+  nextHref,
+  exchangeUnitG,
+}: LessonViewerProps) {
   const [stepIndex, setStepIndex] = useState(0);
   const [completing, setCompleting] = useState(false);
   const contentSteps = lesson.steps.filter((s) => s.type !== "practice");
@@ -42,7 +47,9 @@ export function LessonViewer({ lesson, nextHref }: LessonViewerProps) {
       <article className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-bold text-gray-900">{step.title}</h2>
         <p className="mt-4 text-gray-700 leading-relaxed">{step.body}</p>
-        {step.foodId && <FoodExample foodId={step.foodId} />}
+        {step.foodId && (
+          <FoodExample foodId={step.foodId} exchangeUnitG={exchangeUnitG} />
+        )}
       </article>
 
       <p className="text-center text-sm text-gray-500">
@@ -72,10 +79,16 @@ export function LessonViewer({ lesson, nextHref }: LessonViewerProps) {
   );
 }
 
-function FoodExample({ foodId }: { foodId: string }) {
+function FoodExample({
+  foodId,
+  exchangeUnitG,
+}: {
+  foodId: string;
+  exchangeUnitG: number;
+}) {
   const food = getFoodById(foodId);
   if (!food) return null;
-  const enriched = enrichFoodItem(food, EXCHANGE_UNIT_G);
+  const enriched = enrichFoodItem(food, exchangeUnitG);
 
   return (
     <div className="mt-6 rounded-xl bg-emerald-50 border border-emerald-100 p-4">

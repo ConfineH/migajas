@@ -1,10 +1,8 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CourseLevelList } from "@/components/CourseLevelList";
-import { RegionCourseNotice } from "@/components/RegionCourseNotice";
 import { resolveProgress } from "@/lib/learning-state";
 import { toGuidedProgress, isFreeModeUnlocked } from "@/lib/domain/guided-flow";
-import { getActiveRegion } from "@/lib/region-server";
 import Link from "next/link";
 
 export const metadata = {
@@ -12,13 +10,9 @@ export const metadata = {
 };
 
 export default async function LearnPage() {
-  const [stored, region] = await Promise.all([
-    resolveProgress(),
-    getActiveRegion(),
-  ]);
+  const stored = await resolveProgress();
   const progress = toGuidedProgress(stored);
   const freeMode = isFreeModeUnlocked(progress);
-  const showRegionNotice = region.id !== "es";
 
   return (
     <>
@@ -28,10 +22,6 @@ export default async function LearnPage() {
           title="Curso guiado"
           description="Cinco niveles con lecciones, práctica y examen. Avanza paso a paso."
         />
-
-        {showRegionNotice ? (
-          <RegionCourseNotice regionName={region.name} />
-        ) : null}
 
         {freeMode && (
           <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
