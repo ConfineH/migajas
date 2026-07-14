@@ -18,6 +18,8 @@ interface Props {
   params: Promise<{ levelId: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: Props) {
   const { levelId } = await params;
   const level = getLevelById(levelId);

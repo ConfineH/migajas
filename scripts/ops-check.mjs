@@ -79,7 +79,7 @@ async function main() {
 
   console.log("\n=== Summary ===");
   if (envOk && remoteOk && siteOk) {
-    console.log("Ready for smoke test (see docs/commercial/DEPLOYMENT.md §4).");
+    console.log("Ready for smoke test: npm run ops:smoke");
     process.exit(0);
   }
 

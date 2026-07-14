@@ -1,4 +1,4 @@
-import PDFDocument from "pdfkit";
+import PDFDocument from "pdfkit/js/pdfkit.standalone.js";
 import {
   MEAL_SLOTS,
   MEAL_SLOT_LABELS,

@@ -12,7 +12,10 @@
     "db:seed": "node scripts/generate-content-seed.mjs",
     "db:seed:remote": "node scripts/apply-remote-seed.mjs",
     "ops:check": "node scripts/ops-check.mjs",
-    "ops:smoke:admin": "node scripts/ops-smoke-admin.mjs"
+    "ops:smoke:admin": "node scripts/ops-smoke-admin.mjs",
+    "ops:smoke:clinical": "node scripts/ops-smoke-clinical.mjs",
+    "ops:smoke:deploy": "node scripts/ops-smoke-deploy.mjs",
+    "ops:smoke": "node scripts/ops-smoke-deploy.mjs && node scripts/ops-smoke-admin.mjs && node scripts/ops-smoke-clinical.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",

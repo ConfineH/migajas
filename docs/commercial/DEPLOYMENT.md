@@ -20,11 +20,12 @@
    npm run db:seed:remote
    ```
    O aplicar el SQL de `supabase/migrations/20260713160000_seed_content.sql` en SQL Editor.
-5. Configurar **Auth** → URLs del sitio (ver script `scripts/configure-auth-urls.mjs`).
-6. Comprobar entorno antes del smoke test:
+5. Comprobar entorno y smoke automatizado:
    ```bash
    npm run ops:check
+   npm run ops:smoke
    ```
+6. Configurar **Auth** → URLs del sitio (ver `scripts/configure-auth-urls.mjs`).
 
 ## 2. Variables de entorno
 
@@ -48,10 +49,14 @@ CLINICAL_MODE_ENABLED=true              # false para desactivar diario/export
 
 ## 4. Smoke test
 
+Automatizado: `npm run ops:smoke` (deploy + admin RPC + diario/export).
+
+Checklist manual opcional:
+
 - [ ] Home carga
 - [ ] Onboarding completa (ES o RD)
 - [ ] Login funciona (`/login`)
-- [ ] Curso `/learn` accesible
+- [ ] Curso `/learn` accesible (RD: casabe/viandas en descripciones)
 - [ ] Admin `/admin` solo con `ADMIN_EMAILS`
 - [ ] Catálogo tras aprobar nivel 1
 - [ ] Diario `/diario` tras nivel 3 + modo clínico activo

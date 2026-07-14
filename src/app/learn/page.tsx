@@ -12,6 +12,8 @@ export const metadata = {
   title: "Curso guiado — Migajas",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function LearnPage() {
   const [stored, clinicalPrompt, region] = await Promise.all([
     resolveProgress(),

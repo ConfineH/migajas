@@ -15,7 +15,7 @@ const FOOD_REGION_ALIASES: Record<string, Record<string, string>> = {
   manzana: { do: "mango" },
   leche: { do: "leche-do" },
   platano: { do: "platano-maduro" },
-  "yogur-natural": { do: "leche-do" },
+  "yogur-natural": { do: "do-yogur-do" },
   "arroz-cocido": { do: "arroz-blanco-do" },
   "pasta-cocida": { do: "arroz-blanco-do" },
   "patata-cocida": { do: "yautia" },
@@ -43,8 +43,6 @@ const FOOD_REGION_ALIASES: Record<string, Record<string, string>> = {
   fresas: { do: "mango" },
   pera: { do: "mango" },
   "pasta-tomate": { do: "moro-habichuelas" },
-  platano: { do: "platano-maduro" },
-  "yogur-natural": { do: "do-yogur-do" },
   "leche-media": { do: "leche-do" },
 };
 
