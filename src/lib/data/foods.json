@@ -35,5 +35,22 @@
   {"id":"paella","country":"España","category":"Plato mixto","name":"Paella","portionText":"1 plato","grams":300,"carbsG":45,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"},
   {"id":"lentejas-estofadas","country":"España","category":"Plato mixto","name":"Lentejas estofadas","portionText":"1 plato","grams":300,"carbsG":30,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"},
   {"id":"pasta-tomate","country":"España","category":"Plato mixto","name":"Pasta con tomate","portionText":"1 plato","grams":300,"carbsG":40,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"},
-  {"id":"pizza","country":"España","category":"Plato mixto","name":"Pizza","portionText":"1 porción","grams":150,"carbsG":25,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"}
+  {"id":"pizza","country":"España","category":"Plato mixto","name":"Pizza","portionText":"1 porción","grams":150,"carbsG":25,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"},
+  {"id":"casabe","country":"República Dominicana","category":"Pan","name":"Casabe","portionText":"1 pieza mediana","grams":30,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"pan-sobao","country":"República Dominicana","category":"Pan","name":"Pan sobao","portionText":"1 rollito","grams":40,"carbsG":30,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"arroz-blanco-do","country":"República Dominicana","category":"Cereales","name":"Arroz blanco","portionText":"1/3 taza","grams":50,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"habichuelas-rojas","country":"República Dominicana","category":"Legumbres","name":"Habichuelas rojas","portionText":"1/2 taza","grams":100,"carbsG":15,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"guandules","country":"República Dominicana","category":"Legumbres","name":"Guandules","portionText":"1/2 taza","grams":100,"carbsG":15,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"mangu","country":"República Dominicana","category":"Tubérculos","name":"Mangú","portionText":"1/2 taza","grams":100,"carbsG":30,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"guineo-verde","country":"República Dominicana","category":"Tubérculos","name":"Guineo verde","portionText":"1/2 unidad","grams":60,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"yautia","country":"República Dominicana","category":"Tubérculos","name":"Yautía","portionText":"1/2 taza","grams":70,"carbsG":15,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"batata-do","country":"República Dominicana","category":"Tubérculos","name":"Batata","portionText":"1/2 taza","grams":75,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"tostones","country":"República Dominicana","category":"Tubérculos","name":"Tostones","portionText":"3 unidades","grams":50,"carbsG":15,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"platano-maduro","country":"República Dominicana","category":"Fruta","name":"Plátano maduro","portionText":"1/2 unidad","grams":70,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"mango","country":"República Dominicana","category":"Fruta","name":"Mango","portionText":"1/2 taza","grams":80,"carbsG":15,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"chinola","country":"República Dominicana","category":"Fruta","name":"Chinola (maracuyá)","portionText":"1/2 taza","grams":60,"carbsG":15,"difficulty":"Media","itemType":"base","notes":"Base"},
+  {"id":"leche-do","country":"República Dominicana","category":"Lácteos","name":"Leche","portionText":"1 taza","grams":240,"carbsG":12,"difficulty":"Baja","itemType":"base","notes":"Base"},
+  {"id":"pollo-do","country":"República Dominicana","category":"Proteína","name":"Pollo","portionText":"1 porción","grams":100,"carbsG":0,"difficulty":"Baja","itemType":"modulator","notes":"Modulador"},
+  {"id":"moro-habichuelas","country":"República Dominicana","category":"Plato mixto","name":"Moro de habichuelas","portionText":"1 plato","grams":250,"carbsG":45,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"},
+  {"id":"la-bandera","country":"República Dominicana","category":"Plato mixto","name":"La bandera (arroz, habichuelas, carne)","portionText":"1 plato","grams":350,"carbsG":45,"difficulty":"Alta","itemType":"mixed","notes":"Mixto"}
 ]

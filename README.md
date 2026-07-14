@@ -73,6 +73,7 @@ openspec/        # artefactos SDD
 - [x] Migración middleware → proxy
 - [x] Guía de referencia (`/guia`) tras onboarding
 - [x] Exámenes variables (pool 8–10, sorteo 4/5 por intento)
+- [x] Multi-región: España y República Dominicana (selector en configuración)
 
 ## Repositorio
 

@@ -4,7 +4,9 @@ import { redirect } from "next/navigation";
 export const ONBOARDING_COOKIE = "migajas_onboarding";
 
 export interface OnboardingState {
-  country: string;
+  regionId?: string;
+  /** @deprecated use regionId */
+  country?: string;
   guestMode: boolean;
   completed: boolean;
 }

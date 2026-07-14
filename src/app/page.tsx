@@ -1,7 +1,13 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
+import { formatExchangeRule } from "@/lib/domain/regions";
+import { getOnboardingState } from "@/lib/onboarding";
+import { getActiveRegion, getDefaultRegion } from "@/lib/region-server";
 
-export default function Home() {
+export default async function Home() {
+  const state = await getOnboardingState();
+  const region = state?.completed ? await getActiveRegion() : getDefaultRegion();
+
   return (
     <>
       <AppNavBar />
@@ -16,7 +22,7 @@ export default function Home() {
             </h1>
             <p className="mx-auto max-w-md text-lg text-gray-600">
               Un curso breve guiado para aprender a relacionar gramos,
-              carbohidratos y raciones con comida real de España.
+              carbohidratos y raciones con comida real de tu país.
             </p>
           </div>
 
@@ -29,8 +35,23 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="mt-8 rounded-2xl bg-emerald-50 px-6 py-4 text-sm text-emerald-800">
-            <strong>España</strong> · 10 g de carbohidratos = 1 ración
+          <div className="mt-8 space-y-2 rounded-2xl bg-emerald-50 px-6 py-4 text-sm text-emerald-800">
+            {state?.completed ? (
+              <p>
+                <strong>{region.flag} {region.name}</strong> ·{" "}
+                {formatExchangeRule(region)}
+              </p>
+            ) : (
+              <>
+                <p>
+                  <strong>🇪🇸 España</strong> · 10 g de carbohidratos = 1 ración
+                </p>
+                <p>
+                  <strong>🇩🇴 República Dominicana</strong> · 15 g de carbohidratos
+                  = 1 ración
+                </p>
+              </>
+            )}
           </div>
         </section>
 

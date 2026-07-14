@@ -1,4 +1,4 @@
-import { calculateRations } from "./rations";
+import { calculateRations, EXCHANGE_UNIT_G } from "./rations";
 
 export type Difficulty = "Baja" | "Media" | "Alta";
 export type ItemType = "base" | "mixed" | "modulator";
@@ -20,15 +20,25 @@ export interface EnrichedFoodItem extends FoodItem {
   rations: number;
 }
 
-export function enrichFoodItem(item: FoodItem): EnrichedFoodItem {
+export function enrichFoodItem(
+  item: FoodItem,
+  exchangeUnitG: number = EXCHANGE_UNIT_G,
+): EnrichedFoodItem {
   return {
     ...item,
-    rations: calculateRations(item.carbsG),
+    rations: calculateRations(item.carbsG, exchangeUnitG),
   };
 }
 
-export function enrichFoods(items: FoodItem[]): EnrichedFoodItem[] {
-  return items.map(enrichFoodItem);
+export function enrichFoods(
+  items: FoodItem[],
+  exchangeUnitG: number = EXCHANGE_UNIT_G,
+): EnrichedFoodItem[] {
+  return items.map((item) => enrichFoodItem(item, exchangeUnitG));
+}
+
+export function filterByRegion(items: FoodItem[], foodCountry: string): FoodItem[] {
+  return items.filter((item) => item.country === foodCountry);
 }
 
 export function filterByCategory(

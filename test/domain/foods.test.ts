@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   filterByCategory,
+  filterByRegion,
   searchFoods,
   getCategories,
   enrichFoodItem,
@@ -47,9 +48,31 @@ const sampleFoods: FoodItem[] = [
 ];
 
 describe("enrichFoodItem", () => {
-  it("derives rations from carbs", () => {
+  it("derives rations from carbs with Spain unit", () => {
     const enriched = enrichFoodItem(sampleFoods[0]);
     expect(enriched.rations).toBe(1);
+  });
+
+  it("derives rations with Dominican unit", () => {
+    const enriched = enrichFoodItem(sampleFoods[1], 15);
+    expect(enriched.rations).toBe(1);
+  });
+});
+
+describe("filterByRegion", () => {
+  it("returns only foods for the selected country", () => {
+    const dominican: FoodItem = {
+      ...sampleFoods[0],
+      id: "casabe",
+      country: "República Dominicana",
+      name: "Casabe",
+    };
+    const result = filterByRegion(
+      [...sampleFoods, dominican],
+      "República Dominicana",
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe("Casabe");
   });
 });
 

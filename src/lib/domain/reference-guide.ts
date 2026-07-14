@@ -1,18 +1,23 @@
-import { EXCHANGE_UNIT_G, calculateRations, formatRations } from "@/lib/domain/rations";
+import { calculateRations, formatRations } from "@/lib/domain/rations";
 
 export interface ConversionRow {
   rations: number;
   carbsG: number;
 }
 
-export const REFERENCE_TIPS = [
-  "Cuenta solo carbohidratos (HC), no el peso total del alimento.",
-  "En España: 10 g de HC = 1 ración.",
-  "Puedes usar medios: 5 g = 0,5 raciones, 15 g = 1,5 raciones.",
-  "Los moduladores (pollo, huevo, pescado) aportan 0 raciones de HC.",
-] as const;
+export function buildReferenceTips(exchangeUnitG: number, regionName: string): string[] {
+  const half = exchangeUnitG / 2;
+  const oneAndHalf = exchangeUnitG * 1.5;
+  return [
+    "Cuenta solo carbohidratos (HC), no el peso total del alimento.",
+    `En ${regionName}: ${exchangeUnitG} g de HC = 1 ración.`,
+    `Puedes usar medios: ${half} g = 0,5 raciones, ${oneAndHalf} g = 1,5 raciones.`,
+    "Los moduladores (pollo, huevo, pescado) aportan 0 raciones de HC.",
+  ];
+}
 
 export function buildConversionTable(
+  exchangeUnitG: number,
   maxRations = 5,
   step = 0.5,
 ): ConversionRow[] {
@@ -21,20 +26,26 @@ export function buildConversionTable(
     const rounded = Math.round(rations * 10) / 10;
     rows.push({
       rations: rounded,
-      carbsG: rounded * EXCHANGE_UNIT_G,
+      carbsG: rounded * exchangeUnitG,
     });
   }
   return rows;
 }
 
-export function carbsToRations(carbsG: number): number | null {
+export function carbsToRations(
+  carbsG: number,
+  exchangeUnitG: number,
+): number | null {
   if (!Number.isFinite(carbsG) || carbsG < 0) return null;
-  return calculateRations(carbsG);
+  return calculateRations(carbsG, exchangeUnitG);
 }
 
-export function rationsToCarbs(rations: number): number | null {
+export function rationsToCarbs(
+  rations: number,
+  exchangeUnitG: number,
+): number | null {
   if (!Number.isFinite(rations) || rations < 0) return null;
-  return rations * EXCHANGE_UNIT_G;
+  return rations * exchangeUnitG;
 }
 
 export function formatCarbsInput(value: number): string {

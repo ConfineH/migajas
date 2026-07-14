@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Migajas — Aprende a contar carbohidratos",
   description:
-    "App educativa para aprender conteo de carbohidratos por niveles, empezando por España.",
+    "App educativa para aprender conteo de carbohidratos por niveles, con reglas adaptadas a tu país.",
 };
 
 export default async function RootLayout({

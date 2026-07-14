@@ -5,7 +5,6 @@ import { useState } from "react";
 import { FoodSearchGrid } from "@/components/FoodSearchGrid";
 import type { EnrichedFoodItem } from "@/lib/domain/foods";
 import {
-  REFERENCE_TIPS,
   buildConversionTable,
   carbsToRations,
   formatCarbsInput,
@@ -19,21 +18,30 @@ type TabId = "reglas" | "alimentos" | "calculadora";
 interface ReferenceGuideClientProps {
   foods: EnrichedFoodItem[];
   freeMode: boolean;
+  regionName: string;
+  regionFlag: string;
+  exchangeUnitG: number;
+  tips: string[];
 }
 
 export function ReferenceGuideClient({
   foods,
   freeMode,
+  regionName,
+  regionFlag,
+  exchangeUnitG,
+  tips,
 }: ReferenceGuideClientProps) {
   const [tab, setTab] = useState<TabId>("reglas");
-  const [carbsInput, setCarbsInput] = useState("15");
+  const [carbsInput, setCarbsInput] = useState(String(exchangeUnitG));
   const [rationsInput, setRationsInput] = useState("1.5");
 
-  const table = buildConversionTable(5, 0.5);
+  const table = buildConversionTable(exchangeUnitG, 5, 0.5);
   const carbsValue = Number(carbsInput.replace(",", "."));
   const rationsValue = Number(rationsInput.replace(",", "."));
-  const fromCarbs = carbsToRations(carbsValue);
-  const fromRations = rationsToCarbs(rationsValue);
+  const fromCarbs = carbsToRations(carbsValue, exchangeUnitG);
+  const fromRations = rationsToCarbs(rationsValue, exchangeUnitG);
+  const exchangeRuleLabel = `${exchangeUnitG} g de carbohidratos = 1 ración`;
 
   const tabs: { id: TabId; label: string }[] = [
     { id: "reglas", label: "Reglas" },
@@ -73,12 +81,14 @@ export function ReferenceGuideClient({
       {tab === "reglas" ? (
         <section className="space-y-4">
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-            <h2 className="font-bold text-emerald-900">España</h2>
+            <h2 className="font-bold text-emerald-900">
+              {regionFlag} {regionName}
+            </h2>
             <p className="mt-2 text-emerald-800">
-              <strong>10 g de carbohidratos = 1 ración</strong>
+              <strong>{exchangeRuleLabel}</strong>
             </p>
             <p className="mt-2 text-sm text-emerald-700">
-              Divide los gramos de HC entre 10 para obtener raciones.
+              Divide los gramos de HC entre {exchangeUnitG} para obtener raciones.
             </p>
           </div>
 
@@ -104,7 +114,7 @@ export function ReferenceGuideClient({
           </div>
 
           <ul className="space-y-2 rounded-2xl border border-gray-100 bg-white p-5 text-sm text-gray-700">
-            {REFERENCE_TIPS.map((tip) => (
+            {tips.map((tip) => (
               <li key={tip}>• {tip}</li>
             ))}
           </ul>
@@ -117,7 +127,11 @@ export function ReferenceGuideClient({
             Consulta rápida durante el curso. Tras aprobar el examen del nivel 1,
             el catálogo completo queda en el menú principal.
           </p>
-          <FoodSearchGrid foods={foods} />
+          <FoodSearchGrid
+            foods={foods}
+            exchangeUnitG={exchangeUnitG}
+            exchangeRuleLabel={exchangeRuleLabel}
+          />
         </section>
       ) : null}
 

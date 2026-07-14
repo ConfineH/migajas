@@ -1,0 +1,30 @@
+-- República Dominicana starter foods (15 g HC = 1 ración)
+INSERT INTO public.foods (id, country, category, name, portion_text, grams, carbs_g, difficulty, item_type, notes) VALUES
+('casabe', 'República Dominicana', 'Pan', 'Casabe', '1 pieza mediana', 30, 15, 'Baja', 'base', 'Base'),
+('pan-sobao', 'República Dominicana', 'Pan', 'Pan sobao', '1 rollito', 40, 30, 'Baja', 'base', 'Base'),
+('arroz-blanco-do', 'República Dominicana', 'Cereales', 'Arroz blanco', '1/3 taza', 50, 15, 'Baja', 'base', 'Base'),
+('habichuelas-rojas', 'República Dominicana', 'Legumbres', 'Habichuelas rojas', '1/2 taza', 100, 15, 'Media', 'base', 'Base'),
+('guandules', 'República Dominicana', 'Legumbres', 'Guandules', '1/2 taza', 100, 15, 'Media', 'base', 'Base'),
+('mangu', 'República Dominicana', 'Tubérculos', 'Mangú', '1/2 taza', 100, 30, 'Media', 'base', 'Base'),
+('guineo-verde', 'República Dominicana', 'Tubérculos', 'Guineo verde', '1/2 unidad', 60, 15, 'Baja', 'base', 'Base'),
+('yautia', 'República Dominicana', 'Tubérculos', 'Yautía', '1/2 taza', 70, 15, 'Media', 'base', 'Base'),
+('batata-do', 'República Dominicana', 'Tubérculos', 'Batata', '1/2 taza', 75, 15, 'Baja', 'base', 'Base'),
+('tostones', 'República Dominicana', 'Tubérculos', 'Tostones', '3 unidades', 50, 15, 'Media', 'base', 'Base'),
+('platano-maduro', 'República Dominicana', 'Fruta', 'Plátano maduro', '1/2 unidad', 70, 15, 'Baja', 'base', 'Base'),
+('mango', 'República Dominicana', 'Fruta', 'Mango', '1/2 taza', 80, 15, 'Baja', 'base', 'Base'),
+('chinola', 'República Dominicana', 'Fruta', 'Chinola (maracuyá)', '1/2 taza', 60, 15, 'Media', 'base', 'Base'),
+('leche-do', 'República Dominicana', 'Lácteos', 'Leche', '1 taza', 240, 12, 'Baja', 'base', 'Base'),
+('pollo-do', 'República Dominicana', 'Proteína', 'Pollo', '1 porción', 100, 0, 'Baja', 'modulator', 'Modulador'),
+('moro-habichuelas', 'República Dominicana', 'Plato mixto', 'Moro de habichuelas', '1 plato', 250, 45, 'Alta', 'mixed', 'Mixto'),
+('la-bandera', 'República Dominicana', 'Plato mixto', 'La bandera (arroz, habichuelas, carne)', '1 plato', 350, 45, 'Alta', 'mixed', 'Mixto')
+ON CONFLICT (id) DO UPDATE SET
+  country = EXCLUDED.country,
+  category = EXCLUDED.category,
+  name = EXCLUDED.name,
+  portion_text = EXCLUDED.portion_text,
+  grams = EXCLUDED.grams,
+  carbs_g = EXCLUDED.carbs_g,
+  difficulty = EXCLUDED.difficulty,
+  item_type = EXCLUDED.item_type,
+  notes = EXCLUDED.notes,
+  updated_at = now();

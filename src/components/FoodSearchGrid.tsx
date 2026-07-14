@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FoodCard } from "@/components/FoodCard";
-import type { EnrichedFoodItem } from "@/lib/domain/foods";
+import type { EnrichedFoodItem, FoodItem } from "@/lib/domain/foods";
 import {
   enrichFoods,
   filterAndSearch,
@@ -10,15 +10,24 @@ import {
 } from "@/lib/domain/foods";
 
 interface FoodSearchGridProps {
-  foods: EnrichedFoodItem[];
+  foods: EnrichedFoodItem[] | FoodItem[];
+  exchangeUnitG: number;
+  exchangeRuleLabel: string;
 }
 
-export function FoodSearchGrid({ foods }: FoodSearchGridProps) {
+export function FoodSearchGrid({
+  foods,
+  exchangeUnitG,
+  exchangeRuleLabel,
+}: FoodSearchGridProps) {
   const [category, setCategory] = useState("Todas");
   const [query, setQuery] = useState("");
 
   const categories = ["Todas", ...getCategories(foods)];
-  const filtered = enrichFoods(filterAndSearch(foods, category, query));
+  const filtered = enrichFoods(
+    filterAndSearch(foods, category, query),
+    exchangeUnitG,
+  );
 
   return (
     <div className="space-y-4">
@@ -46,8 +55,8 @@ export function FoodSearchGrid({ foods }: FoodSearchGridProps) {
       </div>
 
       <p className="text-sm text-gray-500">
-        {filtered.length} alimento{filtered.length !== 1 ? "s" : ""} · 10 g HC =
-        1 ración
+        {filtered.length} alimento{filtered.length !== 1 ? "s" : ""} ·{" "}
+        {exchangeRuleLabel}
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2">

@@ -1,4 +1,4 @@
-/** Spain standard: 10g carbohydrates = 1 ration */
+/** Default exchange unit (Spain). Prefer region.exchangeUnitG when available. */
 export const EXCHANGE_UNIT_G = 10;
 
 export function calculateRations(

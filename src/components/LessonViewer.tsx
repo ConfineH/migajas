@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 import type { Lesson } from "@/lib/domain/lessons";
 import { getFoodById } from "@/lib/data/foods";
 import { enrichFoodItem } from "@/lib/domain/foods";
-import { formatRations } from "@/lib/domain/rations";
+import { EXCHANGE_UNIT_G, formatRations } from "@/lib/domain/rations";
 
 interface LessonViewerProps {
   lesson: Lesson;
@@ -75,7 +75,7 @@ export function LessonViewer({ lesson, nextHref }: LessonViewerProps) {
 function FoodExample({ foodId }: { foodId: string }) {
   const food = getFoodById(foodId);
   if (!food) return null;
-  const enriched = enrichFoodItem(food);
+  const enriched = enrichFoodItem(food, EXCHANGE_UNIT_G);
 
   return (
     <div className="mt-6 rounded-xl bg-emerald-50 border border-emerald-100 p-4">
