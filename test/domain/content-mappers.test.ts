@@ -50,14 +50,17 @@ describe("mapLessonRow", () => {
 });
 
 describe("mapLevelExamRow", () => {
-  it("maps exam exercise ids", () => {
+  it("maps exam pool and question count", () => {
     const exam = mapLevelExamRow({
       level_id: "nivel-1",
       title: "Examen",
       description: "Desc",
+      pool_exercise_ids: ["n1-ex1", "n1-ex2"],
+      questions_per_exam: 4,
       exercise_ids: ["n1-ex1"],
     });
-    expect(exam.exerciseIds).toEqual(["n1-ex1"]);
+    expect(exam.poolExerciseIds).toEqual(["n1-ex1", "n1-ex2"]);
+    expect(exam.questionsPerExam).toBe(4);
   });
 });
 

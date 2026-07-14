@@ -45,9 +45,24 @@ describe("content-admin validation", () => {
         levelId: "nivel-1",
         title: "Examen",
         description: "Desc",
-        exerciseIds: [],
+        poolExerciseIds: [],
+        questionsPerExam: 4,
       }),
-    ).toBe("Añade al menos un ejercicio");
+    ).toBe("Añade al menos un ejercicio al banco");
+  });
+
+  it("rejects pool smaller than questions per exam", () => {
+    expect(
+      validateExamUpdate({
+        levelId: "nivel-1",
+        title: "Examen",
+        description: "Desc",
+        poolExerciseIds: ["a", "b"],
+        questionsPerExam: 4,
+      }),
+    ).toBe(
+      "El banco debe tener al menos tantos ejercicios como preguntas por examen",
+    );
   });
 
   it("rejects lesson steps with empty body", () => {

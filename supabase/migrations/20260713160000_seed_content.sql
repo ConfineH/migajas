@@ -70,14 +70,16 @@ ON CONFLICT (id) DO UPDATE SET
   steps = EXCLUDED.steps,
   updated_at = now();
 
-INSERT INTO public.level_exams (level_id, title, description, exercise_ids) VALUES
-('nivel-1', 'Examen — Nivel 1', 'Demuestra lo aprendido sobre raciones, gramos y alimentos básicos. Necesitas al menos 60% para aprobar y desbloquear el modo libre.', '["n1-ex1","n1-ex2","n1-ex4","n1-ex6"]'::jsonb),
-('nivel-2', 'Examen — Nivel 2', 'Cereales y tubérculos: arroz, pasta, patata y boniato.', '["n2-ex1","n2-ex2","n2-ex3","n2-ex4"]'::jsonb),
-('nivel-3', 'Examen — Nivel 3', 'Legumbres y verduras con más contenido de carbohidratos.', '["n3-ex1","n3-ex2","n3-ex3","n3-ex4"]'::jsonb),
-('nivel-4', 'Examen — Nivel 4', 'Platos mixtos: tortilla, bocadillo, paella y pizza.', '["n4-ex1","n4-ex2","n4-ex3","n4-ex4"]'::jsonb),
-('nivel-5', 'Examen — Nivel 5', 'Casos reales: combinar alimentos, moduladores y comidas completas.', '["n5-ex1","n5-ex2","n5-ex3","n5-ex4","n5-ex5"]'::jsonb)
+INSERT INTO public.level_exams (level_id, title, description, exercise_ids, pool_exercise_ids, questions_per_exam) VALUES
+('nivel-1', 'Examen — Nivel 1', 'Demuestra lo aprendido sobre raciones, gramos y alimentos básicos. Necesitas al menos 60% para aprobar y desbloquear el modo libre. Cada intento sortea 4 preguntas del banco del nivel.', '["n1-ex1","n1-ex2","n1-ex3","n1-ex4","n1-ex5","n1-ex6","n1-ex7","n1-ex8"]'::jsonb, '["n1-ex1","n1-ex2","n1-ex3","n1-ex4","n1-ex5","n1-ex6","n1-ex7","n1-ex8"]'::jsonb, 4),
+('nivel-2', 'Examen — Nivel 2', 'Cereales y tubérculos: arroz, pasta, patata y boniato. 4 preguntas sorteadas de un banco de 8.', '["n2-ex1","n2-ex2","n2-ex3","n2-ex4","n2-ex5","n2-ex6","n2-ex7","n2-ex8"]'::jsonb, '["n2-ex1","n2-ex2","n2-ex3","n2-ex4","n2-ex5","n2-ex6","n2-ex7","n2-ex8"]'::jsonb, 4),
+('nivel-3', 'Examen — Nivel 3', 'Legumbres y verduras con más contenido de carbohidratos. 4 preguntas sorteadas.', '["n3-ex1","n3-ex2","n3-ex3","n3-ex4","n3-ex5","n3-ex6","n3-ex7","n3-ex8"]'::jsonb, '["n3-ex1","n3-ex2","n3-ex3","n3-ex4","n3-ex5","n3-ex6","n3-ex7","n3-ex8"]'::jsonb, 4),
+('nivel-4', 'Examen — Nivel 4', 'Platos mixtos: tortilla, bocadillo, paella y pizza. 4 preguntas sorteadas.', '["n4-ex1","n4-ex2","n4-ex3","n4-ex4","n4-ex5","n4-ex6","n4-ex7","n4-ex8"]'::jsonb, '["n4-ex1","n4-ex2","n4-ex3","n4-ex4","n4-ex5","n4-ex6","n4-ex7","n4-ex8"]'::jsonb, 4),
+('nivel-5', 'Examen — Nivel 5', 'Casos reales: combinar alimentos, moduladores y comidas completas. 5 preguntas sorteadas de un banco de 10.', '["n5-ex1","n5-ex2","n5-ex3","n5-ex4","n5-ex5","n5-ex6","n5-ex7","n5-ex8","n5-ex9","n5-ex10"]'::jsonb, '["n5-ex1","n5-ex2","n5-ex3","n5-ex4","n5-ex5","n5-ex6","n5-ex7","n5-ex8","n5-ex9","n5-ex10"]'::jsonb, 5)
 ON CONFLICT (level_id) DO UPDATE SET
   title = EXCLUDED.title,
   description = EXCLUDED.description,
   exercise_ids = EXCLUDED.exercise_ids,
+  pool_exercise_ids = EXCLUDED.pool_exercise_ids,
+  questions_per_exam = EXCLUDED.questions_per_exam,
   updated_at = now();

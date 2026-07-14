@@ -8,12 +8,19 @@ interface NavBarProps {
   freeMode?: boolean;
   user?: AuthUserSummary | null;
   showAdmin?: boolean;
+  showGuide?: boolean;
 }
 
-export function NavBar({ freeMode = false, user = null, showAdmin = false }: NavBarProps) {
+export function NavBar({
+  freeMode = false,
+  user = null,
+  showAdmin = false,
+  showGuide = false,
+}: NavBarProps) {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/learn", label: "Curso" },
+    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
     ...(freeMode
       ? [
           { href: "/levels", label: "Practicar" },

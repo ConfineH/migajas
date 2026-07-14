@@ -22,7 +22,7 @@ describe("lessons levels 2-5", () => {
     it(`${levelId} has an exam`, () => {
       const exam = getExamForLevel(levelId);
       expect(exam).toBeDefined();
-      expect(exam!.exerciseIds.length).toBeGreaterThanOrEqual(3);
+      expect(exam!.poolExerciseIds.length).toBeGreaterThanOrEqual(3);
     });
 
     it(`${levelId} guided sequence ends with exam`, () => {

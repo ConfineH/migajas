@@ -4,19 +4,27 @@ import { ExamRunner } from "@/components/ExamRunner";
 import { Button } from "@/components/Button";
 import { getExamForLevel } from "@/lib/domain/lessons";
 import { getExerciseById, getLevelById, getLevels } from "@/lib/domain/exercises";
-import { resolveProgress } from "@/lib/learning-state";
+import { persistProgress, resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
   canStartExam,
   isGuidedLevelUnlocked,
 } from "@/lib/domain/guided-flow";
+import {
+  buildExamSession,
+  getResumableExamSession,
+  normalizeExamConfig,
+  upsertExamSession,
+} from "@/lib/domain/exam-session";
 
 interface Props {
   params: Promise<{ levelId: string }>;
+  searchParams: Promise<{ nuevo?: string }>;
 }
 
-export default async function ExamPage({ params }: Props) {
+export default async function ExamPage({ params, searchParams }: Props) {
   const { levelId } = await params;
+  const { nuevo } = await searchParams;
   const level = getLevelById(levelId);
   if (!level) notFound();
 
@@ -49,7 +57,35 @@ export default async function ExamPage({ params }: Props) {
   const exam = getExamForLevel(levelId);
   if (!exam) redirect(`/learn/${levelId}`);
 
-  const exercises = exam.exerciseIds
+  const config = normalizeExamConfig(exam);
+  const forceNew = nuevo === "1";
+  let userProgress = await resolveProgress();
+
+  let session = forceNew
+    ? null
+    : getResumableExamSession(userProgress.activeExamSessions, levelId);
+
+  if (!session) {
+    try {
+      session = buildExamSession(
+        levelId,
+        config.poolExerciseIds,
+        config.questionsPerExam,
+      );
+      userProgress = {
+        ...userProgress,
+        activeExamSessions: upsertExamSession(
+          userProgress.activeExamSessions,
+          session,
+        ),
+      };
+      await persistProgress(userProgress);
+    } catch {
+      redirect(`/learn/${levelId}`);
+    }
+  }
+
+  const exercises = session.exerciseIds
     .map((id) => getExerciseById(id))
     .filter((e): e is NonNullable<typeof e> => !!e);
 
@@ -63,6 +99,10 @@ export default async function ExamPage({ params }: Props) {
           <p className="text-sm font-medium text-amber-600">Examen de nivel</p>
           <h1 className="text-2xl font-bold text-gray-900">{exam.title}</h1>
           <p className="mt-2 text-gray-600">{exam.description}</p>
+          <p className="mt-2 text-sm text-gray-500">
+            {exercises.length} preguntas en este intento · banco de{" "}
+            {config.poolExerciseIds.length}
+          </p>
         </header>
         <ExamRunner
           exercises={exercises}

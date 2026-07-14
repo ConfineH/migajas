@@ -29,12 +29,19 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
             .slice(0, index)
             .every((prev) => isGuidedItemComplete(progress, prev, levelId));
 
+        const completion = progress.levelCompletions.find(
+          (entry) => entry.levelId === levelId,
+        );
+        const examHref = completion
+          ? `/learn/${levelId}/exam?nuevo=1`
+          : `/learn/${levelId}/exam`;
+
         const href =
           item.type === "lesson"
             ? `/learn/${levelId}/lessons/${item.id}`
             : item.type === "practice"
               ? `/learn/${levelId}/practice/${item.id}`
-              : `/learn/${levelId}/exam`;
+              : examHref;
 
         return (
           <li key={item.id}>

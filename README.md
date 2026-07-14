@@ -61,6 +61,8 @@ openspec/        # artefactos SDD
 - [x] Design system v1 (headers, cards, nav activo)
 - [x] Backfill analytics al login
 - [x] Migración middleware → proxy
+- [x] Guía de referencia (`/guia`) tras onboarding
+- [x] Exámenes variables (pool 8–10, sorteo 4/5 por intento)
 
 ## Repositorio
 

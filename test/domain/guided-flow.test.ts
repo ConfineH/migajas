@@ -115,6 +115,7 @@ describe("getExamForLevel", () => {
   it("returns exam with exercises for nivel-1", () => {
     const exam = getExamForLevel("nivel-1");
     expect(exam).toBeDefined();
-    expect(exam!.exerciseIds.length).toBeGreaterThanOrEqual(3);
+    expect(exam!.poolExerciseIds.length).toBeGreaterThanOrEqual(3);
+    expect(exam!.questionsPerExam).toBe(4);
   });
 });

@@ -10,11 +10,14 @@ export interface LevelCompletion {
   passed: boolean;
 }
 
+import type { ExamSession } from "./exam-session";
+
 export interface UserProgress {
   completions: LevelCompletion[];
   completedLessons: string[];
   completedPracticeSteps: string[];
   freeModeUnlocked: boolean;
+  activeExamSessions?: ExamSession[];
 }
 
 export interface LevelRef {

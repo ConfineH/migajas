@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const ONBOARDING_COOKIE = "migajas_onboarding";
 
@@ -21,4 +22,15 @@ export async function getOnboardingState(): Promise<OnboardingState | null> {
 
 export function serializeOnboardingState(state: OnboardingState): string {
   return JSON.stringify(state);
+}
+
+export async function hasCompletedOnboarding(): Promise<boolean> {
+  const state = await getOnboardingState();
+  return state?.completed === true;
+}
+
+export async function requireOnboarding(redirectTo = "/onboarding") {
+  if (!(await hasCompletedOnboarding())) {
+    redirect(redirectTo);
+  }
 }

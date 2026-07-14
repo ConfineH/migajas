@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import type { Lesson } from "@/lib/domain/lessons";
@@ -43,6 +44,13 @@ export function LessonViewer({ lesson, nextHref }: LessonViewerProps) {
         <p className="mt-4 text-gray-700 leading-relaxed">{step.body}</p>
         {step.foodId && <FoodExample foodId={step.foodId} />}
       </article>
+
+      <p className="text-center text-sm text-gray-500">
+        ¿Necesitas consultar porciones o la tabla de conversión?{" "}
+        <Link href="/guia" className="font-semibold text-emerald-700">
+          Abrir guía de referencia
+        </Link>
+      </p>
 
       <div className="flex justify-between gap-3">
         {stepIndex > 0 ? (

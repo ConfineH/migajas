@@ -14,8 +14,9 @@ interface ExamEditorProps {
 export function ExamEditor({ exam, levelName }: ExamEditorProps) {
   const [title, setTitle] = useState(exam.title);
   const [description, setDescription] = useState(exam.description);
-  const [exerciseIdsRaw, setExerciseIdsRaw] = useState(
-    exam.exerciseIds.join(", "),
+  const [poolRaw, setPoolRaw] = useState(exam.poolExerciseIds.join(", "));
+  const [questionsPerExam, setQuestionsPerExam] = useState(
+    String(exam.questionsPerExam),
   );
   const [message, setMessage] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
@@ -30,7 +31,8 @@ export function ExamEditor({ exam, levelName }: ExamEditorProps) {
       exam.levelId,
       title,
       description,
-      exerciseIdsRaw,
+      poolRaw,
+      Number(questionsPerExam),
     );
 
     setSaving(false);
@@ -42,7 +44,7 @@ export function ExamEditor({ exam, levelName }: ExamEditorProps) {
     <CollapsiblePanel
       id={exam.levelId}
       title={levelName}
-      subtitle={`${exam.exerciseIds.length} ejercicios · ${exam.levelId}`}
+      subtitle={`Banco: ${exam.poolExerciseIds.length} · ${exam.questionsPerExam} por examen`}
     >
       <form onSubmit={handleSubmit} className="space-y-3">
         <label className="block text-sm">
@@ -63,16 +65,26 @@ export function ExamEditor({ exam, levelName }: ExamEditorProps) {
           />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">IDs de ejercicios</span>
+          <span className="text-gray-600">Preguntas por examen</span>
+          <input
+            type="number"
+            min={1}
+            className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+            value={questionsPerExam}
+            onChange={(event) => setQuestionsPerExam(event.target.value)}
+          />
+        </label>
+        <label className="block text-sm">
+          <span className="text-gray-600">Banco de ejercicios (pool)</span>
           <textarea
             className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-xs"
             rows={4}
-            value={exerciseIdsRaw}
-            onChange={(event) => setExerciseIdsRaw(event.target.value)}
+            value={poolRaw}
+            onChange={(event) => setPoolRaw(event.target.value)}
             placeholder="ej-n1-01, ej-n1-02"
           />
           <span className="mt-1 block text-xs text-gray-500">
-            Separados por comas o saltos de línea.
+            IDs separados por comas. Cada intento sortea N preguntas distintas.
           </span>
         </label>
         <div className="flex items-center gap-3">

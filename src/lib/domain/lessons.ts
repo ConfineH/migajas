@@ -24,7 +24,10 @@ export interface LevelExam {
   levelId: string;
   title: string;
   description: string;
-  exerciseIds: string[];
+  poolExerciseIds: string[];
+  questionsPerExam: number;
+  /** @deprecated legacy fixed list */
+  exerciseIds?: string[];
 }
 
 export function getAllLessons(): Lesson[] {

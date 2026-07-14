@@ -52,12 +52,14 @@ export async function saveExamFromFormAction(
   levelId: string,
   title: string,
   description: string,
-  exerciseIdsRaw: string,
+  poolRaw: string,
+  questionsPerExam: number,
 ) {
   return saveExamAction({
     levelId,
     title,
     description,
-    exerciseIds: parseExerciseIds(exerciseIdsRaw),
+    poolExerciseIds: parseExerciseIds(poolRaw),
+    questionsPerExam,
   });
 }

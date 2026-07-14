@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { completeLevel } from "@/lib/domain/progress";
+import { clearExamSession } from "@/lib/domain/exam-session";
 import {
   buildExamPassedEvent,
   buildFreeModeUnlockedEvent,
@@ -30,7 +31,13 @@ export async function POST(request: Request) {
 
   const existing = await resolveProgress();
   const wasFreeModeUnlocked = existing.freeModeUnlocked;
-  const updated = completeLevel(existing, levelId, correctCount, totalCount);
+  const clearedSessions = clearExamSession(existing.activeExamSessions, levelId);
+  const updated = completeLevel(
+    { ...existing, activeExamSessions: clearedSessions },
+    levelId,
+    correctCount,
+    totalCount,
+  );
   const completion = updated.completions.find((c) => c.levelId === levelId)!;
 
   if (shouldEmitExamPassed(completion.passed)) {

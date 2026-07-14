@@ -1,5 +1,6 @@
 import type { Attempt } from "./attempts";
 import type { LevelCompletion, UserProgress } from "./progress";
+import type { ExamSession } from "./exam-session";
 
 export const MAX_SYNCED_ATTEMPTS = 200;
 
@@ -35,6 +36,21 @@ function mergeCompletions(
   return [...byLevel.values()];
 }
 
+function mergeExamSessions(
+  local: ExamSession[] | undefined,
+  remote: ExamSession[] | undefined,
+): ExamSession[] | undefined {
+  const byLevel = new Map<string, ExamSession>();
+  for (const session of [...(remote ?? []), ...(local ?? [])]) {
+    const existing = byLevel.get(session.levelId);
+    if (!existing || (session.inProgress && !existing.inProgress)) {
+      byLevel.set(session.levelId, session);
+    }
+  }
+  const merged = [...byLevel.values()];
+  return merged.length > 0 ? merged : undefined;
+}
+
 export function mergeUserProgress(
   local: UserProgress,
   remote: UserProgress,
@@ -50,6 +66,10 @@ export function mergeUserProgress(
       remote.completedPracticeSteps,
     ),
     freeModeUnlocked: local.freeModeUnlocked || remote.freeModeUnlocked,
+    activeExamSessions: mergeExamSessions(
+      local.activeExamSessions,
+      remote.activeExamSessions,
+    ),
   };
 }
 

@@ -32,7 +32,8 @@ export interface ExamUpdateInput {
   levelId: string;
   title: string;
   description: string;
-  exerciseIds: string[];
+  poolExerciseIds: string[];
+  questionsPerExam: number;
 }
 
 export function parseExerciseIds(raw: string): string[] {
@@ -122,7 +123,13 @@ export function validateExamUpdate(input: ExamUpdateInput): string | null {
   if (!input.levelId.trim()) return "Nivel requerido";
   if (!input.title.trim()) return "Título requerido";
   if (!input.description.trim()) return "Descripción requerida";
-  if (input.exerciseIds.length === 0) return "Añade al menos un ejercicio";
+  if (input.poolExerciseIds.length === 0) return "Añade al menos un ejercicio al banco";
+  if (!Number.isInteger(input.questionsPerExam) || input.questionsPerExam < 1) {
+    return "Número de preguntas inválido";
+  }
+  if (input.poolExerciseIds.length < input.questionsPerExam) {
+    return "El banco debe tener al menos tantos ejercicios como preguntas por examen";
+  }
   return null;
 }
 
@@ -131,7 +138,9 @@ export function examUpdateToRow(input: ExamUpdateInput) {
     level_id: input.levelId,
     title: input.title.trim(),
     description: input.description.trim(),
-    exercise_ids: input.exerciseIds,
+    pool_exercise_ids: input.poolExerciseIds,
+    questions_per_exam: input.questionsPerExam,
+    exercise_ids: input.poolExerciseIds,
     updated_at: new Date().toISOString(),
   };
 }
