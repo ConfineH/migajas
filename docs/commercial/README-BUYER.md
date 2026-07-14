@@ -15,7 +15,7 @@ Migajas es una aplicación web educativa para aprender a contar carbohidratos me
 | Territorio | Regla de ración | Catálogo | Curso guiado (Fase 1) |
 |------------|-----------------|----------|------------------------|
 | **España** | 10 g HC = 1 ración | Alimentos habituales ES | Currículo principal |
-| **República Dominicana** | 15 g HC = 1 ración | Alimentos habituales RD | Ejemplos con overlays; lecciones aún con contexto español |
+| **República Dominicana** | 15 g HC = 1 ración | Alimentos habituales RD | Currículo guiado localizado (alimentos y platos DO) |
 
 Cada territorio requiere su propia licencia. No se incluye automáticamente el otro país.
 

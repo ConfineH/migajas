@@ -229,9 +229,9 @@ export function OnboardingFlow({
               alimento, los carbohidratos y las raciones calculadas.
             </p>
             {region.id === "do" ? (
-              <p className="text-sm text-amber-800">
-                El curso guiado sigue usando ejemplos de España por ahora; el
-                catálogo y la guía ya están adaptados a República Dominicana.
+              <p className="text-sm text-emerald-800">
+                El curso guiado usa alimentos y platos habituales de República
+                Dominicana con la regla de 15 g de HC por ración.
               </p>
             ) : null}
           </div>

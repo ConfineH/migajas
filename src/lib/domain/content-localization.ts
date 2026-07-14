@@ -1,4 +1,5 @@
 import type { Exercise, ExerciseOption } from "@/lib/domain/exercises";
+import type { Level } from "@/lib/domain/exercises";
 import type { FoodItem } from "@/lib/domain/foods";
 import type { Lesson, LessonStep } from "@/lib/domain/lessons";
 import { calculateRations, formatRations } from "@/lib/domain/rations";
@@ -42,12 +43,53 @@ const FOOD_REGION_ALIASES: Record<string, Record<string, string>> = {
   fresas: { do: "mango" },
   pera: { do: "mango" },
   "pasta-tomate": { do: "moro-habichuelas" },
+  platano: { do: "platano-maduro" },
+  "yogur-natural": { do: "do-yogur-do" },
+  "leche-media": { do: "leche-do" },
 };
 
 const LESSON_TEXT_OVERRIDES: Record<
   string,
   Partial<Record<"title" | "summary" | "body", string>>
 > = {
+  "l1-lesson-3:do:title": { title: "Alimentos básicos del día a día" },
+  "l1-lesson-3:do:summary": {
+    summary: "Casabe, fruta tropical y lácteos: los primeros alimentos que debes reconocer.",
+  },
+  "l1-3-s1:do:body": {
+    body: "Antes de platos combinados, domina alimentos base: casabe, frutas tropicales y lácteos. Son los que más repetirás.",
+  },
+  "l2-lesson-1:do:title": { title: "Arroz y viandas" },
+  "l2-lesson-1:do:summary": {
+    summary: "Arroz blanco y viandas: porciones habituales y raciones.",
+  },
+  "l2-1-s1:do:body": {
+    body: "El arroz y las viandas (yautía, batata, plátano) se miden en tazas cuando están cocidos. Una porción típica suele aportar unos 15 g de HC.",
+  },
+  "l2-lesson-2:do:title": { title: "Yautía y batata" },
+  "l2-lesson-2:do:summary": {
+    summary: "Viandas en el plato diario dominicano.",
+  },
+  "l2-2-s1:do:body": {
+    body: "Yautía, batata y plátano aportan HC en porciones de media taza. El peso de la vianda no coincide con los gramos de carbohidratos.",
+  },
+  "l3-lesson-1:do:title": { title: "Habichuelas y guandules" },
+  "l3-lesson-1:do:summary": {
+    summary: "Legumbres cocidas en porción habitual.",
+  },
+  "l3-1-s2:do:body": {
+    body: "1/2 taza de habichuelas rojas (100 g) = 15 g HC = 1,0 ración con la regla dominicana.",
+  },
+  "l3-lesson-2:do:summary": {
+    summary: "Viandas y vegetales que sí aportan HC.",
+  },
+  "l3-2-s1:do:body": {
+    body: "Guineo verde, batata o auyama aportan más HC que aguacate o berro. Hay que conocer las que sí suman raciones.",
+  },
+  "l4-lesson-1:do:title": { title: "¿Qué es un plato mixto?" },
+  "l4-1-s2:do:body": {
+    body: "El mangú combina vianda (HC) y acompañamiento. Una porción puede aportar unos 30 g de HC = 2,0 raciones.",
+  },
   "l4-lesson-2:do:title": { title: "Platos dominicanos habituales" },
   "l4-lesson-2:do:summary": {
     summary: "Moro, mangú y la bandera en la vida real.",
@@ -55,12 +97,29 @@ const LESSON_TEXT_OVERRIDES: Record<
   "l4-2-s1:do:body": {
     body: "Moro, mangú y la bandera son platos frecuentes. Cada uno concentra HC de forma distinta según la porción.",
   },
+  "l4-2-practice:do:body": {
+    body: "Identifica platos mixtos dominicanos.",
+  },
+  "l5-1-s1:do:body": {
+    body: "En un desayuno o comida real, suma los gramos de HC de cada alimento y divide entre 15 para obtener las raciones totales.",
+  },
   "l5-3-s1:do:body": {
     body: "Mango con leche, moro de habichuelas o mangú son situaciones que encontrarás a menudo. Practica con porciones reales.",
   },
   "l5-3-practice:do:body": {
     body: "Resuelve un caso real de comida dominicana.",
   },
+};
+
+const LEVEL_DESCRIPTION_OVERRIDES: Record<string, string> = {
+  "nivel-1:do":
+    "Casabe, fruta tropical y lácteos. Aprende a reconocer porciones y raciones en alimentos sencillos.",
+  "nivel-2:do":
+    "Arroz, viandas y plátano. Alimentos base de la cocina dominicana.",
+  "nivel-3:do":
+    "Habichuelas, guandules y viandas con más contenido de HC.",
+  "nivel-4:do":
+    "Mangú, moro de habichuelas y la bandera: platos compuestos habituales.",
 };
 
 const COMBO_STEP_FOODS: Record<string, { primary: string; secondary: string }> =
@@ -75,6 +134,16 @@ export function resolveRegionalFoodId(
 ): string {
   if (regionId === DEFAULT_REGION_ID) return canonicalFoodId;
   return FOOD_REGION_ALIASES[canonicalFoodId]?.[regionId] ?? canonicalFoodId;
+}
+
+export function localizeLevel(level: Level, region: RegionProfile): Level {
+  if (region.id === DEFAULT_REGION_ID) return level;
+
+  const override = LEVEL_DESCRIPTION_OVERRIDES[`${level.id}:${region.id}`];
+  return {
+    ...level,
+    description: override ?? localizeLessonText(level.description, region),
+  };
 }
 
 export function localizeLesson(
@@ -273,10 +342,11 @@ function formatOptionLabel(value: number, type: Exercise["type"]): string {
 }
 
 function localizeLessonText(text: string, region: RegionProfile): string {
-  return text
+  let localized = text
     .replaceAll("España", region.name)
     .replaceAll("españoles", region.id === "do" ? "dominicanos" : "españoles")
     .replaceAll("española", region.id === "do" ? "dominicana" : "española")
+    .replaceAll("español", region.id === "do" ? "dominicano" : "español")
     .replaceAll("divide entre 10", `divide entre ${region.exchangeUnitG}`)
     .replaceAll("Divide entre 10", `Divide entre ${region.exchangeUnitG}`)
     .replaceAll("÷ 10", `÷ ${region.exchangeUnitG}`)
@@ -284,6 +354,24 @@ function localizeLessonText(text: string, region: RegionProfile): string {
     .replaceAll("10 gramos de HC", `${region.exchangeUnitG} gramos de HC`)
     .replaceAll("10 g de HC", `${region.exchangeUnitG} g de HC`)
     .replaceAll("equivale a 10 gramos", `equivale a ${region.exchangeUnitG} gramos`);
+
+  if (region.id === "do") {
+    localized = localized
+      .replaceAll("pan, frutas y lácteos", "casabe, frutas tropicales y lácteos")
+      .replaceAll("Pan, fruta y lácteos", "Casabe, fruta tropical y lácteos")
+      .replaceAll("Arroz, pasta y patata", "Arroz, viandas y plátano")
+      .replaceAll("Lentejas, garbanzos", "Habichuelas y guandules")
+      .replaceAll("Tortilla, paella, bocadillo", "Mangú, moro y la bandera")
+      .replaceAll("tortilla de patata", "mangú")
+      .replaceAll("Tortilla de patata", "Mangú")
+      .replaceAll("paella", "moro de habichuelas")
+      .replaceAll("Paella", "Moro de habichuelas")
+      .replaceAll("patata y boniato", "yautía y batata")
+      .replaceAll("Patata y boniato", "Yautía y batata")
+      .replaceAll("Arroz y pasta", "Arroz y viandas");
+  }
+
+  return localized;
 }
 
 function overrideLessonField(

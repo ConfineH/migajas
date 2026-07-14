@@ -3,6 +3,8 @@ import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { GuidedPathList } from "@/components/GuidedPathList";
 import { Button } from "@/components/Button";
+import { getActiveRegion } from "@/lib/region-server";
+import { localizeLevel } from "@/lib/domain/content-localization";
 import { resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
@@ -30,6 +32,8 @@ export default async function LearnLevelPage({ params }: Props) {
   const stored = await resolveProgress();
   const progress = toGuidedProgress(stored);
   const levels = getLevels();
+  const region = await getActiveRegion();
+  const localizedLevel = localizeLevel(level, region);
 
   if (!isGuidedLevelUnlocked(levelId, progress, levels)) {
     return (
@@ -61,8 +65,8 @@ export default async function LearnLevelPage({ params }: Props) {
           <Link href="/learn" className="text-sm text-emerald-600 hover:underline">
             ← Todos los niveles
           </Link>
-          <h1 className="mt-2 text-2xl font-bold text-gray-900">{level.name}</h1>
-          <p className="mt-2 text-gray-600">{level.description}</p>
+          <h1 className="mt-2 text-2xl font-bold text-gray-900">{localizedLevel.name}</h1>
+          <p className="mt-2 text-gray-600">{localizedLevel.description}</p>
           <div className="mt-4">
             <div className="mb-1 flex justify-between text-sm text-gray-500">
               <span>Progreso</span>

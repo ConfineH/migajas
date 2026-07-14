@@ -3,6 +3,7 @@ import { ClinicalModePrompt } from "@/components/ClinicalModePrompt";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CourseLevelList } from "@/components/CourseLevelList";
 import { canShowClinicalPrompt } from "@/lib/clinical-access";
+import { getActiveRegion } from "@/lib/region-server";
 import { resolveProgress } from "@/lib/learning-state";
 import { toGuidedProgress, isFreeModeUnlocked } from "@/lib/domain/guided-flow";
 import Link from "next/link";
@@ -12,9 +13,10 @@ export const metadata = {
 };
 
 export default async function LearnPage() {
-  const [stored, clinicalPrompt] = await Promise.all([
+  const [stored, clinicalPrompt, region] = await Promise.all([
     resolveProgress(),
     canShowClinicalPrompt(),
+    getActiveRegion(),
   ]);
   const progress = toGuidedProgress(stored);
   const freeMode = isFreeModeUnlocked(progress);
@@ -47,7 +49,7 @@ export default async function LearnPage() {
           </div>
         )}
 
-        <CourseLevelList progress={progress} />
+        <CourseLevelList progress={progress} region={region} />
       </main>
     </>
   );

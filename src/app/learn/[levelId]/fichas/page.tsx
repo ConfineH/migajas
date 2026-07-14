@@ -11,6 +11,7 @@ import {
   buildLevelFlashcardDeck,
   getEssentialFlashcardFoodIds,
 } from "@/lib/domain/level-flashcards";
+import { resolveRegionalFoodId } from "@/lib/domain/content-localization";
 import { resolveProgress } from "@/lib/learning-state";
 import {
   toGuidedProgress,
@@ -54,8 +55,14 @@ export default async function LevelFlashcardsPage({ params }: Props) {
   }
 
   const { region, foods } = await getRegionalContentContext();
-  const cards = buildLevelFlashcardDeck(levelId);
-  const foodIds = getEssentialFlashcardFoodIds(levelId);
+  const canonicalFoodIds = getEssentialFlashcardFoodIds(levelId);
+  const foodIds = canonicalFoodIds.map((id) =>
+    resolveRegionalFoodId(id, region.id),
+  );
+  const cards = buildLevelFlashcardDeck(levelId).map((card) => ({
+    ...card,
+    foodId: resolveRegionalFoodId(card.foodId, region.id),
+  }));
 
   const foodsById = Object.fromEntries(
     foodIds

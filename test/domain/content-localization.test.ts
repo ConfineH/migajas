@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { getFoods } from "@/lib/data/foods";
-import { getExerciseById } from "@/lib/domain/exercises";
+import { getExerciseById, getLevels } from "@/lib/domain/exercises";
 import { getLessonById } from "@/lib/domain/lessons";
 import {
   localizeExercise,
   localizeLesson,
+  localizeLevel,
   resolveRegionalFoodId,
 } from "@/lib/domain/content-localization";
 import { getRegionById } from "@/lib/domain/regions";
@@ -21,6 +22,18 @@ describe("resolveRegionalFoodId", () => {
   it("maps Spain staples to Dominican equivalents", () => {
     expect(resolveRegionalFoodId("pan-blanco", "do")).toBe("casabe");
     expect(resolveRegionalFoodId("paella", "do")).toBe("moro-habichuelas");
+  });
+});
+
+describe("localizeLevel", () => {
+  it("localizes nivel descriptions for República Dominicana", () => {
+    const level = getLevels().find((item) => item.id === "nivel-4");
+    expect(level).toBeDefined();
+
+    const localized = localizeLevel(level!, dominican);
+
+    expect(localized.description).toContain("Mangú");
+    expect(localized.description).not.toContain("paella");
   });
 });
 
@@ -45,6 +58,18 @@ describe("localizeLesson", () => {
     expect(localized.steps.find((step) => step.id === paellaStep?.id)?.body).toContain(
       "moro de habichuelas",
     );
+  });
+
+  it("localizes nivel 1 introduction for República Dominicana", () => {
+    const lesson = getLessonById("l1-lesson-1");
+    expect(lesson).toBeDefined();
+
+    const localized = localizeLesson(lesson!, dominican, foods);
+    const example = localized.steps.find((step) => step.id === "l1-1-s2");
+
+    expect(localized.summary).toContain("República Dominicana");
+    expect(example?.foodId).toBe("casabe");
+    expect(example?.body.toLowerCase()).toContain("casabe");
   });
 });
 

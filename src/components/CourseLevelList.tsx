@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { localizeLevel } from "@/lib/domain/content-localization";
+import type { RegionProfile } from "@/lib/domain/regions";
 import {
   getLessonProgressPercent,
   isGuidedLevelUnlocked,
@@ -11,10 +13,11 @@ import { getLessonsForLevel } from "@/lib/domain/lessons";
 
 interface CourseLevelListProps {
   progress: GuidedProgress;
+  region: RegionProfile;
 }
 
-export function CourseLevelList({ progress }: CourseLevelListProps) {
-  const levels = getLevels();
+export function CourseLevelList({ progress, region }: CourseLevelListProps) {
+  const levels = getLevels().map((level) => localizeLevel(level, region));
 
   return (
     <div className="space-y-4">
