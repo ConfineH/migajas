@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { ReferenceGuideClient } from "@/components/reference-guide/ReferenceGuideClient";
 import { getFoods } from "@/lib/data/foods";
 import { enrichFoods } from "@/lib/domain/foods";
+import { getFreeModeStatus } from "@/lib/free-mode";
 import { requireOnboarding } from "@/lib/onboarding";
 
 export const metadata = {
@@ -11,7 +12,10 @@ export const metadata = {
 
 export default async function ReferenceGuidePage() {
   await requireOnboarding();
-  const foods = enrichFoods(getFoods());
+  const [foods, freeMode] = await Promise.all([
+    Promise.resolve(enrichFoods(getFoods())),
+    getFreeModeStatus(),
+  ]);
 
   return (
     <>
@@ -19,9 +23,13 @@ export default async function ReferenceGuidePage() {
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
         <PageHeader
           title="Guía de referencia"
-          description="Reglas, tabla de conversión, alimentos y calculadora para consultar durante el curso."
+          description={
+            freeMode
+              ? "Reglas y calculadora. El listado de alimentos está en el catálogo."
+              : "Reglas, conversión y consulta de alimentos durante el curso."
+          }
         />
-        <ReferenceGuideClient foods={foods} />
+        <ReferenceGuideClient foods={foods} freeMode={freeMode} />
       </main>
     </>
   );

@@ -1,13 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { FoodCard } from "@/components/FoodCard";
+import { FoodSearchGrid } from "@/components/FoodSearchGrid";
 import type { EnrichedFoodItem } from "@/lib/domain/foods";
-import {
-  enrichFoods,
-  filterAndSearch,
-  getCategories,
-} from "@/lib/domain/foods";
 import {
   REFERENCE_TIPS,
   buildConversionTable,
@@ -22,17 +18,17 @@ type TabId = "reglas" | "alimentos" | "calculadora";
 
 interface ReferenceGuideClientProps {
   foods: EnrichedFoodItem[];
+  freeMode: boolean;
 }
 
-export function ReferenceGuideClient({ foods }: ReferenceGuideClientProps) {
+export function ReferenceGuideClient({
+  foods,
+  freeMode,
+}: ReferenceGuideClientProps) {
   const [tab, setTab] = useState<TabId>("reglas");
-  const [category, setCategory] = useState("Todas");
-  const [query, setQuery] = useState("");
   const [carbsInput, setCarbsInput] = useState("15");
   const [rationsInput, setRationsInput] = useState("1.5");
 
-  const categories = ["Todas", ...getCategories(foods)];
-  const filtered = enrichFoods(filterAndSearch(foods, category, query));
   const table = buildConversionTable(5, 0.5);
   const carbsValue = Number(carbsInput.replace(",", "."));
   const rationsValue = Number(rationsInput.replace(",", "."));
@@ -41,12 +37,22 @@ export function ReferenceGuideClient({ foods }: ReferenceGuideClientProps) {
 
   const tabs: { id: TabId; label: string }[] = [
     { id: "reglas", label: "Reglas" },
-    { id: "alimentos", label: "Alimentos" },
+    ...(!freeMode ? [{ id: "alimentos" as const, label: "Alimentos" }] : []),
     { id: "calculadora", label: "Calculadora" },
   ];
 
   return (
     <div className="space-y-6">
+      {freeMode ? (
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
+          El listado completo de alimentos está en el{" "}
+          <Link href="/catalog" className="font-semibold underline">
+            catálogo
+          </Link>
+          . Aquí tienes reglas y calculadora para consultar al vuelo.
+        </div>
+      ) : null}
+
       <div className="flex gap-1 rounded-xl bg-gray-100 p-1">
         {tabs.map((item) => (
           <button
@@ -105,38 +111,13 @@ export function ReferenceGuideClient({ foods }: ReferenceGuideClientProps) {
         </section>
       ) : null}
 
-      {tab === "alimentos" ? (
-        <section className="space-y-4">
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              type="search"
-              placeholder="Buscar alimento..."
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              className="flex-1 rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-              aria-label="Buscar alimento"
-            />
-            <select
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
-              className="rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
-              aria-label="Filtrar por categoría"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p className="text-sm text-gray-500">
-            {filtered.length} alimento{filtered.length !== 1 ? "s" : ""}
+      {tab === "alimentos" && !freeMode ? (
+        <section>
+          <p className="mb-4 text-sm text-gray-600">
+            Consulta rápida durante el curso. Tras aprobar el examen del nivel 1,
+            el catálogo completo queda en el menú principal.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {filtered.map((food) => (
-              <FoodCard key={food.id} food={food} />
-            ))}
-          </div>
+          <FoodSearchGrid foods={foods} />
         </section>
       ) : null}
 
