@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { StatCard } from "@/components/ui/StatCard";
+import { LevelProgressCard } from "@/components/ui/LevelProgressCard";
 import {
   getLevels,
   getExercisesForLevel,
@@ -42,12 +45,10 @@ export default async function ProgressPage() {
     <>
       <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Mi progreso</h1>
-          <p className="mt-2 text-gray-600">
-            Curso guiado, niveles aprobados y ejercicios para repasar.
-          </p>
-        </header>
+        <PageHeader
+          title="Mi progreso"
+          description="Curso guiado, niveles aprobados y ejercicios para repasar."
+        />
 
         <div className="mb-8 space-y-3">
           <h2 className="text-lg font-bold text-gray-900">Curso guiado</h2>
@@ -55,27 +56,16 @@ export default async function ProgressPage() {
             const pct = getLessonProgressPercent(guided, level.id);
             const completion = getLevelCompletion(progress, level.id);
             return (
-              <div
+              <LevelProgressCard
                 key={level.id}
-                className="rounded-xl border border-emerald-100 bg-white p-4"
-              >
-                <div className="flex justify-between text-sm">
-                  <span className="font-medium text-gray-900">{level.name}</span>
-                  <span className="text-emerald-600">{pct}%</span>
-                </div>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100">
-                  <div
-                    className="h-full rounded-full bg-emerald-500"
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-                {completion && (
-                  <p className="mt-1 text-xs text-gray-500">
-                    Examen: {completion.masteryScore}%{" "}
-                    {completion.passed ? "✓" : "(no aprobado)"}
-                  </p>
-                )}
-              </div>
+                title={level.name}
+                percent={pct}
+                subtitle={
+                  completion
+                    ? `Examen: ${completion.masteryScore}% ${completion.passed ? "✓" : "(no aprobado)"}`
+                    : undefined
+                }
+              />
             );
           })}
           <Link href="/learn" className="inline-block text-sm font-semibold text-emerald-700">
@@ -84,21 +74,10 @@ export default async function ProgressPage() {
         </div>
 
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-emerald-100 bg-white p-4 text-center">
-            <p className="text-3xl font-bold text-emerald-700">{passed}/5</p>
-            <p className="mt-1 text-sm text-gray-500">Niveles aprobados</p>
-          </div>
-          <div className="rounded-2xl border border-emerald-100 bg-white p-4 text-center">
-            <p className="text-3xl font-bold text-emerald-700">
-              {overallAccuracy}%
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Aciertos totales</p>
-          </div>
-          <div className="col-span-2 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center sm:col-span-1">
-            <p className="text-3xl font-bold text-amber-700">
-              {allFailed.length}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">Para repasar</p>
+          <StatCard label="Niveles aprobados" value={`${passed}/5`} />
+          <StatCard label="Aciertos totales" value={`${overallAccuracy}%`} />
+          <div className="col-span-2 sm:col-span-1">
+            <StatCard label="Para repasar" value={allFailed.length} />
           </div>
         </div>
 

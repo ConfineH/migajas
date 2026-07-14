@@ -16,6 +16,14 @@ import { isSupabaseConfigured } from "@/lib/supabase/client";
 
 let hydratePromise: Promise<void> | null = null;
 
+export async function refreshContentFromSupabase(): Promise<boolean> {
+  hydratePromise = null;
+  const remote = await fetchFromSupabase();
+  if (!remote) return false;
+  setContentCache(remote);
+  return true;
+}
+
 async function fetchFromSupabase(): Promise<ContentCache | null> {
   if (!isSupabaseConfigured()) return null;
 

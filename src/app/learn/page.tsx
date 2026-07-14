@@ -1,4 +1,5 @@
 import { AppNavBar } from "@/components/AppNavBar";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { CourseLevelList } from "@/components/CourseLevelList";
 import { resolveProgress } from "@/lib/learning-state";
 import { toGuidedProgress, isFreeModeUnlocked } from "@/lib/domain/guided-flow";
@@ -17,12 +18,10 @@ export default async function LearnPage() {
     <>
       <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Curso guiado</h1>
-          <p className="mt-2 text-gray-600">
-            Cinco niveles con lecciones, práctica y examen. Avanza paso a paso.
-          </p>
-        </header>
+        <PageHeader
+          title="Curso guiado"
+          description="Cinco niveles con lecciones, práctica y examen. Avanza paso a paso."
+        />
 
         {freeMode && (
           <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">

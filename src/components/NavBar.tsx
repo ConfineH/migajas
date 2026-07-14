@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { formatUserDisplayName, type AuthUserSummary } from "@/lib/domain/auth";
+import { isContentAdmin } from "@/lib/domain/admin";
 import { signOut } from "@/app/login/actions";
+import { NavLink } from "@/components/ui/NavLink";
 
 interface NavBarProps {
   freeMode?: boolean;
   user?: AuthUserSummary | null;
+  showAdmin?: boolean;
 }
 
-export function NavBar({ freeMode = false, user = null }: NavBarProps) {
+export function NavBar({ freeMode = false, user = null, showAdmin = false }: NavBarProps) {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/learn", label: "Curso" },
@@ -20,6 +23,7 @@ export function NavBar({ freeMode = false, user = null }: NavBarProps) {
     { href: "/progress", label: "Progreso" },
     { href: "/analytics", label: "Actividad" },
     { href: "/onboarding", label: "Configuración" },
+    ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
   ];
 
   return (
@@ -37,12 +41,7 @@ export function NavBar({ freeMode = false, user = null }: NavBarProps) {
             <ul className="flex min-w-0 items-center gap-0.5 overflow-x-auto whitespace-nowrap text-sm font-medium text-emerald-700 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {links.map((link) => (
                 <li key={link.href} className="shrink-0">
-                  <Link
-                    href={link.href}
-                    className="inline-flex items-center rounded-lg px-2 py-1.5 hover:bg-emerald-50"
-                  >
-                    {link.label}
-                  </Link>
+                  <NavLink href={link.href}>{link.label}</NavLink>
                 </li>
               ))}
             </ul>

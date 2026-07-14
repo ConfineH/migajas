@@ -19,6 +19,13 @@ npm test         # tests unitarios
 npm run build    # build de producción
 ```
 
+### Variables de entorno (admin)
+
+```bash
+ADMIN_EMAILS=tu@email.com          # editores de contenido
+SUPABASE_SERVICE_ROLE_KEY=...      # escrituras en Supabase (solo servidor)
+```
+
 ## Estructura
 
 ```
@@ -50,7 +57,10 @@ openspec/        # artefactos SDD
 - [x] Contenido en Supabase (alimentos, lecciones, exámenes)
 - [x] Analytics con user_id en Supabase
 - [x] Dashboard de analytics (Sprint 6)
-- [ ] Admin UI para editar contenido
+- [x] Admin UI para editar contenido
+- [x] Design system v1 (headers, cards, nav activo)
+- [x] Backfill analytics al login
+- [x] Migración middleware → proxy
 
 ## Repositorio
 

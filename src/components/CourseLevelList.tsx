@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   getLessonProgressPercent,
   isGuidedLevelUnlocked,
@@ -70,12 +71,7 @@ export function CourseLevelList({ progress }: CourseLevelListProps) {
                 </span>
               )}
             </div>
-            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-gray-100">
-              <div
-                className="h-full rounded-full bg-emerald-500"
-                style={{ width: `${pct}%` }}
-              />
-            </div>
+            <ProgressBar percent={pct} className="mt-3" />
           </Link>
         );
       })}

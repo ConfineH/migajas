@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { StatCard } from "@/components/ui/StatCard";
+import { LevelProgressCard } from "@/components/ui/LevelProgressCard";
 import {
   aggregateAnalyticsDashboard,
   enrichDashboardWithProgress,
@@ -72,12 +75,10 @@ export default async function AnalyticsPage() {
     <>
       <AppNavBar />
       <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Mi actividad</h1>
-          <p className="mt-2 text-gray-600">
-            Historial de hitos del curso para {user.displayName ?? user.email}.
-          </p>
-        </header>
+        <PageHeader
+          title="Mi actividad"
+          description={`Historial de hitos del curso para ${user.displayName ?? user.email}.`}
+        />
 
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <StatCard label="Lecciones" value={dashboard.lessonsCompleted} />
@@ -94,31 +95,16 @@ export default async function AnalyticsPage() {
           {dashboard.levelFunnel.map((level) => {
             const meta = levels.find((l) => l.id === level.levelId);
             return (
-              <div
+              <LevelProgressCard
                 key={level.levelId}
-                className="rounded-xl border border-emerald-100 bg-white p-4"
-              >
-                <div className="flex justify-between text-sm">
-                  <span className="font-medium text-gray-900">
-                    {meta?.name ?? level.levelId}
-                  </span>
-                  <span className="text-emerald-600">
-                    {level.progressPercent}%
-                  </span>
-                </div>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100">
-                  <div
-                    className="h-full rounded-full bg-emerald-500"
-                    style={{ width: `${level.progressPercent}%` }}
-                  />
-                </div>
-                <p className="mt-2 text-xs text-gray-500">
-                  {level.lessonsCompleted}/{level.totalLessons} lecciones
-                  {level.examPassed && level.bestMasteryScore !== null
+                title={meta?.name ?? level.levelId}
+                percent={level.progressPercent}
+                subtitle={`${level.lessonsCompleted}/${level.totalLessons} lecciones${
+                  level.examPassed && level.bestMasteryScore !== null
                     ? ` · Examen ${level.bestMasteryScore}%`
-                    : ""}
-                </p>
-              </div>
+                    : ""
+                }`}
+              />
             );
           })}
         </section>
@@ -161,20 +147,5 @@ export default async function AnalyticsPage() {
         </div>
       </main>
     </>
-  );
-}
-
-function StatCard({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) {
-  return (
-    <div className="rounded-2xl border border-emerald-100 bg-white p-4 text-center">
-      <p className="text-2xl font-bold text-emerald-700">{value}</p>
-      <p className="mt-1 text-xs text-gray-500">{label}</p>
-    </div>
   );
 }
