@@ -6,14 +6,29 @@ import path from "node:path";
 
 function loadDotEnv(filePath) {
   if (!fs.existsSync(filePath)) return;
-  for (const line of fs.readFileSync(filePath, "utf8").split("\n")) {
-    if (!line || line.startsWith("#")) continue;
-    const index = line.indexOf("=");
+  for (const line of fs.readFileSync(filePath, "utf8").split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const index = trimmed.indexOf("=");
     if (index === -1) continue;
-    const key = line.slice(0, index).trim();
-    const value = line.slice(index + 1).trim();
+    const key = trimmed.slice(0, index).trim();
+    const value = trimmed.slice(index + 1).trim();
     if (key && value && !process.env[key]) process.env[key] = value;
   }
+}
+
+async function patchAuth(accessToken, payload) {
+  return fetch(
+    `https://api.supabase.com/v1/projects/${PROJECT_REF}/config/auth`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  );
 }
 
 async function main() {
@@ -25,32 +40,36 @@ async function main() {
     console.error(
       "Falta SUPABASE_ACCESS_TOKEN. Créalo en https://supabase.com/dashboard/account/tokens",
     );
-    console.error("Guárdalo en .env.supabase (no lo subas a git).");
+    console.error("Guárdalo en .env.local o .env.supabase (no lo subas a git).");
     process.exit(1);
   }
 
-  const payload = {
+  const basePayload = {
     site_url: SITE_URL,
     uri_allow_list: `${SITE_URL}/**,http://localhost:3000/**`,
     external_email_enabled: true,
     mailer_autoconfirm: false,
-    password_hibp_enabled: true,
     password_min_length: 10,
+    security_update_password_require_reauthentication: true,
   };
 
-  const response = await fetch(
-    `https://api.supabase.com/v1/projects/${PROJECT_REF}/config/auth`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    },
-  );
+  let payload = { ...basePayload, password_hibp_enabled: true };
+  let response = await patchAuth(accessToken, payload);
+  let body = await response.text();
 
-  const body = await response.text();
+  if (
+    !response.ok &&
+    response.status === 402 &&
+    body.includes("leaked password")
+  ) {
+    console.warn(
+      "HIBP no disponible en este plan (Pro+). Aplicando el resto de la política de contraseñas…",
+    );
+    payload = basePayload;
+    response = await patchAuth(accessToken, payload);
+    body = await response.text();
+  }
+
   if (!response.ok) {
     console.error("Error configurando Auth:", response.status, body);
     process.exit(1);
@@ -60,8 +79,17 @@ async function main() {
   console.log(`- Site URL: ${SITE_URL}`);
   console.log(`- Redirect URLs: ${payload.uri_allow_list}`);
   console.log("- Confirmación por email: activa");
-  console.log("- Protección contraseñas filtradas (HIBP): activa");
-  console.log("- Longitud mínima de contraseña: 10");
+  console.log(`- Longitud mínima de contraseña: ${payload.password_min_length}`);
+  console.log(
+    `- Reautenticación al cambiar contraseña: ${payload.security_update_password_require_reauthentication ? "activa" : "inactiva"}`,
+  );
+  if ("password_hibp_enabled" in payload && payload.password_hibp_enabled) {
+    console.log("- Protección contraseñas filtradas (HIBP): activa");
+  } else {
+    console.log(
+      "- Protección contraseñas filtradas (HIBP): no disponible en plan Free",
+    );
+  }
 }
 
 main().catch((error) => {
