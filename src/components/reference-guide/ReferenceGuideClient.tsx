@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FoodSearchGrid } from "@/components/FoodSearchGrid";
 import { SourcesPanel } from "@/components/content-sources/SourcesPanel";
+import { GlycemicGuidePanel } from "@/components/reference-guide/GlycemicGuidePanel";
 import type { ContentSource } from "@/lib/domain/content-sources";
 import type { EnrichedFoodItem } from "@/lib/domain/foods";
 import {
@@ -142,6 +143,8 @@ export function ReferenceGuideClient({
               .
             </p>
           ) : null}
+
+          <GlycemicGuidePanel />
         </section>
       ) : null}
 

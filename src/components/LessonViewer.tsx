@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/Button";
 import { LessonStepFootnotes } from "@/components/content-sources/LessonStepFootnotes";
+import { FoodNutritionExtras } from "@/components/FoodNutritionExtras";
 import type { Lesson } from "@/lib/domain/lessons";
 import { getFoodById } from "@/lib/data/foods";
 import { enrichFoodItem } from "@/lib/domain/foods";
@@ -111,6 +112,7 @@ function FoodExample({
           </dd>
         </div>
       </dl>
+      <FoodNutritionExtras food={enriched} compact />
     </div>
   );
 }

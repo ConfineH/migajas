@@ -16,6 +16,8 @@ export interface FoodItem {
   itemType: ItemType;
   notes: string;
   sourceId?: string;
+  /** Grams of fiber for the listed portion (informative only). */
+  fiberG?: number;
 }
 
 export interface EnrichedFoodItem extends FoodItem {

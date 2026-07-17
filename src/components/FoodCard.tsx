@@ -2,6 +2,7 @@ import type { EnrichedFoodItem } from "@/lib/domain/foods";
 import { formatRations } from "@/lib/domain/rations";
 import { inferFoodSourceId } from "@/lib/domain/content-sources";
 import { ContentSourceLink } from "@/components/content-sources/ContentSourceLink";
+import { FoodNutritionExtras } from "@/components/FoodNutritionExtras";
 
 interface FoodCardProps {
   food: EnrichedFoodItem;
@@ -52,6 +53,7 @@ export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
           </dd>
         </div>
       </dl>
+      <FoodNutritionExtras food={food} regionId={regionId} />
       {sourceId ? (
         <p className="mt-3 border-t border-gray-100 pt-3 text-xs">
           <ContentSourceLink sourceId={sourceId} />
