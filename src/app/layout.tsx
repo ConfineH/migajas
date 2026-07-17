@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
 import { CookieConsentGate } from "@/components/CookieConsentGate";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -17,7 +23,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Migajas — Aprende a contar carbohidratos",
   description:
-    "App educativa para aprender conteo de carbohidratos por niveles, con reglas adaptadas a tu país.",
+    "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
 };
 
 export default async function RootLayout({
@@ -30,10 +36,11 @@ export default async function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${playfair.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-stone-50 text-gray-900">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
         {children}
+        <SiteFooter />
         <CookieConsentGate />
       </body>
     </html>

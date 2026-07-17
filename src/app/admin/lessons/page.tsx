@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
 import { AdminShell } from "@/app/admin/AdminShell";
 import { LessonList } from "@/app/admin/lessons/LessonList";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { getAllLessons } from "@/lib/domain/lessons";
 import { getLevels } from "@/lib/domain/exercises";
 import { isContentAdmin } from "@/lib/domain/admin";
@@ -23,12 +24,16 @@ export default async function AdminLessonsPage() {
   return (
     <>
       <AppNavBar />
-      <AdminShell
-        title="Lecciones"
-        description="Metadatos y pasos del curso guiado."
-      >
-        <LessonList lessons={lessons} levelNames={levelNames} />
-      </AdminShell>
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <AdminShell
+            title="Lecciones"
+            description="Metadatos y pasos del curso guiado."
+          >
+            <LessonList lessons={lessons} levelNames={levelNames} />
+          </AdminShell>
+        </AppPageLayout>
+      </main>
     </>
   );
 }

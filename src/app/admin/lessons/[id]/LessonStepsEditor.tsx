@@ -9,8 +9,7 @@ interface LessonStepsEditorProps {
   lesson: Lesson;
 }
 
-const inputClass =
-  "mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm";
+const inputClass = "field-input mt-1 text-sm";
 
 const stepTypeLabels: Record<LessonStep["type"], string> = {
   explanation: "Explicación",
@@ -50,17 +49,17 @@ export function LessonStepsEditor({ lesson }: LessonStepsEditorProps) {
       {steps.map((step, index) => (
         <section
           key={step.id}
-          className="rounded-xl border border-gray-100 bg-gray-50 p-4"
+          className="callout-muted rounded-2xl p-4"
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-gray-900">
+            <p className="text-sm font-medium text-foreground">
               Paso {index + 1}: {stepTypeLabels[step.type]}
             </p>
-            <span className="font-mono text-xs text-gray-400">{step.id}</span>
+            <span className="font-mono text-xs text-muted">{step.id}</span>
           </div>
           <div className="mt-3 space-y-3">
             <label className="block text-sm">
-              <span className="text-gray-600">Título</span>
+              <span className="text-muted">Título</span>
               <input
                 className={inputClass}
                 value={step.title}
@@ -70,7 +69,7 @@ export function LessonStepsEditor({ lesson }: LessonStepsEditorProps) {
               />
             </label>
             <label className="block text-sm">
-              <span className="text-gray-600">Contenido</span>
+              <span className="text-muted">Contenido</span>
               <textarea
                 className={inputClass}
                 rows={4}
@@ -81,12 +80,12 @@ export function LessonStepsEditor({ lesson }: LessonStepsEditorProps) {
               />
             </label>
             {step.type === "practice" ? (
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted">
                 Ejercicio vinculado: {step.exerciseId ?? "—"}
               </p>
             ) : null}
             {step.type === "example" ? (
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted">
                 Alimento vinculado: {step.foodId ?? "—"}
               </p>
             ) : null}
@@ -98,7 +97,7 @@ export function LessonStepsEditor({ lesson }: LessonStepsEditorProps) {
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+          className="btn-terracotta rounded-2xl px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
         >
           {saving ? "Guardando…" : "Guardar pasos"}
         </button>

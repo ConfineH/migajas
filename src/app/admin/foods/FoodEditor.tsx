@@ -10,8 +10,7 @@ interface FoodEditorProps {
   food: FoodItem;
 }
 
-const inputClass =
-  "mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm";
+const inputClass = "field-input mt-1 text-sm";
 
 export function FoodEditor({ food }: FoodEditorProps) {
   const [name, setName] = useState(food.name);
@@ -52,30 +51,30 @@ export function FoodEditor({ food }: FoodEditorProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <p className="text-xs text-gray-400">{food.id}</p>
+      <p className="text-xs text-muted">{food.id}</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block text-sm">
-          <span className="text-gray-600">Nombre</span>
+          <span className="text-muted">Nombre</span>
           <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Categoría</span>
+          <span className="text-muted">Categoría</span>
           <input className={inputClass} value={category} onChange={(e) => setCategory(e.target.value)} />
         </label>
         <label className="block text-sm sm:col-span-2">
-          <span className="text-gray-600">Porción</span>
+          <span className="text-muted">Porción</span>
           <input className={inputClass} value={portionText} onChange={(e) => setPortionText(e.target.value)} />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Gramos</span>
+          <span className="text-muted">Gramos</span>
           <input type="number" className={inputClass} value={grams} onChange={(e) => setGrams(e.target.value)} />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Carbohidratos (g)</span>
+          <span className="text-muted">Carbohidratos (g)</span>
           <input type="number" className={inputClass} value={carbsG} onChange={(e) => setCarbsG(e.target.value)} />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Dificultad</span>
+          <span className="text-muted">Dificultad</span>
           <select className={inputClass} value={difficulty} onChange={(e) => setDifficulty(e.target.value as FoodItem["difficulty"])}>
             <option value="Baja">Baja</option>
             <option value="Media">Media</option>
@@ -83,7 +82,7 @@ export function FoodEditor({ food }: FoodEditorProps) {
           </select>
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Tipo</span>
+          <span className="text-muted">Tipo</span>
           <select className={inputClass} value={itemType} onChange={(e) => setItemType(e.target.value as FoodItem["itemType"])}>
             <option value="base">base</option>
             <option value="mixed">mixed</option>
@@ -91,11 +90,11 @@ export function FoodEditor({ food }: FoodEditorProps) {
           </select>
         </label>
         <label className="block text-sm sm:col-span-2">
-          <span className="text-gray-600">Notas</span>
+          <span className="text-muted">Notas</span>
           <textarea className={inputClass} rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} />
         </label>
       </div>
-      <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+      <p className="callout-sage px-3 py-2 text-sm text-foreground">
         Vista previa: <strong>{previewRations}</strong> ración
         {previewRations === 1 ? "" : "es"} (10 g CHO = 1 ración)
       </p>
@@ -103,7 +102,7 @@ export function FoodEditor({ food }: FoodEditorProps) {
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+          className="btn-terracotta rounded-2xl px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
         >
           {saving ? "Guardando…" : "Guardar"}
         </button>

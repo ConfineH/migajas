@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { Exercise } from "@/lib/domain/exercises";
 
 interface SingleExerciseProps {
@@ -73,24 +74,24 @@ export function SingleExercise({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-800">
+      <div className="callout-sage text-sm font-medium text-foreground">
         Práctica ligada a la lección
       </div>
 
-      <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">{exercise.prompt}</h2>
+      <div className="feature-card p-6">
+        <h2 className="font-display text-xl font-medium text-foreground">
+          {exercise.prompt}
+        </h2>
 
-        {!feedback && (
+        {!feedback ? (
           <ul className="mt-6 space-y-3">
             {exercise.options.map((option) => (
               <li key={option.id}>
                 <button
                   type="button"
                   onClick={() => setSelected(option.value)}
-                  className={`w-full rounded-xl border-2 px-4 py-4 text-left font-medium transition-colors ${
-                    selected === option.value
-                      ? "border-emerald-500 bg-emerald-50"
-                      : "border-gray-200 hover:border-emerald-200"
+                  className={`choice-button ${
+                    selected === option.value ? "choice-button-selected" : ""
                   }`}
                 >
                   {option.label}
@@ -98,31 +99,29 @@ export function SingleExercise({
               </li>
             ))}
           </ul>
-        )}
+        ) : null}
 
-        {feedback && (
+        {feedback ? (
           <div
-            className={`mt-6 rounded-xl p-5 ${
-              feedback.isCorrect
-                ? "bg-emerald-50 border border-emerald-200"
-                : "bg-red-50 border border-red-200"
-            }`}
+            className={
+              feedback.isCorrect ? "feedback-correct mt-6" : "feedback-wrong mt-6"
+            }
           >
             <p
-              className={`text-lg font-bold ${
-                feedback.isCorrect ? "text-emerald-700" : "text-red-700"
+              className={`text-lg font-medium ${
+                feedback.isCorrect ? "text-sage-strong" : "text-red-700"
               }`}
             >
-              {feedback.isCorrect ? "¡Correcto!" : "Incorrecto"}
+              {feedback.isCorrect ? "Correcto" : "Incorrecto"}
             </p>
-            <p className="mt-2 text-gray-700">{feedback.explanation}</p>
-            {!feedback.isCorrect && (
+            <p className="mt-2 text-muted">{feedback.explanation}</p>
+            {!feedback.isCorrect ? (
               <p className="mt-3 text-sm text-red-800">
                 Repasa la explicación e inténtalo de nuevo para continuar.
               </p>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
       </div>
 
       <div className="flex justify-center">

@@ -18,18 +18,18 @@ export function AdminShell({
   children,
 }: AdminShellProps) {
   return (
-    <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
+  <>
       <PageHeader title={title} description={description} />
       <AdminStatusBanner />
       {backHref ? (
         <Link
           href={backHref}
-          className="mb-6 inline-block text-sm font-semibold text-emerald-700"
+          className="mb-6 inline-block text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
         >
           {backLabel}
         </Link>
       ) : null}
       {children}
-    </main>
+    </>
   );
 }

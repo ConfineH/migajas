@@ -14,7 +14,7 @@ export function LessonStepFootnotes({ step }: LessonStepFootnotesProps) {
   if (sourceIds.length === 0) return null;
 
   return (
-    <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-gray-100 pt-3 text-xs text-gray-500">
+    <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border pt-3 text-xs text-muted">
       <span>Fuentes:</span>
       {sourceIds.map((sourceId, index) => (
         <span key={sourceId} className="inline-flex items-center gap-2">

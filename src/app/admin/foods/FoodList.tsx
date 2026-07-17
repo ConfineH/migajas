@@ -50,10 +50,10 @@ export function FoodList({ foods }: FoodListProps) {
             key={item}
             type="button"
             onClick={() => setCategory(item)}
-            className={`rounded-full px-3 py-1 text-xs font-medium ${
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               category === item
-                ? "bg-emerald-600 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-sage-strong text-white"
+                : "bg-sage-light text-foreground hover:bg-sage/30"
             }`}
           >
             {item}

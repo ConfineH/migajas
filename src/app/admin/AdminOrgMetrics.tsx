@@ -5,7 +5,7 @@ import { createServiceClient, isServiceRoleConfigured } from "@/lib/supabase/ser
 export async function AdminOrgMetrics() {
   if (!isServiceRoleConfigured()) {
     return (
-      <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+      <p className="rounded-2xl bg-terracotta-soft/30 px-4 py-3 text-sm text-foreground">
         Configura SUPABASE_SERVICE_ROLE_KEY para ver métricas agregadas.
       </p>
     );
@@ -17,7 +17,7 @@ export async function AdminOrgMetrics() {
 
   if (!stats) {
     return (
-      <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+      <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
         No se pudieron cargar las métricas agregadas.
       </p>
     );
@@ -26,8 +26,10 @@ export async function AdminOrgMetrics() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-lg font-semibold text-gray-900">Métricas de organización</h2>
-        <p className="text-sm text-gray-600">
+        <h2 className="font-display text-lg font-medium text-foreground">
+          Métricas de organización
+        </h2>
+        <p className="text-sm text-muted">
           Datos agregados y anónimos. Sin emails, perfiles individuales ni diarios de ingesta.
         </p>
       </div>

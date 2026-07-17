@@ -12,10 +12,11 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "bg-emerald-600 text-white hover:bg-emerald-700 focus-visible:ring-emerald-500",
+    "btn-terracotta hover:brightness-[1.02] active:scale-[0.98] focus-visible:ring-terracotta",
   secondary:
-    "border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 focus-visible:ring-emerald-500",
-  ghost: "text-emerald-700 hover:bg-emerald-50 focus-visible:ring-emerald-500",
+    "border border-sage-strong/30 bg-surface text-foreground hover:border-sage-strong/50 hover:bg-sage-light/50 active:scale-[0.98] focus-visible:ring-sage-strong",
+  ghost:
+    "text-sage-strong hover:bg-sage-light/60 active:scale-[0.98] focus-visible:ring-sage-strong",
 };
 
 export function Button({
@@ -28,7 +29,7 @@ export function Button({
   disabled = false,
 }: ButtonProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center rounded-xl px-6 py-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+    "inline-flex min-h-12 items-center justify-center rounded-full px-8 py-3.5 text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100";
 
   const classes = `${base} ${variants[variant]} ${className}`;
 

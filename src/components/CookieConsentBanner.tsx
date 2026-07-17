@@ -22,17 +22,20 @@ export function CookieConsentBanner() {
     <div
       role="dialog"
       aria-labelledby="cookie-consent-title"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white p-4 shadow-lg sm:p-6"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface p-4 shadow-soft sm:p-6"
     >
       <div className="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p id="cookie-consent-title" className="font-semibold text-gray-900">
+          <p id="cookie-consent-title" className="font-medium text-foreground">
             Cookies y privacidad
           </p>
-          <p className="mt-1 text-sm text-gray-600">
+          <p className="mt-1 text-sm text-muted">
             Usamos cookies técnicas para sesión, progreso y preferencias.
             Consulta nuestra{" "}
-            <Link href="/privacidad" className="font-medium text-emerald-700 underline">
+            <Link
+              href="/privacidad"
+              className="font-medium text-sage-strong underline-offset-2 hover:underline"
+            >
               política de privacidad
             </Link>
             .

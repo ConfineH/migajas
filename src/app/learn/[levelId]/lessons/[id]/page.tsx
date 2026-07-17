@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
 import { LessonViewer } from "@/components/LessonViewer";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LearnSectionHeader } from "@/components/layout/LearnSectionHeader";
 import { getRegionalContentContext } from "@/lib/content-for-region";
 import { localizeLesson } from "@/lib/domain/content-localization";
 import { getLessonById, getPracticeSteps } from "@/lib/domain/lessons";
@@ -27,19 +29,21 @@ export default async function LessonPage({ params }: Props) {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-6">
-          <p className="text-sm text-emerald-600">
-            {level.name} · Lección {localizedLesson.orderIndex}
-          </p>
-          <h1 className="text-2xl font-bold text-gray-900">{localizedLesson.title}</h1>
-          <p className="mt-2 text-gray-600">{localizedLesson.summary}</p>
-        </header>
-        <LessonViewer
-          lesson={localizedLesson}
-          nextHref={nextHref}
-          exchangeUnitG={region.exchangeUnitG}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <LearnSectionHeader
+            backHref={`/learn/${levelId}`}
+            backLabel="Volver al nivel"
+            eyebrow={`${level.name} · Lección ${localizedLesson.orderIndex}`}
+            title={localizedLesson.title}
+            description={localizedLesson.summary}
+          />
+          <LessonViewer
+            lesson={localizedLesson}
+            nextHref={nextHref}
+            exchangeUnitG={region.exchangeUnitG}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

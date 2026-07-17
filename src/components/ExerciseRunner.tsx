@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Button } from "@/components/Button";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   exerciseTypeLabels,
   type Exercise,
@@ -116,41 +117,33 @@ export function ExerciseRunner({
 
     return (
       <div className="space-y-6 text-center">
-        <div
-          className={`rounded-2xl border p-8 ${
-            passed
-              ? "bg-emerald-50 border-emerald-200"
-              : "bg-amber-50 border-amber-200"
-          }`}
-        >
-          <p className="text-sm font-medium uppercase tracking-wide text-gray-600">
+        <div className={passed ? "callout-sage p-8" : "rounded-2xl bg-terracotta-soft/30 p-8"}>
+          <p className="text-sm font-medium text-muted">
             {retryMode ? "Repaso completado" : `${levelName} completado`}
           </p>
           <p
-            className={`mt-4 text-5xl font-bold ${
-              passed ? "text-emerald-700" : "text-amber-700"
+            className={`mt-4 font-display text-5xl font-medium tabular-nums ${
+              passed ? "text-sage-strong" : "text-terracotta-dark"
             }`}
           >
             {score.correct}/{score.total}
           </p>
-          <p className="mt-2 text-lg text-gray-600">{pct}% de aciertos</p>
-          <p className="mt-4 text-sm font-medium text-gray-700">
+          <p className="mt-2 text-lg text-muted">{pct}% de aciertos</p>
+          <p className="mt-4 text-sm font-medium text-foreground">
             {passed
-              ? "¡Nivel aprobado! Puedes continuar al siguiente."
+              ? "Nivel aprobado. Puedes continuar al siguiente."
               : `Necesitas al menos ${PASS_THRESHOLD}% para desbloquear el siguiente nivel.`}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          {hasNext && (
-            <Button href={`/levels/nivel-${nextLevelNum}`}>
-              Siguiente nivel
-            </Button>
-          )}
-          {!passed && (
+          {hasNext ? (
+            <Button href={`/levels/nivel-${nextLevelNum}`}>Siguiente nivel</Button>
+          ) : null}
+          {!passed ? (
             <Button href={`/levels/${levelId}?retry=1`} variant="secondary">
               Repasar errores
             </Button>
-          )}
+          ) : null}
           <Button href="/progress" variant={hasNext || !passed ? "ghost" : "primary"}>
             Ver progreso
           </Button>
@@ -161,33 +154,28 @@ export function ExerciseRunner({
 
   return (
     <div className="space-y-6">
-      {retryMode && (
-        <p className="rounded-xl bg-amber-50 px-4 py-2 text-sm font-medium text-amber-800">
+      {retryMode ? (
+        <p className="rounded-xl bg-terracotta-soft/25 px-4 py-2 text-sm font-medium text-terracotta-dark">
           Modo repaso — solo ejercicios fallados
         </p>
-      )}
+      ) : null}
 
       <div>
-        <div className="mb-2 flex justify-between text-sm text-gray-500">
+        <div className="mb-1.5 flex justify-between text-sm text-muted">
           <span>
             Ejercicio {index + 1} de {exercises.length}
           </span>
           <span>{exerciseTypeLabels[exercise.type]}</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-gray-100">
-          <div
-            className="h-full rounded-full bg-emerald-500 transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        <ProgressBar percent={progress} />
       </div>
 
-      <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900 leading-snug">
+      <div className="feature-card p-6">
+        <h2 className="font-display text-xl font-medium leading-snug text-foreground">
           {exercise.prompt}
         </h2>
 
-        {!feedback && (
+        {!feedback ? (
           <ul className="mt-6 space-y-3" role="listbox" aria-label="Opciones">
             {exercise.options.map((option) => (
               <li key={option.id}>
@@ -196,10 +184,8 @@ export function ExerciseRunner({
                   role="option"
                   aria-selected={selected === option.value}
                   onClick={() => setSelected(option.value)}
-                  className={`w-full rounded-xl border-2 px-4 py-4 text-left text-base font-medium transition-colors ${
-                    selected === option.value
-                      ? "border-emerald-500 bg-emerald-50 text-emerald-900"
-                      : "border-gray-200 hover:border-emerald-200 text-gray-800"
+                  className={`choice-button ${
+                    selected === option.value ? "choice-button-selected" : ""
                   }`}
                 >
                   {option.label}
@@ -207,27 +193,25 @@ export function ExerciseRunner({
               </li>
             ))}
           </ul>
-        )}
+        ) : null}
 
-        {feedback && (
+        {feedback ? (
           <div
-            className={`mt-6 rounded-xl p-5 ${
-              feedback.isCorrect
-                ? "bg-emerald-50 border border-emerald-200"
-                : "bg-red-50 border border-red-200"
-            }`}
+            className={
+              feedback.isCorrect ? "feedback-correct mt-6" : "feedback-wrong mt-6"
+            }
             role="status"
           >
             <p
-              className={`text-lg font-bold ${
-                feedback.isCorrect ? "text-emerald-700" : "text-red-700"
+              className={`text-lg font-medium ${
+                feedback.isCorrect ? "text-sage-strong" : "text-red-700"
               }`}
             >
-              {feedback.isCorrect ? "¡Correcto!" : "Incorrecto"}
+              {feedback.isCorrect ? "Correcto" : "Incorrecto"}
             </p>
-            <p className="mt-2 text-gray-700">{feedback.explanation}</p>
+            <p className="mt-2 text-muted">{feedback.explanation}</p>
           </div>
-        )}
+        ) : null}
       </div>
 
       <div className="flex justify-center">

@@ -11,6 +11,8 @@ interface ExamEditorProps {
   levelName: string;
 }
 
+const inputClass = "field-input mt-1 text-sm";
+
 export function ExamEditor({ exam, levelName }: ExamEditorProps) {
   const [title, setTitle] = useState(exam.title);
   const [description, setDescription] = useState(exam.description);
@@ -48,42 +50,42 @@ export function ExamEditor({ exam, levelName }: ExamEditorProps) {
     >
       <form onSubmit={handleSubmit} className="space-y-3">
         <label className="block text-sm">
-          <span className="text-gray-600">Título del examen</span>
+          <span className="text-muted">Título del examen</span>
           <input
-            className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+            className={inputClass}
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Descripción</span>
+          <span className="text-muted">Descripción</span>
           <textarea
-            className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+            className={inputClass}
             rows={3}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Preguntas por examen</span>
+          <span className="text-muted">Preguntas por examen</span>
           <input
             type="number"
             min={1}
-            className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+            className={inputClass}
             value={questionsPerExam}
             onChange={(event) => setQuestionsPerExam(event.target.value)}
           />
         </label>
         <label className="block text-sm">
-          <span className="text-gray-600">Banco de ejercicios (pool)</span>
+          <span className="text-muted">Banco de ejercicios (pool)</span>
           <textarea
-            className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-xs"
+            className={`${inputClass} font-mono text-xs`}
             rows={4}
             value={poolRaw}
             onChange={(event) => setPoolRaw(event.target.value)}
             placeholder="ej-n1-01, ej-n1-02"
           />
-          <span className="mt-1 block text-xs text-gray-500">
+          <span className="mt-1 block text-xs text-muted">
             IDs separados por comas. Cada intento sortea N preguntas distintas.
           </span>
         </label>
@@ -91,7 +93,7 @@ export function ExamEditor({ exam, levelName }: ExamEditorProps) {
           <button
             type="submit"
             disabled={saving}
-            className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+            className="btn-terracotta rounded-2xl px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
           >
             {saving ? "Guardando…" : "Guardar"}
           </button>

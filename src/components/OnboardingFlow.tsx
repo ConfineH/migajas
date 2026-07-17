@@ -178,8 +178,15 @@ export function OnboardingFlow({
 
   return (
     <div className="mx-auto max-w-lg space-y-8">
+      {!settingsMode ? (
+        <OnboardingStepIndicator
+          step={step}
+          steps={["country", "mode", "rations"]}
+        />
+      ) : null}
+
       {settingsMode ? (
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center text-sm text-muted">
           Cambia la región de referencia, tu meta diaria y el modo clínico.
         </p>
       ) : null}
@@ -192,12 +199,14 @@ export function OnboardingFlow({
 
       {step === "country" && (
         <section className="space-y-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            {settingsMode ? "Tu región" : "¿Dónde vas a practicar?"}
-          </h1>
-          <p className="text-gray-600">
-            Cada región usa su propia regla de raciones y alimentos habituales.
-          </p>
+          <div className="space-y-2">
+            <h1 className="font-display text-3xl font-medium text-foreground">
+              {settingsMode ? "Tu región" : "¿Dónde vas a practicar?"}
+            </h1>
+            <p className="text-pretty text-muted">
+              Cada región usa su propia regla de raciones y alimentos habituales.
+            </p>
+          </div>
           <div className="space-y-3">
             {REGIONS.map((item) => (
               <RegionOption
@@ -220,35 +229,36 @@ export function OnboardingFlow({
 
       {step === "mode" && !settingsMode && (
         <section className="space-y-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            ¿Cómo quieres empezar?
-          </h1>
+          <div className="space-y-2">
+            <h1 className="font-display text-3xl font-medium text-foreground">
+              ¿Cómo quieres empezar?
+            </h1>
+            <p className="text-pretty text-muted">
+              Puedes probar sin cuenta o registrarte para guardar el progreso.
+            </p>
+          </div>
           <div className="space-y-3">
             <button
               type="button"
               onClick={() => setGuestMode(true)}
-              className={`w-full rounded-2xl border-2 p-5 text-left transition-colors ${
-                guestMode
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-gray-200 hover:border-emerald-200"
+              className={`surface-card-interactive w-full p-5 text-left ${
+                guestMode ? "surface-card-selected" : ""
               }`}
             >
-              <p className="font-semibold text-gray-900">Modo invitado</p>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="font-semibold text-foreground">Modo invitado</p>
+              <p className="mt-1 text-sm text-muted">
                 Empieza al momento, sin registrarte.
               </p>
             </button>
             <button
               type="button"
               onClick={() => setGuestMode(false)}
-              className={`w-full rounded-2xl border-2 p-5 text-left transition-colors ${
-                !guestMode
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-gray-200 hover:border-emerald-200"
+              className={`surface-card-interactive w-full p-5 text-left ${
+                !guestMode ? "surface-card-selected" : ""
               }`}
             >
-              <p className="font-semibold text-gray-900">Crear cuenta</p>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="font-semibold text-foreground">Crear cuenta</p>
+              <p className="mt-1 text-sm text-muted">
                 Guarda tu progreso entre dispositivos.
               </p>
             </button>
@@ -272,29 +282,33 @@ export function OnboardingFlow({
 
       {step === "rations" && (
         <section className="space-y-6">
-          <h1 className="text-center text-2xl font-bold text-gray-900">
+          <h1 className="text-center font-display text-3xl font-medium text-foreground">
             ¿Qué es una ración?
           </h1>
-          <div className="space-y-4 rounded-2xl border border-amber-200 bg-amber-50 p-6">
-            <p className="text-gray-800">
+          <div className="space-y-4 rounded-3xl bg-sage-light p-6 shadow-soft">
+            <p className="text-pretty text-foreground">
               En <strong>{region.name}</strong>, una <strong>ración</strong>{" "}
               equivale a{" "}
               <strong>{region.exchangeUnitG} gramos de carbohidratos</strong>.
             </p>
-            <div className="rounded-xl bg-white p-4 text-center">
-              <p className="text-sm text-gray-500">Ejemplo</p>
-              <p className="mt-1 text-lg font-semibold">{example.food}</p>
-              <p className="text-gray-600">{example.detail}</p>
-              <p className="mt-2 text-2xl font-bold text-emerald-700">
+            <div className="rounded-2xl bg-surface p-5 text-center shadow-soft">
+              <p className="text-xs font-medium text-muted">
+                Ejemplo
+              </p>
+              <p className="mt-2 text-lg font-semibold text-foreground">
+                {example.food}
+              </p>
+              <p className="text-muted">{example.detail}</p>
+              <p className="mt-3 font-display text-3xl font-medium tabular-nums text-sage-strong">
                 = 1,0 ración
               </p>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-pretty text-sm leading-relaxed text-muted">
               {formatExchangeRule(region)}. Siempre verás los gramos del
               alimento, los carbohidratos y las raciones calculadas.
             </p>
             {region.id === "do" ? (
-              <p className="text-sm text-emerald-800">
+              <p className="text-pretty text-sm text-sage-strong">
                 El curso usa palabras sencillas y comida dominicana de verdad, con
                 la regla de 15 gramos de carbohidratos por ración.
               </p>
@@ -320,12 +334,12 @@ export function OnboardingFlow({
 
       {step === "clinical" && settingsMode && (
         <section className="space-y-6">
-          <h1 className="text-center text-2xl font-bold text-gray-900">
+          <h1 className="text-center font-display text-3xl font-medium text-foreground">
             Modo clínico
           </h1>
-          <div className="space-y-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+          <div className="space-y-4 rounded-3xl bg-sage-light/70 p-6 shadow-soft">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-gray-800">
+              <span className="text-sm font-medium text-foreground">
                 Meta diaria de carbohidratos (g)
               </span>
               <input
@@ -335,9 +349,9 @@ export function OnboardingFlow({
                 value={dailyCarbGoal}
                 onChange={(event) => setDailyCarbGoal(event.target.value)}
                 placeholder="Ej. 160"
-                className="w-full rounded-xl border border-gray-200 px-4 py-3"
+                className="field-input"
               />
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-muted">
                 Opcional. Se usará en el diario y en los reportes para comparar
                 tu ingesta diaria.
               </span>
@@ -345,7 +359,7 @@ export function OnboardingFlow({
 
             {isAuthenticated ? (
               <div className="space-y-3">
-                <label className="flex items-start gap-3 rounded-xl bg-white p-4">
+                <label className="flex items-start gap-3 rounded-2xl bg-surface p-4 shadow-soft">
                   <input
                     type="checkbox"
                     checked={clinicalModeEnabled}
@@ -359,8 +373,8 @@ export function OnboardingFlow({
                     }}
                     className="mt-1"
                   />
-                  <span className="text-sm text-gray-700">
-                    <span className="font-medium text-gray-900">
+                  <span className="text-sm text-muted">
+                    <span className="font-medium text-foreground">
                       Activar modo clínico
                     </span>
                     <br />
@@ -371,7 +385,7 @@ export function OnboardingFlow({
                 </label>
 
                 {clinicalModeEnabled && canEnableClinicalMode ? (
-                  <label className="flex items-start gap-3 rounded-xl border border-sky-200 bg-sky-50 p-4">
+                  <label className="flex items-start gap-3 rounded-2xl border border-sage/30 bg-sage-light/50 p-4">
                     <input
                       type="checkbox"
                       checked={healthDataConsent}
@@ -380,12 +394,12 @@ export function OnboardingFlow({
                       }
                       className="mt-1"
                     />
-                    <span className="text-sm text-gray-700">
+                    <span className="text-sm text-muted">
                       Consiento el tratamiento de mis datos de alimentación
                       según la{" "}
                       <Link
                         href="/privacidad"
-                        className="font-medium text-emerald-700 underline"
+                        className="font-medium text-sage-strong underline"
                       >
                         política de privacidad
                       </Link>
@@ -396,7 +410,7 @@ export function OnboardingFlow({
                 ) : null}
               </div>
             ) : (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted">
                 Inicia sesión para activar el modo clínico y sincronizar tu meta
                 entre dispositivos.
               </p>
@@ -404,11 +418,11 @@ export function OnboardingFlow({
           </div>
 
           {isAuthenticated ? (
-            <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-6">
-              <h2 className="text-lg font-semibold text-gray-900">
+            <div className="feature-card space-y-4 p-6">
+              <h2 className="font-display text-lg font-medium text-foreground">
                 Privacidad y datos
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted">
                 Puedes exportar o eliminar todos tus datos personales.
               </p>
               {accountActionError ? (
@@ -460,15 +474,66 @@ function RegionOption({
     <button
       type="button"
       onClick={onSelect}
-      className={`w-full rounded-2xl border-2 p-5 text-left transition-colors ${
-        selected
-          ? "border-emerald-500 bg-emerald-50"
-          : "border-gray-200 hover:border-emerald-200"
+      className={`surface-card-interactive w-full p-5 text-left ${
+        selected ? "surface-card-selected" : ""
       }`}
     >
-      <p className="text-2xl">{region.flag}</p>
-      <p className="mt-2 text-lg font-semibold text-emerald-800">{region.name}</p>
-      <p className="mt-1 text-sm text-emerald-600">{formatExchangeRule(region)}</p>
+      <p className="text-3xl">{region.flag}</p>
+      <p className="mt-2 text-lg font-semibold text-sage-strong">{region.name}</p>
+      <p className="mt-1 text-sm text-muted">{formatExchangeRule(region)}</p>
     </button>
+  );
+}
+
+const STEP_LABELS: Record<Step, string> = {
+  country: "Región",
+  mode: "Cuenta",
+  rations: "Raciones",
+  clinical: "Clínico",
+};
+
+function OnboardingStepIndicator({
+  step,
+  steps,
+}: {
+  step: Step;
+  steps: Step[];
+}) {
+  const currentIndex = steps.indexOf(step);
+
+  return (
+    <div
+      className="flex items-center justify-center gap-2"
+      aria-label={`Paso ${currentIndex + 1} de ${steps.length}: ${STEP_LABELS[step]}`}
+    >
+      {steps.map((item, index) => {
+        const done = index < currentIndex;
+        const active = item === step;
+
+        return (
+          <div key={item} className="flex items-center gap-2">
+            <span
+              className={`flex h-8 min-w-8 items-center justify-center rounded-full px-2 text-xs font-semibold transition-colors duration-200 ${
+                active
+                  ? "bg-sage-strong text-white shadow-soft"
+                  : done
+                    ? "bg-sage-light text-sage-strong"
+                    : "bg-sage-muted/40 text-muted"
+              }`}
+            >
+              {index + 1}
+            </span>
+            {index < steps.length - 1 ? (
+              <span
+                aria-hidden
+                className={`h-px w-6 sm:w-10 ${
+                  done ? "bg-sage-strong/30" : "bg-border"
+                }`}
+              />
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
   );
 }

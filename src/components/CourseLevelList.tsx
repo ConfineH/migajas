@@ -31,18 +31,17 @@ export function CourseLevelList({ progress, region }: CourseLevelListProps) {
 
         if (!unlocked) {
           return (
-            <div
-              key={level.id}
-              className="rounded-2xl border border-gray-200 bg-gray-50 p-6 opacity-75"
-            >
+            <div key={level.id} className="callout-muted">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="font-bold text-gray-500">{level.name}</h2>
-                  <p className="mt-1 text-sm text-gray-400">{level.description}</p>
+                  <h2 className="font-display text-lg font-medium text-muted">
+                    {level.name}
+                  </h2>
+                  <p className="mt-1 text-sm text-muted/80">{level.description}</p>
                 </div>
                 <StatusBadge variant="locked">Bloqueado</StatusBadge>
               </div>
-              <p className="mt-3 text-sm text-gray-400">
+              <p className="mt-3 text-sm text-muted/80">
                 Aprueba el examen del nivel anterior para continuar.
               </p>
             </div>
@@ -53,25 +52,31 @@ export function CourseLevelList({ progress, region }: CourseLevelListProps) {
           <Link
             key={level.id}
             href={`/learn/${level.id}`}
-            className="block rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm transition-shadow hover:border-emerald-200 hover:shadow-md"
+            className="card-interactive"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="font-bold text-gray-900">{level.name}</h2>
-                <p className="mt-1 text-sm text-gray-600">{level.description}</p>
-                <p className="mt-2 text-xs text-gray-500">
+                <h2 className="font-display text-lg font-medium text-foreground">
+                  {level.name}
+                </h2>
+                <p className="mt-1 text-pretty text-sm text-muted">
+                  {level.description}
+                </p>
+                <p className="mt-2 text-xs text-muted/80">
                   {lessonCount} lecciones · {pct}% completado
                 </p>
               </div>
               {completion?.passed ? (
-                <StatusBadge variant="success">✓ {completion.masteryScore}%</StatusBadge>
+                <StatusBadge variant="success">
+                  ✓ {completion.masteryScore}%
+                </StatusBadge>
               ) : (
-                <span className="shrink-0 text-sm font-semibold text-emerald-600">
+                <span className="shrink-0 text-sm font-medium text-sage-strong">
                   Entrar →
                 </span>
               )}
             </div>
-            <ProgressBar percent={pct} className="mt-3" />
+            <ProgressBar percent={pct} className="mt-4" />
           </Link>
         );
       })}

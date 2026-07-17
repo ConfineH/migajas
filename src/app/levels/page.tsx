@@ -1,5 +1,7 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { LevelsList } from "@/components/LevelsList";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
@@ -15,15 +17,14 @@ export default async function LevelsPage() {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Practicar</h1>
-          <p className="mt-2 text-gray-600">
-            Avanza por niveles. Necesitas al menos 60% de aciertos para
-            desbloquear el siguiente.
-          </p>
-        </header>
-        <LevelsList progress={progress} attempts={attempts} />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <PageHeader
+            title="Practicar"
+            description="Avanza por niveles. Necesitas al menos 60% de aciertos para desbloquear el siguiente."
+          />
+          <LevelsList progress={progress} attempts={attempts} />
+        </AppPageLayout>
       </main>
     </>
   );

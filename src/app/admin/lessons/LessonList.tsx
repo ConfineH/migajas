@@ -53,7 +53,7 @@ export function LessonList({ lessons, levelNames }: LessonListProps) {
       <div className="space-y-8">
         {grouped.map(([levelId, levelLessons]) => (
           <section key={levelId} className="space-y-4">
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="font-display text-lg font-medium text-foreground">
               {levelNames[levelId] ?? levelId}
             </h2>
             {levelLessons.map((lesson) => (
@@ -66,7 +66,7 @@ export function LessonList({ lessons, levelNames }: LessonListProps) {
                 <LessonEditor lesson={lesson} />
                 <Link
                   href={`/admin/lessons/${lesson.id}`}
-                  className="mt-4 inline-block text-sm font-semibold text-emerald-700"
+                  className="mt-4 inline-block text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
                 >
                   Editar pasos →
                 </Link>

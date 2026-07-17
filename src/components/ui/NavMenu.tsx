@@ -56,8 +56,10 @@ export function NavMenu({ label, items }: NavMenuProps) {
         aria-controls={menuId}
         aria-haspopup="menu"
         onClick={() => setOpen((value) => !value)}
-        className={`inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium hover:bg-emerald-50 ${
-          active ? "bg-emerald-50 font-semibold text-emerald-800" : "text-emerald-700"
+        className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+          active
+            ? "font-semibold text-foreground"
+            : "text-foreground/75 hover:text-foreground"
         }`}
       >
         {label}
@@ -79,7 +81,7 @@ export function NavMenu({ label, items }: NavMenuProps) {
         <ul
           id={menuId}
           role="menu"
-          className="absolute right-0 z-20 mt-1 min-w-40 rounded-xl border border-emerald-100 bg-white py-1 shadow-lg"
+          className="absolute right-0 z-20 mt-2 min-w-44 rounded-2xl border border-border bg-surface py-1.5 shadow-soft"
         >
           {items.map((item) => {
             const itemActive =
@@ -93,10 +95,10 @@ export function NavMenu({ label, items }: NavMenuProps) {
                   href={item.href}
                   role="menuitem"
                   onClick={() => setOpen(false)}
-                  className={`block px-3 py-2 text-sm hover:bg-emerald-50 ${
+                  className={`block px-4 py-2 text-sm transition-colors hover:bg-sage-light/50 ${
                     itemActive
-                      ? "font-semibold text-emerald-800"
-                      : "text-gray-700"
+                      ? "font-semibold text-foreground"
+                      : "text-muted"
                   }`}
                 >
                   {item.label}

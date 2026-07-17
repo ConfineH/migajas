@@ -39,53 +39,60 @@ export function NavBar({
   ];
 
   return (
-    <header className="sticky top-0 z-10 border-b border-emerald-100 bg-white/95 backdrop-blur">
-      <nav className="mx-auto max-w-3xl px-4 py-3">
-        <div className="flex items-center justify-between gap-3">
-          <Link
-            href="/"
-            className="shrink-0 text-lg font-bold tracking-tight text-emerald-800"
-          >
-            Migajas
-          </Link>
+    <header className="relative z-10 bg-background/80 backdrop-blur-sm">
+      <nav
+        className="mx-auto grid max-w-5xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-5 sm:px-8"
+        aria-label="Principal"
+      >
+        <Link
+          href="/"
+          className="font-display text-2xl font-semibold text-foreground"
+        >
+          Migajas
+        </Link>
 
-          <div className="flex min-w-0 items-center justify-end gap-1 sm:gap-2">
-            <ul className="flex min-w-0 items-center gap-0.5 text-sm font-medium text-emerald-700">
-              {primaryLinks.map((link) => (
-                <li key={link.href} className="shrink-0">
-                  <NavLink href={link.href}>{link.label}</NavLink>
-                </li>
-              ))}
-              <li className="shrink-0">
-                <NavMenu label="Más" items={moreLinks} />
-              </li>
-            </ul>
+        <ul className="hidden items-center justify-center gap-1 text-sm font-medium text-foreground/85 md:flex">
+          {primaryLinks.map((link) => (
+            <li key={link.href}>
+              <NavLink href={link.href}>{link.label}</NavLink>
+            </li>
+          ))}
+          <li>
+            <NavMenu label="Más" items={moreLinks} />
+          </li>
+        </ul>
 
-            <div className="shrink-0 border-l border-emerald-100 pl-2 sm:pl-3">
-              {user ? (
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="hidden max-w-24 truncate text-gray-600 sm:inline md:max-w-none">
-                    {formatUserDisplayName(user)}
-                  </span>
-                  <form action={signOut}>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center rounded-lg px-2 py-1.5 font-medium text-emerald-700 hover:bg-emerald-50"
-                    >
-                      Salir
-                    </button>
-                  </form>
-                </div>
-              ) : (
-                <Link
-                  href="/login"
-                  className="inline-flex items-center rounded-lg px-2 py-1.5 text-sm font-medium text-emerald-700 hover:bg-emerald-50"
+        <div className="flex items-center justify-end gap-3 text-sm">
+          <ul className="flex items-center gap-0.5 md:hidden">
+            <li>
+              <NavLink href="/learn">Curso</NavLink>
+            </li>
+            <li>
+              <NavMenu label="Más" items={[...primaryLinks.slice(1), ...moreLinks]} />
+            </li>
+          </ul>
+          {user ? (
+            <>
+              <span className="hidden truncate text-muted sm:inline max-w-[8rem] lg:max-w-none">
+                {formatUserDisplayName(user)}
+              </span>
+              <form action={signOut}>
+                <button
+                  type="submit"
+                  className="font-medium text-foreground/80 transition-colors hover:text-foreground"
                 >
-                  Entrar
-                </Link>
-              )}
-            </div>
-          </div>
+                  Salir
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="font-medium text-foreground/80 transition-colors hover:text-foreground"
+            >
+              Entrar
+            </Link>
+          )}
         </div>
       </nav>
     </header>

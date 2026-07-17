@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { FlashcardDeck } from "@/components/FlashcardDeck";
 import { Button } from "@/components/Button";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LearnSectionHeader } from "@/components/layout/LearnSectionHeader";
 import { getRegionalContentContext } from "@/lib/content-for-region";
 import { getFoodById } from "@/lib/data/foods";
 import { enrichFoodItem } from "@/lib/domain/foods";
@@ -40,15 +41,21 @@ export default async function LevelFlashcardsPage({ params }: Props) {
     return (
       <>
         <AppNavBar />
-        <main className="mx-auto max-w-3xl flex-1 px-4 py-12 text-center">
-          <p className="text-4xl">📚</p>
-          <h1 className="mt-4 text-xl font-bold">Completa el curso primero</h1>
-          <p className="mt-2 text-gray-600">
-            Termina las lecciones y prácticas antes de repasar las fichas.
-          </p>
-          <div className="mt-6">
-            <Button href={`/learn/${levelId}`}>Volver al nivel</Button>
-          </div>
+        <main className="flex flex-1 flex-col">
+          <AppPageLayout className="py-12 text-center">
+            <p className="text-4xl" aria-hidden>
+              📚
+            </p>
+            <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+              Completa el curso primero
+            </h1>
+            <p className="mt-2 text-muted">
+              Termina las lecciones y prácticas antes de repasar las fichas.
+            </p>
+            <div className="mt-6">
+              <Button href={`/learn/${levelId}`}>Volver al nivel</Button>
+            </div>
+          </AppPageLayout>
         </main>
       </>
     );
@@ -79,31 +86,24 @@ export default async function LevelFlashcardsPage({ params }: Props) {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <Link
-            href={`/learn/${levelId}`}
-            className="text-sm text-emerald-600 hover:underline"
-          >
-            ← Volver al nivel
-          </Link>
-          <p className="mt-2 text-sm font-medium text-violet-600">
-            Fichas del nivel
-          </p>
-          <h1 className="text-2xl font-bold text-gray-900">{level.name}</h1>
-          <p className="mt-2 text-gray-600">
-            Repasa {foodIds.length} alimentos esenciales ({cards.length} fichas)
-            antes del examen. Cada uno cubre porción, carbohidratos y raciones.
-          </p>
-        </header>
-        <FlashcardDeck
-          levelId={levelId}
-          cards={cards}
-          foodsById={foodsById}
-          exchangeUnitG={region.exchangeUnitG}
-          regionId={region.id}
-          returnHref={`/learn/${levelId}`}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <LearnSectionHeader
+            backHref={`/learn/${levelId}`}
+            backLabel="Volver al nivel"
+            eyebrow="Fichas del nivel"
+            title={level.name}
+            description={`Repasa ${foodIds.length} alimentos esenciales (${cards.length} fichas) antes del examen. Cada uno cubre porción, carbohidratos y raciones.`}
+          />
+          <FlashcardDeck
+            levelId={levelId}
+            cards={cards}
+            foodsById={foodsById}
+            exchangeUnitG={region.exchangeUnitG}
+            regionId={region.id}
+            returnHref={`/learn/${levelId}`}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

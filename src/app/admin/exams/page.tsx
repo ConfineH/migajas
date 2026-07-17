@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
 import { AdminShell } from "@/app/admin/AdminShell";
 import { ExamEditor } from "@/app/admin/exams/ExamEditor";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { getAllExams } from "@/lib/domain/lessons";
 import { getLevels } from "@/lib/domain/exercises";
 import { isContentAdmin } from "@/lib/domain/admin";
@@ -23,20 +24,24 @@ export default async function AdminExamsPage() {
   return (
     <>
       <AppNavBar />
-      <AdminShell
-        title="Exámenes por nivel"
-        description="Título, descripción y lista de ejercicios de cada examen."
-      >
-        <div className="space-y-4">
-          {exams.map((exam) => (
-            <ExamEditor
-              key={exam.levelId}
-              exam={exam}
-              levelName={levelNames[exam.levelId] ?? exam.levelId}
-            />
-          ))}
-        </div>
-      </AdminShell>
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <AdminShell
+            title="Exámenes por nivel"
+            description="Título, descripción y lista de ejercicios de cada examen."
+          >
+            <div className="space-y-4">
+              {exams.map((exam) => (
+                <ExamEditor
+                  key={exam.levelId}
+                  exam={exam}
+                  levelName={levelNames[exam.levelId] ?? exam.levelId}
+                />
+              ))}
+            </div>
+          </AdminShell>
+        </AppPageLayout>
+      </main>
     </>
   );
 }

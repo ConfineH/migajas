@@ -4,10 +4,10 @@ interface StatusBadgeProps {
 }
 
 const variants = {
-  locked: "bg-gray-200 text-gray-500",
-  success: "bg-emerald-600 text-white",
-  muted: "bg-emerald-100 text-emerald-700",
-  warning: "bg-amber-100 text-amber-800",
+  locked: "bg-sage-muted/50 text-muted",
+  success: "bg-sage-strong text-white",
+  muted: "bg-sage-light text-sage-strong",
+  warning: "bg-terracotta-soft/60 text-terracotta-dark",
 };
 
 export function StatusBadge({

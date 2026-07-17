@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   getFlashcardFace,
   type LevelFlashcard,
@@ -66,7 +67,7 @@ export function FlashcardDeck({
 
   if (!card || !food || !face) {
     return (
-      <p className="text-center text-gray-600">
+      <p className="text-center text-muted">
         No hay fichas disponibles para este nivel.
       </p>
     );
@@ -74,12 +75,12 @@ export function FlashcardDeck({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl bg-violet-50 border border-violet-200 px-4 py-2 text-sm font-medium text-violet-800">
+      <div className="callout-sage text-sm font-medium text-foreground">
         Memoriza porciones, carbohidratos y raciones de cada alimento del nivel
       </div>
 
       <div>
-        <div className="mb-2 flex justify-between text-sm text-gray-500">
+        <div className="mb-1.5 flex justify-between text-sm text-muted">
           <span>
             Ficha {index + 1} de {cards.length}
           </span>
@@ -91,37 +92,32 @@ export function FlashcardDeck({
                 : "Raciones"}
           </span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-gray-100">
-          <div
-            className="h-full rounded-full bg-violet-500 transition-all"
-            style={{ width: `${progressPct}%` }}
-          />
-        </div>
+        <ProgressBar percent={progressPct} />
       </div>
 
       <button
         type="button"
         onClick={() => setRevealed(true)}
-        className={`w-full rounded-2xl border-2 p-8 text-left shadow-sm transition-colors ${
+        className={`w-full rounded-2xl border-2 p-8 text-left shadow-soft transition-all duration-200 ${
           revealed
-            ? "border-violet-300 bg-violet-50"
-            : "border-gray-200 bg-white hover:border-violet-200"
+            ? "border-sage-strong/40 bg-sage-light/80"
+            : "border-border bg-surface hover:border-sage-strong/25"
         }`}
       >
-        <p className="text-sm font-medium uppercase tracking-wide text-violet-600">
+        <p className="text-sm font-medium uppercase tracking-wide text-sage-strong">
           {revealed ? "Respuesta" : "Pregunta"}
         </p>
-        <p className="mt-4 text-xl font-semibold text-gray-900">
+        <p className="mt-4 font-display text-xl font-medium text-foreground">
           {revealed ? face.back : face.front}
         </p>
-        {!revealed && face.hint && (
-          <p className="mt-4 text-sm text-gray-500">{face.hint}</p>
-        )}
-        {!revealed && (
-          <p className="mt-6 text-sm font-medium text-violet-600">
+        {!revealed && face.hint ? (
+          <p className="mt-4 text-sm text-muted">{face.hint}</p>
+        ) : null}
+        {!revealed ? (
+          <p className="mt-6 text-sm font-medium text-sage-strong">
             Toca para ver la respuesta
           </p>
-        )}
+        ) : null}
       </button>
 
       <div className="flex justify-center gap-3">

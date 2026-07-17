@@ -3,6 +3,8 @@ import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
 import { Button } from "@/components/Button";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LearnSectionHeader } from "@/components/layout/LearnSectionHeader";
 import {
   getLevelById,
   getExercisesForLevel,
@@ -49,20 +51,24 @@ export default async function LevelPage({
     return (
       <>
         <AppNavBar />
-        <main className="mx-auto max-w-3xl flex-1 px-4 py-12 text-center">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-            <p className="text-4xl">🔒</p>
-            <h1 className="mt-4 text-xl font-bold text-gray-900">
-              Nivel bloqueado
-            </h1>
-            <p className="mt-2 text-gray-600">
-              Completa el nivel anterior con al menos 60% de aciertos para
-              desbloquear <strong>{level.name}</strong>.
-            </p>
-            <div className="mt-6">
-              <Button href="/levels">Volver a niveles</Button>
+        <main className="flex flex-1 flex-col">
+          <AppPageLayout className="py-12 text-center">
+            <div className="hero-pill p-8">
+              <p className="text-4xl" aria-hidden>
+                🔒
+              </p>
+              <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+                Nivel bloqueado
+              </h1>
+              <p className="mt-2 text-muted">
+                Completa el nivel anterior con al menos 60% de aciertos para
+                desbloquear <strong>{level.name}</strong>.
+              </p>
+              <div className="mt-6">
+                <Button href="/levels">Volver a niveles</Button>
+              </div>
             </div>
-          </div>
+          </AppPageLayout>
         </main>
       </>
     );
@@ -85,28 +91,30 @@ export default async function LevelPage({
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <p className="text-sm font-medium text-emerald-600">
-            {level.country}
-          </p>
-          <h1 className="text-2xl font-bold text-gray-900">{level.name}</h1>
-          <p className="mt-2 text-gray-600">{level.description}</p>
-          {!retryMode && (
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <LearnSectionHeader
+            backHref="/levels"
+            backLabel="Volver a practicar"
+            eyebrow={level.country}
+            title={level.name}
+            description={level.description}
+          />
+          {!retryMode ? (
             <Link
               href="/progress"
-              className="mt-2 inline-block text-sm text-emerald-600 hover:underline"
+              className="-mt-4 mb-6 inline-block text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
             >
               Ver mi progreso →
             </Link>
-          )}
-        </header>
-        <ExerciseRunner
-          exercises={exercises}
-          levelId={id}
-          levelName={level.name}
-          retryMode={retryMode}
-        />
+          ) : null}
+          <ExerciseRunner
+            exercises={exercises}
+            levelId={id}
+            levelName={level.name}
+            retryMode={retryMode}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

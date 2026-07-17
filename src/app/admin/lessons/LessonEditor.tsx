@@ -9,8 +9,7 @@ interface LessonEditorProps {
   lesson: Lesson;
 }
 
-const inputClass =
-  "mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm";
+const inputClass = "field-input mt-1 text-sm";
 
 export function LessonEditor({ lesson }: LessonEditorProps) {
   const [title, setTitle] = useState(lesson.title);
@@ -38,18 +37,18 @@ export function LessonEditor({ lesson }: LessonEditorProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <label className="block text-sm">
-        <span className="text-gray-600">Título</span>
+        <span className="text-muted">Título</span>
         <input className={inputClass} value={title} onChange={(e) => setTitle(e.target.value)} />
       </label>
       <label className="block text-sm">
-        <span className="text-gray-600">Resumen</span>
+        <span className="text-muted">Resumen</span>
         <textarea className={inputClass} rows={3} value={summary} onChange={(e) => setSummary(e.target.value)} />
       </label>
       <div className="flex items-center gap-3">
         <button
           type="submit"
           disabled={saving}
-          className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+          className="btn-terracotta rounded-2xl px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
         >
           {saving ? "Guardando…" : "Guardar"}
         </button>

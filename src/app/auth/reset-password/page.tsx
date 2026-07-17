@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
 import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { getAuthUser } from "@/lib/supabase/auth";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -17,16 +18,20 @@ export default async function ResetPasswordPage() {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto flex max-w-lg flex-1 flex-col px-4 py-12">
-        <section className="space-y-8 text-center">
-          <div className="space-y-3">
-            <h1 className="text-2xl font-bold text-gray-900">Nueva contraseña</h1>
-            <p className="text-gray-600">
-              Elige una contraseña nueva para tu cuenta.
-            </p>
-          </div>
-          <ResetPasswordForm />
-        </section>
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout width="narrow" className="flex flex-col items-center py-12">
+          <section className="hero-pill w-full max-w-md px-8 py-10 text-center sm:px-10 sm:py-12">
+            <div className="space-y-3">
+              <h1 className="font-display text-2xl font-medium text-foreground">
+                Nueva contraseña
+              </h1>
+              <p className="text-muted">Elige una contraseña nueva para tu cuenta.</p>
+            </div>
+            <div className="mt-8 text-left">
+              <ResetPasswordForm />
+            </div>
+          </section>
+        </AppPageLayout>
       </main>
     </>
   );

@@ -23,7 +23,7 @@ export function GoogleSignInButton({ nextPath }: GoogleSignInButtonProps) {
     <button
       type="button"
       onClick={handleSignIn}
-      className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-gray-200 bg-white px-6 py-3 text-base font-semibold text-gray-800 transition-colors hover:border-emerald-300 hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+      className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full border border-border bg-surface px-6 py-3 text-base font-medium text-foreground shadow-soft transition-all duration-200 hover:border-sage-strong/30 hover:bg-sage-light/30 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-strong focus-visible:ring-offset-2"
     >
       <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden>
         <path

@@ -32,10 +32,12 @@ export function ClinicalExportPanel() {
   }
 
   return (
-    <section className="space-y-4 rounded-2xl border border-sky-100 bg-sky-50 p-5">
+    <section className="callout-sage space-y-4">
       <div>
-        <h2 className="text-lg font-semibold text-gray-900">Exportar reporte</h2>
-        <p className="mt-1 text-sm text-gray-600">
+        <h2 className="font-display text-lg font-medium text-foreground">
+          Exportar reporte
+        </h2>
+        <p className="mt-1 text-sm text-muted">
           Descarga un resumen en CSV o PDF para compartir con tu equipo de salud.
         </p>
       </div>
@@ -52,10 +54,10 @@ export function ClinicalExportPanel() {
             key={value}
             type="button"
             onClick={() => setRange(value)}
-            className={`rounded-xl border px-4 py-3 text-sm font-medium ${
+            className={`rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
               range === value
-                ? "border-sky-500 bg-white text-sky-900"
-                : "border-sky-200 bg-sky-100/60 text-sky-800"
+                ? "bg-surface text-foreground shadow-soft"
+                : "bg-sage-muted/30 text-muted hover:text-foreground"
             }`}
           >
             {label}
@@ -66,29 +68,27 @@ export function ClinicalExportPanel() {
       {range === "custom" ? (
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="space-y-1 text-sm">
-            <span className="font-medium text-gray-700">Desde</span>
+            <span className="font-medium text-foreground">Desde</span>
             <input
               type="date"
               value={from}
               onChange={(event) => setFrom(event.target.value)}
-              className="w-full rounded-xl border border-gray-200 px-4 py-3"
+              className="field-input"
             />
           </label>
           <label className="space-y-1 text-sm">
-            <span className="font-medium text-gray-700">Hasta</span>
+            <span className="font-medium text-foreground">Hasta</span>
             <input
               type="date"
               value={to}
               onChange={(event) => setTo(event.target.value)}
-              className="w-full rounded-xl border border-gray-200 px-4 py-3"
+              className="field-input"
             />
           </label>
         </div>
       ) : null}
 
-      {error ? (
-        <p className="text-sm text-red-700">{error}</p>
-      ) : null}
+      {error ? <p className="text-sm text-red-700">{error}</p> : null}
 
       <div className="flex flex-wrap gap-3">
         <Button variant="secondary" onClick={() => handleDownload("csv")}>

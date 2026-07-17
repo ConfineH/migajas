@@ -25,7 +25,7 @@ export function ContentSourceLink({
         href={source.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center gap-1 font-medium text-emerald-700 hover:text-emerald-900 ${className}`}
+        className={`inline-flex items-center gap-1 font-medium text-sage-strong underline-offset-2 hover:underline ${className}`}
       >
         {text} ↗
       </a>
@@ -35,7 +35,7 @@ export function ContentSourceLink({
   return (
     <Link
       href={`${source.url}?tab=fuentes#${source.id}`}
-      className={`inline-flex items-center gap-1 font-medium text-emerald-700 hover:text-emerald-900 ${className}`}
+      className={`inline-flex items-center gap-1 font-medium text-sage-strong underline-offset-2 hover:underline ${className}`}
     >
       {text}
     </Link>

@@ -7,7 +7,7 @@ import {
   signUpWithEmail,
   type EmailAuthState,
 } from "@/app/login/actions";
-import { AuthFormField } from "@/components/auth/AuthFormField";
+import { AuthFormField, inputClassName } from "@/components/auth/AuthFormField";
 
 interface EmailAuthFormProps {
   nextPath: string;
@@ -32,14 +32,14 @@ export function EmailAuthForm({ nextPath }: EmailAuthFormProps) {
 
   return (
     <div className="space-y-4 text-left">
-      <div className="flex rounded-xl border border-gray-200 p-1">
+      <div className="flex rounded-full border border-border bg-surface p-1">
         <button
           type="button"
           onClick={() => setMode("signin")}
-          className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-full px-3 py-2 text-sm font-medium transition-all duration-200 ${
             mode === "signin"
-              ? "bg-emerald-600 text-white"
-              : "text-gray-600 hover:text-gray-900"
+              ? "btn-terracotta shadow-soft"
+              : "text-muted hover:text-foreground"
           }`}
         >
           Entrar
@@ -47,33 +47,33 @@ export function EmailAuthForm({ nextPath }: EmailAuthFormProps) {
         <button
           type="button"
           onClick={() => setMode("signup")}
-          className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-full px-3 py-2 text-sm font-medium transition-all duration-200 ${
             mode === "signup"
-              ? "bg-emerald-600 text-white"
-              : "text-gray-600 hover:text-gray-900"
+              ? "btn-terracotta shadow-soft"
+              : "text-muted hover:text-foreground"
           }`}
         >
           Crear cuenta
         </button>
       </div>
 
-      {state.error && (
+      {state.error ? (
         <p
           role="alert"
-          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+          className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
         >
           {state.error}
         </p>
-      )}
+      ) : null}
 
-      {state.message && (
+      {state.message ? (
         <p
           role="status"
-          className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
+          className="callout-sage text-sm text-foreground"
         >
           {state.message}
         </p>
-      )}
+      ) : null}
 
       <form action={action} className="space-y-3">
         <input type="hidden" name="next" value={nextPath} />
@@ -87,17 +87,17 @@ export function EmailAuthForm({ nextPath }: EmailAuthFormProps) {
         />
         <div className="space-y-1.5">
           <div className="flex items-center justify-between gap-3">
-            <label htmlFor="auth-password" className="text-sm font-medium text-gray-700">
+            <label htmlFor="auth-password" className="text-sm font-medium text-foreground">
               Contraseña
             </label>
-            {mode === "signin" && (
+            {mode === "signin" ? (
               <Link
                 href="/login/forgot-password"
-                className="text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+                className="text-xs font-medium text-sage-strong underline-offset-2 hover:underline"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
-            )}
+            ) : null}
           </div>
           <input
             id="auth-password"
@@ -106,14 +106,14 @@ export function EmailAuthForm({ nextPath }: EmailAuthFormProps) {
             autoComplete={mode === "signin" ? "current-password" : "new-password"}
             required
             minLength={6}
-            className="w-full rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+            className={inputClassName}
             placeholder="Mínimo 6 caracteres"
           />
         </div>
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:opacity-60"
+          className="btn-terracotta inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3 text-base font-medium transition-all duration-200 hover:brightness-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 disabled:opacity-60"
         >
           {pending
             ? "Procesando…"

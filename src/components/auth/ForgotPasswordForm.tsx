@@ -21,17 +21,14 @@ export function ForgotPasswordForm() {
       {state.error && (
         <p
           role="alert"
-          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+          className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
         >
           {state.error}
         </p>
       )}
 
       {state.message && (
-        <p
-          role="status"
-          className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800"
-        >
+        <p role="status" className="callout-sage px-4 py-3 text-sm text-foreground">
           {state.message}
         </p>
       )}
@@ -48,13 +45,16 @@ export function ForgotPasswordForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:opacity-60"
+        className="btn-terracotta inline-flex min-h-12 w-full items-center justify-center rounded-2xl px-6 py-3 text-base font-semibold text-white transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-strong focus-visible:ring-offset-2 disabled:opacity-60"
       >
         {pending ? "Enviando…" : "Enviar enlace de recuperación"}
       </button>
 
-      <p className="text-center text-sm text-gray-600">
-        <Link href="/login" className="font-semibold text-emerald-700 hover:text-emerald-800">
+      <p className="text-center text-sm text-muted">
+        <Link
+          href="/login"
+          className="font-medium text-sage-strong underline-offset-2 hover:underline"
+        >
           Volver a entrar
         </Link>
       </p>

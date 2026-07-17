@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Button } from "@/components/Button";
+import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   exerciseTypeLabels,
   type Exercise,
@@ -91,53 +92,43 @@ export function ExamRunner({
     const pct = Math.round((score.correct / score.total) * 100);
     return (
       <div className="space-y-6 text-center">
-        <div
-          className={`rounded-2xl border p-8 ${
-            passed
-              ? "bg-emerald-50 border-emerald-200"
-              : "bg-amber-50 border-amber-200"
-          }`}
-        >
-          <p className="text-sm font-medium uppercase tracking-wide text-gray-600">
-            Resultado del examen
-          </p>
+        <div className={passed ? "callout-sage p-8" : "rounded-2xl bg-terracotta-soft/30 p-8"}>
+          <p className="text-sm font-medium text-muted">Resultado del examen</p>
           <p
-            className={`mt-4 text-5xl font-bold ${
-              passed ? "text-emerald-700" : "text-amber-700"
+            className={`mt-4 font-display text-5xl font-medium tabular-nums ${
+              passed ? "text-sage-strong" : "text-terracotta-dark"
             }`}
           >
             {score.correct}/{score.total}
           </p>
-          <p className="mt-2 text-lg text-gray-600">{pct}% de aciertos</p>
-          <p className="mt-4 text-sm font-medium text-gray-700">
+          <p className="mt-2 text-lg text-muted">{pct}% de aciertos</p>
+          <p className="mt-4 text-sm font-medium text-foreground">
             {passed
               ? levelId === "nivel-1"
-                ? "¡Aprobado! Modo libre desbloqueado: catálogo y práctica libre."
+                ? "Aprobado. Modo libre desbloqueado: catálogo y práctica libre."
                 : levelId === "nivel-5"
-                  ? "¡Enhorabuena! Has completado todo el curso guiado."
-                  : "¡Nivel aprobado! Puedes continuar al siguiente."
+                  ? "Enhorabuena. Has completado todo el curso guiado."
+                  : "Nivel aprobado. Puedes continuar al siguiente."
               : `Necesitas al menos ${PASS_THRESHOLD}%. Repasa las lecciones e inténtalo de nuevo.`}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          {passed && freeModeUnlocked && (
+          {passed && freeModeUnlocked ? (
             <>
               <Button href="/catalog">Explorar catálogo</Button>
               <Button href="/levels" variant="secondary">
                 Práctica libre
               </Button>
             </>
-          )}
-          {passed && nextLevelId && (
-            <Button href={`/learn/${nextLevelId}`}>
-              Siguiente nivel
-            </Button>
-          )}
-          {!passed && (
+          ) : null}
+          {passed && nextLevelId ? (
+            <Button href={`/learn/${nextLevelId}`}>Siguiente nivel</Button>
+          ) : null}
+          {!passed ? (
             <Button href={`/learn/${levelId}`} variant="secondary">
               Repasar curso
             </Button>
-          )}
+          ) : null}
           <Button href="/learn" variant="ghost">
             Todos los niveles
           </Button>
@@ -148,39 +139,34 @@ export function ExamRunner({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl bg-amber-50 border border-amber-200 px-4 py-2 text-sm font-medium text-amber-800">
+      <div className="rounded-xl bg-terracotta-soft/25 px-4 py-2 text-sm font-medium text-terracotta-dark">
         Examen — {levelName}
       </div>
 
       <div>
-        <div className="mb-2 flex justify-between text-sm text-gray-500">
+        <div className="mb-1.5 flex justify-between text-sm text-muted">
           <span>
             Pregunta {index + 1} de {exercises.length}
           </span>
           <span>{exerciseTypeLabels[exercise.type]}</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-gray-100">
-          <div
-            className="h-full rounded-full bg-amber-500 transition-all"
-            style={{ width: `${progressPct}%` }}
-          />
-        </div>
+        <ProgressBar percent={progressPct} />
       </div>
 
-      <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">{exercise.prompt}</h2>
+      <div className="feature-card p-6">
+        <h2 className="font-display text-xl font-medium text-foreground">
+          {exercise.prompt}
+        </h2>
 
-        {!feedback && (
+        {!feedback ? (
           <ul className="mt-6 space-y-3">
             {exercise.options.map((option) => (
               <li key={option.id}>
                 <button
                   type="button"
                   onClick={() => setSelected(option.value)}
-                  className={`w-full rounded-xl border-2 px-4 py-4 text-left font-medium transition-colors ${
-                    selected === option.value
-                      ? "border-emerald-500 bg-emerald-50"
-                      : "border-gray-200 hover:border-emerald-200"
+                  className={`choice-button ${
+                    selected === option.value ? "choice-button-selected" : ""
                   }`}
                 >
                   {option.label}
@@ -188,26 +174,24 @@ export function ExamRunner({
               </li>
             ))}
           </ul>
-        )}
+        ) : null}
 
-        {feedback && (
+        {feedback ? (
           <div
-            className={`mt-6 rounded-xl p-5 ${
-              feedback.isCorrect
-                ? "bg-emerald-50 border border-emerald-200"
-                : "bg-red-50 border border-red-200"
-            }`}
+            className={
+              feedback.isCorrect ? "feedback-correct mt-6" : "feedback-wrong mt-6"
+            }
           >
             <p
-              className={`text-lg font-bold ${
-                feedback.isCorrect ? "text-emerald-700" : "text-red-700"
+              className={`text-lg font-medium ${
+                feedback.isCorrect ? "text-sage-strong" : "text-red-700"
               }`}
             >
-              {feedback.isCorrect ? "¡Correcto!" : "Incorrecto"}
+              {feedback.isCorrect ? "Correcto" : "Incorrecto"}
             </p>
-            <p className="mt-2 text-gray-700">{feedback.explanation}</p>
+            <p className="mt-2 text-muted">{feedback.explanation}</p>
           </div>
-        )}
+        ) : null}
       </div>
 
       <div className="flex justify-center">

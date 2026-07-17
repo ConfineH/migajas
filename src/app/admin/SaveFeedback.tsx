@@ -8,7 +8,7 @@ export function SaveFeedback({ message, ok }: SaveFeedbackProps) {
 
   return (
     <span
-      className={`text-sm ${ok ? "font-medium text-emerald-700" : "text-red-600"}`}
+      className={`text-sm ${ok ? "font-medium text-sage-strong" : "text-red-600"}`}
       role="status"
     >
       {message}

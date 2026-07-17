@@ -1,5 +1,6 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { OnboardingFlow } from "@/components/OnboardingFlow";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import {
   hasPassedNivel3,
   toGuidedProgress,
@@ -28,18 +29,20 @@ export default async function OnboardingPage() {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-12">
-        <OnboardingFlow
-          initialRegionId={profile?.region_id ?? resolveRegionIdFromOnboarding(state)}
-          initialGuestMode={state?.guestMode ?? true}
-          initialDailyCarbGoal={
-            profile?.daily_carb_goal_g ?? state?.daily_carb_goal_g ?? null
-          }
-          initialClinicalModeEnabled={profile?.clinical_mode_enabled ?? false}
-          isAuthenticated={Boolean(user)}
-          canEnableClinicalMode={hasPassedNivel3(guidedProgress)}
-          settingsMode={settingsMode}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <OnboardingFlow
+            initialRegionId={profile?.region_id ?? resolveRegionIdFromOnboarding(state)}
+            initialGuestMode={state?.guestMode ?? true}
+            initialDailyCarbGoal={
+              profile?.daily_carb_goal_g ?? state?.daily_carb_goal_g ?? null
+            }
+            initialClinicalModeEnabled={profile?.clinical_mode_enabled ?? false}
+            isAuthenticated={Boolean(user)}
+            canEnableClinicalMode={hasPassedNivel3(guidedProgress)}
+            settingsMode={settingsMode}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

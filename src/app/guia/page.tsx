@@ -1,4 +1,5 @@
 import { AppNavBar } from "@/components/AppNavBar";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ReferenceGuideClient } from "@/components/reference-guide/ReferenceGuideClient";
 import { getFoodsForCountry } from "@/lib/data/foods";
@@ -34,26 +35,28 @@ export default async function ReferenceGuidePage({ searchParams }: Props) {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <PageHeader
-          title="Guía de referencia"
-          description={
-            freeMode
-              ? "Reglas, fuentes y calculadora. El listado de alimentos está en el catálogo."
-              : "Reglas, conversión, fuentes y consulta de alimentos durante el curso."
-          }
-        />
-        <ReferenceGuideClient
-          foods={foods}
-          freeMode={freeMode}
-          regionName={region.name}
-          regionFlag={region.flag}
-          regionId={region.id}
-          exchangeUnitG={region.exchangeUnitG}
-          tips={buildReferenceTips(region.exchangeUnitG, region.name, region.id)}
-          sources={sources}
-          initialTab={tab === "fuentes" ? "fuentes" : undefined}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <PageHeader
+            title="Guía de referencia"
+            description={
+              freeMode
+                ? "Reglas, fuentes y calculadora. El listado de alimentos está en el catálogo."
+                : "Reglas, conversión, fuentes y consulta de alimentos durante el curso."
+            }
+          />
+          <ReferenceGuideClient
+            foods={foods}
+            freeMode={freeMode}
+            regionName={region.name}
+            regionFlag={region.flag}
+            regionId={region.id}
+            exchangeUnitG={region.exchangeUnitG}
+            tips={buildReferenceTips(region.exchangeUnitG, region.name, region.id)}
+            sources={sources}
+            initialTab={tab === "fuentes" ? "fuentes" : undefined}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

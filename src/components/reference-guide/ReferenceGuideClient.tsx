@@ -62,25 +62,28 @@ export function ReferenceGuideClient({
   return (
     <div className="space-y-6">
       {freeMode ? (
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
+        <div className="callout-sage text-sm text-foreground">
           El listado completo de alimentos está en el{" "}
-          <Link href="/catalog" className="font-semibold underline">
+          <Link
+            href="/catalog"
+            className="font-semibold text-sage-strong underline-offset-2 hover:underline"
+          >
             catálogo
           </Link>
           . Aquí tienes reglas y calculadora para consultar al vuelo.
         </div>
       ) : null}
 
-      <div className="flex gap-1 rounded-xl bg-gray-100 p-1">
+      <div className="flex gap-1 rounded-full bg-sage-muted/40 p-1">
         {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setTab(item.id)}
-            className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+            className={`flex-1 rounded-full px-3 py-2 text-sm font-medium transition-all duration-200 ${
               tab === item.id
-                ? "bg-white text-emerald-800 shadow-sm"
-                : "text-gray-600 hover:text-gray-900"
+                ? "bg-surface text-foreground shadow-soft"
+                : "text-muted hover:text-foreground"
             }`}
           >
             {item.label}
@@ -90,53 +93,53 @@ export function ReferenceGuideClient({
 
       {tab === "reglas" ? (
         <section className="space-y-4">
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-            <h2 className="font-bold text-emerald-900">
+          <div className="callout-sage">
+            <h2 className="font-display text-xl font-medium text-foreground">
               {regionFlag} {regionName}
             </h2>
-            <p className="mt-2 text-emerald-800">
+            <p className="mt-2 text-foreground">
               <strong>{exchangeRuleLabel}</strong>
             </p>
-            <p className="mt-2 text-sm text-emerald-700">
+            <p className="mt-2 text-sm text-muted">
               {regionId === "do"
                 ? `Divide los gramos de carbohidratos entre ${exchangeUnitG} para obtener raciones.`
                 : `Divide los gramos de HC entre ${exchangeUnitG} para obtener raciones.`}
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white">
+          <div className="feature-card overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-left text-gray-600">
+              <thead className="bg-sage-light/50 text-left text-muted">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Raciones</th>
-                  <th className="px-4 py-3 font-semibold">Carbohidratos (g)</th>
+                  <th className="px-4 py-3 font-medium">Raciones</th>
+                  <th className="px-4 py-3 font-medium">Carbohidratos (g)</th>
                 </tr>
               </thead>
               <tbody>
                 {table.map((row) => (
-                  <tr key={row.rations} className="border-t border-gray-100">
-                    <td className="px-4 py-3 font-medium text-gray-900">
+                  <tr key={row.rations} className="border-t border-border/60">
+                    <td className="px-4 py-3 font-medium text-foreground">
                       {formatRations(row.rations)}
                     </td>
-                    <td className="px-4 py-3 text-gray-700">{row.carbsG} g</td>
+                    <td className="px-4 py-3 text-muted">{row.carbsG} g</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <ul className="space-y-2 rounded-2xl border border-gray-100 bg-white p-5 text-sm text-gray-700">
+          <ul className="feature-card space-y-2 p-5 text-sm text-muted">
             {tips.map((tip) => (
               <li key={tip}>• {tip}</li>
             ))}
           </ul>
           {sources.length > 0 ? (
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-muted">
               Metodología y bibliografía en la pestaña{" "}
               <button
                 type="button"
                 onClick={() => setTab("fuentes")}
-                className="font-semibold text-emerald-700 hover:text-emerald-900"
+                className="font-medium text-sage-strong underline-offset-2 hover:underline"
               >
                 Fuentes
               </button>
@@ -154,7 +157,7 @@ export function ReferenceGuideClient({
 
       {tab === "alimentos" && !freeMode ? (
         <section>
-          <p className="mb-4 text-sm text-gray-600">
+          <p className="mb-4 text-sm text-muted">
             Consulta rápida durante el curso. Tras aprobar el examen del nivel 1,
             el catálogo completo queda en el menú principal.
           </p>
@@ -169,9 +172,9 @@ export function ReferenceGuideClient({
 
       {tab === "calculadora" ? (
         <section className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-emerald-100 bg-white p-5">
-            <h2 className="font-semibold text-gray-900">Gramos → raciones</h2>
-            <label className="mt-4 block text-sm text-gray-600">
+          <div className="feature-card p-5">
+            <h2 className="font-medium text-foreground">Gramos → raciones</h2>
+            <label className="mt-4 block text-sm text-muted">
               Carbohidratos (g)
               <input
                 type="number"
@@ -179,19 +182,19 @@ export function ReferenceGuideClient({
                 step="0.5"
                 value={carbsInput}
                 onChange={(event) => setCarbsInput(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+                className="field-input mt-1"
               />
             </label>
-            <p className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-800">
+            <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
               {fromCarbs === null
                 ? "Introduce un valor válido"
                 : `${formatCarbsInput(carbsValue)} = ${formatRationsResult(fromCarbs)}`}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-emerald-100 bg-white p-5">
-            <h2 className="font-semibold text-gray-900">Raciones → gramos</h2>
-            <label className="mt-4 block text-sm text-gray-600">
+          <div className="feature-card p-5">
+            <h2 className="font-medium text-foreground">Raciones → gramos</h2>
+            <label className="mt-4 block text-sm text-muted">
               Raciones
               <input
                 type="number"
@@ -199,10 +202,10 @@ export function ReferenceGuideClient({
                 step="0.5"
                 value={rationsInput}
                 onChange={(event) => setRationsInput(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2"
+                className="field-input mt-1"
               />
             </label>
-            <p className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-800">
+            <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
               {fromRations === null
                 ? "Introduce un valor válido"
                 : `${formatRations(rationsValue)} ración${rationsValue === 1 ? "" : "es"} = ${fromRations} g de HC`}

@@ -171,7 +171,7 @@ export function DiaryClient({
       </div>
 
       {dailyGoalG ? (
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-muted">
           Meta: {dailyGoalG} g de HC · {exchangeRuleLabel}
         </p>
       ) : null}
@@ -182,19 +182,19 @@ export function DiaryClient({
         </p>
       ) : null}
 
-      <section className="space-y-4 rounded-2xl border border-emerald-100 bg-white p-5">
-        <h2 className="text-lg font-semibold text-gray-900">Añadir alimento</h2>
+      <section className="feature-card space-y-4 p-5">
+        <h2 className="font-display text-lg font-medium text-foreground">Añadir alimento</h2>
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Buscar alimento..."
-          className="w-full rounded-xl border border-emerald-200 px-4 py-3"
+          className="field-input"
         />
         <select
           value={selectedFoodId}
           onChange={(event) => setSelectedFoodId(event.target.value)}
-          className="w-full rounded-xl border border-emerald-200 px-4 py-3"
+          className="field-input"
         >
           {filteredFoods.map((food) => (
             <option key={food.id} value={food.id}>
@@ -206,7 +206,7 @@ export function DiaryClient({
           <select
             value={mealSlot}
             onChange={(event) => setMealSlot(event.target.value as MealSlot)}
-            className="rounded-xl border border-emerald-200 px-4 py-3"
+            className="field-input"
           >
             {MEAL_SLOTS.map((slot) => (
               <option key={slot} value={slot}>
@@ -220,7 +220,7 @@ export function DiaryClient({
             step={0.5}
             value={portionMultiplier}
             onChange={(event) => setPortionMultiplier(event.target.value)}
-            className="rounded-xl border border-emerald-200 px-4 py-3"
+            className="field-input"
             aria-label="Multiplicador de porción"
           />
         </div>
@@ -230,9 +230,9 @@ export function DiaryClient({
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900">Hoy</h2>
+        <h2 className="font-display text-lg font-medium text-foreground">Hoy</h2>
         {entries.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-gray-200 p-8 text-center text-gray-500">
+          <p className="rounded-2xl border border-dashed border-border p-8 text-center text-muted">
             Aún no has registrado alimentos hoy.
           </p>
         ) : (
@@ -240,12 +240,12 @@ export function DiaryClient({
             {entries.map((entry) => (
               <article
                 key={entry.id}
-                className="rounded-2xl border border-gray-200 bg-white p-4"
+                className="feature-card p-4"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <p className="font-semibold text-gray-900">{entry.foodName}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="font-medium text-foreground">{entry.foodName}</p>
+                    <p className="text-sm text-muted">
                       {MEAL_SLOT_LABELS[entry.meal_slot]} · {entry.portionText} ·{" "}
                       {entry.carbs_g} g HC · {formatRations(entry.rations)} raciones
                     </p>
@@ -257,7 +257,7 @@ export function DiaryClient({
                         min={0.5}
                         step={0.5}
                         defaultValue={entry.portion_multiplier}
-                        className="w-20 rounded-lg border border-gray-200 px-2 py-1 text-sm"
+                        className="field-input w-20 px-2 py-1 text-sm"
                         onBlur={(event) => {
                           const value = Number(event.target.value);
                           if (
@@ -278,7 +278,7 @@ export function DiaryClient({
                       </button>
                     </div>
                   ) : (
-                    <span className="text-xs text-gray-500">Solo lectura</span>
+                    <span className="text-xs text-muted">Solo lectura</span>
                   )}
                 </div>
               </article>

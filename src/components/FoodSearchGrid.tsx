@@ -40,13 +40,13 @@ export function FoodSearchGrid({
           placeholder="Buscar alimento..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+          className="field-input flex-1"
           aria-label="Buscar alimento"
         />
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+          className="field-input sm:max-w-[12rem]"
           aria-label="Filtrar por categoría"
         >
           {categories.map((cat) => (
@@ -57,7 +57,7 @@ export function FoodSearchGrid({
         </select>
       </div>
 
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-muted">
         {filtered.length} alimento{filtered.length !== 1 ? "s" : ""} ·{" "}
         {exchangeRuleLabel}
       </p>
@@ -69,7 +69,7 @@ export function FoodSearchGrid({
       </div>
 
       {filtered.length === 0 ? (
-        <p className="py-12 text-center text-gray-500">
+        <p className="py-12 text-center text-muted">
           No hay alimentos que coincidan con tu búsqueda.
         </p>
       ) : null}

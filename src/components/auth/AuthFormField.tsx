@@ -9,8 +9,7 @@ interface AuthFormFieldProps {
   placeholder?: string;
 }
 
-const inputClassName =
-  "w-full rounded-xl border border-emerald-200 px-4 py-3 text-base focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200";
+export const inputClassName = "field-input";
 
 export function AuthFormField({
   id,
@@ -24,7 +23,7 @@ export function AuthFormField({
 }: AuthFormFieldProps) {
   return (
     <div className="space-y-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-gray-700">
+      <label htmlFor={id} className="text-sm font-medium text-foreground">
         {label}
       </label>
       <input
@@ -40,5 +39,3 @@ export function AuthFormField({
     </div>
   );
 }
-
-export { inputClassName };

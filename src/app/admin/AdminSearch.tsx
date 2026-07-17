@@ -22,9 +22,9 @@ export function AdminSearch({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm"
+        className="field-input text-sm"
       />
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-muted">
         Mostrando {resultCount} de {totalCount}
       </p>
     </div>

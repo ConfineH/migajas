@@ -1,5 +1,7 @@
 import { AppNavBar } from "@/components/AppNavBar";
 import { CatalogClient } from "@/components/CatalogClient";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { getFoodsForCountry } from "@/lib/data/foods";
 import { enrichFoods } from "@/lib/domain/foods";
 import { formatExchangeRule } from "@/lib/domain/regions";
@@ -22,22 +24,19 @@ export default async function CatalogPage() {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Catálogo de alimentos
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Alimentos habituales en {region.name}. Cada ficha muestra la porción,
-            los gramos, los carbohidratos y las raciones ({formatExchangeRule(region)}).
-          </p>
-        </header>
-        <CatalogClient
-          foods={foods}
-          exchangeUnitG={region.exchangeUnitG}
-          exchangeRuleLabel={formatExchangeRule(region)}
-          regionId={region.id}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          <PageHeader
+            title="Catálogo de alimentos"
+            description={`Alimentos habituales en ${region.name}. Cada ficha muestra la porción, los gramos, los carbohidratos y las raciones (${formatExchangeRule(region)}).`}
+          />
+          <CatalogClient
+            foods={foods}
+            exchangeUnitG={region.exchangeUnitG}
+            exchangeRuleLabel={formatExchangeRule(region)}
+            regionId={region.id}
+          />
+        </AppPageLayout>
       </main>
     </>
   );

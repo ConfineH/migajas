@@ -1,7 +1,10 @@
 import { notFound, redirect } from "next/navigation";
+import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { ExamRunner } from "@/components/ExamRunner";
 import { Button } from "@/components/Button";
+import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LearnSectionHeader } from "@/components/layout/LearnSectionHeader";
 import { getExamForLevel } from "@/lib/domain/lessons";
 import { getExerciseById, getLevelById, getLevels } from "@/lib/domain/exercises";
 import { getRegionalContentContext } from "@/lib/content-for-region";
@@ -41,15 +44,21 @@ export default async function ExamPage({ params, searchParams }: Props) {
     return (
       <>
         <AppNavBar />
-        <main className="mx-auto max-w-3xl flex-1 px-4 py-12 text-center">
-          <p className="text-4xl">📚</p>
-          <h1 className="mt-4 text-xl font-bold">Completa el curso primero</h1>
-          <p className="mt-2 text-gray-600">
-            Termina todas las lecciones y prácticas antes del examen.
-          </p>
-          <div className="mt-6">
-            <Button href={`/learn/${levelId}`}>Volver al nivel</Button>
-          </div>
+        <main className="flex flex-1 flex-col">
+          <AppPageLayout className="py-12 text-center">
+            <p className="text-4xl" aria-hidden>
+              📚
+            </p>
+            <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+              Completa el curso primero
+            </h1>
+            <p className="mt-2 text-muted">
+              Termina todas las lecciones y prácticas antes del examen.
+            </p>
+            <div className="mt-6">
+              <Button href={`/learn/${levelId}`}>Volver al nivel</Button>
+            </div>
+          </AppPageLayout>
         </main>
       </>
     );
@@ -79,20 +88,26 @@ export default async function ExamPage({ params, searchParams }: Props) {
     return (
       <>
         <AppNavBar />
-        <main className="mx-auto max-w-3xl flex-1 px-4 py-12 text-center">
-          <p className="text-4xl">⚠️</p>
-          <h1 className="mt-4 text-xl font-bold">No se pudo cargar el examen</h1>
-          <p className="mt-2 text-gray-600">
-            El banco de preguntas no está disponible. Inténtalo de nuevo.
-          </p>
-          <div className="mt-6 flex justify-center gap-3">
-            <Button href={`/api/exam/start?levelId=${levelId}&nuevo=1`}>
-              Reintentar examen
-            </Button>
-            <Button href={`/learn/${levelId}`} variant="secondary">
-              Volver al nivel
-            </Button>
-          </div>
+        <main className="flex flex-1 flex-col">
+          <AppPageLayout className="py-12 text-center">
+            <p className="text-4xl" aria-hidden>
+              ⚠️
+            </p>
+            <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+              No se pudo cargar el examen
+            </h1>
+            <p className="mt-2 text-muted">
+              El banco de preguntas no está disponible. Inténtalo de nuevo.
+            </p>
+            <div className="mt-6 flex justify-center gap-3">
+              <Button href={`/api/exam/start?levelId=${levelId}&nuevo=1`}>
+                Reintentar examen
+              </Button>
+              <Button href={`/learn/${levelId}`} variant="secondary">
+                Volver al nivel
+              </Button>
+            </div>
+          </AppPageLayout>
         </main>
       </>
     );
@@ -105,37 +120,37 @@ export default async function ExamPage({ params, searchParams }: Props) {
   return (
     <>
       <AppNavBar />
-      <main className="mx-auto max-w-3xl flex-1 px-4 py-8">
-        {fichasIncomplete && (
-          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
-            <p className="font-semibold">Recomendado antes del examen</p>
-            <p className="mt-1">
-              Aún no has completado las fichas del nivel. Repásalas para memorizar
-              porciones y carbohidratos de los alimentos del examen.
-            </p>
-            <a
-              href={`/learn/${levelId}/fichas`}
-              className="mt-2 inline-block font-semibold text-amber-800 underline"
-            >
-              Ir a Fichas del nivel →
-            </a>
-          </div>
-        )}
-        <header className="mb-8">
-          <p className="text-sm font-medium text-amber-600">Examen de nivel</p>
-          <h1 className="text-2xl font-bold text-gray-900">{exam.title}</h1>
-          <p className="mt-2 text-gray-600">{exam.description}</p>
-          <p className="mt-2 text-sm text-gray-500">
-            {exercises.length} preguntas en este intento · banco de{" "}
-            {config.poolExerciseIds.length}
-          </p>
-        </header>
-        <ExamRunner
-          exercises={exercises}
-          levelId={levelId}
-          levelName={level.name}
-          nextLevelId={nextLevel?.id}
-        />
+      <main className="flex flex-1 flex-col">
+        <AppPageLayout>
+          {fichasIncomplete ? (
+            <div className="mb-6 rounded-2xl bg-terracotta-soft/25 px-5 py-4 text-sm text-foreground">
+              <p className="font-semibold">Recomendado antes del examen</p>
+              <p className="mt-1 text-muted">
+                Aún no has completado las fichas del nivel. Repásalas para memorizar
+                porciones y carbohidratos de los alimentos del examen.
+              </p>
+              <Link
+                href={`/learn/${levelId}/fichas`}
+                className="mt-2 inline-block font-medium text-terracotta-dark underline-offset-2 hover:underline"
+              >
+                Ir a Fichas del nivel →
+              </Link>
+            </div>
+          ) : null}
+          <LearnSectionHeader
+            backHref={`/learn/${levelId}`}
+            backLabel="Volver al nivel"
+            eyebrow="Examen de nivel"
+            title={exam.title}
+            description={`${exam.description} · ${exercises.length} preguntas en este intento · banco de ${config.poolExerciseIds.length}`}
+          />
+          <ExamRunner
+            exercises={exercises}
+            levelId={levelId}
+            levelName={level.name}
+            nextLevelId={nextLevel?.id}
+          />
+        </AppPageLayout>
       </main>
     </>
   );
