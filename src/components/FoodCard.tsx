@@ -1,5 +1,7 @@
 import type { EnrichedFoodItem } from "@/lib/domain/foods";
 import { formatRations } from "@/lib/domain/rations";
+import { inferFoodSourceId } from "@/lib/domain/content-sources";
+import { ContentSourceLink } from "@/components/content-sources/ContentSourceLink";
 
 interface FoodCardProps {
   food: EnrichedFoodItem;
@@ -20,6 +22,7 @@ const typeLabelsDo = {
 
 export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
   const typeLabels = regionId === "do" ? typeLabelsDo : typeLabelsEs;
+  const sourceId = inferFoodSourceId(food);
   return (
     <article className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
       <div className="mb-2 flex items-start justify-between gap-2">
@@ -49,6 +52,11 @@ export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
           </dd>
         </div>
       </dl>
+      {sourceId ? (
+        <p className="mt-3 border-t border-gray-100 pt-3 text-xs">
+          <ContentSourceLink sourceId={sourceId} />
+        </p>
+      ) : null}
     </article>
   );
 }

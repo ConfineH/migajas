@@ -2,6 +2,7 @@ import { AppNavBar } from "@/components/AppNavBar";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ReferenceGuideClient } from "@/components/reference-guide/ReferenceGuideClient";
 import { getFoodsForCountry } from "@/lib/data/foods";
+import { getSourcesForRegion } from "@/lib/domain/content-sources";
 import { enrichFoods } from "@/lib/domain/foods";
 import { buildReferenceTips } from "@/lib/domain/reference-guide";
 import { getFreeModeStatus } from "@/lib/free-mode";
@@ -12,8 +13,13 @@ export const metadata = {
   title: "Guía de referencia — Migajas",
 };
 
-export default async function ReferenceGuidePage() {
+type Props = {
+  searchParams: Promise<{ tab?: string }>;
+};
+
+export default async function ReferenceGuidePage({ searchParams }: Props) {
   await requireOnboarding();
+  const { tab } = await searchParams;
   const [region, freeMode] = await Promise.all([
     getActiveRegion(),
     getFreeModeStatus(),
@@ -23,6 +29,7 @@ export default async function ReferenceGuidePage() {
     region.exchangeUnitG,
     region.id,
   );
+  const sources = getSourcesForRegion(region.id);
 
   return (
     <>
@@ -32,8 +39,8 @@ export default async function ReferenceGuidePage() {
           title="Guía de referencia"
           description={
             freeMode
-              ? "Reglas y calculadora. El listado de alimentos está en el catálogo."
-              : "Reglas, conversión y consulta de alimentos durante el curso."
+              ? "Reglas, fuentes y calculadora. El listado de alimentos está en el catálogo."
+              : "Reglas, conversión, fuentes y consulta de alimentos durante el curso."
           }
         />
         <ReferenceGuideClient
@@ -44,6 +51,8 @@ export default async function ReferenceGuidePage() {
           regionId={region.id}
           exchangeUnitG={region.exchangeUnitG}
           tips={buildReferenceTips(region.exchangeUnitG, region.name, region.id)}
+          sources={sources}
+          initialTab={tab === "fuentes" ? "fuentes" : undefined}
         />
       </main>
     </>

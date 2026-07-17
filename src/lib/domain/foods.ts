@@ -15,6 +15,7 @@ export interface FoodItem {
   difficulty: Difficulty;
   itemType: ItemType;
   notes: string;
+  sourceId?: string;
 }
 
 export interface EnrichedFoodItem extends FoodItem {

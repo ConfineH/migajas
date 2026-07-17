@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FoodSearchGrid } from "@/components/FoodSearchGrid";
+import { SourcesPanel } from "@/components/content-sources/SourcesPanel";
+import type { ContentSource } from "@/lib/domain/content-sources";
 import type { EnrichedFoodItem } from "@/lib/domain/foods";
 import {
   buildConversionTable,
@@ -13,7 +15,7 @@ import {
 } from "@/lib/domain/reference-guide";
 import { formatRations } from "@/lib/domain/rations";
 
-type TabId = "reglas" | "alimentos" | "calculadora";
+type TabId = "reglas" | "alimentos" | "calculadora" | "fuentes";
 
 interface ReferenceGuideClientProps {
   foods: EnrichedFoodItem[];
@@ -23,6 +25,8 @@ interface ReferenceGuideClientProps {
   regionId?: string;
   exchangeUnitG: number;
   tips: string[];
+  sources: ContentSource[];
+  initialTab?: TabId;
 }
 
 export function ReferenceGuideClient({
@@ -33,8 +37,10 @@ export function ReferenceGuideClient({
   regionId = "es",
   exchangeUnitG,
   tips,
+  sources,
+  initialTab,
 }: ReferenceGuideClientProps) {
-  const [tab, setTab] = useState<TabId>("reglas");
+  const [tab, setTab] = useState<TabId>(initialTab ?? "reglas");
   const [carbsInput, setCarbsInput] = useState(String(exchangeUnitG));
   const [rationsInput, setRationsInput] = useState("1.5");
 
@@ -49,6 +55,7 @@ export function ReferenceGuideClient({
     { id: "reglas", label: "Reglas" },
     ...(!freeMode ? [{ id: "alimentos" as const, label: "Alimentos" }] : []),
     { id: "calculadora", label: "Calculadora" },
+    ...(sources.length > 0 ? [{ id: "fuentes" as const, label: "Fuentes" }] : []),
   ];
 
   return (
@@ -122,7 +129,24 @@ export function ReferenceGuideClient({
               <li key={tip}>• {tip}</li>
             ))}
           </ul>
+          {sources.length > 0 ? (
+            <p className="text-center text-sm text-gray-500">
+              Metodología y bibliografía en la pestaña{" "}
+              <button
+                type="button"
+                onClick={() => setTab("fuentes")}
+                className="font-semibold text-emerald-700 hover:text-emerald-900"
+              >
+                Fuentes
+              </button>
+              .
+            </p>
+          ) : null}
         </section>
+      ) : null}
+
+      {tab === "fuentes" && sources.length > 0 ? (
+        <SourcesPanel sources={sources} />
       ) : null}
 
       {tab === "alimentos" && !freeMode ? (
