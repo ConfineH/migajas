@@ -4042,5 +4042,41 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA"
+  },
+  {
+    "id": "tomate-frito",
+    "country": "España",
+    "category": "Salsa",
+    "name": "Tomate frito",
+    "portionText": "2 cucharadas (50 g)",
+    "grams": 50,
+    "carbsG": 6,
+    "difficulty": "Media",
+    "itemType": "base",
+    "notes": "BEDCA"
+  },
+  {
+    "id": "embutido-almidon",
+    "country": "España",
+    "category": "Embutido",
+    "name": "Embutido con almidón",
+    "portionText": "2 lonchas (50 g)",
+    "grams": 50,
+    "carbsG": 8,
+    "difficulty": "Media",
+    "itemType": "base",
+    "notes": "BEDCA — relleno con fécula"
+  },
+  {
+    "id": "salsa-barbacoa",
+    "country": "España",
+    "category": "Salsa",
+    "name": "Salsa barbacoa",
+    "portionText": "1 cucharada (15 g)",
+    "grams": 15,
+    "carbsG": 6,
+    "difficulty": "Media",
+    "itemType": "base",
+    "notes": "BEDCA"
   }
 ]

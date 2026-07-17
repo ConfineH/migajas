@@ -2,7 +2,7 @@
   {
     "levelId": "nivel-1",
     "title": "Examen — Nivel 1",
-    "description": "Fundamentos: raciones, etiquetas, moduladores, fibra y alimentos básicos. 5 preguntas sorteadas de un banco de 12.",
+    "description": "Fundamentos: raciones, etiquetas, moduladores, fibra y alimentos básicos. 5 preguntas sorteadas de un banco de 15.",
     "poolExerciseIds": [
       "ex-l1-1-basic-ration",
       "ex-l1-2-label-reading",
@@ -15,14 +15,17 @@
       "n1-ex9",
       "n1-ex10",
       "n1-ex11",
-      "n1-ex12"
+      "n1-ex12",
+      "n1-ex13",
+      "n1-ex14",
+      "n1-ex15"
     ],
     "questionsPerExam": 5
   },
   {
     "levelId": "nivel-2",
     "title": "Examen — Nivel 2",
-    "description": "Cereales, tubérculos y legumbres. 4 preguntas sorteadas de un banco de 10.",
+    "description": "Cereales, tubérculos y legumbres. 4 preguntas sorteadas de un banco de 12.",
     "poolExerciseIds": [
       "ex-l2-1-rice-pasta-portions",
       "ex-l2-2-potato-sweet-potato",
@@ -33,14 +36,16 @@
       "n2-ex7",
       "n2-ex8",
       "n2-ex9",
-      "n2-ex10"
+      "n2-ex10",
+      "n2-ex11",
+      "n2-ex12"
     ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-3",
     "title": "Examen — Nivel 3",
-    "description": "Verduras y frutas avanzadas. 4 preguntas sorteadas de un banco de 10.",
+    "description": "Verduras y frutas avanzadas. 4 preguntas sorteadas de un banco de 11.",
     "poolExerciseIds": [
       "ex-l3-1-vegetable-carb-identify",
       "ex-l3-2-fruit-density-juice",
@@ -51,14 +56,15 @@
       "n3-ex7",
       "n3-ex8",
       "n3-ex9",
-      "n3-ex10"
+      "n3-ex10",
+      "n3-ex11"
     ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-4",
     "title": "Examen — Nivel 4",
-    "description": "Platos mixtos, cocina española y comer fuera. 4 preguntas sorteadas de un banco de 12.",
+    "description": "Platos mixtos, cocina española y comer fuera. 4 preguntas sorteadas de un banco de 14.",
     "poolExerciseIds": [
       "ex-l4-1-mixed-plate-sum",
       "ex-l4-2-spanish-home-dishes",
@@ -71,14 +77,16 @@
       "n4-ex9",
       "n4-ex10",
       "n4-ex11",
-      "n4-ex12"
+      "n4-ex12",
+      "n4-ex13",
+      "n4-ex14"
     ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-5",
     "title": "Examen — Nivel 5",
-    "description": "Integración, menús completos, alcohol y situaciones reales. 6 preguntas sorteadas de un banco de 15.",
+    "description": "Integración, menús completos, alcohol y situaciones reales. 6 preguntas sorteadas de un banco de 17.",
     "poolExerciseIds": [
       "ex-l5-1-fat-protein-delayed-glucose",
       "ex-l5-2-full-day-menu",
@@ -94,7 +102,9 @@
       "n5-ex12",
       "n5-ex13",
       "n5-ex14",
-      "n5-ex15"
+      "n5-ex15",
+      "n5-ex16",
+      "n5-ex17"
     ],
     "questionsPerExam": 6
   }

@@ -35,6 +35,9 @@ describe("reference-guide", () => {
     const esTips = buildReferenceTips(10, "España", "es");
     expect(esTips[1]).toContain("España");
     expect(esTips[1]).toContain("10 g de HC");
+    const joined = esTips.join(" ").toLowerCase();
+    expect(joined).toMatch(/fibra|hc totales/);
+    expect(joined).toMatch(/alcohol/);
 
     const doTips = buildReferenceTips(15, "República Dominicana", "do");
     expect(doTips[1]).toContain("República Dominicana");

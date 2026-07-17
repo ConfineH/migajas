@@ -22,6 +22,9 @@ export function buildReferenceTips(
     `En ${regionName}: ${exchangeUnitG} g de HC = 1 ración.`,
     `Puedes usar medios: ${half} g = 0,5 raciones, ${oneAndHalf} g = 1,5 raciones.`,
     "Los moduladores (pollo, huevo, pescado) aportan 0 raciones de HC.",
+    "Migajas cuenta HC totales por defecto; la fibra se enseña en el curso pero no se resta salvo indicación médica.",
+    "Grasas y proteínas pueden retrasar la subida de glucosa 2-4 horas (pizza, frituras, menús mixtos).",
+    "El alcohol aporta HC y puede causar hipoglucemia tardía (6-12 h después). Vigila la glucosa.",
   ];
 }
 

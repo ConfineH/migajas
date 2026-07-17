@@ -21,11 +21,11 @@ const EXAM_SPECS: Record<
   string,
   { poolSize: number; questionsPerExam: number }
 > = {
-  "nivel-1": { poolSize: 12, questionsPerExam: 5 },
-  "nivel-2": { poolSize: 10, questionsPerExam: 4 },
-  "nivel-3": { poolSize: 10, questionsPerExam: 4 },
-  "nivel-4": { poolSize: 12, questionsPerExam: 4 },
-  "nivel-5": { poolSize: 15, questionsPerExam: 6 },
+  "nivel-1": { poolSize: 15, questionsPerExam: 5 },
+  "nivel-2": { poolSize: 12, questionsPerExam: 4 },
+  "nivel-3": { poolSize: 11, questionsPerExam: 4 },
+  "nivel-4": { poolSize: 14, questionsPerExam: 4 },
+  "nivel-5": { poolSize: 17, questionsPerExam: 6 },
 };
 
 const LESSON_EXERCISE_IDS = [

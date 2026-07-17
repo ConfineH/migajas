@@ -2041,5 +2041,347 @@
         "isCorrect": false
       }
     ]
+  },
+  {
+    "id": "n1-ex13",
+    "levelId": "nivel-1",
+    "type": "count_rations",
+    "prompt": "Estimas 2 rebanadas de pan de molde (24 g HC en total). ¿Cuántas raciones?",
+    "explanation": "24 g ÷ 10 = 2,4 raciones.",
+    "difficulty": "Media",
+    "foodId": "pan-molde",
+    "correctAnswer": "2.4",
+    "options": [
+      {
+        "id": "a",
+        "label": "1,2 raciones",
+        "value": "1.2",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "2,4 raciones",
+        "value": "2.4",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "3,0 raciones",
+        "value": "3.0",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n1-ex14",
+    "levelId": "nivel-1",
+    "type": "identify_portion",
+    "prompt": "Sin mirar la etiqueta: ¿qué opción ronda ~1,5 raciones?",
+    "explanation": "1 manzana mediana ≈ 15 g HC = 1,5 raciones.",
+    "difficulty": "Media",
+    "foodId": "manzana",
+    "correctAnswer": "manzana",
+    "options": [
+      {
+        "id": "a",
+        "label": "1 manzana mediana",
+        "value": "manzana",
+        "isCorrect": true
+      },
+      {
+        "id": "b",
+        "label": "Pollo a la plancha",
+        "value": "pollo",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "Aceite de oliva",
+        "value": "aceite-oliva",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n1-ex15",
+    "levelId": "nivel-1",
+    "type": "count_rations",
+    "prompt": "2 cucharadas de kétchup (8 g HC). ¿Raciones?",
+    "explanation": "8 g ÷ 10 = 0,8 raciones.",
+    "difficulty": "Media",
+    "foodId": "ketchup",
+    "correctAnswer": "0.8",
+    "options": [
+      {
+        "id": "a",
+        "label": "0,5 raciones",
+        "value": "0.5",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "0,8 raciones",
+        "value": "0.8",
+        "isCorrect": true
+      },
+      {
+        "id": "c",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "d",
+        "label": "1,5 raciones",
+        "value": "1.5",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n2-ex11",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "½ taza de arroz cocido (75 g, 20 g HC). ¿Raciones?",
+    "explanation": "20 g ÷ 10 = 2,0 raciones.",
+    "difficulty": "Media",
+    "foodId": "arroz-cocido-150g",
+    "correctAnswer": "2.0",
+    "options": [
+      {
+        "id": "a",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "1,5 raciones",
+        "value": "1.5",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "2,5 raciones",
+        "value": "2.5",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n2-ex12",
+    "levelId": "nivel-2",
+    "type": "identify_portion",
+    "prompt": "¿Qué porción tiene ~2,5 raciones sin etiqueta?",
+    "explanation": "1 patata mediana cocida ≈ 25 g HC.",
+    "difficulty": "Media",
+    "foodId": "patata-cocida-150g",
+    "correctAnswer": "patata-cocida-150g",
+    "options": [
+      {
+        "id": "a",
+        "label": "1 patata mediana cocida",
+        "value": "patata-cocida-150g",
+        "isCorrect": true
+      },
+      {
+        "id": "b",
+        "label": "100 g de lechuga",
+        "value": "es-lechuga",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "1 huevo",
+        "value": "huevo",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n3-ex11",
+    "levelId": "nivel-3",
+    "type": "count_rations",
+    "prompt": "100 g de guisantes cocidos (14 g HC). ¿Raciones?",
+    "explanation": "14 g ÷ 10 = 1,4 raciones.",
+    "difficulty": "Media",
+    "foodId": "guisantes-cocidos",
+    "correctAnswer": "1.4",
+    "options": [
+      {
+        "id": "a",
+        "label": "0,5 raciones",
+        "value": "0.5",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "1,4 raciones",
+        "value": "1.4",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n4-ex13",
+    "levelId": "nivel-4",
+    "type": "count_rations",
+    "prompt": "2 cucharadas de tomate frito (6 g HC). ¿Raciones?",
+    "explanation": "6 g ÷ 10 = 0,6 raciones.",
+    "difficulty": "Alta",
+    "foodId": "tomate-frito",
+    "correctAnswer": "0.6",
+    "options": [
+      {
+        "id": "a",
+        "label": "0,3 raciones",
+        "value": "0.3",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "0,6 raciones",
+        "value": "0.6",
+        "isCorrect": true
+      },
+      {
+        "id": "c",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "d",
+        "label": "1,5 raciones",
+        "value": "1.5",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n4-ex14",
+    "levelId": "nivel-4",
+    "type": "count_rations",
+    "prompt": "2 lonchas de embutido con almidón (8 g HC). ¿Raciones?",
+    "explanation": "8 g ÷ 10 = 0,8 raciones.",
+    "difficulty": "Alta",
+    "foodId": "embutido-almidon",
+    "correctAnswer": "0.8",
+    "options": [
+      {
+        "id": "a",
+        "label": "0,5 raciones",
+        "value": "0.5",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "0,8 raciones",
+        "value": "0.8",
+        "isCorrect": true
+      },
+      {
+        "id": "c",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "d",
+        "label": "1,5 raciones",
+        "value": "1.5",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n5-ex16",
+    "levelId": "nivel-5",
+    "type": "count_rations",
+    "prompt": "2 cañas de cerveza (20 g HC). ¿Raciones?",
+    "explanation": "20 g ÷ 10 = 2,0 raciones.",
+    "difficulty": "Alta",
+    "foodId": "cerveza",
+    "correctAnswer": "2.0",
+    "options": [
+      {
+        "id": "a",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "1,5 raciones",
+        "value": "1.5",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "2,5 raciones",
+        "value": "2.5",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "n5-ex17",
+    "levelId": "nivel-5",
+    "type": "identify_portion",
+    "prompt": "En una cena con alcohol: ¿qué bebida aporta más HC por ración típica?",
+    "explanation": "1 caña de cerveza (~10 g HC) supera a 1 copa de vino (~3 g HC).",
+    "difficulty": "Alta",
+    "foodId": "cerveza",
+    "correctAnswer": "cerveza",
+    "options": [
+      {
+        "id": "a",
+        "label": "1 caña de cerveza",
+        "value": "cerveza",
+        "isCorrect": true
+      },
+      {
+        "id": "b",
+        "label": "1 copa de vino tinto",
+        "value": "vino-tinto",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "Agua",
+        "value": "es-agua",
+        "isCorrect": false
+      }
+    ]
   }
 ]
