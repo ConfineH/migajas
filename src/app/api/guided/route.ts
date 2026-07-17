@@ -6,6 +6,7 @@ import {
   toGuidedProgress,
   mergeGuidedIntoUserProgress,
 } from "@/lib/domain/guided-flow";
+import { validateGuidedAction } from "@/lib/domain/progress-integrity";
 import { getLessonById } from "@/lib/domain/lessons";
 import { buildLessonCompletedEvent } from "@/lib/domain/analytics";
 import { trackLearningEvent } from "@/lib/analytics-server";
@@ -22,6 +23,10 @@ export async function POST(request: Request) {
   let guided = toGuidedProgress(stored);
 
   if (action === "complete-lesson") {
+    const gate = validateGuidedAction(guided, action, id);
+    if (!gate.ok) {
+      return NextResponse.json({ error: gate.error }, { status: gate.status });
+    }
     guided = completeLesson(guided, id);
     const lesson = getLessonById(id);
     if (lesson) {
@@ -30,8 +35,16 @@ export async function POST(request: Request) {
       );
     }
   } else if (action === "complete-practice") {
+    const gate = validateGuidedAction(guided, action, id);
+    if (!gate.ok) {
+      return NextResponse.json({ error: gate.error }, { status: gate.status });
+    }
     guided = completePracticeStep(guided, id);
   } else if (action === "complete-flashcards") {
+    const gate = validateGuidedAction(guided, action, id);
+    if (!gate.ok) {
+      return NextResponse.json({ error: gate.error }, { status: gate.status });
+    }
     guided = completeFlashcards(guided, id);
   } else {
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });

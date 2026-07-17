@@ -18,6 +18,7 @@ function loadDotEnv(filePath) {
 
 async function main() {
   loadDotEnv(path.join(process.cwd(), ".env.supabase"));
+  loadDotEnv(path.join(process.cwd(), ".env.local"));
 
   const accessToken = process.env.SUPABASE_ACCESS_TOKEN;
   if (!accessToken) {
@@ -33,6 +34,8 @@ async function main() {
     uri_allow_list: `${SITE_URL}/**,http://localhost:3000/**`,
     external_email_enabled: true,
     mailer_autoconfirm: false,
+    password_hibp_enabled: true,
+    password_min_length: 10,
   };
 
   const response = await fetch(
@@ -57,6 +60,8 @@ async function main() {
   console.log(`- Site URL: ${SITE_URL}`);
   console.log(`- Redirect URLs: ${payload.uri_allow_list}`);
   console.log("- Confirmación por email: activa");
+  console.log("- Protección contraseñas filtradas (HIBP): activa");
+  console.log("- Longitud mínima de contraseña: 10");
 }
 
 main().catch((error) => {

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import type { NextResponse } from "next/server";
 import type { Attempt } from "@/lib/domain/attempts";
 import type { UserProgress } from "@/lib/domain/progress";
+import { getAppCookieOptions } from "@/lib/cookie-options";
 import { mergeAttempts, mergeUserProgress } from "@/lib/domain/progress-sync";
 import {
   ATTEMPTS_COOKIE,
@@ -96,12 +97,7 @@ export async function syncGuestLearningState(
   return merged;
 }
 
-const LEARNING_STATE_COOKIE_OPTIONS = {
-  httpOnly: true,
-  sameSite: "lax" as const,
-  maxAge: 60 * 60 * 24 * 365,
-  path: "/",
-};
+const LEARNING_STATE_COOKIE_OPTIONS = getAppCookieOptions();
 
 export function applyLearningStateCookies(
   response: NextResponse,
@@ -139,12 +135,7 @@ async function setProgressCookie(
   serialized: string,
   response?: NextResponse,
 ): Promise<void> {
-  const cookieOptions = {
-    httpOnly: true,
-    sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  };
+  const cookieOptions = getAppCookieOptions();
 
   if (response) {
     response.cookies.set(PROGRESS_COOKIE, serialized, cookieOptions);
@@ -159,12 +150,7 @@ async function setAttemptsCookie(
   serialized: string,
   response?: NextResponse,
 ): Promise<void> {
-  const cookieOptions = {
-    httpOnly: true,
-    sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
-  };
+  const cookieOptions = getAppCookieOptions();
 
   if (response) {
     response.cookies.set(ATTEMPTS_COOKIE, serialized, cookieOptions);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
+import { CookieConsentGate } from "@/components/CookieConsentGate";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default async function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-stone-50 text-gray-900">
         {children}
+        <CookieConsentGate />
       </body>
     </html>
   );

@@ -4,16 +4,14 @@ import {
   serializeOnboardingState,
   type OnboardingState,
 } from "@/lib/onboarding";
+import { getAppCookieOptions } from "@/lib/cookie-options";
 
 export async function POST(request: Request) {
   const body = (await request.json()) as OnboardingState;
 
   const response = NextResponse.json({ ok: true });
   response.cookies.set(ONBOARDING_COOKIE, serializeOnboardingState(body), {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 365,
-    path: "/",
+    ...getAppCookieOptions(),
   });
 
   return response;

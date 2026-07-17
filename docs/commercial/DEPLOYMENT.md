@@ -25,7 +25,9 @@
    npm run ops:check
    npm run ops:smoke
    ```
-6. Configurar **Auth** → URLs del sitio (ver `scripts/configure-auth-urls.mjs`).
+6. Configurar **Auth** → URLs del sitio y política de contraseñas (ver `scripts/configure-auth-urls.mjs`):
+   - `password_hibp_enabled: true` (HaveIBeenPwned; requiere plan Pro+)
+   - `password_min_length: 10`
 
 ## 2. Variables de entorno
 

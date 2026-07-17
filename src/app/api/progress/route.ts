@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { completeLevel } from "@/lib/domain/progress";
 import { clearExamSession } from "@/lib/domain/exam-session";
+import { getExercisesForLevel, getLevelById } from "@/lib/domain/exercises";
+import { validateLevelCompletion } from "@/lib/domain/progress-integrity";
 import {
   buildExamPassedEvent,
   buildFreeModeUnlockedEvent,
@@ -8,8 +10,7 @@ import {
   shouldEmitFreeModeUnlocked,
 } from "@/lib/domain/analytics";
 import { trackLearningEvent } from "@/lib/analytics-server";
-import { persistProgress, resolveProgress } from "@/lib/learning-state";
-import { getLevelById } from "@/lib/domain/exercises";
+import { persistProgress, resolveAttempts, resolveProgress } from "@/lib/learning-state";
 
 export async function GET() {
   const progress = await resolveProgress();
@@ -18,10 +19,10 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { levelId, correctCount, totalCount } = body as {
+  const { levelId } = body as {
     levelId: string;
-    correctCount: number;
-    totalCount: number;
+    correctCount?: number;
+    totalCount?: number;
   };
 
   const level = getLevelById(levelId);
@@ -30,13 +31,27 @@ export async function POST(request: Request) {
   }
 
   const existing = await resolveProgress();
+  const attempts = await resolveAttempts();
+  const validation = validateLevelCompletion(
+    existing,
+    attempts,
+    levelId,
+    getExercisesForLevel(levelId).map((exercise) => exercise.id),
+  );
+  if (!validation.ok) {
+    return NextResponse.json(
+      { error: validation.error },
+      { status: validation.status },
+    );
+  }
+
   const wasFreeModeUnlocked = existing.freeModeUnlocked;
   const clearedSessions = clearExamSession(existing.activeExamSessions, levelId);
   const updated = completeLevel(
     { ...existing, activeExamSessions: clearedSessions },
     levelId,
-    correctCount,
-    totalCount,
+    validation.correct,
+    validation.total,
   );
   const completion = updated.completions.find((c) => c.levelId === levelId)!;
 

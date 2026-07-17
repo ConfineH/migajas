@@ -22,6 +22,7 @@ export interface ProfilePatchInput {
   region_id?: unknown;
   daily_carb_goal_g?: unknown;
   clinical_mode_enabled?: unknown;
+  health_data_consent?: unknown;
 }
 
 export function isClinicalFeatureEnabled(
@@ -93,6 +94,15 @@ export function validateProfilePatch(
   if (input.clinical_mode_enabled !== undefined) {
     if (typeof input.clinical_mode_enabled !== "boolean") {
       return { ok: false, error: "Modo clínico no válido." };
+    }
+    if (input.clinical_mode_enabled === true) {
+      if (input.health_data_consent !== true) {
+        return {
+          ok: false,
+          error:
+            "Debes dar tu consentimiento explícito para tratar datos de salud.",
+        };
+      }
     }
     patch.clinical_mode_enabled = input.clinical_mode_enabled;
   }

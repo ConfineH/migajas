@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
 import {
@@ -55,7 +56,14 @@ export function OnboardingFlow({
   const [clinicalModeEnabled, setClinicalModeEnabled] = useState(
     initialClinicalModeEnabled,
   );
+  const [healthDataConsent, setHealthDataConsent] = useState(
+    initialClinicalModeEnabled,
+  );
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [accountActionError, setAccountActionError] = useState<string | null>(
+    null,
+  );
+  const [accountBusy, setAccountBusy] = useState(false);
 
   const region = getRegionById(regionId);
   const example = REGION_EXAMPLES[region.id] ?? REGION_EXAMPLES.es;
@@ -90,6 +98,13 @@ export function OnboardingFlow({
     });
 
     if (isAuthenticated) {
+      if (clinicalModeEnabled && !healthDataConsent) {
+        setSaveError(
+          "Debes dar tu consentimiento explícito para tratar datos de salud.",
+        );
+        return;
+      }
+
       const profileResponse = await fetch("/api/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -97,6 +112,9 @@ export function OnboardingFlow({
           region_id: region.id,
           daily_carb_goal_g: goal,
           clinical_mode_enabled: clinicalModeEnabled,
+          ...(clinicalModeEnabled
+            ? { health_data_consent: true }
+            : {}),
         }),
       });
 
@@ -109,6 +127,53 @@ export function OnboardingFlow({
 
     router.push(settingsMode ? "/learn" : "/learn");
     router.refresh();
+  }
+
+  async function exportAccountData() {
+    setAccountActionError(null);
+    setAccountBusy(true);
+    try {
+      const response = await fetch("/api/account/export");
+      if (!response.ok) {
+        const payload = (await response.json()) as { error?: string };
+        setAccountActionError(payload.error ?? "No se pudo exportar.");
+        return;
+      }
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "migajas-export.json";
+      anchor.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setAccountBusy(false);
+    }
+  }
+
+  async function deleteAccount() {
+    if (
+      !window.confirm(
+        "¿Seguro que quieres eliminar tu cuenta y todos tus datos? Esta acción no se puede deshacer.",
+      )
+    ) {
+      return;
+    }
+
+    setAccountActionError(null);
+    setAccountBusy(true);
+    try {
+      const response = await fetch("/api/account/delete", { method: "DELETE" });
+      if (!response.ok) {
+        const payload = (await response.json()) as { error?: string };
+        setAccountActionError(payload.error ?? "No se pudo eliminar la cuenta.");
+        return;
+      }
+      router.push("/login");
+      router.refresh();
+    } finally {
+      setAccountBusy(false);
+    }
   }
 
   return (
@@ -279,26 +344,57 @@ export function OnboardingFlow({
             </label>
 
             {isAuthenticated ? (
-              <label className="flex items-start gap-3 rounded-xl bg-white p-4">
-                <input
-                  type="checkbox"
-                  checked={clinicalModeEnabled}
-                  disabled={!canEnableClinicalMode}
-                  onChange={(event) =>
-                    setClinicalModeEnabled(event.target.checked)
-                  }
-                  className="mt-1"
-                />
-                <span className="text-sm text-gray-700">
-                  <span className="font-medium text-gray-900">
-                    Activar modo clínico
+              <div className="space-y-3">
+                <label className="flex items-start gap-3 rounded-xl bg-white p-4">
+                  <input
+                    type="checkbox"
+                    checked={clinicalModeEnabled}
+                    disabled={!canEnableClinicalMode}
+                    onChange={(event) => {
+                      const enabled = event.target.checked;
+                      setClinicalModeEnabled(enabled);
+                      if (!enabled) {
+                        setHealthDataConsent(false);
+                      }
+                    }}
+                    className="mt-1"
+                  />
+                  <span className="text-sm text-gray-700">
+                    <span className="font-medium text-gray-900">
+                      Activar modo clínico
+                    </span>
+                    <br />
+                    {canEnableClinicalMode
+                      ? "Podrás registrar tu ingesta desde el nivel 3 en adelante."
+                      : "Disponible tras aprobar el examen del nivel 3."}
                   </span>
-                  <br />
-                  {canEnableClinicalMode
-                    ? "Podrás registrar tu ingesta desde el nivel 3 en adelante."
-                    : "Disponible tras aprobar el examen del nivel 3."}
-                </span>
-              </label>
+                </label>
+
+                {clinicalModeEnabled && canEnableClinicalMode ? (
+                  <label className="flex items-start gap-3 rounded-xl border border-sky-200 bg-sky-50 p-4">
+                    <input
+                      type="checkbox"
+                      checked={healthDataConsent}
+                      onChange={(event) =>
+                        setHealthDataConsent(event.target.checked)
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-sm text-gray-700">
+                      Consiento el tratamiento de mis datos de alimentación
+                      según la{" "}
+                      <Link
+                        href="/privacidad"
+                        className="font-medium text-emerald-700 underline"
+                      >
+                        política de privacidad
+                      </Link>
+                      . Entiendo que Migajas es una herramienta educativa, no un
+                      dispositivo médico.
+                    </span>
+                  </label>
+                ) : null}
+              </div>
             ) : (
               <p className="text-sm text-gray-600">
                 Inicia sesión para activar el modo clínico y sincronizar tu meta
@@ -306,6 +402,39 @@ export function OnboardingFlow({
               </p>
             )}
           </div>
+
+          {isAuthenticated ? (
+            <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-6">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Privacidad y datos
+              </h2>
+              <p className="text-sm text-gray-600">
+                Puedes exportar o eliminar todos tus datos personales.
+              </p>
+              {accountActionError ? (
+                <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {accountActionError}
+                </p>
+              ) : null}
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  variant="secondary"
+                  onClick={exportAccountData}
+                  className={accountBusy ? "opacity-50 pointer-events-none" : ""}
+                >
+                  Exportar mis datos
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={deleteAccount}
+                  className={accountBusy ? "opacity-50 pointer-events-none" : ""}
+                >
+                  Eliminar cuenta
+                </Button>
+              </div>
+            </div>
+          ) : null}
+
           <div className="flex justify-center gap-3">
             <Button variant="ghost" onClick={() => setStep("rations")}>
               Atrás

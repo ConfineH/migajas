@@ -70,6 +70,7 @@ describe("validateProfilePatch", () => {
       region_id: "do",
       daily_carb_goal_g: 160,
       clinical_mode_enabled: true,
+      health_data_consent: true,
     });
     expect(result.ok).toBe(true);
     if (result.ok) {
