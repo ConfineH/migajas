@@ -141,7 +141,7 @@ describe("getExamForLevel", () => {
     const exam = getExamForLevel("nivel-1");
     expect(exam).toBeDefined();
     expect(exam!.poolExerciseIds.length).toBeGreaterThanOrEqual(3);
-    expect(exam!.questionsPerExam).toBe(4);
+    expect(exam!.questionsPerExam).toBe(5);
   });
 });
 

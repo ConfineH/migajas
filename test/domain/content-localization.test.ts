@@ -76,7 +76,7 @@ describe("localizeLesson", () => {
     expect(lesson).toBeDefined();
 
     const localized = localizeLesson(lesson!, dominican, foods);
-    const example = localized.steps.find((step) => step.id === "l1-1-s2");
+    const example = localized.steps.find((step) => step.id === "l1-lesson-1-s3");
 
     expect(localized.summary).toContain("República Dominicana");
     expect(example?.foodId).toBe("casabe");
@@ -86,8 +86,8 @@ describe("localizeLesson", () => {
 
 describe("localizeExercise", () => {
   it("recalculates rations with 15 g rule for Dominican foods", () => {
-    const exercise = getExerciseById("n1-ex1");
-    expect(exercise?.foodId).toBe("pan-blanco");
+    const exercise = getExerciseById("ex-l1-1-basic-ration");
+    expect(exercise?.foodId).toBe("pan-molde");
 
     const localized = localizeExercise(exercise!, dominican, foods);
 
@@ -98,7 +98,7 @@ describe("localizeExercise", () => {
   });
 
   it("maps identify_portion answers to regional food ids", () => {
-    const exercise = getExerciseById("n4-ex3");
+    const exercise = getExerciseById("n4-ex12");
     expect(exercise?.type).toBe("identify_portion");
     expect(exercise?.foodId).toBe("paella");
 

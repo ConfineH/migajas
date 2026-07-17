@@ -2,36 +2,100 @@
   {
     "levelId": "nivel-1",
     "title": "Examen — Nivel 1",
-    "description": "Demuestra lo aprendido sobre raciones, gramos y alimentos básicos. Necesitas al menos 60% para aprobar y desbloquear el modo libre. Cada intento sortea 4 preguntas del banco del nivel.",
-    "poolExerciseIds": ["n1-ex1", "n1-ex2", "n1-ex3", "n1-ex4", "n1-ex5", "n1-ex6", "n1-ex7", "n1-ex8"],
-    "questionsPerExam": 4
+    "description": "Fundamentos: raciones, etiquetas, moduladores, fibra y alimentos básicos. 5 preguntas sorteadas de un banco de 12.",
+    "poolExerciseIds": [
+      "ex-l1-1-basic-ration",
+      "ex-l1-2-label-reading",
+      "ex-l1-3-zero-carb-identify",
+      "ex-l1-4-fiber-net-carbs",
+      "ex-l1-5-fruit-bread-dairy",
+      "n1-ex6",
+      "n1-ex7",
+      "n1-ex8",
+      "n1-ex9",
+      "n1-ex10",
+      "n1-ex11",
+      "n1-ex12"
+    ],
+    "questionsPerExam": 5
   },
   {
     "levelId": "nivel-2",
     "title": "Examen — Nivel 2",
-    "description": "Cereales y tubérculos: arroz, pasta, patata y boniato. 4 preguntas sorteadas de un banco de 8.",
-    "poolExerciseIds": ["n2-ex1", "n2-ex2", "n2-ex3", "n2-ex4", "n2-ex5", "n2-ex6", "n2-ex7", "n2-ex8"],
+    "description": "Cereales, tubérculos y legumbres. 4 preguntas sorteadas de un banco de 10.",
+    "poolExerciseIds": [
+      "ex-l2-1-rice-pasta-portions",
+      "ex-l2-2-potato-sweet-potato",
+      "ex-l2-3-legumes-counting",
+      "n2-ex4",
+      "n2-ex5",
+      "n2-ex6",
+      "n2-ex7",
+      "n2-ex8",
+      "n2-ex9",
+      "n2-ex10"
+    ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-3",
     "title": "Examen — Nivel 3",
-    "description": "Legumbres y verduras con más contenido de carbohidratos. 4 preguntas sorteadas.",
-    "poolExerciseIds": ["n3-ex1", "n3-ex2", "n3-ex3", "n3-ex4", "n3-ex5", "n3-ex6", "n3-ex7", "n3-ex8"],
+    "description": "Verduras y frutas avanzadas. 4 preguntas sorteadas de un banco de 10.",
+    "poolExerciseIds": [
+      "ex-l3-1-vegetable-carb-identify",
+      "ex-l3-2-fruit-density-juice",
+      "n3-ex3",
+      "n3-ex4",
+      "n3-ex5",
+      "n3-ex6",
+      "n3-ex7",
+      "n3-ex8",
+      "n3-ex9",
+      "n3-ex10"
+    ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-4",
     "title": "Examen — Nivel 4",
-    "description": "Platos mixtos: tortilla, bocadillo, paella y pizza. 4 preguntas sorteadas.",
-    "poolExerciseIds": ["n4-ex1", "n4-ex2", "n4-ex3", "n4-ex4", "n4-ex5", "n4-ex6", "n4-ex7", "n4-ex8"],
+    "description": "Platos mixtos, cocina española y comer fuera. 4 preguntas sorteadas de un banco de 12.",
+    "poolExerciseIds": [
+      "ex-l4-1-mixed-plate-sum",
+      "ex-l4-2-spanish-home-dishes",
+      "ex-l4-3-tapas-bocadillo-pizza",
+      "n4-ex4",
+      "n4-ex5",
+      "n4-ex6",
+      "n4-ex7",
+      "n4-ex8",
+      "n4-ex9",
+      "n4-ex10",
+      "n4-ex11",
+      "n4-ex12"
+    ],
     "questionsPerExam": 4
   },
   {
     "levelId": "nivel-5",
     "title": "Examen — Nivel 5",
-    "description": "Casos reales: combinar alimentos, moduladores y comidas completas. 5 preguntas sorteadas de un banco de 10.",
-    "poolExerciseIds": ["n5-ex1", "n5-ex2", "n5-ex3", "n5-ex4", "n5-ex5", "n5-ex6", "n5-ex7", "n5-ex8", "n5-ex9", "n5-ex10"],
-    "questionsPerExam": 5
+    "description": "Integración, menús completos, alcohol y situaciones reales. 6 preguntas sorteadas de un banco de 15.",
+    "poolExerciseIds": [
+      "ex-l5-1-fat-protein-delayed-glucose",
+      "ex-l5-2-full-day-menu",
+      "ex-l5-3-alcohol-celebrations",
+      "n5-ex4",
+      "n5-ex5",
+      "n5-ex6",
+      "n5-ex7",
+      "n5-ex8",
+      "n5-ex9",
+      "n5-ex10",
+      "n5-ex11",
+      "n5-ex12",
+      "n5-ex13",
+      "n5-ex14",
+      "n5-ex15"
+    ],
+    "questionsPerExam": 6
   }
 ]

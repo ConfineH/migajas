@@ -15,8 +15,8 @@ import { enrichFoodItem } from "@/lib/domain/foods";
 describe("level-flashcards", () => {
   it("collects food ids from nivel-2 lessons", () => {
     const ids = collectLessonFoodIds("nivel-2");
-    expect(ids).toContain("arroz-cocido");
-    expect(ids).toContain("patata-cocida");
+    expect(ids).toContain("arroz-cocido-150g");
+    expect(ids).toContain("patata-cocida-150g");
   });
 
   it("deck has three modes per essential food", () => {

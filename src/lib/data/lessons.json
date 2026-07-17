@@ -3,28 +3,40 @@
     "id": "l1-lesson-1",
     "levelId": "nivel-1",
     "orderIndex": 1,
-    "title": "¿Qué es una ración?",
-    "summary": "Aprende la unidad básica del conteo de carbohidratos en España.",
+    "title": "Qué es una ración (10 g HC = 1 ración)",
+    "summary": "Aprende el concepto básico de ración de carbohidratos y por qué 10 g es el estándar en España.",
     "steps": [
       {
-        "id": "l1-1-s1",
+        "id": "l1-lesson-1-s1",
         "type": "explanation",
-        "title": "La unidad de trabajo",
-        "body": "En España, una ración de carbohidratos equivale a 10 gramos de HC. No es el peso del alimento, sino los carbohidratos que aporta."
+        "title": "¿Qué es una ración?",
+        "body": "Una ración de carbohidratos son 10 gramos de HC. Es la medida que usan los médicos en España para contar lo que comes."
       },
       {
-        "id": "l1-1-s2",
+        "id": "l1-lesson-1-s2",
+        "type": "explanation",
+        "title": "¿Por qué 10 gramos?",
+        "body": "Porque 10 g de HC elevan la glucemia de forma parecida en la mayoría de personas. Así puedes comparar manzanas con pan o arroz."
+      },
+      {
+        "id": "l1-lesson-1-s3",
         "type": "example",
-        "title": "Ejemplo: pan blanco",
-        "body": "1 rebanada de pan blanco pesa 25 g, pero aporta 10 g de carbohidratos. Eso son 1,0 ración.",
-        "foodId": "pan-blanco"
+        "title": "Ejemplo rápido",
+        "body": "1 rebanada pequeña de pan = ~10 g HC = 1 ración. 1 manzana mediana = ~15 g HC = 1,5 raciones.",
+        "foodId": "pan-molde"
       },
       {
-        "id": "l1-1-practice",
+        "id": "l1-lesson-1-s4",
+        "type": "explanation",
+        "title": "Tu objetivo",
+        "body": "Al final de esta lección sabrás identificar cuántas raciones tiene un alimento simple."
+      },
+      {
+        "id": "l1-lesson-1-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Comprueba si has entendido la unidad de ración con un ejercicio rápido.",
-        "exerciseId": "n1-ex1"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l1-1-basic-ration"
       }
     ]
   },
@@ -32,28 +44,40 @@
     "id": "l1-lesson-2",
     "levelId": "nivel-1",
     "orderIndex": 2,
-    "title": "Gramos y carbohidratos",
-    "summary": "El peso del alimento no es lo mismo que los carbohidratos.",
+    "title": "Gramos del alimento vs gramos de carbohidratos",
+    "summary": "No todo el peso del alimento es carbohidrato. Aprende a leer etiquetas y tablas nutricionales.",
     "steps": [
       {
-        "id": "l1-2-s1",
+        "id": "l1-lesson-2-s1",
         "type": "explanation",
-        "title": "Dos números distintos",
-        "body": "Siempre verás dos cifras: los gramos del alimento (cuánto pesa la porción) y los gramos de carbohidratos (cuánto HC aporta). Las raciones se calculan solo con los HC."
+        "title": "La confusión más común",
+        "body": "100 g de pan NO son 100 g de carbohidratos. El pan tiene agua, proteína, grasa y HC. Solo contamos los HC."
       },
       {
-        "id": "l1-2-s2",
+        "id": "l1-lesson-2-s2",
+        "type": "explanation",
+        "title": "Cómo leer la etiqueta",
+        "body": "Busca \"Hidratos de carbono\" en la tabla nutricional. Ese número (por 100 g) es lo que te importa. Ignora el peso total del alimento."
+      },
+      {
+        "id": "l1-lesson-2-s3",
+        "type": "explanation",
+        "title": "Fórmula mágica",
+        "body": "(Gramos de alimento × HC por 100 g) ÷ 100 = Gramos de HC. Luego divide por 10 para obtener raciones."
+      },
+      {
+        "id": "l1-lesson-2-s4",
         "type": "example",
-        "title": "Ejemplo: manzana",
-        "body": "Una manzana pequeña pesa 120 g pero aporta 15 g de HC. Eso son 1,5 raciones — no 12 raciones.",
-        "foodId": "manzana"
+        "title": "Ejemplo con yogur",
+        "body": "125 g de yogur natural × 5 g HC/100 g = 6,25 g HC ≈ 0,6 raciones. ¡No son 12,5 raciones!",
+        "foodId": "yogur-natural"
       },
       {
-        "id": "l1-2-practice",
+        "id": "l1-lesson-2-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Calcula las raciones a partir de los gramos de carbohidratos.",
-        "exerciseId": "n1-ex2"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l1-2-label-reading"
       }
     ]
   },
@@ -61,28 +85,125 @@
     "id": "l1-lesson-3",
     "levelId": "nivel-1",
     "orderIndex": 3,
-    "title": "Alimentos básicos del día a día",
-    "summary": "Pan, fruta y lácteos: los primeros alimentos que debes reconocer.",
+    "title": "Proteínas y grasas: los \"moduladores\" (0 raciones)",
+    "summary": "Carne, pollo, huevo, pescado y aceites no cuentan como carbohidratos. Pero afectan cómo absorbes los HC.",
     "steps": [
       {
-        "id": "l1-3-s1",
+        "id": "l1-lesson-3-s1",
         "type": "explanation",
-        "title": "Empieza por lo sencillo",
-        "body": "Antes de platos combinados, domina alimentos base: pan, frutas y lácteos. Son los que más repetirás."
+        "title": "¿Qué son los moduladores?",
+        "body": "Son alimentos con 0 o casi 0 carbohidratos: pollo, carne, huevo, pescado, aceite, mantequilla. No suman raciones."
       },
       {
-        "id": "l1-3-s2",
+        "id": "l1-lesson-3-s2",
+        "type": "explanation",
+        "title": "¿Por qué importan?",
+        "body": "Las proteínas y grasas retrasan la absorción de los carbohidratos. Una pizza con mucho queso sube la glucosa más tarde que un pan solo."
+      },
+      {
+        "id": "l1-lesson-3-s3",
         "type": "example",
-        "title": "Ejemplo: leche",
-        "body": "1 taza de leche (250 ml) aporta 12 g de HC = 1,2 raciones. El yogur natural aporta menos: 5 g = 0,5 raciones.",
-        "foodId": "leche"
+        "title": "Ejemplo: tortilla española",
+        "body": "1 huevo = 0 g HC. 100 g de patata = ~17 g HC (1,7 raciones). La tortilla tiene HC por la patata, no por el huevo.",
+        "foodId": "huevo"
       },
       {
-        "id": "l1-3-practice",
+        "id": "l1-lesson-3-s4",
+        "type": "example",
+        "title": "Regla de oro",
+        "body": "Si el alimento es solo proteína o grasa (pollo a la plancha, aceite de oliva), cuenta 0 raciones. Si tiene mezcla (empanado, salsa), lee la etiqueta.",
+        "foodId": "pollo"
+      },
+      {
+        "id": "l1-lesson-3-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Identifica alimentos básicos y sus raciones.",
-        "exerciseId": "n1-ex3"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l1-3-zero-carb-identify"
+      }
+    ]
+  },
+  {
+    "id": "l1-lesson-4",
+    "levelId": "nivel-1",
+    "orderIndex": 4,
+    "title": "Fibra y carbohidratos netos: qué cuenta realmente",
+    "summary": "La fibra no cuenta como ración. Aprende a restarla si la etiqueta la muestra por separado (según FEN y ADA).",
+    "steps": [
+      {
+        "id": "l1-lesson-4-s1",
+        "type": "explanation",
+        "title": "¿Qué es la fibra?",
+        "body": "Es un tipo de carbohidrato que tu cuerpo no digiere. No sube la glucosa. La FEN recomienda 25-30 g de fibra al día."
+      },
+      {
+        "id": "l1-lesson-4-s2",
+        "type": "explanation",
+        "title": "HC totales vs HC netos",
+        "body": "HC netos = HC totales − Fibra. Si la etiqueta separa la fibra, puedes restarla. Si no, usa los HC totales (más seguro)."
+      },
+      {
+        "id": "l1-lesson-4-s3",
+        "type": "example",
+        "title": "Ejemplo: pan integral",
+        "body": "100 g de pan integral = 45 g HC totales, 8 g fibra. HC netos = 37 g ≈ 3,7 raciones. Sin restar fibra = 4,5 raciones.",
+        "foodId": "pan-integral-100g"
+      },
+      {
+        "id": "l1-lesson-4-s4",
+        "type": "explanation",
+        "title": "Recomendación para Migajas",
+        "body": "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina)."
+      },
+      {
+        "id": "l1-lesson-4-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l1-4-fiber-net-carbs"
+      }
+    ]
+  },
+  {
+    "id": "l1-lesson-5",
+    "levelId": "nivel-1",
+    "orderIndex": 5,
+    "title": "Pan, fruta y lácteos: los básicos de cada día",
+    "summary": "Estos tres grupos son la base de los carbohidratos diarios. Aprende porciones típicas y raciones equivalentes.",
+    "steps": [
+      {
+        "id": "l1-lesson-5-s1",
+        "type": "example",
+        "title": "Pan y cereales",
+        "body": "1 rebanada de pan de molde = ~10 g HC (1 ración). 1 rebanada de pan de barra = ~15 g HC (1,5 raciones). El integral tiene más fibra.",
+        "foodId": "pan-molde"
+      },
+      {
+        "id": "l1-lesson-5-s2",
+        "type": "example",
+        "title": "Fruta",
+        "body": "1 manzana mediana = ~15 g HC (1,5 raciones). 1 plátano pequeño = ~20 g HC (2 raciones). El zumo cuenta igual que la fruta entera.",
+        "foodId": "manzana"
+      },
+      {
+        "id": "l1-lesson-5-s3",
+        "type": "example",
+        "title": "Lácteos",
+        "body": "1 vaso de leche (200 ml) = ~10 g HC (1 ración). 1 yogur natural = ~5-6 g HC (0,5-0,6 raciones). Los lácteos azucarados tienen más.",
+        "foodId": "leche-semi-200ml"
+      },
+      {
+        "id": "l1-lesson-5-s4",
+        "type": "explanation",
+        "title": "Truco visual",
+        "body": "1 ración de fruta = 1 pieza del tamaño de tu puño. 1 ración de pan = 1 rebanada fina. 1 ración de leche = 1 vaso pequeño."
+      },
+      {
+        "id": "l1-lesson-5-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l1-5-fruit-bread-dairy"
       }
     ]
   },
@@ -90,28 +211,42 @@
     "id": "l2-lesson-1",
     "levelId": "nivel-2",
     "orderIndex": 1,
-    "title": "Arroz y pasta",
-    "summary": "Cereales cocidos: porciones habituales y raciones.",
+    "title": "Arroz y pasta: porciones en tazas y gramos",
+    "summary": "Arroz y pasta son carbohidratos concentrados. Aprende a medir porciones cocidas y crudas con equivalencias prácticas.",
     "steps": [
       {
-        "id": "l2-1-s1",
-        "type": "explanation",
-        "title": "Porciones de cereales",
-        "body": "El arroz y la pasta se miden en tazas cuando están cocidos. Una porción típica (1/3 taza) aporta unos 15 g de HC = 1,5 raciones."
-      },
-      {
-        "id": "l2-1-s2",
+        "id": "l2-lesson-1-s1",
         "type": "example",
-        "title": "Ejemplo: arroz cocido",
-        "body": "1/3 taza de arroz (50 g) aporta 15 g de HC. Divide entre 10: 1,5 raciones.",
-        "foodId": "arroz-cocido"
+        "title": "Arroz cocido",
+        "body": "1 taza de arroz cocido (150 g) = ~40 g HC (4 raciones). ½ taza = 2 raciones. Mide con una taza de cocina estándar.",
+        "foodId": "arroz-cocido-150g"
       },
       {
-        "id": "l2-1-practice",
+        "id": "l2-lesson-1-s2",
+        "type": "example",
+        "title": "Pasta cocida",
+        "body": "1 taza de pasta cocida (140 g) = ~35 g HC (3,5 raciones). La pasta integral tiene más fibra pero similar HC total.",
+        "foodId": "pasta-cocida-140g"
+      },
+      {
+        "id": "l2-lesson-1-s3",
+        "type": "explanation",
+        "title": "Crudo vs cocido",
+        "body": "100 g de arroz crudo = 77 g HC (7,7 raciones). Al cocerse, absorbe agua y pesa más, pero los HC no cambian."
+      },
+      {
+        "id": "l2-lesson-1-s4",
+        "type": "example",
+        "title": "Consejo ADA",
+        "body": "Elige pasta y arroz integral cuando puedas. La fibra extra ayuda a que la glucosa suba más despacio.",
+        "foodId": "arroz-integral-cocido-150g"
+      },
+      {
+        "id": "l2-lesson-1-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Calcula raciones de cereales cocidos.",
-        "exerciseId": "n2-ex1"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l2-1-rice-pasta-portions"
       }
     ]
   },
@@ -119,28 +254,85 @@
     "id": "l2-lesson-2",
     "levelId": "nivel-2",
     "orderIndex": 2,
-    "title": "Patata y boniato",
-    "summary": "Tubérculos en el plato diario.",
+    "title": "Patata y boniato: no son verduras, son carbohidratos",
+    "summary": "Patata, boniato y batata cuentan como raciones, no como verduras libres. Aprende porciones y formas de cocción.",
     "steps": [
       {
-        "id": "l2-2-s1",
-        "type": "explanation",
-        "title": "Tubérculos",
-        "body": "Patata y boniato aportan HC en porciones de media taza. El peso del tubérculo no coincide con los gramos de carbohidratos."
-      },
-      {
-        "id": "l2-2-s2",
+        "id": "l2-lesson-2-s1",
         "type": "example",
-        "title": "Ejemplo: patata cocida",
-        "body": "1/2 taza de patata (75 g) aporta 15 g de HC = 1,5 raciones.",
-        "foodId": "patata-cocida"
+        "title": "Patata cocida",
+        "body": "1 patata mediana cocida (150 g) = ~25 g HC (2,5 raciones). Las patatas fritas tienen más grasa pero similar HC.",
+        "foodId": "patata-cocida-150g"
       },
       {
-        "id": "l2-2-practice",
+        "id": "l2-lesson-2-s2",
+        "type": "example",
+        "title": "Boniato/batata",
+        "body": "1 boniato pequeño (130 g) = ~26 g HC (2,6 raciones). Es más dulce que la patata pero cuenta similar.",
+        "foodId": "boniato-asado-130g"
+      },
+      {
+        "id": "l2-lesson-2-s3",
+        "type": "example",
+        "title": "Puré instantáneo",
+        "body": "Cuidado: el puré de sobre puede tener leche en polvo y almidones. 100 g de puré preparado = ~12 g HC (1,2 raciones).",
+        "foodId": "es-pure-patata"
+      },
+      {
+        "id": "l2-lesson-2-s4",
+        "type": "explanation",
+        "title": "Consejo de cocción",
+        "body": "Cocer o asar es mejor que freír. La grasa de la fritura no cuenta como HC, pero afecta la absorción (glucemia tardía)."
+      },
+      {
+        "id": "l2-lesson-2-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Identifica tubérculos y sus raciones.",
-        "exerciseId": "n2-ex3"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l2-2-potato-sweet-potato"
+      }
+    ]
+  },
+  {
+    "id": "l2-lesson-3",
+    "levelId": "nivel-2",
+    "orderIndex": 3,
+    "title": "Legumbres: lentejas, garbanzos y alubias (con fibra y proteína)",
+    "summary": "Las legumbres son carbohidratos complejos con mucha fibra y proteína. Cuentan como raciones, pero de absorción más lenta.",
+    "steps": [
+      {
+        "id": "l2-lesson-3-s1",
+        "type": "example",
+        "title": "Lentejas cocidas",
+        "body": "1 plato de lentejas cocidas (200 g) = ~24 g HC (2,4 raciones). Tienen 5 g de fibra, que ayuda a frenar la subida de glucosa.",
+        "foodId": "lentejas-cocidas-200g"
+      },
+      {
+        "id": "l2-lesson-3-s2",
+        "type": "example",
+        "title": "Garbanzos y alubias",
+        "body": "100 g de garbanzos cocidos = ~16 g HC (1,6 raciones). 100 g de alubias rojas = ~14 g HC (1,4 raciones).",
+        "foodId": "garbanzos-cocidos"
+      },
+      {
+        "id": "l2-lesson-3-s3",
+        "type": "explanation",
+        "title": "¿Por qué son especiales?",
+        "body": "Tienen proteína vegetal y mucha fibra. Por eso, aunque tienen HC, suben la glucosa más despacio que el pan o el arroz."
+      },
+      {
+        "id": "l2-lesson-3-s4",
+        "type": "example",
+        "title": "Consejos FEN y ADA",
+        "body": "La FEN y ADA recomiendan legumbres 2-3 veces por semana. Son parte de la dieta mediterránea y ayudan a controlar la glucemia.",
+        "foodId": "alubias-cocidas"
+      },
+      {
+        "id": "l2-lesson-3-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l2-3-legumes-counting"
       }
     ]
   },
@@ -148,28 +340,43 @@
     "id": "l3-lesson-1",
     "levelId": "nivel-3",
     "orderIndex": 1,
-    "title": "Legumbres",
-    "summary": "Lentejas, garbanzos y alubias en porción habitual.",
+    "title": "Verduras: cuáles son \"libres\" y cuáles cuentan",
+    "summary": "La mayoría de verduras son muy bajas en carbohidratos, pero algunas (calabaza, zanahoria, maíz) sí cuentan como raciones.",
     "steps": [
       {
-        "id": "l3-1-s1",
-        "type": "explanation",
-        "title": "Legumbres cocidas",
-        "body": "Media taza de legumbres cocidas suele aportar unos 15 g de HC. Son alimento base, aunque a veces van en platos mixtos."
-      },
-      {
-        "id": "l3-1-s2",
+        "id": "l3-lesson-1-s1",
         "type": "example",
-        "title": "Ejemplo: lentejas",
-        "body": "1/2 taza de lentejas (100 g) = 15 g HC = 1,5 raciones.",
-        "foodId": "lentejas-cocidas"
+        "title": "Verduras \"libres\" (0 raciones)",
+        "body": "Lechuga, espinacas, pepino, tomate, brócoli, coliflor, judías verdes. Tienen menos de 5 g de HC por ración. Come libremente.",
+        "foodId": "es-lechuga"
       },
       {
-        "id": "l3-1-practice",
+        "id": "l3-lesson-1-s2",
+        "type": "example",
+        "title": "Verduras que SÍ cuentan",
+        "body": "Calabaza cocida (100 g = ~6 g HC), zanahoria cocida (100 g = ~8 g HC), maíz (100 g = ~19 g HC). Estas sí suman raciones.",
+        "foodId": "calabaza"
+      },
+      {
+        "id": "l3-lesson-1-s3",
+        "type": "example",
+        "title": "Truco de cocción",
+        "body": "Las verduras cocidas concentran más los HC que las crudas. 100 g de zanahoria cruda = 5 g HC, cocida = 8 g HC.",
+        "foodId": "zanahoria"
+      },
+      {
+        "id": "l3-lesson-1-s4",
+        "type": "example",
+        "title": "Recomendación diaria",
+        "body": "La FEN recomienda 2-3 raciones de verdura al día. Prioriza las \"libres\" para llenar el plato sin sumar carbohidratos.",
+        "foodId": "maiz-grano"
+      },
+      {
+        "id": "l3-lesson-1-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Cuenta raciones de legumbres.",
-        "exerciseId": "n3-ex1"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l3-1-vegetable-carb-identify"
       }
     ]
   },
@@ -177,28 +384,43 @@
     "id": "l3-lesson-2",
     "levelId": "nivel-3",
     "orderIndex": 2,
-    "title": "Verduras con más HC",
-    "summary": "No todas las verduras aportan igual.",
+    "title": "Frutas avanzadas: zumo vs pieza, densidad y variedades españolas",
+    "summary": "No todas las frutas son iguales. El zumo cuenta igual que la fruta, pero algunas frutas son mucho más densas en carbohidratos.",
     "steps": [
       {
-        "id": "l3-2-s1",
-        "type": "explanation",
-        "title": "Verduras que cuentan",
-        "body": "Zanahoria, calabaza o cebolla aportan más HC que lechuga o pepino. Hay que conocer las que sí suman raciones."
-      },
-      {
-        "id": "l3-2-s2",
+        "id": "l3-lesson-2-s1",
         "type": "example",
-        "title": "Ejemplo: calabaza",
-        "body": "1 taza de calabaza aporta 15 g de HC = 1,5 raciones.",
-        "foodId": "calabaza"
+        "title": "Zumo vs fruta entera",
+        "body": "1 vaso de zumo de naranja (200 ml) = ~20 g HC (2 raciones), igual que 1 naranja grande. Pero el zumo no tiene fibra, así que sube más rápido la glucosa.",
+        "foodId": "es-zumo-naranja"
       },
       {
-        "id": "l3-2-practice",
+        "id": "l3-lesson-2-s2",
+        "type": "example",
+        "title": "Frutas muy densas",
+        "body": "Uvas (100 g = ~18 g HC), higos, chirimoya, mango. Son saludables, pero 1 puñado puede ser 2-3 raciones. Mide con cuidado.",
+        "foodId": "uvas"
+      },
+      {
+        "id": "l3-lesson-2-s3",
+        "type": "example",
+        "title": "Frutas menos densas",
+        "body": "Fresas (100 g = ~6 g HC), melón, sandía. Puedes comer más cantidad con menos raciones. Ideales para saciar sin exceso de HC.",
+        "foodId": "fresas"
+      },
+      {
+        "id": "l3-lesson-2-s4",
+        "type": "example",
+        "title": "Fruta en almíbar",
+        "body": "Cuidado: la fruta en almíbar tiene azúcar añadido. 100 g de piña en almíbar = ~20 g HC, vs 10 g de piña natural.",
+        "foodId": "pina-almibar"
+      },
+      {
+        "id": "l3-lesson-2-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Distingue verduras por su aporte de HC.",
-        "exerciseId": "n3-ex3"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l3-2-fruit-density-juice"
       }
     ]
   },
@@ -206,28 +428,42 @@
     "id": "l4-lesson-1",
     "levelId": "nivel-4",
     "orderIndex": 1,
-    "title": "¿Qué es un plato mixto?",
-    "summary": "Cuando un plato combina varios ingredientes.",
+    "title": "Concepto de plato compuesto: cómo sumar raciones de varios alimentos",
+    "summary": "La mayoría de comidas combinan varios alimentos. Aprende a sumar las raciones de cada ingrediente para obtener el total.",
     "steps": [
       {
-        "id": "l4-1-s1",
+        "id": "l4-lesson-1-s1",
         "type": "explanation",
-        "title": "Platos compuestos",
-        "body": "Un plato mixto mezcla carbohidratos, proteínas y grasas. Los HC vienen del pan, arroz, patata u otros ingredientes base."
+        "title": "Descomponer el plato",
+        "body": "Separa mentalmente cada ingrediente: pan + carne + patata + ensalada. Suma solo los que tienen carbohidratos."
       },
       {
-        "id": "l4-1-s2",
+        "id": "l4-lesson-1-s2",
         "type": "example",
-        "title": "Ejemplo: tortilla de patata",
-        "body": "La tortilla combina huevo (modulador) y patata (HC). Una porción puede aportar unos 20 g de HC = 2,0 raciones.",
-        "foodId": "tortilla-patata"
+        "title": "Ejemplo: filete con patatas",
+        "body": "Filete de ternera = 0 raciones (solo proteína). 150 g de patata cocida = 2,5 raciones. Ensalada = 0 raciones. Total = 2,5 raciones.",
+        "foodId": "patata-cocida-150g"
       },
       {
-        "id": "l4-1-practice",
+        "id": "l4-lesson-1-s3",
+        "type": "example",
+        "title": "Salsas y rebozados",
+        "body": "El rebozado (harina, pan rallado) suma carbohidratos. Las salsas con azúcar (kétchup, salsa barbacoa) también. Lee la etiqueta.",
+        "foodId": "ketchup"
+      },
+      {
+        "id": "l4-lesson-1-s4",
+        "type": "example",
+        "title": "Plato del servidor",
+        "body": "Divide tu plato en 3: ½ verduras, ¼ proteína (pollo, pescado), ¼ carbohidratos (arroz, patata, pasta). Es la recomendación de la ADA y FEN.",
+        "foodId": "ensalada-mixta"
+      },
+      {
+        "id": "l4-lesson-1-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Calcula raciones en un plato mixto.",
-        "exerciseId": "n4-ex1"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l4-1-mixed-plate-sum"
       }
     ]
   },
@@ -235,28 +471,87 @@
     "id": "l4-lesson-2",
     "levelId": "nivel-4",
     "orderIndex": 2,
-    "title": "Platos españoles habituales",
-    "summary": "Paella, bocadillo y pizza en la vida real.",
+    "title": "Cocina de casa: guisos, paella, tortilla y platos españoles típicos",
+    "summary": "Aprende a calcular raciones en platos típicos españoles: paella, tortilla, cocido, gazpacho, fabada.",
     "steps": [
       {
-        "id": "l4-2-s1",
-        "type": "explanation",
-        "title": "Comida cotidiana",
-        "body": "Paella, bocadillos y pizza son platos frecuentes. Cada uno concentra HC de forma distinta según la porción."
-      },
-      {
-        "id": "l4-2-s2",
+        "id": "l4-lesson-2-s1",
         "type": "example",
-        "title": "Ejemplo: paella",
-        "body": "1 plato de paella (300 g) puede aportar 45 g de HC = 4,5 raciones, principalmente del arroz.",
+        "title": "Paella",
+        "body": "1 plato de paella (300 g) = ~45 g HC (4,5 raciones) por el arroz. El pollo, marisco y verduras no suman HC, solo el arroz.",
         "foodId": "paella"
       },
       {
-        "id": "l4-2-practice",
+        "id": "l4-lesson-2-s2",
+        "type": "example",
+        "title": "Tortilla de patata",
+        "body": "1 ración de tortilla (100 g) = ~10 g HC (1 ración) por la patata. El huevo y aceite no cuentan. Varía según la cantidad de patata.",
+        "foodId": "tortilla-patata"
+      },
+      {
+        "id": "l4-lesson-2-s3",
+        "type": "example",
+        "title": "Gazpacho",
+        "body": "1 vaso de gazpacho (250 ml) = ~10 g HC (1 ración) por el tomate, pimiento y pan que lleva. Sin pan añadido, menos HC.",
+        "foodId": "es-gazpacho"
+      },
+      {
+        "id": "l4-lesson-2-s4",
+        "type": "example",
+        "title": "Fabada o cocido",
+        "body": "1 plato de fabada (300 g) = ~30 g HC (3 raciones) por las alubias y chorizo (el chorizo tiene almidón). El compango no cuenta.",
+        "foodId": "es-fabada"
+      },
+      {
+        "id": "l4-lesson-2-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Identifica platos mixtos españoles.",
-        "exerciseId": "n4-ex3"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l4-2-spanish-home-dishes"
+      }
+    ]
+  },
+  {
+    "id": "l4-lesson-3",
+    "levelId": "nivel-4",
+    "orderIndex": 3,
+    "title": "Fuera de casa: tapas, bocadillos, pizzas y restaurantes",
+    "summary": "Comer fuera es un reto. Aprende a estimar raciones en situaciones sociales: tapeo, bocadillos, comida rápida.",
+    "steps": [
+      {
+        "id": "l4-lesson-3-s1",
+        "type": "example",
+        "title": "Bocadillos",
+        "body": "1 bocadillo de pan de barra (100 g de pan) = ~50 g HC (5 raciones). El relleno (jamón, tortilla) no cuenta, solo el pan.",
+        "foodId": "bocadillo-jamon"
+      },
+      {
+        "id": "l4-lesson-3-s2",
+        "type": "example",
+        "title": "Tapas típicas",
+        "body": "Patatas fritas (ración mediana 150 g) = ~38 g HC (3,8 raciones). Calamares a la romana (rebozados) = ~15 g HC por el rebozado.",
+        "foodId": "patatas-fritas-150g"
+      },
+      {
+        "id": "l4-lesson-3-s3",
+        "type": "example",
+        "title": "Pizza",
+        "body": "1 porción de pizza (125 g) = ~30 g HC (3 raciones) por la masa. Cuanto más fina la masa, menos HC. El queso y ingredientes no suman.",
+        "foodId": "pizza"
+      },
+      {
+        "id": "l4-lesson-3-s4",
+        "type": "example",
+        "title": "Truco de restaurante",
+        "body": "Pide la salsa aparte, elige opciones a la plancha, y comparte las patatas fritas o el pan. Así controlas mejor las raciones.",
+        "foodId": "calamares-romana"
+      },
+      {
+        "id": "l4-lesson-3-practice",
+        "type": "practice",
+        "title": "Practica ahora",
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l4-3-tapas-bocadillo-pizza"
       }
     ]
   },
@@ -264,28 +559,40 @@
     "id": "l5-lesson-1",
     "levelId": "nivel-5",
     "orderIndex": 1,
-    "title": "Combinar en una comida",
-    "summary": "Suma los HC de cada alimento.",
+    "title": "Grasas y proteínas: impacto en la glucemia tardía (concepto avanzado)",
+    "summary": "Las comidas muy grasas o proteicas pueden retrasar el pico de glucosa 3-5 horas. Aprende a identificar estas situaciones.",
     "steps": [
       {
-        "id": "l5-1-s1",
+        "id": "l5-lesson-1-s1",
         "type": "explanation",
-        "title": "Raciones totales",
-        "body": "En un desayuno o comida real, suma los gramos de HC de cada alimento y divide entre 10 para obtener las raciones totales."
+        "title": "El efecto de la grasa",
+        "body": "Una pizza o una comida con mucha grasa (frituras, quesos) puede hacer que la glucosa suba más tarde (3-5 horas después)."
       },
       {
-        "id": "l5-1-s2",
+        "id": "l5-lesson-1-s2",
+        "type": "explanation",
+        "title": "Proteínas en exceso",
+        "body": "Comer mucha proteína (filete grande, pollo entero) también puede retrasar la absorción de carbohidratos y afectar la glucemia tardía."
+      },
+      {
+        "id": "l5-lesson-1-s3",
+        "type": "explanation",
+        "title": "¿Qué hacer?",
+        "body": "Si comes muy grasas, vigila la glucosa varias horas después, no solo a las 2 horas. Habla con tu médico si usas insulina."
+      },
+      {
+        "id": "l5-lesson-1-s4",
         "type": "example",
-        "title": "Ejemplo: desayuno",
-        "body": "Pan (10 g HC) + leche (12 g HC) = 22 g HC total = 2,2 raciones.",
-        "foodId": "pan-blanco"
+        "title": "Ejemplo: pizza vs pasta",
+        "body": "La pasta (poca grasa) sube la glucosa a las 2 horas. La pizza (mucha grasa) puede subirla a las 4-5 horas. Ambas tienen HC similares.",
+        "foodId": "pizza-pepperoni"
       },
       {
-        "id": "l5-1-practice",
+        "id": "l5-lesson-1-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Suma raciones de una comida combinada.",
-        "exerciseId": "n5-ex1"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l5-1-fat-protein-delayed-glucose"
       }
     ]
   },
@@ -293,28 +600,43 @@
     "id": "l5-lesson-2",
     "levelId": "nivel-5",
     "orderIndex": 2,
-    "title": "Moduladores: proteína sin HC",
-    "summary": "Pollo, pescado y huevo no aportan raciones de HC.",
+    "title": "Menús completos: desayunos, comidas, meriendas y cenas",
+    "summary": "Integra todo lo aprendido calculando raciones en menús completos de un día. Practica con casos reales.",
     "steps": [
       {
-        "id": "l5-2-s1",
-        "type": "explanation",
-        "title": "Qué son los moduladores",
-        "body": "Las proteínas (pollo, carne, pescado, huevo) tienen 0 g de HC y 0 raciones. Acompañan pero no suman carbohidratos."
-      },
-      {
-        "id": "l5-2-s2",
+        "id": "l5-lesson-2-s1",
         "type": "example",
-        "title": "Ejemplo: pollo con arroz",
-        "body": "Arroz (15 g HC) + pollo (0 g HC) = solo 1,5 raciones de HC. El pollo es modulador.",
-        "foodId": "pollo"
+        "title": "Desayuno típico",
+        "body": "1 vaso de leche (1 ración) + 2 tostadas de pan (2 raciones) + 1 pieza de fruta (1,5 raciones) = 4,5 raciones totales.",
+        "foodId": "tostadas-pan"
       },
       {
-        "id": "l5-2-practice",
+        "id": "l5-lesson-2-s2",
+        "type": "example",
+        "title": "Comida completa",
+        "body": "Ensalada (0) + filete con patatas (2,5 raciones) + 1 yogur (0,5 raciones) + 1 fruta (1 ración) = 4 raciones totales.",
+        "foodId": "patata-cocida-150g"
+      },
+      {
+        "id": "l5-lesson-2-s3",
+        "type": "example",
+        "title": "Merienda",
+        "body": "1 sándwich pequeño (2 raciones) o 1 fruta + 3-4 nueces (0 raciones, solo grasa). Las nueces no suman HC.",
+        "foodId": "es-sandwich-mixto"
+      },
+      {
+        "id": "l5-lesson-2-s4",
+        "type": "example",
+        "title": "Cena ligera",
+        "body": "Gazpacho (1 ración) + tortilla francesa (0 raciones) + 1 rebanada de pan (1 ración) = 2 raciones totales. Ideal para la noche.",
+        "foodId": "es-gazpacho"
+      },
+      {
+        "id": "l5-lesson-2-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Identifica qué alimentos no aportan raciones.",
-        "exerciseId": "n5-ex2"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l5-2-full-day-menu"
       }
     ]
   },
@@ -322,28 +644,43 @@
     "id": "l5-lesson-3",
     "levelId": "nivel-5",
     "orderIndex": 3,
-    "title": "Casos del día a día",
-    "summary": "Meriendas y platos completos.",
+    "title": "Alcohol, celebraciones y situaciones especiales",
+    "summary": "El alcohol afecta la glucemia y cuenta como carbohidratos. Aprende a manejar cervezas, vino y dulces de celebración.",
     "steps": [
       {
-        "id": "l5-3-s1",
-        "type": "explanation",
-        "title": "Situaciones reales",
-        "body": "Plátano con yogur, lentejas estofadas o pasta con tomate son situaciones que encontrarás a menudo. Practica con porciones reales."
-      },
-      {
-        "id": "l5-3-s2",
+        "id": "l5-lesson-3-s1",
         "type": "example",
-        "title": "Ejemplo: lentejas estofadas",
-        "body": "1 plato completo (300 g) puede aportar 30 g de HC = 3,0 raciones.",
-        "foodId": "lentejas-estofadas"
+        "title": "Cerveza",
+        "body": "1 caña de cerveza (200 ml) = ~10 g HC (1 ración). La cerveza sin alcohol tiene menos HC (~5 g/200 ml). No cuentes solo el alcohol, cuenta los HC.",
+        "foodId": "cerveza"
       },
       {
-        "id": "l5-3-practice",
+        "id": "l5-lesson-3-s2",
+        "type": "example",
+        "title": "Vino",
+        "body": "1 copa de vino (100 ml) = ~2-3 g HC (0,2-0,3 raciones). El vino dulce o cava tiene más (hasta 8 g/100 ml).",
+        "foodId": "vino-tinto"
+      },
+      {
+        "id": "l5-lesson-3-s3",
+        "type": "example",
+        "title": "Dulces de celebración",
+        "body": "1 trozo de tarta de cumpleaños (100 g) = ~35-50 g HC (3,5-5 raciones). El chocolate (100 g) = ~50 g HC (5 raciones).",
+        "foodId": "tarta-cumpleanos"
+      },
+      {
+        "id": "l5-lesson-3-s4",
+        "type": "example",
+        "title": "Consejo de seguridad",
+        "body": "El alcohol puede causar hipoglucemias tardías (6-12 horas después). Si bebes, hazlo con comida y vigila tu glucosa.",
+        "foodId": "chocolate-leche"
+      },
+      {
+        "id": "l5-lesson-3-practice",
         "type": "practice",
         "title": "Practica ahora",
-        "body": "Resuelve un caso real de comida española.",
-        "exerciseId": "n5-ex4"
+        "body": "Comprueba lo aprendido con un ejercicio rápido.",
+        "exerciseId": "ex-l5-3-alcohol-celebrations"
       }
     ]
   }

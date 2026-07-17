@@ -2,36 +2,36 @@
   {
     "id": "nivel-1",
     "orderIndex": 1,
-    "name": "Nivel 1 — Lo básico",
-    "description": "Pan, fruta y lácteos. Aprende a reconocer porciones y raciones en alimentos sencillos.",
+    "name": "Nivel 1 — Fundamentos y metabolismo",
+    "description": "Raciones, etiquetas, moduladores, fibra y alimentos básicos del día a día.",
     "country": "España"
   },
   {
     "id": "nivel-2",
     "orderIndex": 2,
-    "name": "Nivel 2 — Cereales y tubérculos",
-    "description": "Arroz, pasta y patata. Alimentos base de muchos platos cotidianos.",
+    "name": "Nivel 2 — Cereales, tubérculos y legumbres",
+    "description": "Arroz, pasta, patata, boniato y legumbres con fibra y proteína.",
     "country": "España"
   },
   {
     "id": "nivel-3",
     "orderIndex": 3,
-    "name": "Nivel 3 — Legumbres y verduras",
-    "description": "Lentejas, garbanzos y verduras con más contenido de HC.",
+    "name": "Nivel 3 — Verduras y frutas avanzado",
+    "description": "Verduras libres vs las que cuentan, y frutas densas, zumo y almíbar.",
     "country": "España"
   },
   {
     "id": "nivel-4",
     "orderIndex": 4,
-    "name": "Nivel 4 — Platos mixtos",
-    "description": "Tortilla, paella, bocadillo y otros platos compuestos.",
+    "name": "Nivel 4 — Platos mixtos y cocina española",
+    "description": "Platos compuestos, cocina de casa y comer fuera: tapas, bocadillos y pizza.",
     "country": "España"
   },
   {
     "id": "nivel-5",
     "orderIndex": 5,
-    "name": "Nivel 5 — Casos reales",
-    "description": "Combinaciones y situaciones del día a día para afianzar lo aprendido.",
+    "name": "Nivel 5 — Integración y vida real",
+    "description": "Menús completos, grasas y glucemia tardía, alcohol y celebraciones.",
     "country": "España"
   }
 ]
