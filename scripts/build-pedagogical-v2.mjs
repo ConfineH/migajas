@@ -12,6 +12,7 @@ function lesson(id, levelId, orderIndex, title, summary, contentSteps, exerciseI
     title: s.title,
     body: s.body,
     ...(s.foodId ? { foodId: s.foodId } : {}),
+    ...(s.sourceIds ? { sourceIds: s.sourceIds } : {}),
   }));
   steps.push({
     id: `${id}-practice`,
@@ -98,10 +99,10 @@ const LESSONS = [
     { title: "Regla de oro", body: "Si el alimento es solo proteína o grasa (pollo a la plancha, aceite de oliva), cuenta 0 raciones. Si tiene mezcla (empanado, salsa), lee la etiqueta.", foodId: "pollo" },
   ], "ex-l1-3-zero-carb-identify"),
   lesson("l1-lesson-4", "nivel-1", 4, "Fibra y carbohidratos netos: qué cuenta realmente", "La fibra no cuenta como ración. Aprende a restarla si la etiqueta la muestra por separado (según FEN y ADA).", [
-    { title: "¿Qué es la fibra?", body: "Es un tipo de carbohidrato que tu cuerpo no digiere. No sube la glucosa. La FEN recomienda 25-30 g de fibra al día." },
+    { title: "¿Qué es la fibra?", body: "Es un tipo de carbohidrato que tu cuerpo no digiere. No sube la glucosa. La FEN recomienda 25-30 g de fibra al día.", sourceIds: ["fen"] },
     { title: "HC totales vs HC netos", body: "HC netos = HC totales − Fibra. Si la etiqueta separa la fibra, puedes restarla. Si no, usa los HC totales (más seguro)." },
     { title: "Ejemplo: pan integral", body: "100 g de pan integral = 45 g HC totales, 8 g fibra. HC netos = 37 g ≈ 3,7 raciones. Sin restar fibra = 4,5 raciones.", foodId: "pan-integral-100g" },
-    { title: "Recomendación para Migajas", body: "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina)." },
+    { title: "Recomendación para Migajas", body: "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina).", sourceIds: ["migajas-fiber-policy"] },
   ], "ex-l1-4-fiber-net-carbs"),
   lesson("l1-lesson-5", "nivel-1", 5, "Pan, fruta y lácteos: los básicos de cada día", "Estos tres grupos son la base de los carbohidratos diarios. Aprende porciones típicas y raciones equivalentes.", [
     { title: "Pan y cereales", body: "1 rebanada de pan de molde = ~10 g HC (1 ración). 1 rebanada de pan de barra = ~15 g HC (1,5 raciones). El integral tiene más fibra.", foodId: "pan-molde" },
@@ -113,7 +114,7 @@ const LESSONS = [
     { title: "Arroz cocido", body: "1 taza de arroz cocido (150 g) = ~40 g HC (4 raciones). ½ taza = 2 raciones. Mide con una taza de cocina estándar.", foodId: "arroz-cocido-150g" },
     { title: "Pasta cocida", body: "1 taza de pasta cocida (140 g) = ~35 g HC (3,5 raciones). La pasta integral tiene más fibra pero similar HC total.", foodId: "pasta-cocida-140g" },
     { title: "Crudo vs cocido", body: "100 g de arroz crudo = 77 g HC (7,7 raciones). Al cocerse, absorbe agua y pesa más, pero los HC no cambian." },
-    { title: "Consejo ADA", body: "Elige pasta y arroz integral cuando puedas. La fibra extra ayuda a que la glucosa suba más despacio.", foodId: "arroz-integral-cocido-150g" },
+    { title: "Consejo ADA", body: "Elige pasta y arroz integral cuando puedas. La fibra extra ayuda a que la glucosa suba más despacio.", foodId: "arroz-integral-cocido-150g", sourceIds: ["ada"] },
   ], "ex-l2-1-rice-pasta-portions"),
   lesson("l2-lesson-2", "nivel-2", 2, "Patata y boniato: no son verduras, son carbohidratos", "Patata, boniato y batata cuentan como raciones, no como verduras libres. Aprende porciones y formas de cocción.", [
     { title: "Patata cocida", body: "1 patata mediana cocida (150 g) = ~25 g HC (2,5 raciones). Las patatas fritas tienen más grasa pero similar HC.", foodId: "patata-cocida-150g" },
@@ -125,13 +126,13 @@ const LESSONS = [
     { title: "Lentejas cocidas", body: "1 plato de lentejas cocidas (200 g) = ~24 g HC (2,4 raciones). Tienen 5 g de fibra, que ayuda a frenar la subida de glucosa.", foodId: "lentejas-cocidas-200g" },
     { title: "Garbanzos y alubias", body: "100 g de garbanzos cocidos = ~16 g HC (1,6 raciones). 100 g de alubias rojas = ~14 g HC (1,4 raciones).", foodId: "garbanzos-cocidos" },
     { title: "¿Por qué son especiales?", body: "Tienen proteína vegetal y mucha fibra. Por eso, aunque tienen HC, suben la glucosa más despacio que el pan o el arroz." },
-    { title: "Consejos FEN y ADA", body: "La FEN y ADA recomiendan legumbres 2-3 veces por semana. Son parte de la dieta mediterránea y ayudan a controlar la glucemia.", foodId: "alubias-cocidas" },
+    { title: "Consejos FEN y ADA", body: "La FEN y ADA recomiendan legumbres 2-3 veces por semana. Son parte de la dieta mediterránea y ayudan a controlar la glucemia.", foodId: "alubias-cocidas", sourceIds: ["fen", "ada"] },
   ], "ex-l2-3-legumes-counting"),
   lesson("l3-lesson-1", "nivel-3", 1, 'Verduras: cuáles son "libres" y cuáles cuentan', "La mayoría de verduras son muy bajas en carbohidratos, pero algunas (calabaza, zanahoria, maíz) sí cuentan como raciones.", [
     { title: 'Verduras "libres" (0 raciones)', body: "Lechuga, espinacas, pepino, tomate, brócoli, coliflor, judías verdes. Tienen menos de 5 g de HC por ración. Come libremente.", foodId: "es-lechuga" },
     { title: "Verduras que SÍ cuentan", body: "Calabaza cocida (100 g = ~6 g HC), zanahoria cocida (100 g = ~8 g HC), maíz (100 g = ~19 g HC). Estas sí suman raciones.", foodId: "calabaza" },
     { title: "Truco de cocción", body: "Las verduras cocidas concentran más los HC que las crudas. 100 g de zanahoria cruda = 5 g HC, cocida = 8 g HC.", foodId: "zanahoria" },
-    { title: "Recomendación diaria", body: 'La FEN recomienda 2-3 raciones de verdura al día. Prioriza las "libres" para llenar el plato sin sumar carbohidratos.', foodId: "maiz-grano" },
+    { title: "Recomendación diaria", body: 'La FEN recomienda 2-3 raciones de verdura al día. Prioriza las "libres" para llenar el plato sin sumar carbohidratos.', foodId: "maiz-grano", sourceIds: ["fen"] },
   ], "ex-l3-1-vegetable-carb-identify"),
   lesson("l3-lesson-2", "nivel-3", 2, "Frutas avanzadas: zumo vs pieza, densidad y variedades españolas", "No todas las frutas son iguales. El zumo cuenta igual que la fruta, pero algunas frutas son mucho más densas en carbohidratos.", [
     { title: "Zumo vs fruta entera", body: "1 vaso de zumo de naranja (200 ml) = ~20 g HC (2 raciones), igual que 1 naranja grande. Pero el zumo no tiene fibra, así que sube más rápido la glucosa.", foodId: "es-zumo-naranja" },
@@ -143,7 +144,7 @@ const LESSONS = [
     { title: "Descomponer el plato", body: "Separa mentalmente cada ingrediente: pan + carne + patata + ensalada. Suma solo los que tienen carbohidratos." },
     { title: "Ejemplo: filete con patatas", body: "Filete de ternera = 0 raciones (solo proteína). 150 g de patata cocida = 2,5 raciones. Ensalada = 0 raciones. Total = 2,5 raciones.", foodId: "patata-cocida-150g" },
     { title: "Salsas y rebozados", body: "El rebozado (harina, pan rallado) suma carbohidratos. Las salsas con azúcar (kétchup, salsa barbacoa) también. Lee la etiqueta.", foodId: "ketchup" },
-    { title: "Plato del servidor", body: "Divide tu plato en 3: ½ verduras, ¼ proteína (pollo, pescado), ¼ carbohidratos (arroz, patata, pasta). Es la recomendación de la ADA y FEN.", foodId: "ensalada-mixta" },
+    { title: "Plato del servidor", body: "Divide tu plato en 3: ½ verduras, ¼ proteína (pollo, pescado), ¼ carbohidratos (arroz, patata, pasta). Es la recomendación de la ADA y FEN.", foodId: "ensalada-mixta", sourceIds: ["ada", "fen"] },
   ], "ex-l4-1-mixed-plate-sum"),
   lesson("l4-lesson-2", "nivel-4", 2, "Cocina de casa: guisos, paella, tortilla y platos españoles típicos", "Aprende a calcular raciones en platos típicos españoles: paella, tortilla, cocido, gazpacho, fabada.", [
     { title: "Paella", body: "1 plato de paella (300 g) = ~45 g HC (4,5 raciones) por el arroz. El pollo, marisco y verduras no suman HC, solo el arroz.", foodId: "paella" },
@@ -173,7 +174,7 @@ const LESSONS = [
     { title: "Cerveza", body: "1 caña de cerveza (200 ml) = ~10 g HC (1 ración). La cerveza sin alcohol tiene menos HC (~5 g/200 ml). No cuentes solo el alcohol, cuenta los HC.", foodId: "cerveza" },
     { title: "Vino", body: "1 copa de vino (100 ml) = ~2-3 g HC (0,2-0,3 raciones). El vino dulce o cava tiene más (hasta 8 g/100 ml).", foodId: "vino-tinto" },
     { title: "Dulces de celebración", body: "1 trozo de tarta de cumpleaños (100 g) = ~35-50 g HC (3,5-5 raciones). El chocolate (100 g) = ~50 g HC (5 raciones).", foodId: "tarta-cumpleanos" },
-    { title: "Consejo de seguridad", body: "El alcohol puede causar hipoglucemias tardías (6-12 horas después). Si bebes, hazlo con comida y vigila tu glucosa.", foodId: "chocolate-leche" },
+    { title: "Consejo de seguridad", body: "El alcohol puede causar hipoglucemias tardías (6-12 horas después). Si bebes, hazlo con comida y vigila tu glucosa.", foodId: "chocolate-leche", sourceIds: ["ada"] },
   ], "ex-l5-3-alcohol-celebrations"),
 ];
 

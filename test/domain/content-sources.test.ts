@@ -5,6 +5,7 @@ import {
   getSourcesForRegion,
   groupSourcesByScope,
   inferFoodSourceId,
+  resolveStepSourceIds,
   SOURCE_SCOPES,
 } from "@/lib/domain/content-sources";
 
@@ -57,5 +58,23 @@ describe("content-sources", () => {
     expect(inferFoodSourceId({ sourceId: "bedca", notes: "Base" })).toBe(
       "bedca",
     );
+  });
+
+  it("resolves explicit lesson step sources", () => {
+    expect(
+      resolveStepSourceIds({
+        sourceIds: ["fen", "ada"],
+        body: "Sin menciones",
+      }),
+    ).toEqual(["fen", "ada"]);
+  });
+
+  it("infers FEN and ADA from lesson step copy when sourceIds missing", () => {
+    expect(
+      resolveStepSourceIds({
+        title: "Consejos",
+        body: "La FEN y ADA recomiendan legumbres.",
+      }),
+    ).toEqual(["fen", "ada"]);
   });
 });

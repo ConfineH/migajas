@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/Button";
+import { LessonStepFootnotes } from "@/components/content-sources/LessonStepFootnotes";
 import type { Lesson } from "@/lib/domain/lessons";
 import { getFoodById } from "@/lib/data/foods";
 import { enrichFoodItem } from "@/lib/domain/foods";
@@ -50,6 +51,7 @@ export function LessonViewer({
         {step.foodId && (
           <FoodExample foodId={step.foodId} exchangeUnitG={exchangeUnitG} />
         )}
+        <LessonStepFootnotes step={step} />
       </article>
 
       <p className="text-center text-sm text-gray-500">

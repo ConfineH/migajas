@@ -9,6 +9,7 @@ export interface LessonStep {
   body: string;
   foodId?: string;
   exerciseId?: string;
+  sourceIds?: string[];
 }
 
 export interface Lesson {

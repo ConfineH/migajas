@@ -134,7 +134,10 @@
         "id": "l1-lesson-4-s1",
         "type": "explanation",
         "title": "¿Qué es la fibra?",
-        "body": "Es un tipo de carbohidrato que tu cuerpo no digiere. No sube la glucosa. La FEN recomienda 25-30 g de fibra al día."
+        "body": "Es un tipo de carbohidrato que tu cuerpo no digiere. No sube la glucosa. La FEN recomienda 25-30 g de fibra al día.",
+        "sourceIds": [
+          "fen"
+        ]
       },
       {
         "id": "l1-lesson-4-s2",
@@ -153,7 +156,10 @@
         "id": "l1-lesson-4-s4",
         "type": "explanation",
         "title": "Recomendación para Migajas",
-        "body": "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina)."
+        "body": "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina).",
+        "sourceIds": [
+          "migajas-fiber-policy"
+        ]
       },
       {
         "id": "l1-lesson-4-practice",
@@ -239,7 +245,10 @@
         "type": "example",
         "title": "Consejo ADA",
         "body": "Elige pasta y arroz integral cuando puedas. La fibra extra ayuda a que la glucosa suba más despacio.",
-        "foodId": "arroz-integral-cocido-150g"
+        "foodId": "arroz-integral-cocido-150g",
+        "sourceIds": [
+          "ada"
+        ]
       },
       {
         "id": "l2-lesson-1-practice",
@@ -325,7 +334,11 @@
         "type": "example",
         "title": "Consejos FEN y ADA",
         "body": "La FEN y ADA recomiendan legumbres 2-3 veces por semana. Son parte de la dieta mediterránea y ayudan a controlar la glucemia.",
-        "foodId": "alubias-cocidas"
+        "foodId": "alubias-cocidas",
+        "sourceIds": [
+          "fen",
+          "ada"
+        ]
       },
       {
         "id": "l2-lesson-3-practice",
@@ -369,7 +382,10 @@
         "type": "example",
         "title": "Recomendación diaria",
         "body": "La FEN recomienda 2-3 raciones de verdura al día. Prioriza las \"libres\" para llenar el plato sin sumar carbohidratos.",
-        "foodId": "maiz-grano"
+        "foodId": "maiz-grano",
+        "sourceIds": [
+          "fen"
+        ]
       },
       {
         "id": "l3-lesson-1-practice",
@@ -456,7 +472,11 @@
         "type": "example",
         "title": "Plato del servidor",
         "body": "Divide tu plato en 3: ½ verduras, ¼ proteína (pollo, pescado), ¼ carbohidratos (arroz, patata, pasta). Es la recomendación de la ADA y FEN.",
-        "foodId": "ensalada-mixta"
+        "foodId": "ensalada-mixta",
+        "sourceIds": [
+          "ada",
+          "fen"
+        ]
       },
       {
         "id": "l4-lesson-1-practice",
@@ -673,7 +693,10 @@
         "type": "example",
         "title": "Consejo de seguridad",
         "body": "El alcohol puede causar hipoglucemias tardías (6-12 horas después). Si bebes, hazlo con comida y vigila tu glucosa.",
-        "foodId": "chocolate-leche"
+        "foodId": "chocolate-leche",
+        "sourceIds": [
+          "ada"
+        ]
       },
       {
         "id": "l5-lesson-3-practice",

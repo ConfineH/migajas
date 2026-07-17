@@ -17,9 +17,12 @@ Expose canonical bibliography for Migajas educational content: BEDCA nutritional
 - BEDCA-backed foods show source link on `FoodCard`
 - `content-sources.test.ts` + suite green
 
-## Out of Scope
+## Out of Scope (v1)
 
-- Lesson step footnotes (phase C)
 - RD sources
 - Admin CRUD for sources
 - Supabase `source_id` column (infer from notes for now)
+
+## Added in v1.1
+
+- Lesson step `sourceIds` with footnotes in `LessonViewer`

@@ -120,3 +120,24 @@ export function inferFoodSourceId(food: {
   if (notes.includes("BEDCA")) return "bedca";
   return null;
 }
+
+export function resolveStepSourceIds(step: {
+  sourceIds?: string[];
+  title?: string;
+  body?: string;
+}): string[] {
+  if (step.sourceIds?.length) {
+    return step.sourceIds.filter((id) => getSourceById(id));
+  }
+
+  const text = `${step.title ?? ""} ${step.body ?? ""}`;
+  const inferred: string[] = [];
+  if (/\bFEN\b/.test(text)) inferred.push("fen");
+  if (/\bADA\b/.test(text)) inferred.push("ada");
+  if (/Migajas cuenta HC/i.test(text)) inferred.push("migajas-fiber-policy");
+  if (/modulador/i.test(text) && /0 raciones/i.test(text)) {
+    inferred.push("migajas-modulators");
+  }
+
+  return inferred.filter((id, index, all) => all.indexOf(id) === index);
+}
