@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import AnimatedContent from "@/components/react-bits/AnimatedContent";
+import BlurText from "@/components/react-bits/BlurText";
+import SpotlightCard from "@/components/react-bits/SpotlightCard";
 import StaggeredList from "@/components/react-bits/StaggeredList";
 
 const FEATURES = [
@@ -23,6 +25,9 @@ const FEATURES = [
   },
 ] as const;
 
+const HERO_TITLE =
+  "Bienvenido a Migajas. Tu guía amable para el conteo de carbohidratos.";
+
 export function HomeHero({
   regionLine,
 }: {
@@ -35,9 +40,13 @@ export function HomeHero({
       duration={0.7}
       className="hero-pill mx-auto w-full max-w-3xl px-8 py-12 text-center sm:px-14 sm:py-16"
     >
-      <h1 className="font-display text-3xl font-medium leading-snug text-foreground sm:text-4xl">
-        Bienvenido a Migajas. Tu guía amable para el conteo de carbohidratos.
-      </h1>
+      <BlurText
+        text={HERO_TITLE}
+        animateBy="words"
+        delay={70}
+        stepDuration={0.3}
+        className="font-display text-3xl font-medium leading-snug text-foreground sm:text-4xl"
+      />
       <p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-muted sm:text-lg">
         Aprende a relacionar comida real de tu país con confianza y tranquilidad.
       </p>
@@ -70,7 +79,11 @@ export function HomeFeatures() {
         itemClassName="h-full"
       >
         {FEATURES.map(({ title, desc, icon }) => (
-          <div key={title} className="feature-card px-6 py-8 text-center h-full">
+          <SpotlightCard
+            key={title}
+            className="feature-card h-full px-6 py-8 text-center"
+            spotlightColor="rgba(107, 127, 98, 0.22)"
+          >
             <div className="mx-auto flex h-20 items-center justify-center text-4xl">
               {icon}
             </div>
@@ -80,7 +93,7 @@ export function HomeFeatures() {
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted">
               {desc}
             </p>
-          </div>
+          </SpotlightCard>
         ))}
       </StaggeredList>
     </section>

@@ -1,11 +1,21 @@
+"use client";
+
+import Aurora from "@/components/react-bits/Aurora";
+
 export function HomeBackgroundBlobs() {
   return (
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
+      <Aurora
+        colorStops={["#b8c9af", "#e3ebe0", "#e8b5a3"]}
+        amplitude={0.5}
+        blend={0.38}
+        className="opacity-60"
+      />
       <svg
-        className="absolute -left-24 top-32 h-72 w-72 opacity-70 sm:h-96 sm:w-96"
+        className="absolute -left-24 top-32 h-72 w-72 opacity-40 sm:h-96 sm:w-96"
         viewBox="0 0 400 400"
         fill="none"
       >
@@ -19,7 +29,7 @@ export function HomeBackgroundBlobs() {
         />
       </svg>
       <svg
-        className="absolute -right-16 top-8 h-56 w-56 opacity-60 sm:h-80 sm:w-80"
+        className="absolute -right-16 top-8 h-56 w-56 opacity-35 sm:h-80 sm:w-80"
         viewBox="0 0 320 320"
         fill="none"
       >
@@ -33,7 +43,7 @@ export function HomeBackgroundBlobs() {
         />
       </svg>
       <svg
-        className="absolute bottom-16 left-1/3 h-48 w-48 opacity-50"
+        className="absolute bottom-16 left-1/3 h-48 w-48 opacity-30"
         viewBox="0 0 280 280"
         fill="none"
       >
