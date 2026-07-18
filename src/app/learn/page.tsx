@@ -3,6 +3,7 @@ import { AppNavBar } from "@/components/AppNavBar";
 import { ClinicalModePrompt } from "@/components/ClinicalModePrompt";
 import { CourseLevelList } from "@/components/CourseLevelList";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LearnAnimatedSection } from "@/components/learn/LearnAnimated";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { canShowClinicalPrompt } from "@/lib/clinical-access";
 import { isFreeModeUnlocked, toGuidedProgress } from "@/lib/domain/guided-flow";
@@ -59,7 +60,9 @@ export default async function LearnPage() {
             </div>
           ) : null}
 
-          <CourseLevelList progress={progress} region={region} />
+          <LearnAnimatedSection>
+            <CourseLevelList progress={progress} region={region} />
+          </LearnAnimatedSection>
         </AppPageLayout>
       </main>
     </>
