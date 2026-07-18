@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
+import Stack from "@/components/react-bits/Stack";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   getFlashcardFace,
@@ -17,6 +18,47 @@ interface FlashcardDeckProps {
   exchangeUnitG: number;
   regionId?: string;
   returnHref: string;
+}
+
+function FlashcardFace({
+  revealed,
+  front,
+  back,
+  hint,
+  onReveal,
+}: {
+  revealed: boolean;
+  front: string;
+  back: string;
+  hint?: string;
+  onReveal: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => !revealed && onReveal()}
+      className={`h-full w-full rounded-2xl border-2 p-8 text-left shadow-soft transition-all duration-200 ${
+        revealed
+          ? "border-sage-strong/40 bg-sage-light/80"
+          : "border-border bg-surface hover:border-sage-strong/25"
+      }`}
+    >
+      <p className="text-sm font-medium uppercase tracking-wide text-sage-strong">
+        {revealed ? "Respuesta" : "Pregunta"}
+      </p>
+      <p className="mt-4 font-display text-xl font-medium text-foreground">
+        {revealed ? back : front}
+      </p>
+      {!revealed && hint ? (
+        <p className="mt-4 text-sm text-muted">{hint}</p>
+      ) : null}
+      {!revealed ? (
+        <p className="mt-6 text-sm font-medium text-sage-strong">
+          Toca para ver la respuesta
+        </p>
+      ) : null}
+    </button>
+  );
 }
 
 export function FlashcardDeck({
@@ -65,6 +107,34 @@ export function FlashcardDeck({
     setRevealed(false);
   }
 
+  const stackCards = useMemo(() => {
+    if (!face) return [];
+
+    const mainCard = (
+      <FlashcardFace
+        revealed={revealed}
+        front={face.front}
+        back={face.back}
+        hint={face.hint}
+        onReveal={() => setRevealed(true)}
+      />
+    );
+
+    return [
+      mainCard,
+      <div
+        key="peek-1"
+        aria-hidden
+        className="h-full rounded-2xl border border-border/60 bg-sage-light/40"
+      />,
+      <div
+        key="peek-2"
+        aria-hidden
+        className="h-full rounded-2xl border border-border/40 bg-sage-muted/30"
+      />,
+    ];
+  }, [face, revealed]);
+
   if (!card || !food || !face) {
     return (
       <p className="text-center text-muted">
@@ -95,37 +165,25 @@ export function FlashcardDeck({
         <ProgressBar percent={progressPct} />
       </div>
 
-      <button
-        type="button"
-        onClick={() => setRevealed(true)}
-        className={`w-full rounded-2xl border-2 p-8 text-left shadow-soft transition-all duration-200 ${
-          revealed
-            ? "border-sage-strong/40 bg-sage-light/80"
-            : "border-border bg-surface hover:border-sage-strong/25"
-        }`}
-      >
-        <p className="text-sm font-medium uppercase tracking-wide text-sage-strong">
-          {revealed ? "Respuesta" : "Pregunta"}
-        </p>
-        <p className="mt-4 font-display text-xl font-medium text-foreground">
-          {revealed ? face.back : face.front}
-        </p>
-        {!revealed && face.hint ? (
-          <p className="mt-4 text-sm text-muted">{face.hint}</p>
-        ) : null}
-        {!revealed ? (
-          <p className="mt-6 text-sm font-medium text-sage-strong">
-            Toca para ver la respuesta
-          </p>
-        ) : null}
-      </button>
+      <div className="relative mx-auto h-56 w-full max-w-lg sm:h-64">
+        <Stack
+          cards={stackCards}
+          mobileClickOnly
+          randomRotation
+          className="h-full"
+        />
+      </div>
 
       <div className="flex justify-center gap-3">
         {!revealed ? (
           <Button onClick={() => setRevealed(true)}>Mostrar respuesta</Button>
         ) : (
           <Button onClick={nextCard} className={finishing ? "opacity-50" : ""}>
-            {isLast ? (finishing ? "Guardando…" : "Terminar repaso") : "Siguiente ficha"}
+            {isLast
+              ? finishing
+                ? "Guardando…"
+                : "Terminar repaso"
+              : "Siguiente ficha"}
           </Button>
         )}
       </div>
