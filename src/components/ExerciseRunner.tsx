@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import { Button } from "@/components/Button";
-import ClickSpark from "@/components/react-bits/ClickSpark";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import {
   exerciseTypeLabels,
@@ -40,7 +39,6 @@ export function ExerciseRunner({
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
   const [completion, setCompletion] = useState<CompletionResult>(null);
-  const [sparkBurst, setSparkBurst] = useState(0);
   const startTime = useRef<number | null>(null);
 
   const exercise = exercises[index];
@@ -70,9 +68,6 @@ export function ExerciseRunner({
 
     const data = await res.json();
     setFeedback({ isCorrect: data.isCorrect, explanation: data.explanation });
-    if (data.isCorrect) {
-      setSparkBurst((n) => n + 1);
-    }
     setScore((s) => ({
       correct: s.correct + (data.isCorrect ? 1 : 0),
       total: s.total + 1,
@@ -158,13 +153,7 @@ export function ExerciseRunner({
   }
 
   return (
-    <ClickSpark
-      burstTrigger={sparkBurst}
-      sparkColor="#6b7f62"
-      sparkCount={12}
-      sparkRadius={22}
-      className="space-y-6"
-    >
+    <div className="space-y-6">
       {retryMode ? (
         <p className="rounded-xl bg-terracotta-soft/25 px-4 py-2 text-sm font-medium text-terracotta-dark">
           Modo repaso — solo ejercicios fallados
@@ -241,6 +230,6 @@ export function ExerciseRunner({
           </Button>
         )}
       </div>
-    </ClickSpark>
+    </div>
   );
 }
