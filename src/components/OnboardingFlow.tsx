@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
-import Stepper, { Step } from "@/components/react-bits/Stepper";
 import {
   REGIONS,
   formatExchangeRule,
@@ -12,10 +11,7 @@ import {
   type RegionProfile,
 } from "@/lib/domain/regions";
 
-type StepId = "country" | "mode" | "rations" | "clinical";
-
-const ONBOARDING_STEPS: StepId[] = ["country", "mode", "rations"];
-const SETTINGS_STEPS: StepId[] = ["country", "rations", "clinical"];
+type Step = "country" | "mode" | "rations" | "clinical";
 
 interface OnboardingFlowProps {
   initialRegionId?: string;
@@ -51,8 +47,7 @@ export function OnboardingFlow({
   settingsMode = false,
 }: OnboardingFlowProps) {
   const router = useRouter();
-  const steps = settingsMode ? SETTINGS_STEPS : ONBOARDING_STEPS;
-  const [stepIndex, setStepIndex] = useState(1);
+  const [step, setStep] = useState<Step>("country");
   const [regionId, setRegionId] = useState(initialRegionId);
   const [guestMode, setGuestMode] = useState(initialGuestMode);
   const [dailyCarbGoal, setDailyCarbGoal] = useState(
@@ -184,14 +179,17 @@ export function OnboardingFlow({
   return (
     <div className="mx-auto max-w-lg space-y-8">
       {!settingsMode ? (
-        <p className="sr-only">
-          Paso {stepIndex} de {steps.length}
-        </p>
-      ) : (
+        <OnboardingStepIndicator
+          step={step}
+          steps={["country", "mode", "rations"]}
+        />
+      ) : null}
+
+      {settingsMode ? (
         <p className="text-center text-sm text-muted">
           Cambia la región de referencia, tu meta diaria y el modo clínico.
         </p>
-      )}
+      ) : null}
 
       {saveError ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -199,274 +197,266 @@ export function OnboardingFlow({
         </p>
       ) : null}
 
-      <Stepper
-        step={stepIndex}
-        onStepChange={setStepIndex}
-        hideFooter
-        hideIndicators={settingsMode}
-        contentClassName="pt-6"
-      >
-        <Step>
-          <section className="space-y-6 text-center">
-            <div className="space-y-2">
-              <h1 className="font-display text-3xl font-medium text-foreground">
-                {settingsMode ? "Tu región" : "¿Dónde vas a practicar?"}
-              </h1>
-              <p className="text-pretty text-muted">
-                Cada región usa su propia regla de raciones y alimentos habituales.
-              </p>
-            </div>
-            <div className="space-y-3">
-              {REGIONS.map((item) => (
-                <RegionOption
-                  key={item.id}
-                  region={item}
-                  selected={regionId === item.id}
-                  onSelect={() => setRegionId(item.id)}
-                />
-              ))}
-            </div>
-            <Button onClick={() => setStepIndex(2)}>Continuar</Button>
-          </section>
-        </Step>
-
-        {!settingsMode ? (
-          <Step>
-            <section className="space-y-6 text-center">
-              <div className="space-y-2">
-                <h1 className="font-display text-3xl font-medium text-foreground">
-                  ¿Cómo quieres empezar?
-                </h1>
-                <p className="text-pretty text-muted">
-                  Puedes probar sin cuenta o registrarte para guardar el progreso.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <button
-                  type="button"
-                  onClick={() => setGuestMode(true)}
-                  className={`surface-card-interactive w-full p-5 text-left ${
-                    guestMode ? "surface-card-selected" : ""
-                  }`}
-                >
-                  <p className="font-semibold text-foreground">Modo invitado</p>
-                  <p className="mt-1 text-sm text-muted">
-                    Empieza al momento, sin registrarte.
-                  </p>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setGuestMode(false)}
-                  className={`surface-card-interactive w-full p-5 text-left ${
-                    !guestMode ? "surface-card-selected" : ""
-                  }`}
-                >
-                  <p className="font-semibold text-foreground">Crear cuenta</p>
-                  <p className="mt-1 text-sm text-muted">
-                    Guarda tu progreso entre dispositivos.
-                  </p>
-                </button>
-              </div>
-              <div className="flex justify-center gap-3">
-                <Button variant="ghost" onClick={() => setStepIndex(1)}>
-                  Atrás
-                </Button>
-                <Button
-                  onClick={() =>
-                    guestMode
-                      ? setStepIndex(3)
-                      : router.push("/login?next=/onboarding")
-                  }
-                >
-                  Continuar
-                </Button>
-              </div>
-            </section>
-          </Step>
-        ) : null}
-
-        <Step>
-          <section className="space-y-6">
-            <h1 className="text-center font-display text-3xl font-medium text-foreground">
-              ¿Qué es una ración?
+      {step === "country" && (
+        <section className="space-y-6 text-center">
+          <div className="space-y-2">
+            <h1 className="font-display text-3xl font-medium text-foreground">
+              {settingsMode ? "Tu región" : "¿Dónde vas a practicar?"}
             </h1>
-            <div className="space-y-4 rounded-3xl bg-sage-light p-6 shadow-soft">
-              <p className="text-pretty text-foreground">
-                En <strong>{region.name}</strong>, una <strong>ración</strong>{" "}
-                equivale a{" "}
-                <strong>{region.exchangeUnitG} gramos de carbohidratos</strong>.
-              </p>
-              <div className="rounded-2xl bg-surface p-5 text-center shadow-soft">
-                <p className="text-xs font-medium text-muted">Ejemplo</p>
-                <p className="mt-2 text-lg font-semibold text-foreground">
-                  {example.food}
-                </p>
-                <p className="text-muted">{example.detail}</p>
-                <p className="mt-3 font-display text-3xl font-medium tabular-nums text-sage-strong">
-                  = 1,0 ración
-                </p>
-              </div>
-              <p className="text-pretty text-sm leading-relaxed text-muted">
-                {formatExchangeRule(region)}. Siempre verás los gramos del
-                alimento, los carbohidratos y las raciones calculadas.
-              </p>
-              {region.id === "do" ? (
-                <p className="text-pretty text-sm text-sage-strong">
-                  El curso usa palabras sencillas y comida dominicana de verdad,
-                  con la regla de 15 gramos de carbohidratos por ración.
-                </p>
-              ) : null}
-            </div>
-            <div className="flex justify-center gap-3">
-              <Button
-                variant="ghost"
-                onClick={() => setStepIndex(settingsMode ? 1 : 2)}
-              >
-                Atrás
-              </Button>
-              <Button
-                onClick={() =>
-                  settingsMode ? setStepIndex(3) : void completeOnboarding()
-                }
-              >
-                {settingsMode ? "Continuar" : "Empezar el curso"}
-              </Button>
-            </div>
-          </section>
-        </Step>
+            <p className="text-pretty text-muted">
+              Cada región usa su propia regla de raciones y alimentos habituales.
+            </p>
+          </div>
+          <div className="space-y-3">
+            {REGIONS.map((item) => (
+              <RegionOption
+                key={item.id}
+                region={item}
+                selected={regionId === item.id}
+                onSelect={() => setRegionId(item.id)}
+              />
+            ))}
+          </div>
+          <Button
+            onClick={() =>
+              settingsMode ? setStep("rations") : setStep("mode")
+            }
+          >
+            Continuar
+          </Button>
+        </section>
+      )}
 
-        {settingsMode ? (
-          <Step>
-            <section className="space-y-6">
-              <h1 className="text-center font-display text-3xl font-medium text-foreground">
-                Modo clínico
-              </h1>
-              <div className="space-y-4 rounded-3xl bg-sage-light/70 p-6 shadow-soft">
-                <label className="block space-y-2">
-                  <span className="text-sm font-medium text-foreground">
-                    Meta diaria de carbohidratos (g)
-                  </span>
+      {step === "mode" && !settingsMode && (
+        <section className="space-y-6 text-center">
+          <div className="space-y-2">
+            <h1 className="font-display text-3xl font-medium text-foreground">
+              ¿Cómo quieres empezar?
+            </h1>
+            <p className="text-pretty text-muted">
+              Puedes probar sin cuenta o registrarte para guardar el progreso.
+            </p>
+          </div>
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={() => setGuestMode(true)}
+              className={`surface-card-interactive w-full p-5 text-left ${
+                guestMode ? "surface-card-selected" : ""
+              }`}
+            >
+              <p className="font-semibold text-foreground">Modo invitado</p>
+              <p className="mt-1 text-sm text-muted">
+                Empieza al momento, sin registrarte.
+              </p>
+            </button>
+            <button
+              type="button"
+              onClick={() => setGuestMode(false)}
+              className={`surface-card-interactive w-full p-5 text-left ${
+                !guestMode ? "surface-card-selected" : ""
+              }`}
+            >
+              <p className="font-semibold text-foreground">Crear cuenta</p>
+              <p className="mt-1 text-sm text-muted">
+                Guarda tu progreso entre dispositivos.
+              </p>
+            </button>
+          </div>
+          <div className="flex justify-center gap-3">
+            <Button variant="ghost" onClick={() => setStep("country")}>
+              Atrás
+            </Button>
+            <Button
+              onClick={() =>
+                guestMode
+                  ? setStep("rations")
+                  : router.push("/login?next=/onboarding")
+              }
+            >
+              Continuar
+            </Button>
+          </div>
+        </section>
+      )}
+
+      {step === "rations" && (
+        <section className="space-y-6">
+          <h1 className="text-center font-display text-3xl font-medium text-foreground">
+            ¿Qué es una ración?
+          </h1>
+          <div className="space-y-4 rounded-3xl bg-sage-light p-6 shadow-soft">
+            <p className="text-pretty text-foreground">
+              En <strong>{region.name}</strong>, una <strong>ración</strong>{" "}
+              equivale a{" "}
+              <strong>{region.exchangeUnitG} gramos de carbohidratos</strong>.
+            </p>
+            <div className="rounded-2xl bg-surface p-5 text-center shadow-soft">
+              <p className="text-xs font-medium text-muted">
+                Ejemplo
+              </p>
+              <p className="mt-2 text-lg font-semibold text-foreground">
+                {example.food}
+              </p>
+              <p className="text-muted">{example.detail}</p>
+              <p className="mt-3 font-display text-3xl font-medium tabular-nums text-sage-strong">
+                = 1,0 ración
+              </p>
+            </div>
+            <p className="text-pretty text-sm leading-relaxed text-muted">
+              {formatExchangeRule(region)}. Siempre verás los gramos del
+              alimento, los carbohidratos y las raciones calculadas.
+            </p>
+            {region.id === "do" ? (
+              <p className="text-pretty text-sm text-sage-strong">
+                El curso usa palabras sencillas y comida dominicana de verdad, con
+                la regla de 15 gramos de carbohidratos por ración.
+              </p>
+            ) : null}
+          </div>
+          <div className="flex justify-center gap-3">
+            <Button
+              variant="ghost"
+              onClick={() => setStep(settingsMode ? "country" : "mode")}
+            >
+              Atrás
+            </Button>
+            <Button
+              onClick={() =>
+                settingsMode ? setStep("clinical") : completeOnboarding()
+              }
+            >
+              {settingsMode ? "Continuar" : "Empezar el curso"}
+            </Button>
+          </div>
+        </section>
+      )}
+
+      {step === "clinical" && settingsMode && (
+        <section className="space-y-6">
+          <h1 className="text-center font-display text-3xl font-medium text-foreground">
+            Modo clínico
+          </h1>
+          <div className="space-y-4 rounded-3xl bg-sage-light/70 p-6 shadow-soft">
+            <label className="block space-y-2">
+              <span className="text-sm font-medium text-foreground">
+                Meta diaria de carbohidratos (g)
+              </span>
+              <input
+                type="number"
+                min={1}
+                step={1}
+                value={dailyCarbGoal}
+                onChange={(event) => setDailyCarbGoal(event.target.value)}
+                placeholder="Ej. 160"
+                className="field-input"
+              />
+              <span className="text-xs text-muted">
+                Opcional. Se usará en el diario y en los reportes para comparar
+                tu ingesta diaria.
+              </span>
+            </label>
+
+            {isAuthenticated ? (
+              <div className="space-y-3">
+                <label className="flex items-start gap-3 rounded-2xl bg-surface p-4 shadow-soft">
                   <input
-                    type="number"
-                    min={1}
-                    step={1}
-                    value={dailyCarbGoal}
-                    onChange={(event) => setDailyCarbGoal(event.target.value)}
-                    placeholder="Ej. 160"
-                    className="field-input"
+                    type="checkbox"
+                    checked={clinicalModeEnabled}
+                    disabled={!canEnableClinicalMode}
+                    onChange={(event) => {
+                      const enabled = event.target.checked;
+                      setClinicalModeEnabled(enabled);
+                      if (!enabled) {
+                        setHealthDataConsent(false);
+                      }
+                    }}
+                    className="mt-1"
                   />
-                  <span className="text-xs text-muted">
-                    Opcional. Se usará en el diario y en los reportes para
-                    comparar tu ingesta diaria.
+                  <span className="text-sm text-muted">
+                    <span className="font-medium text-foreground">
+                      Activar modo clínico
+                    </span>
+                    <br />
+                    {canEnableClinicalMode
+                      ? "Podrás registrar tu ingesta desde el nivel 3 en adelante."
+                      : "Disponible tras aprobar el examen del nivel 3."}
                   </span>
                 </label>
 
-                {isAuthenticated ? (
-                  <div className="space-y-3">
-                    <label className="flex items-start gap-3 rounded-2xl bg-surface p-4 shadow-soft">
-                      <input
-                        type="checkbox"
-                        checked={clinicalModeEnabled}
-                        disabled={!canEnableClinicalMode}
-                        onChange={(event) => {
-                          const enabled = event.target.checked;
-                          setClinicalModeEnabled(enabled);
-                          if (!enabled) {
-                            setHealthDataConsent(false);
-                          }
-                        }}
-                        className="mt-1"
-                      />
-                      <span className="text-sm text-muted">
-                        <span className="font-medium text-foreground">
-                          Activar modo clínico
-                        </span>
-                        <br />
-                        {canEnableClinicalMode
-                          ? "Podrás registrar tu ingesta desde el nivel 3 en adelante."
-                          : "Disponible tras aprobar el examen del nivel 3."}
-                      </span>
-                    </label>
-
-                    {clinicalModeEnabled && canEnableClinicalMode ? (
-                      <label className="flex items-start gap-3 rounded-2xl border border-sage/30 bg-sage-light/50 p-4">
-                        <input
-                          type="checkbox"
-                          checked={healthDataConsent}
-                          onChange={(event) =>
-                            setHealthDataConsent(event.target.checked)
-                          }
-                          className="mt-1"
-                        />
-                        <span className="text-sm text-muted">
-                          Consiento el tratamiento de mis datos de alimentación
-                          según la{" "}
-                          <Link
-                            href="/privacidad"
-                            className="font-medium text-sage-strong underline"
-                          >
-                            política de privacidad
-                          </Link>
-                          . Entiendo que Migajas es una herramienta educativa, no
-                          un dispositivo médico.
-                        </span>
-                      </label>
-                    ) : null}
-                  </div>
-                ) : (
-                  <p className="text-sm text-muted">
-                    Inicia sesión para activar el modo clínico y sincronizar tu
-                    meta entre dispositivos.
-                  </p>
-                )}
+                {clinicalModeEnabled && canEnableClinicalMode ? (
+                  <label className="flex items-start gap-3 rounded-2xl border border-sage/30 bg-sage-light/50 p-4">
+                    <input
+                      type="checkbox"
+                      checked={healthDataConsent}
+                      onChange={(event) =>
+                        setHealthDataConsent(event.target.checked)
+                      }
+                      className="mt-1"
+                    />
+                    <span className="text-sm text-muted">
+                      Consiento el tratamiento de mis datos de alimentación
+                      según la{" "}
+                      <Link
+                        href="/privacidad"
+                        className="font-medium text-sage-strong underline"
+                      >
+                        política de privacidad
+                      </Link>
+                      . Entiendo que Migajas es una herramienta educativa, no un
+                      dispositivo médico.
+                    </span>
+                  </label>
+                ) : null}
               </div>
+            ) : (
+              <p className="text-sm text-muted">
+                Inicia sesión para activar el modo clínico y sincronizar tu meta
+                entre dispositivos.
+              </p>
+            )}
+          </div>
 
-              {isAuthenticated ? (
-                <div className="feature-card space-y-4 p-6">
-                  <h2 className="font-display text-lg font-medium text-foreground">
-                    Privacidad y datos
-                  </h2>
-                  <p className="text-sm text-muted">
-                    Puedes exportar o eliminar todos tus datos personales.
-                  </p>
-                  {accountActionError ? (
-                    <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                      {accountActionError}
-                    </p>
-                  ) : null}
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button
-                      variant="secondary"
-                      onClick={exportAccountData}
-                      className={
-                        accountBusy ? "pointer-events-none opacity-50" : ""
-                      }
-                    >
-                      Exportar mis datos
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      onClick={deleteAccount}
-                      className={
-                        accountBusy ? "pointer-events-none opacity-50" : ""
-                      }
-                    >
-                      Eliminar cuenta
-                    </Button>
-                  </div>
-                </div>
+          {isAuthenticated ? (
+            <div className="feature-card space-y-4 p-6">
+              <h2 className="font-display text-lg font-medium text-foreground">
+                Privacidad y datos
+              </h2>
+              <p className="text-sm text-muted">
+                Puedes exportar o eliminar todos tus datos personales.
+              </p>
+              {accountActionError ? (
+                <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {accountActionError}
+                </p>
               ) : null}
-
-              <div className="flex justify-center gap-3">
-                <Button variant="ghost" onClick={() => setStepIndex(2)}>
-                  Atrás
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  variant="secondary"
+                  onClick={exportAccountData}
+                  className={accountBusy ? "opacity-50 pointer-events-none" : ""}
+                >
+                  Exportar mis datos
                 </Button>
-                <Button onClick={completeOnboarding}>Guardar cambios</Button>
+                <Button
+                  variant="ghost"
+                  onClick={deleteAccount}
+                  className={accountBusy ? "opacity-50 pointer-events-none" : ""}
+                >
+                  Eliminar cuenta
+                </Button>
               </div>
-            </section>
-          </Step>
-        ) : null}
-      </Stepper>
+            </div>
+          ) : null}
+
+          <div className="flex justify-center gap-3">
+            <Button variant="ghost" onClick={() => setStep("rations")}>
+              Atrás
+            </Button>
+            <Button onClick={completeOnboarding}>Guardar cambios</Button>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
@@ -492,5 +482,58 @@ function RegionOption({
       <p className="mt-2 text-lg font-semibold text-sage-strong">{region.name}</p>
       <p className="mt-1 text-sm text-muted">{formatExchangeRule(region)}</p>
     </button>
+  );
+}
+
+const STEP_LABELS: Record<Step, string> = {
+  country: "Región",
+  mode: "Cuenta",
+  rations: "Raciones",
+  clinical: "Clínico",
+};
+
+function OnboardingStepIndicator({
+  step,
+  steps,
+}: {
+  step: Step;
+  steps: Step[];
+}) {
+  const currentIndex = steps.indexOf(step);
+
+  return (
+    <div
+      className="flex items-center justify-center gap-2"
+      aria-label={`Paso ${currentIndex + 1} de ${steps.length}: ${STEP_LABELS[step]}`}
+    >
+      {steps.map((item, index) => {
+        const done = index < currentIndex;
+        const active = item === step;
+
+        return (
+          <div key={item} className="flex items-center gap-2">
+            <span
+              className={`flex h-8 min-w-8 items-center justify-center rounded-full px-2 text-xs font-semibold transition-colors duration-200 ${
+                active
+                  ? "bg-sage-strong text-white shadow-soft"
+                  : done
+                    ? "bg-sage-light text-sage-strong"
+                    : "bg-sage-muted/40 text-muted"
+              }`}
+            >
+              {index + 1}
+            </span>
+            {index < steps.length - 1 ? (
+              <span
+                aria-hidden
+                className={`h-px w-6 sm:w-10 ${
+                  done ? "bg-sage-strong/30" : "bg-border"
+                }`}
+              />
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
   );
 }

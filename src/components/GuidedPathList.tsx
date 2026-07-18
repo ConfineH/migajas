@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import StaggeredList from "@/components/react-bits/StaggeredList";
 import {
   buildGuidedSequence,
   isGuidedItemComplete,
@@ -31,7 +28,7 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
   const sequence = buildGuidedSequence(levelId);
 
   return (
-    <StaggeredList className="space-y-3" itemClassName="list-none">
+    <ol className="space-y-3">
       {sequence.map((item, index) => {
         const done = isGuidedItemComplete(progress, item, levelId);
         const isNext =
@@ -63,7 +60,7 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
 
         if (done) {
           return (
-            <div key={item.id}>
+            <li key={item.id}>
               <Link
                 href={href}
                 className="flex items-center gap-4 rounded-2xl bg-sage-light/80 px-5 py-4 transition-all duration-200 hover:bg-sage-light"
@@ -77,12 +74,12 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                   {revisitLabel} →
                 </span>
               </Link>
-            </div>
+            </li>
           );
         }
 
         return (
-          <div key={item.id}>
+          <li key={item.id}>
             {locked ? (
               <div
                 className="callout-muted flex items-center gap-4 px-5 py-4"
@@ -111,9 +108,9 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                 </span>
               </Link>
             )}
-          </div>
+          </li>
         );
       })}
-    </StaggeredList>
+    </ol>
   );
 }

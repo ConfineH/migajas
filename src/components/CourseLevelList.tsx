@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import StaggeredList from "@/components/react-bits/StaggeredList";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { localizeLevel } from "@/lib/domain/content-localization";
@@ -23,7 +20,7 @@ export function CourseLevelList({ progress, region }: CourseLevelListProps) {
   const levels = getLevels().map((level) => localizeLevel(level, region));
 
   return (
-    <StaggeredList className="space-y-4" itemClassName="space-y-0">
+    <div className="space-y-4">
       {levels.map((level) => {
         const unlocked = isGuidedLevelUnlocked(level.id, progress, levels);
         const pct = getLessonProgressPercent(progress, level.id);
@@ -83,6 +80,6 @@ export function CourseLevelList({ progress, region }: CourseLevelListProps) {
           </Link>
         );
       })}
-    </StaggeredList>
+    </div>
   );
 }
