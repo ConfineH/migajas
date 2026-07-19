@@ -1,4 +1,5 @@
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { ProgressRing } from "@/components/ui/ProgressRing";
 
 interface LevelProgressCardProps {
   title: string;
@@ -6,6 +7,7 @@ interface LevelProgressCardProps {
   subtitle?: string;
   trailing?: React.ReactNode;
   className?: string;
+  variant?: "bar" | "ring";
 }
 
 export function LevelProgressCard({
@@ -14,7 +16,23 @@ export function LevelProgressCard({
   subtitle,
   trailing,
   className = "",
+  variant = "bar",
 }: LevelProgressCardProps) {
+  if (variant === "ring") {
+    return (
+      <div className={`feature-card flex flex-col items-center p-6 text-center ${className}`}>
+        <p className="text-sm font-medium text-foreground">{title}</p>
+        <ProgressRing percent={percent} className="my-5" />
+        {subtitle ? (
+          <p className="max-w-[16rem] text-pretty text-xs leading-relaxed text-muted">
+            {subtitle}
+          </p>
+        ) : null}
+        {trailing ? <div className="mt-3">{trailing}</div> : null}
+      </div>
+    );
+  }
+
   return (
     <div className={`feature-card p-4 ${className}`}>
       <div className="flex justify-between gap-3 text-sm">

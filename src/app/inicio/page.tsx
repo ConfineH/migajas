@@ -122,6 +122,7 @@ export default async function InicioPage() {
                 <LevelProgressCard
                   title="Tu progreso"
                   percent={summary.activePercent}
+                  variant="ring"
                   subtitle={`${summary.passedLevels}/${summary.totalLevels} niveles aprobados${
                     summary.activeLevelName
                       ? ` · ${summary.activeLevelName}`

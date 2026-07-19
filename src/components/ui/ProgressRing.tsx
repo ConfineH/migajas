@@ -1,0 +1,55 @@
+interface ProgressRingProps {
+  percent: number;
+  size?: number;
+  strokeWidth?: number;
+  className?: string;
+}
+
+export function ProgressRing({
+  percent,
+  size = 132,
+  strokeWidth = 10,
+  className = "",
+}: ProgressRingProps) {
+  const clamped = Math.min(100, Math.max(0, percent));
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (clamped / 100) * circumference;
+  const center = size / 2;
+
+  return (
+    <div
+      className={`relative inline-flex shrink-0 items-center justify-center ${className}`}
+      style={{ width: size, height: size }}
+      role="progressbar"
+      aria-valuenow={Math.round(clamped)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+    >
+      <svg width={size} height={size} className="-rotate-90" aria-hidden>
+        <circle
+          cx={center}
+          cy={center}
+          r={radius}
+          fill="none"
+          className="stroke-sage-muted/35"
+          strokeWidth={strokeWidth}
+        />
+        <circle
+          cx={center}
+          cy={center}
+          r={radius}
+          fill="none"
+          className="stroke-sage-strong transition-[stroke-dashoffset] duration-500 ease-out"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+        />
+      </svg>
+      <span className="absolute font-display text-3xl font-medium tabular-nums text-sage-strong">
+        {Math.round(clamped)}%
+      </span>
+    </div>
+  );
+}
