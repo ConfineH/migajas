@@ -7,7 +7,7 @@ export interface AuthUserSummary {
   provider: string | null;
 }
 
-const DEFAULT_POST_AUTH_PATH = "/learn";
+const DEFAULT_POST_AUTH_PATH = "/inicio";
 
 export function resolveAuthMode(
   userId: string | null | undefined,

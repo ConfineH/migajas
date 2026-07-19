@@ -28,14 +28,14 @@ describe("sanitizePostAuthRedirect", () => {
   });
 
   it("blocks external URLs", () => {
-    expect(sanitizePostAuthRedirect("https://evil.com")).toBe("/learn");
-    expect(sanitizePostAuthRedirect("//evil.com")).toBe("/learn");
+    expect(sanitizePostAuthRedirect("https://evil.com")).toBe("/inicio");
+    expect(sanitizePostAuthRedirect("//evil.com")).toBe("/inicio");
   });
 
   it("falls back when next is empty", () => {
-    expect(sanitizePostAuthRedirect(null)).toBe("/learn");
-    expect(sanitizePostAuthRedirect(undefined)).toBe("/learn");
-    expect(sanitizePostAuthRedirect("")).toBe("/learn");
+    expect(sanitizePostAuthRedirect(null)).toBe("/inicio");
+    expect(sanitizePostAuthRedirect(undefined)).toBe("/inicio");
+    expect(sanitizePostAuthRedirect("")).toBe("/inicio");
   });
 
   it("uses custom fallback when provided", () => {
@@ -51,7 +51,7 @@ describe("buildOAuthCallbackUrl", () => {
   });
 
   it("omits next query when path is default", () => {
-    expect(buildOAuthCallbackUrl("https://migajas.app", "/learn")).toBe(
+    expect(buildOAuthCallbackUrl("https://migajas.app", "/inicio")).toBe(
       "https://migajas.app/auth/callback",
     );
   });
@@ -86,8 +86,8 @@ describe("resolveAuthCallbackRedirect", () => {
     expect(resolveAuthCallbackRedirect(null, "signup")).toBe("/auth/confirmed");
   });
 
-  it("defaults to learn", () => {
-    expect(resolveAuthCallbackRedirect(null, null)).toBe("/learn");
+  it("defaults to inicio", () => {
+    expect(resolveAuthCallbackRedirect(null, null)).toBe("/inicio");
   });
 });
 

@@ -21,6 +21,7 @@ export function NavBar({
   showDiary = false,
 }: NavBarProps) {
   const primaryLinks = [
+    ...(user ? [{ href: "/inicio", label: "Inicio" }] : []),
     { href: "/learn", label: "Curso" },
     ...(showDiary ? [{ href: "/diario", label: "Diario" }] : []),
     ...(freeMode
@@ -46,7 +47,7 @@ export function NavBar({
         aria-label="Principal"
       >
         <Link
-          href="/"
+          href={user ? "/inicio" : "/"}
           className="flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-strong focus-visible:ring-offset-2"
         >
           <MigajasLogo variant="mark" size="sm" />
@@ -69,7 +70,9 @@ export function NavBar({
         <div className="flex items-center justify-end gap-3 text-sm">
           <ul className="flex items-center gap-0.5 md:hidden">
             <li>
-              <NavLink href="/learn">Curso</NavLink>
+              <NavLink href={user ? "/inicio" : "/learn"}>
+                {user ? "Inicio" : "Curso"}
+              </NavLink>
             </li>
             <li>
               <NavMenu label="Más" items={[...primaryLinks.slice(1), ...moreLinks]} />
