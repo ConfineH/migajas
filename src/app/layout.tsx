@@ -20,10 +20,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
+  "https://migajas.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Migajas — Aprende a contar carbohidratos",
   description:
     "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    siteName: "Migajas",
+    title: "Migajas — Aprende a contar carbohidratos",
+    description:
+      "Un curso guiado para relacionar gramos, carbohidratos y raciones con comida real de tu país.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Migajas — Aprende a contar carbohidratos",
+    description:
+      "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+  },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
