@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
+import { MigajasLogo } from "@/components/brand/MigajasLogo";
+import { CoursePathPreview } from "@/components/onboarding/CoursePathPreview";
 import Stepper, { Step } from "@/components/react-bits/Stepper";
 import {
   REGIONS,
@@ -12,9 +14,15 @@ import {
   type RegionProfile,
 } from "@/lib/domain/regions";
 
-type StepId = "country" | "mode" | "rations" | "clinical";
+type StepId = "welcome" | "country" | "course" | "mode" | "rations" | "clinical";
 
-const ONBOARDING_STEPS: StepId[] = ["country", "mode", "rations"];
+const ONBOARDING_STEPS: StepId[] = [
+  "welcome",
+  "country",
+  "course",
+  "mode",
+  "rations",
+];
 const SETTINGS_STEPS: StepId[] = ["country", "rations", "clinical"];
 
 interface OnboardingFlowProps {
@@ -206,6 +214,28 @@ export function OnboardingFlow({
         hideIndicators={settingsMode}
         contentClassName="pt-6"
       >
+        {!settingsMode ? (
+          <Step>
+            <section className="space-y-6 text-center">
+              <MigajasLogo size="lg" className="mx-auto" priority />
+              <div className="space-y-2">
+                <h1 className="font-display text-3xl font-medium text-foreground">
+                  Bienvenido a Migajas
+                </h1>
+                <p className="text-pretty text-muted">
+                  Aprende a contar carbohidratos con comida de tu país, paso a
+                  paso y sin prisas.
+                </p>
+              </div>
+              <p className="rounded-2xl bg-sage-light/70 px-4 py-3 text-sm text-muted">
+                Migajas es una herramienta educativa. No sustituye el criterio de
+                tu equipo de salud.
+              </p>
+              <Button onClick={() => setStepIndex(2)}>Empezar</Button>
+            </section>
+          </Step>
+        ) : null}
+
         <Step>
           <section className="space-y-6 text-center">
             <div className="space-y-2">
@@ -226,9 +256,43 @@ export function OnboardingFlow({
                 />
               ))}
             </div>
-            <Button onClick={() => setStepIndex(2)}>Continuar</Button>
+            <div className="flex justify-center gap-3">
+              {!settingsMode ? (
+                <Button variant="ghost" onClick={() => setStepIndex(1)}>
+                  Atrás
+                </Button>
+              ) : null}
+              <Button
+                onClick={() => setStepIndex(settingsMode ? 2 : 3)}
+              >
+                Continuar
+              </Button>
+            </div>
           </section>
         </Step>
+
+        {!settingsMode ? (
+          <Step>
+            <section className="space-y-6">
+              <div className="space-y-2 text-center">
+                <h1 className="font-display text-3xl font-medium text-foreground">
+                  Así funciona el curso
+                </h1>
+                <p className="text-pretty text-muted">
+                  Cinco niveles guiados. Avanzas paso a paso; no hace falta
+                  saberlo todo de golpe.
+                </p>
+              </div>
+              <CoursePathPreview />
+              <div className="flex justify-center gap-3">
+                <Button variant="ghost" onClick={() => setStepIndex(2)}>
+                  Atrás
+                </Button>
+                <Button onClick={() => setStepIndex(4)}>Continuar</Button>
+              </div>
+            </section>
+          </Step>
+        ) : null}
 
         {!settingsMode ? (
           <Step>
@@ -268,13 +332,13 @@ export function OnboardingFlow({
                 </button>
               </div>
               <div className="flex justify-center gap-3">
-                <Button variant="ghost" onClick={() => setStepIndex(1)}>
+                <Button variant="ghost" onClick={() => setStepIndex(3)}>
                   Atrás
                 </Button>
                 <Button
                   onClick={() =>
                     guestMode
-                      ? setStepIndex(3)
+                      ? setStepIndex(5)
                       : router.push("/login?next=/onboarding")
                   }
                 >
@@ -320,7 +384,7 @@ export function OnboardingFlow({
             <div className="flex justify-center gap-3">
               <Button
                 variant="ghost"
-                onClick={() => setStepIndex(settingsMode ? 1 : 2)}
+                onClick={() => setStepIndex(settingsMode ? 1 : 4)}
               >
                 Atrás
               </Button>

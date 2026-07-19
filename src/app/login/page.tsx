@@ -1,4 +1,5 @@
 import { AppNavBar } from "@/components/AppNavBar";
+import { MigajasLogo } from "@/components/brand/MigajasLogo";
 import { Button } from "@/components/Button";
 import { EmailAuthForm } from "@/components/EmailAuthForm";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
@@ -28,6 +29,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       <main className="flex flex-1 flex-col">
         <AppPageLayout width="narrow" className="flex flex-col items-center py-10 sm:py-14">
           <section className="hero-pill w-full max-w-md px-8 py-10 text-center sm:px-10 sm:py-12">
+            <MigajasLogo size="md" className="mx-auto mb-6" />
             <div className="space-y-3">
               <h1 className="font-display text-3xl font-medium text-foreground">
                 Tu cuenta

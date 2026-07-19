@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MigajasLogo } from "@/components/brand/MigajasLogo";
 import { formatUserDisplayName, type AuthUserSummary } from "@/lib/domain/auth";
 import { signOut } from "@/app/login/actions";
 import { NavLink } from "@/components/ui/NavLink";
@@ -46,9 +47,12 @@ export function NavBar({
       >
         <Link
           href="/"
-          className="font-display text-2xl font-semibold text-foreground"
+          className="flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-strong focus-visible:ring-offset-2"
         >
-          Migajas
+          <MigajasLogo variant="mark" size="sm" />
+          <span className="font-display text-2xl font-semibold text-foreground">
+            Migajas
+          </span>
         </Link>
 
         <ul className="hidden items-center justify-center gap-1 text-sm font-medium text-foreground/85 md:flex">

@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   title: "Migajas — Aprende a contar carbohidratos",
   description:
     "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default async function RootLayout({
