@@ -217,7 +217,7 @@ export function OnboardingFlow({
         {!settingsMode ? (
           <Step>
             <section className="space-y-6 text-center">
-              <MigajasLogo size="lg" className="mx-auto" priority />
+              <MigajasLogo size="lg" className="mx-auto" />
               <div className="space-y-2">
                 <h1 className="font-display text-3xl font-medium text-foreground">
                   Bienvenido a Migajas

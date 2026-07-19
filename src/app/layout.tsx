@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   description:
     "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
   },
 };
 
