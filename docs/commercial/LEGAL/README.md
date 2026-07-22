@@ -10,6 +10,7 @@
 | `PRIVACY-POLICY-TEMPLATE.md` | Política de privacidad para usuarios finales |
 | `COOKIE-NOTICE-TEMPLATE.md` | Aviso de cookies (onboarding, sesión, analytics) |
 | `HEALTH-DATA-DISCLAIMER.md` | Aviso educativo / no clínico + datos de salud |
+| `MDR-POSITION.md` | Justificación interna de no-producto sanitario (MDR) |
 
 ## Placeholders a completar
 

@@ -73,10 +73,6 @@ export function OnboardingFlow({
     initialClinicalModeEnabled,
   );
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [accountActionError, setAccountActionError] = useState<string | null>(
-    null,
-  );
-  const [accountBusy, setAccountBusy] = useState(false);
   const [clinicalRevokeBusy, setClinicalRevokeBusy] = useState(false);
 
   const region = getRegionById(regionId);
@@ -170,53 +166,6 @@ export function OnboardingFlow({
       router.refresh();
     } finally {
       setClinicalRevokeBusy(false);
-    }
-  }
-
-  async function exportAccountData() {
-    setAccountActionError(null);
-    setAccountBusy(true);
-    try {
-      const response = await fetch("/api/account/export");
-      if (!response.ok) {
-        const payload = (await response.json()) as { error?: string };
-        setAccountActionError(payload.error ?? "No se pudo exportar.");
-        return;
-      }
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.download = "migajas-export.json";
-      anchor.click();
-      URL.revokeObjectURL(url);
-    } finally {
-      setAccountBusy(false);
-    }
-  }
-
-  async function deleteAccount() {
-    if (
-      !window.confirm(
-        "¿Seguro que quieres eliminar tu cuenta y todos tus datos? Esta acción no se puede deshacer.",
-      )
-    ) {
-      return;
-    }
-
-    setAccountActionError(null);
-    setAccountBusy(true);
-    try {
-      const response = await fetch("/api/account/delete", { method: "DELETE" });
-      if (!response.ok) {
-        const payload = (await response.json()) as { error?: string };
-        setAccountActionError(payload.error ?? "No se pudo eliminar la cuenta.");
-        return;
-      }
-      router.push("/login");
-      router.refresh();
-    } finally {
-      setAccountBusy(false);
     }
   }
 
@@ -529,50 +478,6 @@ export function OnboardingFlow({
                   </p>
                 )}
               </div>
-
-              {isAuthenticated ? (
-                <div className="feature-card space-y-4 p-6">
-                  <h2 className="font-display text-lg font-medium text-foreground">
-                    Privacidad y datos
-                  </h2>
-                  <p className="text-sm text-muted">
-                    Puedes exportar o eliminar todos tus datos personales. Gestiona
-                    cookies en la{" "}
-                    <Link
-                      href="/cookies"
-                      className="font-medium text-sage-strong underline-offset-2 hover:underline"
-                    >
-                      política de cookies
-                    </Link>
-                    .
-                  </p>
-                  {accountActionError ? (
-                    <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                      {accountActionError}
-                    </p>
-                  ) : null}
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button
-                      variant="secondary"
-                      onClick={exportAccountData}
-                      className={
-                        accountBusy ? "pointer-events-none opacity-50" : ""
-                      }
-                    >
-                      Exportar mis datos
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      onClick={deleteAccount}
-                      className={
-                        accountBusy ? "pointer-events-none opacity-50" : ""
-                      }
-                    >
-                      Eliminar cuenta
-                    </Button>
-                  </div>
-                </div>
-              ) : null}
 
               <div className="flex justify-center gap-3">
                 <Button variant="ghost" onClick={() => setStepIndex(2)}>

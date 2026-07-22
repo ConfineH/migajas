@@ -43,6 +43,7 @@ describe("account lifecycle APIs", () => {
       error: null,
     });
     mockExportData.mockResolvedValue({
+      account: { user_id: "user-1", email: "user@example.com" },
       profile: { user_id: "user-1" },
       learning_state: null,
       intake_entries: [],
@@ -55,6 +56,7 @@ describe("account lifecycle APIs", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("Content-Type")).toContain("application/json");
     await expect(response.json()).resolves.toEqual({
+      account: { user_id: "user-1", email: "user@example.com" },
       profile: { user_id: "user-1" },
       learning_state: null,
       intake_entries: [],

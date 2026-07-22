@@ -9,6 +9,7 @@ import {
 import { syncGuestProfile } from "@/lib/profile-sync";
 import { getAllLessons } from "@/lib/domain/lessons";
 import { backfillLearningEvents } from "@/lib/supabase/analytics-backfill";
+import { grantPrivacyPolicyConsentIfNeeded } from "@/lib/supabase/consent-records";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -35,6 +36,7 @@ export async function GET(request: Request) {
       if (user) {
         const merged = await syncGuestLearningState(user.id);
         await syncGuestProfile(user.id);
+        await grantPrivacyPolicyConsentIfNeeded(user.id);
         await backfillLearningEvents(
           user.id,
           merged.progress,

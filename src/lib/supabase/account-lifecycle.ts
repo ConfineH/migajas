@@ -3,9 +3,18 @@ import { createServiceClient, isServiceRoleConfigured } from "@/lib/supabase/ser
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { listUserConsents } from "@/lib/supabase/consent-records";
 
-export async function exportAuthenticatedUserData(userId: string) {
+export async function exportAuthenticatedUserData(
+  userId: string,
+  account?: { email?: string | null },
+) {
+  const accountExport = {
+    user_id: userId,
+    email: account?.email ?? null,
+  };
+
   if (!isSupabaseConfigured()) {
     return {
+      account: accountExport,
       profile: null,
       learning_state: null,
       intake_entries: [],
@@ -42,6 +51,7 @@ export async function exportAuthenticatedUserData(userId: string) {
   ]);
 
   return {
+    account: accountExport,
     profile: profile.data,
     learning_state: learningState.data,
     intake_entries: intake.data ?? [],

@@ -2,6 +2,8 @@ import type { CookieConsentValue } from "@/lib/domain/cookie-consent";
 import {
   buildCookiePreferencesGrant,
   buildHealthDataGrant,
+  buildPrivacyPolicyGrant,
+  hasActiveConsent,
   parseConsentRecordRow,
   type ConsentGrantInput,
   type ConsentRecord,
@@ -92,4 +94,14 @@ export async function grantCookiePreferences(
 ): Promise<boolean> {
   await revokeActiveConsents(userId, "cookie_preferences");
   return insertConsentGrant(userId, buildCookiePreferencesGrant(preference));
+}
+
+export async function grantPrivacyPolicyConsentIfNeeded(
+  userId: string,
+): Promise<boolean> {
+  const records = await listUserConsents(userId);
+  if (hasActiveConsent(records, "privacy_policy")) {
+    return true;
+  }
+  return insertConsentGrant(userId, buildPrivacyPolicyGrant());
 }

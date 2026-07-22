@@ -50,6 +50,10 @@ export function buildHealthDataGrant(): ConsentGrantInput {
   return buildConsentGrant("health_data");
 }
 
+export function buildPrivacyPolicyGrant(): ConsentGrantInput {
+  return buildConsentGrant("privacy_policy");
+}
+
 export function parseConsentRecordRow(row: {
   id: string;
   user_id: string;

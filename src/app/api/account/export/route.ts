@@ -12,7 +12,9 @@ export async function GET() {
     return NextResponse.json({ error: "No autenticado" }, { status: 401 });
   }
 
-  const exportData = await exportAuthenticatedUserData(user.id);
+  const exportData = await exportAuthenticatedUserData(user.id, {
+    email: user.email,
+  });
   const filename = `migajas-export-${user.id}.json`;
 
   return new NextResponse(JSON.stringify(exportData, null, 2), {

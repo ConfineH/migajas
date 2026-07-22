@@ -15,6 +15,7 @@ const REQUIRED_COMMERCIAL_DOCS = [
   "LEGAL/PRIVACY-POLICY-TEMPLATE.md",
   "LEGAL/COOKIE-NOTICE-TEMPLATE.md",
   "LEGAL/HEALTH-DATA-DISCLAIMER.md",
+  "LEGAL/MDR-POSITION.md",
 ] as const;
 
 describe("commercial documentation kit manifest", () => {

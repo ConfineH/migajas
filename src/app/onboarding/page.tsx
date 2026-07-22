@@ -1,4 +1,5 @@
 import { AppNavBar } from "@/components/AppNavBar";
+import { AccountPrivacyPanel } from "@/components/AccountPrivacyPanel";
 import { OnboardingFlow } from "@/components/OnboardingFlow";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import {
@@ -31,6 +32,11 @@ export default async function OnboardingPage() {
       <AppNavBar />
       <main className="flex flex-1 flex-col">
         <AppPageLayout>
+          {settingsMode && user ? (
+            <div className="mb-8">
+              <AccountPrivacyPanel />
+            </div>
+          ) : null}
           <OnboardingFlow
             initialRegionId={profile?.region_id ?? resolveRegionIdFromOnboarding(state)}
             initialGuestMode={state?.guestMode ?? true}
