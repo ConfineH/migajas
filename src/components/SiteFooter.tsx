@@ -19,6 +19,22 @@ export function SiteFooter() {
             </li>
             <li>
               <Link
+                href="/cookies"
+                className="text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
+              >
+                Cookies
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terminos"
+                className="text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
+              >
+                Términos
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/onboarding"
                 className="text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
               >

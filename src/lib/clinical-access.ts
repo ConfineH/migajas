@@ -41,7 +41,7 @@ export async function requireClinicalAccess(): Promise<ClinicalAccessResult> {
     return {
       ok: false,
       status: 403,
-      error: "El modo clínico no está disponible.",
+      error: "El seguimiento personal no está disponible.",
       reason: "feature",
     };
   }
@@ -73,7 +73,7 @@ export async function requireClinicalAccess(): Promise<ClinicalAccessResult> {
     return {
       ok: false,
       status: 403,
-      error: "Activa el modo clínico en Configuración.",
+      error: "Activa el seguimiento personal en Configuración.",
       reason: "opt-in",
     };
   }

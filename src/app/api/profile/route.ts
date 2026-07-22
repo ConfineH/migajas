@@ -17,6 +17,10 @@ import {
   upsertUserProfile,
 } from "@/lib/supabase/user-profile";
 import { getOnboardingState } from "@/lib/onboarding";
+import {
+  grantHealthDataConsent,
+  revokeHealthDataConsent,
+} from "@/lib/supabase/consent-records";
 
 async function requireAuthenticatedUser() {
   const supabase = await createClient();
@@ -70,7 +74,7 @@ export async function PATCH(request: Request) {
     !isClinicalFeatureEnabled()
   ) {
     return NextResponse.json(
-      { error: "El modo clínico no está disponible." },
+      { error: "El seguimiento personal no está disponible." },
       { status: 403 },
     );
   }
@@ -79,7 +83,7 @@ export async function PATCH(request: Request) {
     const progress = await resolveProgress();
     if (!hasPassedNivel3(toGuidedProgress(progress))) {
       return NextResponse.json(
-        { error: "Completa el nivel 3 para activar el modo clínico." },
+        { error: "Completa el nivel 3 para activar el seguimiento personal." },
         { status: 403 },
       );
     }
@@ -110,6 +114,21 @@ export async function PATCH(request: Request) {
       { error: "No se pudo guardar el perfil" },
       { status: 500 },
     );
+  }
+
+  if (validation.value.clinical_mode_enabled === true) {
+    const recorded = await grantHealthDataConsent(user.id);
+    if (!recorded) {
+      return NextResponse.json(
+        { error: "No se pudo registrar el consentimiento de salud." },
+        { status: 503 },
+      );
+    }
+  } else if (
+    validation.value.clinical_mode_enabled === false &&
+    existing.clinical_mode_enabled
+  ) {
+    await revokeHealthDataConsent(user.id);
   }
 
   return NextResponse.json(updated);

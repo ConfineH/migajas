@@ -5,6 +5,8 @@ import {
   type CookieConsentValue,
 } from "@/lib/domain/cookie-consent";
 import { getAppCookieOptions } from "@/lib/cookie-options";
+import { grantCookiePreferences } from "@/lib/supabase/consent-records";
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -16,6 +18,14 @@ export async function POST(request: Request) {
   const body = (await request.json()) as { value?: CookieConsentValue };
   if (body.value !== "accepted" && body.value !== "essential") {
     return NextResponse.json({ error: "Valor no válido." }, { status: 400 });
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    await grantCookiePreferences(user.id, body.value);
   }
 
   const response = NextResponse.json({ ok: true });

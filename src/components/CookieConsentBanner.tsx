@@ -33,6 +33,13 @@ export function CookieConsentBanner() {
             Usamos cookies técnicas para sesión, progreso y preferencias.
             Consulta nuestra{" "}
             <Link
+              href="/cookies"
+              className="font-medium text-sage-strong underline-offset-2 hover:underline"
+            >
+              política de cookies
+            </Link>{" "}
+            y la{" "}
+            <Link
               href="/privacidad"
               className="font-medium text-sage-strong underline-offset-2 hover:underline"
             >

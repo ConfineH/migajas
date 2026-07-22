@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 export function ClinicalModePrompt() {
   return (
     <div className="callout-sage mb-6">
-      <p className="font-semibold text-foreground">Modo clínico disponible</p>
+      <p className="font-semibold text-foreground">Seguimiento personal disponible</p>
       <p className="mt-1 text-pretty text-sm text-muted">
         Ya aprobaste el nivel 3. Puedes activar el diario de ingesta para llevar
         un registro de carbohidratos y preparar reportes para tu equipo de salud.

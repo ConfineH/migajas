@@ -77,6 +77,7 @@ export function OnboardingFlow({
     null,
   );
   const [accountBusy, setAccountBusy] = useState(false);
+  const [clinicalRevokeBusy, setClinicalRevokeBusy] = useState(false);
 
   const region = getRegionById(regionId);
   const example = REGION_EXAMPLES[region.id] ?? REGION_EXAMPLES.es;
@@ -142,6 +143,36 @@ export function OnboardingFlow({
     router.refresh();
   }
 
+  async function revokeClinicalConsent() {
+    if (
+      !window.confirm(
+        "¿Retirar el consentimiento para datos de salud? Se desactivará el seguimiento personal y no podrás usar el diario hasta que vuelvas a consentir.",
+      )
+    ) {
+      return;
+    }
+
+    setSaveError(null);
+    setClinicalRevokeBusy(true);
+    try {
+      const response = await fetch("/api/consent/revoke-health-data", {
+        method: "POST",
+      });
+      if (!response.ok) {
+        const payload = (await response.json()) as { error?: string };
+        setSaveError(
+          payload.error ?? "No se pudo retirar el consentimiento.",
+        );
+        return;
+      }
+      setClinicalModeEnabled(false);
+      setHealthDataConsent(false);
+      router.refresh();
+    } finally {
+      setClinicalRevokeBusy(false);
+    }
+  }
+
   async function exportAccountData() {
     setAccountActionError(null);
     setAccountBusy(true);
@@ -197,7 +228,7 @@ export function OnboardingFlow({
         </p>
       ) : (
         <p className="text-center text-sm text-muted">
-          Cambia la región de referencia, tu meta diaria y el modo clínico.
+          Cambia la región de referencia, tu meta diaria y el seguimiento personal.
         </p>
       )}
 
@@ -403,7 +434,7 @@ export function OnboardingFlow({
           <Step>
             <section className="space-y-6">
               <h1 className="text-center font-display text-3xl font-medium text-foreground">
-                Modo clínico
+                Seguimiento personal
               </h1>
               <div className="space-y-4 rounded-3xl bg-sage-light/70 p-6 shadow-soft">
                 <label className="block space-y-2">
@@ -443,7 +474,7 @@ export function OnboardingFlow({
                       />
                       <span className="text-sm text-muted">
                         <span className="font-medium text-foreground">
-                          Activar modo clínico
+                          Activar seguimiento personal
                         </span>
                         <br />
                         {canEnableClinicalMode
@@ -476,10 +507,24 @@ export function OnboardingFlow({
                         </span>
                       </label>
                     ) : null}
+
+                    {clinicalModeEnabled && canEnableClinicalMode ? (
+                      <Button
+                        variant="ghost"
+                        onClick={revokeClinicalConsent}
+                        className={
+                          clinicalRevokeBusy
+                            ? "pointer-events-none opacity-50"
+                            : ""
+                        }
+                      >
+                        Retirar consentimiento de seguimiento personal
+                      </Button>
+                    ) : null}
                   </div>
                 ) : (
                   <p className="text-sm text-muted">
-                    Inicia sesión para activar el modo clínico y sincronizar tu
+                    Inicia sesión para activar el seguimiento personal y sincronizar tu
                     meta entre dispositivos.
                   </p>
                 )}
@@ -491,7 +536,15 @@ export function OnboardingFlow({
                     Privacidad y datos
                   </h2>
                   <p className="text-sm text-muted">
-                    Puedes exportar o eliminar todos tus datos personales.
+                    Puedes exportar o eliminar todos tus datos personales. Gestiona
+                    cookies en la{" "}
+                    <Link
+                      href="/cookies"
+                      className="font-medium text-sage-strong underline-offset-2 hover:underline"
+                    >
+                      política de cookies
+                    </Link>
+                    .
                   </p>
                   {accountActionError ? (
                     <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">

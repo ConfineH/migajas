@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
+import { LEGAL_VERSIONS } from "@/lib/domain/legal-versions";
 
 export const metadata = {
   title: "Privacidad — Migajas",
@@ -13,6 +14,10 @@ export default function PrivacyPage() {
       <main className="flex flex-1 flex-col">
         <AppPageLayout className="prose prose-stone py-10">
           <h1 className="font-display">Política de privacidad</h1>
+          <p className="text-sm text-muted">
+            Versión {LEGAL_VERSIONS.privacy_policy}. Última actualización: 23 de
+            julio de 2026.
+          </p>
           <p>
             Migajas es una herramienta educativa para aprender a estimar
             carbohidratos. No es un dispositivo médico ni sustituye el consejo de
@@ -24,7 +29,7 @@ export default function PrivacyPage() {
             <li>Cuenta (email, nombre de perfil)</li>
             <li>Progreso del curso y preferencias de región</li>
             <li>
-              Datos de salud opcionales al activar el modo clínico (registro de
+              Datos de salud opcionales al activar el seguimiento personal (registro de
               ingesta)
             </li>
           </ul>
@@ -34,7 +39,7 @@ export default function PrivacyPage() {
             <li>Servicio educativo (art. 6.1.b)</li>
             <li>
               Datos de salud del diario: consentimiento explícito (art. 9.2.a) al
-              activar el modo clínico
+              activar el seguimiento personal
             </li>
           </ul>
 
@@ -49,12 +54,26 @@ export default function PrivacyPage() {
           <h2>Cookies</h2>
           <p>
             Usamos cookies técnicas para sesión, progreso y onboarding. No usamos
-            cookies publicitarias de terceros en la versión base.
+            cookies publicitarias de terceros en la versión base. Consulta el{" "}
+            <Link
+              href="/cookies"
+              className="font-medium text-sage-strong underline-offset-2 hover:underline"
+            >
+              inventario de cookies
+            </Link>
+            .
+          </p>
+
+          <h2>Registro de consentimientos</h2>
+          <p>
+            Si tienes cuenta, guardamos la fecha y versión del texto legal cuando
+            aceptas cookies o activas el seguimiento personal. Puedes exportar este
+            historial desde Configuración.
           </p>
 
           <p className="text-sm text-muted">
-            Plantilla operativa — revisión legal obligatoria antes de uso clínico
-            en la UE.
+            Plantilla operativa — revisión legal obligatoria antes de despliegue con
+            datos de salud en la UE.
           </p>
 
           <p>

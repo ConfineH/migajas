@@ -91,7 +91,7 @@ describe("requireClinicalAccess", () => {
     expect(result).toEqual({
       ok: false,
       status: 403,
-      error: "El modo clínico no está disponible.",
+      error: "El seguimiento personal no está disponible.",
       reason: "feature",
     });
   });

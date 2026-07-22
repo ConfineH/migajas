@@ -93,7 +93,7 @@ export function validateProfilePatch(
 
   if (input.clinical_mode_enabled !== undefined) {
     if (typeof input.clinical_mode_enabled !== "boolean") {
-      return { ok: false, error: "Modo clínico no válido." };
+      return { ok: false, error: "Seguimiento personal no válido." };
     }
     if (input.clinical_mode_enabled === true) {
       if (input.health_data_consent !== true) {

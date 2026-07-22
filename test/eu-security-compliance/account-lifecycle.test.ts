@@ -47,6 +47,7 @@ describe("account lifecycle APIs", () => {
       learning_state: null,
       intake_entries: [],
       learning_events: [],
+      consents: [],
     });
 
     const response = await exportGet();
@@ -58,6 +59,7 @@ describe("account lifecycle APIs", () => {
       learning_state: null,
       intake_entries: [],
       learning_events: [],
+      consents: [],
     });
   });
 

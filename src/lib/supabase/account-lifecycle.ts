@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient, isServiceRoleConfigured } from "@/lib/supabase/service";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { listUserConsents } from "@/lib/supabase/consent-records";
 
 export async function exportAuthenticatedUserData(userId: string) {
   if (!isSupabaseConfigured()) {
@@ -9,11 +10,12 @@ export async function exportAuthenticatedUserData(userId: string) {
       learning_state: null,
       intake_entries: [],
       learning_events: [],
+      consents: [],
     };
   }
 
   const supabase = await createClient();
-  const [profile, learningState, intake, events] = await Promise.all([
+  const [profile, learningState, intake, events, consents] = await Promise.all([
     supabase
       .from("user_profiles")
       .select(
@@ -36,6 +38,7 @@ export async function exportAuthenticatedUserData(userId: string) {
       .from("learning_events")
       .select("id, event_type, payload, created_at")
       .eq("user_id", userId),
+    listUserConsents(userId),
   ]);
 
   return {
@@ -43,6 +46,7 @@ export async function exportAuthenticatedUserData(userId: string) {
     learning_state: learningState.data,
     intake_entries: intake.data ?? [],
     learning_events: events.data ?? [],
+    consents,
   };
 }
 
@@ -56,6 +60,7 @@ export async function deleteAuthenticatedUserData(userId: string): Promise<boole
     "intake_entries",
     "learning_events",
     "user_learning_state",
+    "user_consents",
     "user_profiles",
   ] as const;
 

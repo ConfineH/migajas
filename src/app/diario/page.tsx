@@ -46,7 +46,7 @@ export default async function DiaryPage() {
                   ? "Inicia sesión para usar el diario"
                   : access.reason === "nivel"
                     ? "Completa el nivel 3 primero"
-                    : "Activa el modo clínico"
+                    : "Activa el seguimiento personal"
               }
               description={access.error}
               actionHref={action?.href}

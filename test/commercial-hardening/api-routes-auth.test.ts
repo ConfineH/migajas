@@ -35,7 +35,7 @@ import { GET as profileGet, PATCH as profilePatch } from "@/app/api/profile/rout
 const denied403 = {
   ok: false,
   status: 403,
-  error: "Activa el modo clínico en Configuración.",
+  error: "Activa el seguimiento personal en Configuración.",
   reason: "opt-in",
 } as const;
 
