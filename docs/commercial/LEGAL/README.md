@@ -11,6 +11,8 @@
 | `COOKIE-NOTICE-TEMPLATE.md` | Aviso de cookies (onboarding, sesión, analytics) |
 | `HEALTH-DATA-DISCLAIMER.md` | Aviso educativo / no clínico + datos de salud |
 | `MDR-POSITION.md` | Justificación interna de no-producto sanitario (MDR) |
+| `ROPA-TEMPLATE.md` | Registro de actividades de tratamiento (art. 30 GDPR) |
+| `BREACH-PROCEDURE.md` | Procedimiento interno de notificación de brechas |
 
 ## Placeholders a completar
 

@@ -40,7 +40,11 @@ SUPABASE_SERVICE_ROLE_KEY=eyJ...          # solo servidor — admin + métricas
 NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
 ADMIN_EMAILS=admin@clinica.com          # editores de contenido
 CLINICAL_MODE_ENABLED=true              # false para desactivar diario/export
+CRON_SECRET=...                         # secreto para cron de retención (vercel.json)
+INTAKE_RETENTION_DAYS=365               # opcional; purge semanal de diario antiguo
 ```
+
+`vercel.json` programa `GET /api/cron/purge-intake` los domingos a las 03:00 UTC. Sin `CRON_SECRET` el endpoint responde 401.
 
 ## 3. Vercel
 
@@ -61,7 +65,7 @@ Checklist manual opcional:
 - [ ] Curso `/learn` accesible (RD: casabe/viandas en descripciones)
 - [ ] Admin `/admin` solo con `ADMIN_EMAILS`
 - [ ] Catálogo tras aprobar nivel 1
-- [ ] Diario `/diario` tras nivel 3 + modo clínico activo
+- [ ] Diario `/diario` tras nivel 3 + seguimiento personal activo
 - [ ] Export CSV/PDF desde diario
 
 ## 5. Actualizaciones post-licencia
