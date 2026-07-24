@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
+import { SEO_COPY } from "@/lib/domain/brand-positioning";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
 import { CookieConsentGate } from "@/components/CookieConsentGate";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -26,22 +27,19 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Migajas — Aprende a contar carbohidratos",
-  description:
-    "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+  title: SEO_COPY.title,
+  description: SEO_COPY.description,
   openGraph: {
     type: "website",
     locale: "es_ES",
     siteName: "Migajas",
-    title: "Migajas — Aprende a contar carbohidratos",
-    description:
-      "Un curso guiado para relacionar gramos, carbohidratos y raciones con comida real de tu país.",
+    title: SEO_COPY.title,
+    description: SEO_COPY.openGraphDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Migajas — Aprende a contar carbohidratos",
-    description:
-      "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+    title: SEO_COPY.title,
+    description: SEO_COPY.description,
   },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],

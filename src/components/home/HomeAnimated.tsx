@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/Button";
+import { HERO_COPY } from "@/lib/domain/brand-positioning";
 import AnimatedContent from "@/components/react-bits/AnimatedContent";
 import StaggeredList from "@/components/react-bits/StaggeredList";
 
@@ -36,18 +37,18 @@ export function HomeHero({
       className="hero-pill mx-auto w-full max-w-3xl px-8 py-12 text-center sm:px-14 sm:py-16"
     >
       <h1 className="font-display text-3xl font-medium leading-snug text-foreground sm:text-4xl">
-        Bienvenido a Migajas. Tu guía amable para el conteo de carbohidratos.
+        {HERO_COPY.headline}
       </h1>
       <p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-muted sm:text-lg">
-        Aprende a relacionar comida real de tu país con confianza y tranquilidad.
+        {HERO_COPY.subtitle}
       </p>
       <div className="mt-8 flex flex-col items-center gap-4">
-        <Button href="/onboarding">Empezar mi curso</Button>
+        <Button href="/onboarding">{HERO_COPY.ctaPrimary}</Button>
         <Link
           href="/learn"
           className="text-sm font-medium text-sage-strong underline-offset-4 transition-colors hover:text-foreground hover:underline"
         >
-          Ya empecé — continuar
+          {HERO_COPY.ctaSecondary}
         </Link>
       </div>
       {regionLine ? (

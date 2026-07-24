@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
+import { SEO_COPY } from "@/lib/domain/brand-positioning";
 
-export const alt =
-  "Migajas — Aprende a contar carbohidratos con comida real de tu país";
+export const alt = SEO_COPY.openGraphAlt;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
