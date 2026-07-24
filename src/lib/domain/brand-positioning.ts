@@ -114,6 +114,7 @@ export const ACTIVE_BRAND_SOURCES = [
 
 export const BRAND_DOC_FILES = [
   "docs/BRAND_EDITORIAL_SYSTEM.md",
+  "docs/BRAND_CANVA_TEMPLATES_v0.1.md",
 ] as const;
 
 export const CONTENT_LIBRARY_FILES = [

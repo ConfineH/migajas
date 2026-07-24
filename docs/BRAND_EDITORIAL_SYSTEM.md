@@ -2,14 +2,14 @@
 
 Sistema editorial para Instagram (y derivados) con identidad reconocible. Cualquier diseñador, copywriter o IA debe poder seguir este documento y el resultado debe parecer inequívocamente Migajas.
 
-**Fuentes de verdad del repo:** `src/lib/domain/brand-positioning.ts`, `src/app/globals.css`, `docs/commercial/LEGAL/MDR-POSITION.md`
+**Fuentes de verdad del repo:** `src/lib/domain/brand-positioning.ts`, `src/app/globals.css`, `docs/BRAND_CANVA_TEMPLATES_v0.1.md`, `docs/commercial/LEGAL/MDR-POSITION.md`
 
 ---
 
 ## Quick path — empezar esta semana
 
 1. Lee **Idea fundacional** y **Voz** (5 min).
-2. Crea **6 plantillas** en Figma/Canva según **Plantillas** (día 1–2).
+2. Crea **6 plantillas** en Canva según `docs/BRAND_CANVA_TEMPLATES_v0.1.md` (día 1–2).
 3. Elige 9 piezas de `docs/content-library/batch-01-instagram.md`.
 4. Produce 3 posts/semana con el flujo de **Producción**.
 5. Revisa el grid 3×3 completo antes de publicar el primero.
