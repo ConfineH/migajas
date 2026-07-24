@@ -28,6 +28,18 @@ Objetivo de cada pieza:
 
 La confianza nace antes que la conversión.
 
+### Copy canónico (app + redes)
+
+| Rol | Texto | Uso |
+|-----|-------|-----|
+| **Tagline** | Aprende contando carbohidratos. | Home hero, OG headline |
+| **One-liner** | Aprende a contar carbohidratos con comida real de tu país — paso a paso, con tranquilidad. | Meta, onboarding, shares |
+| **Hero subtítulo** | Un curso guiado con comida real de tu país. Paso a paso, con tranquilidad. | Home |
+| **Onboarding** | Bienvenido a Migajas + one-liner | Primer paso |
+| **Bio IG** | Ver `SOCIAL_COPY` en `brand-positioning.ts` | Instagram |
+
+Fuente única: `src/lib/domain/brand-positioning.ts`
+
 ---
 
 ## 1. Arco de marca

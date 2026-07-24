@@ -13,6 +13,7 @@ import {
   getRegionById,
   type RegionProfile,
 } from "@/lib/domain/regions";
+import { ONBOARDING_COPY } from "@/lib/domain/brand-positioning";
 
 type StepId = "welcome" | "country" | "course" | "mode" | "rations" | "clinical";
 
@@ -200,16 +201,14 @@ export function OnboardingFlow({
               <MigajasLogo size="lg" className="mx-auto" />
               <div className="space-y-2">
                 <h1 className="font-display text-3xl font-medium text-foreground">
-                  Bienvenido a Migajas
+                  {ONBOARDING_COPY.welcomeTitle}
                 </h1>
                 <p className="text-pretty text-muted">
-                  Aprende a contar carbohidratos con comida de tu país, paso a
-                  paso y sin prisas.
+                  {ONBOARDING_COPY.welcomeIntro}
                 </p>
               </div>
               <p className="rounded-2xl bg-sage-light/70 px-4 py-3 text-sm text-muted">
-                Migajas es una herramienta educativa. No sustituye el criterio de
-                tu equipo de salud.
+                {ONBOARDING_COPY.educationalNote}
               </p>
               <Button onClick={() => setStepIndex(2)}>Empezar</Button>
             </section>

@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SEO_COPY } from "@/lib/domain/brand-positioning";
+import { BRAND_TAGLINE, SEO_COPY } from "@/lib/domain/brand-positioning";
 
 export const alt = SEO_COPY.openGraphAlt;
 export const size = { width: 1200, height: 630 };
@@ -134,7 +134,7 @@ export default async function Image() {
                 lineHeight: 1.15,
               }}
             >
-              Aprende contando carbohidratos.
+              {BRAND_TAGLINE}
             </div>
             <div
               style={{
@@ -145,8 +145,7 @@ export default async function Image() {
                 maxWidth: 820,
               }}
             >
-              Un curso guiado para relacionar gramos, carbohidratos y raciones
-              con comida real de tu país.
+              {SEO_COPY.openGraphDescription}
             </div>
           </div>
         </div>

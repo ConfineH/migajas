@@ -12,26 +12,40 @@ export const BRAND_FOUNDATION =
 
 export const BRAND_OUTCOME = "Ahora lo entiendo mejor.";
 
+/** Short hook — home hero, OG headline, social. */
+export const BRAND_TAGLINE = "Aprende contando carbohidratos.";
+
+/** Full value proposition — meta, onboarding, share cards. */
 export const BRAND_ONE_LINER =
   "Aprende a contar carbohidratos con comida real de tu país — paso a paso, con tranquilidad.";
 
 export const HERO_COPY = {
-  headline:
-    "Bienvenido a Migajas. Tu guía amable para el conteo de carbohidratos.",
+  headline: BRAND_TAGLINE,
   subtitle:
-    "Aprende a relacionar comida real de tu país con confianza y tranquilidad.",
+    "Un curso guiado con comida real de tu país. Paso a paso, con tranquilidad.",
   ctaPrimary: "Empezar mi curso",
   ctaSecondary: "Ya empecé — continuar",
 } as const;
 
+export const ONBOARDING_COPY = {
+  welcomeTitle: "Bienvenido a Migajas",
+  welcomeIntro: BRAND_ONE_LINER,
+  educationalNote:
+    "Migajas es una herramienta educativa. No sustituye el criterio de tu equipo de salud.",
+} as const;
+
 export const SEO_COPY = {
-  title: "Migajas — Aprende a contar carbohidratos",
-  description:
-    "Tu guía amable para el conteo de carbohidratos con comida real de tu país.",
+  title: "Migajas — Aprende contando carbohidratos",
+  description: BRAND_ONE_LINER,
   openGraphDescription:
     "Un curso guiado para relacionar gramos, carbohidratos y raciones con comida real de tu país.",
-  openGraphAlt:
-    "Migajas — Aprende a contar carbohidratos con comida real de tu país",
+  openGraphAlt: `Migajas — ${BRAND_ONE_LINER}`,
+} as const;
+
+/** Instagram / social profile (categoría: Educación). */
+export const SOCIAL_COPY = {
+  bio: "Aprende a contar carbohidratos con comida real.\nCurso guiado paso a paso.",
+  category: "Educación",
 } as const;
 
 /** Editorial voice: plural brand ("empezamos") or impersonal, not founder-first. */
@@ -105,11 +119,17 @@ export function findForbiddenMarketingPhrases(text: string): string[] {
   );
 }
 
-/** App surfaces guarded by brand-positioning tests. */
-export const ACTIVE_BRAND_SOURCES = [
+/** Marketing surfaces scanned for forbidden headline patterns. */
+export const MARKETING_BRAND_SOURCES = [
   "src/components/home/HomeAnimated.tsx",
   "src/app/layout.tsx",
   "src/app/opengraph-image.tsx",
+] as const;
+
+/** App surfaces that must import canonical copy from this module. */
+export const ACTIVE_BRAND_SOURCES = [
+  ...MARKETING_BRAND_SOURCES,
+  "src/components/OnboardingFlow.tsx",
 ] as const;
 
 export const BRAND_DOC_FILES = [

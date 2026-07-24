@@ -5,14 +5,18 @@ import {
   ACTIVE_BRAND_SOURCES,
   BRAND_DOC_FILES,
   BRAND_ONE_LINER,
+  BRAND_TAGLINE,
   BRAND_VISUAL_TOKENS,
   CONTENT_LIBRARY_FILES,
   CONTENT_MIX,
   EDITORIAL_SERIES,
   FORBIDDEN_MARKETING_PATTERNS,
   HERO_COPY,
+  MARKETING_BRAND_SOURCES,
+  ONBOARDING_COPY,
   PRODUCT_ARC,
   SEO_COPY,
+  SOCIAL_COPY,
   findForbiddenMarketingPhrases,
 } from "@/lib/domain/brand-positioning";
 
@@ -36,16 +40,19 @@ describe("brand-positioning", () => {
     );
   });
 
-  it("canonical hero copy prioritizes learning over clinical claims", () => {
-    expect(HERO_COPY.headline).toMatch(/guía amable/i);
+  it("canonical hero copy uses tagline and aligned subtitle", () => {
+    expect(HERO_COPY.headline).toBe(BRAND_TAGLINE);
+    expect(HERO_COPY.subtitle).toMatch(/curso guiado/i);
     expect(HERO_COPY.subtitle).toMatch(/comida real/i);
-    expect(HERO_COPY.subtitle).toMatch(/confianza/i);
+    expect(HERO_COPY.subtitle).toMatch(/tranquilidad/i);
     expect(findForbiddenMarketingPhrases(HERO_COPY.headline)).toEqual([]);
     expect(findForbiddenMarketingPhrases(HERO_COPY.subtitle)).toEqual([]);
   });
 
-  it("SEO copy stays educational", () => {
-    expect(SEO_COPY.title).toMatch(/Aprende a contar carbohidratos/i);
+  it("SEO and onboarding share the one-liner value proposition", () => {
+    expect(SEO_COPY.description).toBe(BRAND_ONE_LINER);
+    expect(ONBOARDING_COPY.welcomeIntro).toBe(BRAND_ONE_LINER);
+    expect(SEO_COPY.title).toMatch(/Aprende contando carbohidratos/i);
     expect(SEO_COPY.openGraphDescription).toMatch(/curso guiado/i);
     expect(findForbiddenMarketingPhrases(SEO_COPY.description)).toEqual([]);
     expect(findForbiddenMarketingPhrases(SEO_COPY.openGraphDescription)).toEqual(
@@ -53,9 +60,10 @@ describe("brand-positioning", () => {
     );
   });
 
-  it("brand one-liner matches product positioning", () => {
-    expect(BRAND_ONE_LINER).toMatch(/comida real/i);
-    expect(BRAND_ONE_LINER).toMatch(/carbohidratos/i);
+  it("social copy stays educational for Instagram bio", () => {
+    expect(SOCIAL_COPY.category).toBe("Educación");
+    expect(SOCIAL_COPY.bio).toMatch(/comida real/i);
+    expect(findForbiddenMarketingPhrases(SOCIAL_COPY.bio)).toEqual([]);
   });
 
   it("active brand sources import canonical copy", () => {
@@ -63,13 +71,21 @@ describe("brand-positioning", () => {
     expect(home).toContain("HERO_COPY");
     expect(home).toContain("@/lib/domain/brand-positioning");
 
+    const onboarding = readSource("src/components/OnboardingFlow.tsx");
+    expect(onboarding).toContain("ONBOARDING_COPY");
+    expect(onboarding).toContain("@/lib/domain/brand-positioning");
+
     const layout = readSource("src/app/layout.tsx");
     expect(layout).toContain("SEO_COPY");
     expect(layout).toContain("@/lib/domain/brand-positioning");
+
+    const og = readSource("src/app/opengraph-image.tsx");
+    expect(og).toContain("BRAND_TAGLINE");
+    expect(og).toContain("SEO_COPY");
   });
 
-  it("active brand sources avoid forbidden headline patterns", () => {
-    for (const path of ACTIVE_BRAND_SOURCES) {
+  it("marketing brand sources avoid forbidden headline patterns", () => {
+    for (const path of MARKETING_BRAND_SOURCES) {
       const content = readSource(path);
       const violations = findForbiddenMarketingPhrases(content);
       expect(
