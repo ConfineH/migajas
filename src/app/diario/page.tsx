@@ -9,9 +9,9 @@ import { enrichFoods, localizeFoodDisplay } from "@/lib/domain/foods";
 import { formatExchangeRule, getRegionById } from "@/lib/domain/regions";
 import { listIntakeEntries } from "@/lib/supabase/intake";
 
-export const metadata = {
-  title: "Diario — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 function getTodayLocalDate(): string {
   const now = new Date();

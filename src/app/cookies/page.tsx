@@ -8,10 +8,9 @@ import {
   parseCookieConsent,
 } from "@/lib/domain/cookie-consent";
 import { getCookieInventory, LEGAL_VERSIONS } from "@/lib/domain/legal-versions";
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
 
-export const metadata = {
-  title: "Política de cookies — Migajas",
-};
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.cookies);
 
 export default async function CookiesPage() {
   const cookieStore = await cookies();

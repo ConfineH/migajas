@@ -15,9 +15,9 @@ import { getAuthUser } from "@/lib/supabase/auth";
 import { getUserLearningEvents } from "@/lib/supabase/analytics-events";
 import { resolveProgress } from "@/lib/learning-state";
 
-export const metadata = {
-  title: "Mi actividad — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 function formatDate(iso: string): string {
   return new Intl.DateTimeFormat("es-ES", {

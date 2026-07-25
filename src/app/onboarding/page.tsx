@@ -12,9 +12,9 @@ import { getOnboardingState } from "@/lib/onboarding";
 import { createClient } from "@/lib/supabase/server";
 import { getUserProfile } from "@/lib/supabase/user-profile";
 
-export const metadata = {
-  title: "Configuración — Migajas",
-};
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.onboarding);
 
 export default async function OnboardingPage() {
   const state = await getOnboardingState();

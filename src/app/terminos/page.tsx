@@ -2,10 +2,9 @@ import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { LEGAL_VERSIONS } from "@/lib/domain/legal-versions";
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
 
-export const metadata = {
-  title: "Términos y condiciones — Migajas",
-};
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.terminos);
 
 export default function TermsPage() {
   return (

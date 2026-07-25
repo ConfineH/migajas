@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
-import { SEO_COPY } from "@/lib/domain/brand-positioning";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
+import { buildRootMetadata } from "@/lib/site-metadata";
 import { CookieConsentGate } from "@/components/CookieConsentGate";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
@@ -21,31 +21,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://migajas.vercel.app";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: SEO_COPY.title,
-  description: SEO_COPY.description,
-  openGraph: {
-    type: "website",
-    locale: "es_ES",
-    siteName: "Migajas",
-    title: SEO_COPY.title,
-    description: SEO_COPY.openGraphDescription,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SEO_COPY.title,
-    description: SEO_COPY.description,
-  },
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
-  },
-};
+export const metadata: Metadata = buildRootMetadata();
 
 export default async function RootLayout({
   children,

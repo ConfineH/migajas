@@ -10,9 +10,9 @@ import { isFreeModeUnlocked, toGuidedProgress } from "@/lib/domain/guided-flow";
 import { resolveProgress } from "@/lib/learning-state";
 import { getActiveRegion } from "@/lib/region-server";
 
-export const metadata = {
-  title: "Curso guiado — Migajas",
-};
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.learn);
 
 export const dynamic = "force-dynamic";
 

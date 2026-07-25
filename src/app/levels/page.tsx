@@ -5,9 +5,9 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
-export const metadata = {
-  title: "Practicar — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 export default async function LevelsPage() {
   await requireFreeMode();

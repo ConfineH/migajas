@@ -10,9 +10,9 @@ import { getFreeModeStatus } from "@/lib/free-mode";
 import { requireOnboarding } from "@/lib/onboarding";
 import { getActiveRegion } from "@/lib/region-server";
 
-export const metadata = {
-  title: "Guía de referencia — Migajas",
-};
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
+
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.guia);
 
 type Props = {
   searchParams: Promise<{ tab?: string }>;

@@ -2,10 +2,9 @@ import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { LEGAL_VERSIONS } from "@/lib/domain/legal-versions";
+import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
 
-export const metadata = {
-  title: "Privacidad — Migajas",
-};
+export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.privacidad);
 
 export default function PrivacyPage() {
   return (

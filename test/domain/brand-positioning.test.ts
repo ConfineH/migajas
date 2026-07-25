@@ -76,8 +76,8 @@ describe("brand-positioning", () => {
     expect(onboarding).toContain("@/lib/domain/brand-positioning");
 
     const layout = readSource("src/app/layout.tsx");
-    expect(layout).toContain("SEO_COPY");
-    expect(layout).toContain("@/lib/domain/brand-positioning");
+    expect(layout).toContain("buildRootMetadata");
+    expect(layout).toContain("@/lib/site-metadata");
 
     const og = readSource("src/app/opengraph-image.tsx");
     expect(og).toContain("BRAND_TAGLINE");

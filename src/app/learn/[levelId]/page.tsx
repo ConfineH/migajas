@@ -14,6 +14,7 @@ import {
   isGuidedLevelUnlocked,
 } from "@/lib/domain/guided-flow";
 import { getLevelById, getLevels } from "@/lib/domain/exercises";
+import { buildPageMetadata, getLearnLevelSeo } from "@/lib/domain/seo";
 
 interface Props {
   params: Promise<{ levelId: string }>;
@@ -23,8 +24,11 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props) {
   const { levelId } = await params;
-  const level = getLevelById(levelId);
-  return { title: level ? `${level.name} — Curso` : "Curso — Migajas" };
+  const entry = getLearnLevelSeo(levelId);
+  if (!entry) {
+    return { title: "Curso — Migajas" };
+  }
+  return buildPageMetadata(entry);
 }
 
 export default async function LearnLevelPage({ params }: Props) {

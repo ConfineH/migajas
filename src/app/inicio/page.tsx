@@ -23,9 +23,9 @@ import { resolveProgress } from "@/lib/learning-state";
 import { getActiveRegion } from "@/lib/region-server";
 import { getAuthUser } from "@/lib/supabase/auth";
 
-export const metadata = {
-  title: "Inicio — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 export const dynamic = "force-dynamic";
 

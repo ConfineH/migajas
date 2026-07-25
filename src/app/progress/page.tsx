@@ -24,9 +24,9 @@ import {
   getLessonProgressPercent,
 } from "@/lib/domain/guided-flow";
 
-export const metadata = {
-  title: "Mi progreso — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 export default async function ProgressPage() {
   const progress = await resolveProgress();

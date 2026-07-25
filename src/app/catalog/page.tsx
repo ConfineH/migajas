@@ -8,9 +8,9 @@ import { formatExchangeRule } from "@/lib/domain/regions";
 import { requireFreeMode } from "@/lib/free-mode";
 import { getActiveRegion } from "@/lib/region-server";
 
-export const metadata = {
-  title: "Catálogo — Migajas",
-};
+import { NOINDEX_METADATA } from "@/lib/domain/seo";
+
+export const metadata = NOINDEX_METADATA;
 
 export default async function CatalogPage() {
   await requireFreeMode();
