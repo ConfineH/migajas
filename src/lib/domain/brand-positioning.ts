@@ -133,6 +133,11 @@ export const ACTIVE_BRAND_SOURCES = [
 ] as const;
 
 export const BRAND_DOC_FILES = [
+  "docs/brand/README.md",
+  "docs/brand/DECISIONS.md",
+  "docs/brand/STRATEGY.md",
+  "docs/brand/COPY-SEO-SOCIAL.md",
+  "docs/brand/CREATIVE-PRODUCTION.md",
   "docs/BRAND_EDITORIAL_SYSTEM.md",
   "docs/BRAND_CANVA_TEMPLATES_v0.1.md",
 ] as const;

@@ -2,6 +2,7 @@
 
 Sistema editorial para Instagram (y derivados) con identidad reconocible. Cualquier diseñador, copywriter o IA debe poder seguir este documento y el resultado debe parecer inequívocamente Migajas.
 
+**Índice de marca:** `docs/brand/README.md`  
 **Fuentes de verdad del repo:** `src/lib/domain/brand-positioning.ts`, `src/app/globals.css`, `docs/BRAND_CANVA_TEMPLATES_v0.1.md`, `docs/commercial/LEGAL/MDR-POSITION.md`
 
 ---
