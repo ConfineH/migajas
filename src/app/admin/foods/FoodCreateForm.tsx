@@ -3,34 +3,28 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { FoodCountry } from "@/lib/domain/content-admin";
-import type { FoodItem } from "@/lib/domain/foods";
+import type { Difficulty, ItemType } from "@/lib/domain/foods";
 import { calculateRations } from "@/lib/domain/rations";
-import { deleteFoodAction, saveFoodAction } from "@/app/admin/actions";
+import { createFoodAction } from "@/app/admin/actions";
 import { SaveFeedback } from "@/app/admin/SaveFeedback";
-
-interface FoodEditorProps {
-  food: FoodItem;
-}
 
 const inputClass = "field-input mt-1 text-sm";
 
-export function FoodEditor({ food }: FoodEditorProps) {
+export function FoodCreateForm() {
   const router = useRouter();
-  const [country, setCountry] = useState<FoodCountry>(
-    food.country === "República Dominicana" ? "República Dominicana" : "España",
-  );
-  const [name, setName] = useState(food.name);
-  const [category, setCategory] = useState(food.category);
-  const [portionText, setPortionText] = useState(food.portionText);
-  const [grams, setGrams] = useState(String(food.grams));
-  const [carbsG, setCarbsG] = useState(String(food.carbsG));
-  const [difficulty, setDifficulty] = useState(food.difficulty);
-  const [itemType, setItemType] = useState(food.itemType);
-  const [notes, setNotes] = useState(food.notes);
+  const [id, setId] = useState("");
+  const [country, setCountry] = useState<FoodCountry>("España");
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [portionText, setPortionText] = useState("");
+  const [grams, setGrams] = useState("100");
+  const [carbsG, setCarbsG] = useState("10");
+  const [difficulty, setDifficulty] = useState<Difficulty>("Baja");
+  const [itemType, setItemType] = useState<ItemType>("base");
+  const [notes, setNotes] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [ok, setOk] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState(false);
 
   const previewRations = calculateRations(Number(carbsG) || 0);
 
@@ -39,8 +33,8 @@ export function FoodEditor({ food }: FoodEditorProps) {
     setSaving(true);
     setMessage(null);
 
-    const result = await saveFoodAction({
-      id: food.id,
+    const result = await createFoodAction({
+      id,
       country,
       name,
       category,
@@ -54,26 +48,30 @@ export function FoodEditor({ food }: FoodEditorProps) {
 
     setSaving(false);
     setOk(result.ok);
-    setMessage(result.ok ? "Guardado" : result.error);
-  }
-
-  async function handleDelete() {
-    if (!window.confirm(`¿Eliminar "${food.name}"? Esta acción no se puede deshacer.`)) {
-      return;
+    setMessage(result.ok ? "Alimento creado" : result.error);
+    if (result.ok) {
+      setId("");
+      setName("");
+      setCategory("");
+      setPortionText("");
+      setNotes("");
+      router.refresh();
     }
-    setDeleting(true);
-    setMessage(null);
-    const result = await deleteFoodAction(food.id);
-    setDeleting(false);
-    setOk(result.ok);
-    setMessage(result.ok ? "Eliminado" : result.error);
-    if (result.ok) router.refresh();
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <p className="text-xs text-muted">{food.id}</p>
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border p-5">
+      <h2 className="font-medium text-foreground">Añadir alimento</h2>
       <div className="grid gap-3 sm:grid-cols-2">
+        <label className="block text-sm">
+          <span className="text-muted">ID (slug)</span>
+          <input
+            className={inputClass}
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="ej. pan-casero"
+          />
+        </label>
         <label className="block text-sm">
           <span className="text-muted">País</span>
           <select
@@ -107,7 +105,7 @@ export function FoodEditor({ food }: FoodEditorProps) {
         </label>
         <label className="block text-sm">
           <span className="text-muted">Dificultad</span>
-          <select className={inputClass} value={difficulty} onChange={(e) => setDifficulty(e.target.value as FoodItem["difficulty"])}>
+          <select className={inputClass} value={difficulty} onChange={(e) => setDifficulty(e.target.value as Difficulty)}>
             <option value="Baja">Baja</option>
             <option value="Media">Media</option>
             <option value="Alta">Alta</option>
@@ -115,7 +113,7 @@ export function FoodEditor({ food }: FoodEditorProps) {
         </label>
         <label className="block text-sm">
           <span className="text-muted">Tipo</span>
-          <select className={inputClass} value={itemType} onChange={(e) => setItemType(e.target.value as FoodItem["itemType"])}>
+          <select className={inputClass} value={itemType} onChange={(e) => setItemType(e.target.value as ItemType)}>
             <option value="base">base</option>
             <option value="mixed">mixed</option>
             <option value="modulator">modulator</option>
@@ -130,21 +128,13 @@ export function FoodEditor({ food }: FoodEditorProps) {
         Vista previa: <strong>{previewRations}</strong> ración
         {previewRations === 1 ? "" : "es"} (10 g CHO = 1 ración)
       </p>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex items-center gap-3">
         <button
           type="submit"
-          disabled={saving || deleting}
+          disabled={saving}
           className="btn-terracotta rounded-2xl px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
         >
-          {saving ? "Guardando…" : "Guardar"}
-        </button>
-        <button
-          type="button"
-          disabled={saving || deleting}
-          onClick={handleDelete}
-          className="rounded-2xl border border-red-200 px-4 py-2 text-sm font-semibold text-red-700 disabled:opacity-60"
-        >
-          {deleting ? "Eliminando…" : "Eliminar"}
+          {saving ? "Creando…" : "Crear alimento"}
         </button>
         <SaveFeedback message={message} ok={ok} />
       </div>

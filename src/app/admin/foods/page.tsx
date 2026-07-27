@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
+import { AdminNav } from "@/app/admin/AdminNav";
 import { AdminShell } from "@/app/admin/AdminShell";
 import { FoodList } from "@/app/admin/foods/FoodList";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
@@ -23,6 +23,7 @@ export default async function AdminFoodsPage() {
       <AppNavBar />
       <main className="flex flex-1 flex-col">
         <AppPageLayout>
+          <AdminNav currentPath="/admin/foods" />
           <AdminShell
             title="Alimentos"
             description={`${foods.length} ítems editables`}

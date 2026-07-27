@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   parseExerciseIds,
   validateExamUpdate,
+  validateFoodCreate,
   validateLessonStepsUpdate,
   validateFoodUpdate,
   validateLessonUpdate,
@@ -13,6 +14,7 @@ describe("content-admin validation", () => {
     expect(
       validateFoodUpdate({
         id: "f1",
+        country: "España",
         name: "Pan",
         category: "Pan",
         portionText: "1 rebanada",
@@ -23,6 +25,23 @@ describe("content-admin validation", () => {
         notes: "",
       }),
     ).toBe("Gramos inválidos");
+  });
+
+  it("rejects invalid food country", () => {
+    expect(
+      validateFoodCreate({
+        id: "f1",
+        country: "MX" as "España",
+        name: "Pan",
+        category: "Pan",
+        portionText: "1 rebanada",
+        grams: 30,
+        carbsG: 10,
+        difficulty: "Baja",
+        itemType: "base",
+        notes: "",
+      }),
+    ).toBe("País inválido");
   });
 
   it("accepts valid lesson update", () => {

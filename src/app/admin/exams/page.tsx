@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
+import { AdminNav } from "@/app/admin/AdminNav";
 import { AdminShell } from "@/app/admin/AdminShell";
 import { ExamEditor } from "@/app/admin/exams/ExamEditor";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
@@ -26,6 +27,7 @@ export default async function AdminExamsPage() {
       <AppNavBar />
       <main className="flex flex-1 flex-col">
         <AppPageLayout>
+          <AdminNav currentPath="/admin/exams" />
           <AdminShell
             title="Exámenes por nivel"
             description="Título, descripción y lista de ejercicios de cada examen."

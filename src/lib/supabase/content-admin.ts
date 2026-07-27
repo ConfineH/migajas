@@ -6,10 +6,12 @@ import {
   lessonStepsUpdateToRow,
   lessonUpdateToRow,
   validateExamUpdate,
+  validateFoodCreate,
   validateFoodUpdate,
   validateLessonStepsUpdate,
   validateLessonUpdate,
   type ExamUpdateInput,
+  type FoodCreateInput,
   type FoodUpdateInput,
   type LessonStepsUpdateInput,
   type LessonUpdateInput,
@@ -40,6 +42,39 @@ export async function updateFood(input: FoodUpdateInput): Promise<string | null>
     .eq("id", input.id);
 
   if (dbError) return dbError.message;
+  await refreshContentFromSupabase();
+  return null;
+}
+
+export async function createFood(input: FoodCreateInput): Promise<string | null> {
+  await requireContentAdmin();
+  const error = validateFoodCreate(input);
+  if (error) return error;
+
+  const supabase = createServiceClient();
+  const { error: dbError } = await supabase.from("foods").insert(foodUpdateToRow(input));
+
+  if (dbError) {
+    if (dbError.code === "23505") return "Ya existe un alimento con ese ID";
+    return dbError.message;
+  }
+  await refreshContentFromSupabase();
+  return null;
+}
+
+export async function deleteFood(id: string): Promise<string | null> {
+  await requireContentAdmin();
+  if (!id.trim()) return "ID requerido";
+
+  const supabase = createServiceClient();
+  const { error: dbError } = await supabase.from("foods").delete().eq("id", id.trim());
+
+  if (dbError) {
+    if (dbError.code === "23503") {
+      return "No se puede eliminar: hay registros de ingesta asociados";
+    }
+    return dbError.message;
+  }
   await refreshContentFromSupabase();
   return null;
 }

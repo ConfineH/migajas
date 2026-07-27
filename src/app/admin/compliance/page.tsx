@@ -1,38 +1,31 @@
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
+import { AdminComplianceMetrics } from "@/app/admin/AdminComplianceMetrics";
 import { AdminNav } from "@/app/admin/AdminNav";
 import { AdminShell } from "@/app/admin/AdminShell";
-import { LessonList } from "@/app/admin/lessons/LessonList";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
-import { getAllLessons } from "@/lib/domain/lessons";
-import { getLevels } from "@/lib/domain/exercises";
 import { isContentAdmin } from "@/lib/domain/admin";
 import { getAuthUser } from "@/lib/supabase/auth";
 
 export const metadata = {
-  title: "Admin lecciones — Migajas",
+  title: "Admin cumplimiento — Migajas",
 };
 
-export default async function AdminLessonsPage() {
+export default async function AdminCompliancePage() {
   const user = await getAuthUser();
   if (!isContentAdmin(user?.email)) redirect("/");
-
-  const lessons = getAllLessons();
-  const levelNames = Object.fromEntries(
-    getLevels().map((level) => [level.id, level.name]),
-  );
 
   return (
     <>
       <AppNavBar />
       <main className="flex flex-1 flex-col">
         <AppPageLayout>
-          <AdminNav currentPath="/admin/lessons" />
+          <AdminNav currentPath="/admin/compliance" />
           <AdminShell
-            title="Lecciones"
-            description="Metadatos y pasos del curso guiado."
+            title="Cumplimiento"
+            description="Consentimientos agregados por tipo y versión legal."
           >
-            <LessonList lessons={lessons} levelNames={levelNames} />
+            <AdminComplianceMetrics />
           </AdminShell>
         </AppPageLayout>
       </main>

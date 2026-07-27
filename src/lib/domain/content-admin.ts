@@ -1,12 +1,20 @@
 import type { Difficulty, ItemType } from "@/lib/domain/foods";
 import type { LessonStep } from "@/lib/domain/lessons";
+import { REGIONS } from "@/lib/domain/regions";
 
 const DIFFICULTIES: Difficulty[] = ["Baja", "Media", "Alta"];
 const ITEM_TYPES: ItemType[] = ["base", "mixed", "modulator"];
+const FOOD_COUNTRIES = REGIONS.map((region) => region.foodCountry) as [
+  string,
+  ...string[],
+];
 const STEP_TYPES: LessonStep["type"][] = ["explanation", "example", "practice"];
+
+export type FoodCountry = (typeof FOOD_COUNTRIES)[number];
 
 export interface FoodUpdateInput {
   id: string;
+  country: FoodCountry;
   name: string;
   category: string;
   portionText: string;
@@ -16,6 +24,8 @@ export interface FoodUpdateInput {
   itemType: ItemType;
   notes: string;
 }
+
+export interface FoodCreateInput extends FoodUpdateInput {}
 
 export interface LessonUpdateInput {
   id: string;
@@ -43,8 +53,12 @@ export function parseExerciseIds(raw: string): string[] {
     .filter(Boolean);
 }
 
-export function validateFoodUpdate(input: FoodUpdateInput): string | null {
+function validateFoodFields(input: FoodUpdateInput): string | null {
   if (!input.id.trim()) return "ID requerido";
+  if (!/^[a-z0-9-]+$/.test(input.id.trim())) {
+    return "ID inválido (usa minúsculas, números y guiones)";
+  }
+  if (!FOOD_COUNTRIES.includes(input.country)) return "País inválido";
   if (!input.name.trim()) return "Nombre requerido";
   if (!input.category.trim()) return "Categoría requerida";
   if (!input.portionText.trim()) return "Porción requerida";
@@ -59,6 +73,14 @@ export function validateFoodUpdate(input: FoodUpdateInput): string | null {
   return null;
 }
 
+export function validateFoodUpdate(input: FoodUpdateInput): string | null {
+  return validateFoodFields(input);
+}
+
+export function validateFoodCreate(input: FoodCreateInput): string | null {
+  return validateFoodFields(input);
+}
+
 export function validateLessonUpdate(input: LessonUpdateInput): string | null {
   if (!input.id.trim()) return "ID requerido";
   if (!input.title.trim()) return "Título requerido";
@@ -68,7 +90,8 @@ export function validateLessonUpdate(input: LessonUpdateInput): string | null {
 
 export function foodUpdateToRow(input: FoodUpdateInput) {
   return {
-    id: input.id,
+    id: input.id.trim(),
+    country: input.country,
     name: input.name.trim(),
     category: input.category.trim(),
     portion_text: input.portionText.trim(),
