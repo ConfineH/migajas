@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
-import { buildRootMetadata } from "@/lib/site-metadata";
+import { buildRootMetadata, buildRootViewport } from "@/lib/site-metadata";
 import { CookieConsentGate } from "@/components/CookieConsentGate";
+import { PwaServiceWorker } from "@/components/PwaServiceWorker";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
@@ -22,6 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = buildRootMetadata();
+export const viewport: Viewport = buildRootViewport();
 
 export default async function RootLayout({
   children,
@@ -39,6 +41,7 @@ export default async function RootLayout({
         {children}
         <SiteFooter />
         <CookieConsentGate />
+        <PwaServiceWorker />
       </body>
     </html>
   );

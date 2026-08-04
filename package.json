@@ -17,7 +17,8 @@
     "ops:smoke:admin": "node scripts/ops-smoke-admin.mjs",
     "ops:smoke:clinical": "node scripts/ops-smoke-clinical.mjs",
     "ops:smoke:deploy": "node scripts/ops-smoke-deploy.mjs",
-    "ops:smoke": "node scripts/ops-smoke-deploy.mjs && node scripts/ops-smoke-admin.mjs && node scripts/ops-smoke-clinical.mjs"
+    "ops:smoke": "node scripts/ops-smoke-deploy.mjs && node scripts/ops-smoke-admin.mjs && node scripts/ops-smoke-clinical.mjs",
+    "pwa:icons": "node scripts/generate-pwa-icons.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
@@ -41,6 +42,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "jsdom": "^29.1.1",
+    "playwright": "^1.61.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"
