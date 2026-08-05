@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { DM_Sans, Geist_Mono, Playfair_Display } from "next/font/google";
 import { hydrateContentFromSupabase } from "@/lib/content-server";
 import { buildRootMetadata, buildRootViewport } from "@/lib/site-metadata";
@@ -42,6 +43,7 @@ export default async function RootLayout({
         <SiteFooter />
         <CookieConsentGate />
         <PwaServiceWorker />
+        <Analytics />
       </body>
     </html>
   );

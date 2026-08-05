@@ -32,6 +32,9 @@ export default async function CookiesPage() {
             Migajas usa cookies y almacenamiento local para ofrecer el curso,
             guardar tu progreso y recordar tus preferencias. No usamos cookies
             publicitarias ni de seguimiento de terceros en la versión base.
+            En el hosting (Vercel) puede haber medición agregada de visitas
+            (Web Analytics) diseñada sin cookies de publicidad; no identifica
+            a personas con fines comerciales.
           </p>
 
           <h2>Inventario de cookies</h2>
