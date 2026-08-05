@@ -75,12 +75,52 @@ const CONTENT_SOURCES: ContentSource[] = [
   },
   {
     id: "migajas-modulators",
-    title: "Moduladores (0 raciones de HC)",
+    title: "Moduladores (sin raciones de HC)",
     publisher: "Migajas",
     url: "/guia",
     scope: "methodology",
     summary:
-      "Proteínas y grasas puras no suman raciones; pueden retrasar la absorción de carbohidratos.",
+      "Proteínas y grasas puras no aportan raciones de HC; pueden modificar la respuesta glucémica en comidas mixtas.",
+    regionIds: ["es"],
+  },
+  {
+    id: "migajas-veg-policy",
+    title: "Verduras de bajo HC (habitualmente no contabilizadas)",
+    publisher: "Migajas",
+    url: "/guia",
+    scope: "methodology",
+    summary:
+      "No usamos «verduras libres» como cantidad infinita. Algunas verduras en guarnición habitual no se contabilizan; otras (p. ej. brócoli o judías en 1 taza) sí según la ficha del catálogo.",
+    regionIds: ["es"],
+  },
+  {
+    id: "sed-education",
+    title: "Educación terapéutica estructurada (SED)",
+    publisher: "Sociedad Española de Diabetes",
+    url: "https://www.sediabetes.org/",
+    scope: "clinical-guideline",
+    summary:
+      "Referencia de programas de educación diabetológica estructurados, con objetivos, evaluación y adaptación al paciente.",
+    regionIds: ["es"],
+  },
+  {
+    id: "seen",
+    title: "Sociedad Española de Endocrinología y Nutrición (SEEN)",
+    publisher: "SEEN",
+    url: "https://www.seen.es/",
+    scope: "clinical-guideline",
+    summary:
+      "Marco clínico-nutricional de referencia en España para educación y nutrición en diabetes.",
+    regionIds: ["es"],
+  },
+  {
+    id: "easd",
+    title: "European Association for the Study of Diabetes (EASD)",
+    publisher: "EASD",
+    url: "https://www.easd.org/",
+    scope: "clinical-guideline",
+    summary:
+      "Orientación europea sobre diabetes; usada como referencia de rigor educativo, no como claim de dispositivo médico.",
     regionIds: ["es"],
   },
 ];

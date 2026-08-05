@@ -21,8 +21,9 @@ export function buildReferenceTips(
     "Cuenta solo carbohidratos (HC), no el peso total del alimento.",
     `En ${regionName}: ${exchangeUnitG} g de HC = 1 ración.`,
     `Puedes usar medios: ${half} g = 0,5 raciones, ${oneAndHalf} g = 1,5 raciones.`,
-    "Los moduladores (pollo, huevo, pescado) aportan 0 raciones de HC.",
-    "Migajas cuenta HC totales por defecto; la fibra se enseña en el curso pero no se resta salvo indicación médica.",
+    "Los moduladores (pollo, huevo, pescado, aceite) no aportan raciones de HC; pueden modificar la respuesta glucémica en comidas mixtas.",
+    "Migajas cuenta HC totales por defecto; restar fibra solo si tu equipo de salud lo indica (no hay una regla universal).",
+    "Verduras de bajo HC en porción habitual suelen no contabilizarse; brócoli o judías en ración generosa sí pueden contar (mira la ficha).",
     "Grasas y proteínas pueden retrasar la subida de glucosa 2-4 horas (pizza, frituras, menús mixtos).",
     "El alcohol aporta HC y puede causar hipoglucemia tardía (6-12 h después). Vigila la glucosa.",
   ];

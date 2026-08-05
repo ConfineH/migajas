@@ -85,14 +85,14 @@
     "id": "l1-lesson-3",
     "levelId": "nivel-1",
     "orderIndex": 3,
-    "title": "Proteínas y grasas: los \"moduladores\" (0 raciones)",
-    "summary": "Carne, pollo, huevo, pescado y aceites no cuentan como carbohidratos. Pero afectan cómo absorbes los HC.",
+    "title": "Proteínas y grasas: no aportan raciones de HC",
+    "summary": "Carne, pollo, huevo, pescado y aceites no aportan raciones de hidratos, aunque pueden modificar la respuesta glucémica de una comida mixta.",
     "steps": [
       {
         "id": "l1-lesson-3-s1",
         "type": "explanation",
         "title": "¿Qué son los moduladores?",
-        "body": "Son alimentos con 0 o casi 0 carbohidratos: pollo, carne, huevo, pescado, aceite, mantequilla. No suman raciones."
+        "body": "Son alimentos con 0 o casi 0 carbohidratos: pollo, carne, huevo, pescado, aceite, mantequilla. No aportan raciones de HC. Sí pueden modificar la respuesta glucémica cuando van con carbohidratos (comida mixta)."
       },
       {
         "id": "l1-lesson-3-s2",
@@ -127,8 +127,8 @@
     "id": "l1-lesson-4",
     "levelId": "nivel-1",
     "orderIndex": 4,
-    "title": "Fibra y carbohidratos netos: qué cuenta realmente",
-    "summary": "La fibra no cuenta como ración. Aprende a restarla si la etiqueta la muestra por separado (según FEN y ADA).",
+    "title": "Fibra y carbohidratos: qué usa Migajas",
+    "summary": "Migajas cuenta HC totales por defecto. Los HC netos (restar fibra) solo si tu equipo de salud te lo indica; el criterio varía según país, etiquetado y protocolo educativo.",
     "steps": [
       {
         "id": "l1-lesson-4-s1",
@@ -143,7 +143,7 @@
         "id": "l1-lesson-4-s2",
         "type": "explanation",
         "title": "HC totales vs HC netos",
-        "body": "HC netos = HC totales − Fibra. Si la etiqueta separa la fibra, puedes restarla. Si no, usa los HC totales (más seguro)."
+        "body": "HC netos = HC totales − Fibra. Algunos equipos educativos los usan cuando la etiqueta separa la fibra. Si no hay criterio claro, los HC totales son la opción más segura y la que usa Migajas por defecto."
       },
       {
         "id": "l1-lesson-4-s3",
@@ -156,7 +156,7 @@
         "id": "l1-lesson-4-s4",
         "type": "explanation",
         "title": "Recomendación para Migajas",
-        "body": "Enseñamos HC totales (sin restar fibra) para simplificar, salvo que el usuario tenga instrucciones de su médico para restar fibra (común en diabetes tipo 1 con insulina).",
+        "body": "Contamos HC totales (sin restar fibra) para simplificar y alinear con muchos programas en España. Si tu equipo de salud te indica restar fibra (a veces en diabetes tipo 1 con insulina), sigue su protocolo: no hay una regla universal.",
         "sourceIds": [
           "migajas-fiber-policy"
         ]
@@ -353,21 +353,21 @@
     "id": "l3-lesson-1",
     "levelId": "nivel-3",
     "orderIndex": 1,
-    "title": "Verduras: cuáles son \"libres\" y cuáles cuentan",
-    "summary": "La mayoría de verduras son muy bajas en carbohidratos, pero algunas (calabaza, zanahoria, maíz) sí cuentan como raciones.",
+    "title": "Verduras: bajo contenido en HC vs las que sí se contabilizan",
+    "summary": "Algunas verduras, en cantidades habituales de guarnición, suelen no contabilizarse. Otras (calabaza, zanahoria, maíz, brócoli en ración generosa, judías verdes) sí aportan HC relevantes. Migajas muestra el dato del catálogo para no mezclar «libre» con 0 infinito.",
     "steps": [
       {
         "id": "l3-lesson-1-s1",
         "type": "example",
-        "title": "Verduras \"libres\" (0 raciones)",
-        "body": "Lechuga, espinacas, pepino, tomate, brócoli, coliflor, judías verdes. Tienen menos de 5 g de HC por ración. Come libremente.",
+        "title": "Verduras de bajo HC (habitualmente no contabilizadas)",
+        "body": "Lechuga, espinacas, pepino, tomate, coliflor, apio, calabacín, champiñones y pimiento, en porciones habituales de ensalada o guarnición, suelen no contabilizarse en muchos protocolos. No significa cantidad infinita: el catálogo muestra HC si la porción es grande.",
         "foodId": "es-lechuga"
       },
       {
         "id": "l3-lesson-1-s2",
         "type": "example",
-        "title": "Verduras que SÍ cuentan",
-        "body": "Calabaza cocida (100 g = ~6 g HC), zanahoria cocida (100 g = ~8 g HC), maíz (100 g = ~19 g HC). Estas sí suman raciones.",
+        "title": "Verduras que SÍ se contabilizan en la porción del catálogo",
+        "body": "Calabaza, zanahoria, maíz, brócoli (1 taza ≈ 10 g HC) y judías verdes (1 taza ≈ 10 g HC) sí suman raciones en Migajas. Una guarnición muy pequeña puede tratarse distinto según el protocolo de tu equipo; aquí usamos el dato de la ficha.",
         "foodId": "calabaza"
       },
       {
@@ -381,7 +381,7 @@
         "id": "l3-lesson-1-s4",
         "type": "example",
         "title": "Recomendación diaria",
-        "body": "La FEN recomienda 2-3 raciones de verdura al día. Prioriza las \"libres\" para llenar el plato sin sumar carbohidratos.",
+        "body": "La FEN recomienda 2-3 raciones de verdura al día. Prioriza las de bajo HC para llenar el plato; consulta con tu equipo si tu protocolo no contabiliza ciertas verduras en cantidades habituales.",
         "foodId": "maiz-grano",
         "sourceIds": [
           "fen"
@@ -407,7 +407,7 @@
         "id": "l3-lesson-2-s1",
         "type": "example",
         "title": "Zumo vs fruta entera",
-        "body": "1 vaso de zumo de naranja (200 ml) = ~20 g HC (2 raciones), igual que 1 naranja grande. Pero el zumo no tiene fibra, así que sube más rápido la glucosa.",
+        "body": "1 vaso de zumo de naranja (200 ml) en el catálogo = 22 g HC (2,2 raciones). La pieza entera aporta fibra; el zumo sube la glucosa más rápido. Los valores redondeados «~20 g» en ejemplos antiguos equivalen a la misma idea educativa.",
         "foodId": "es-zumo-naranja"
       },
       {
@@ -498,21 +498,21 @@
         "id": "l4-lesson-2-s1",
         "type": "example",
         "title": "Paella",
-        "body": "1 plato de paella (300 g) = ~45 g HC (4,5 raciones) por el arroz. El pollo, marisco y verduras no suman HC, solo el arroz.",
+        "body": "1 plato de paella (300 g) = ~45 g HC (4,5 raciones) por el arroz. El pollo, marisco y verduras no suman HC, solo el arroz. Nota: las preparaciones tradicionales varían según receta; los valores del catálogo son una porción estándar con fines educativos.",
         "foodId": "paella"
       },
       {
         "id": "l4-lesson-2-s2",
         "type": "example",
         "title": "Tortilla de patata",
-        "body": "1 ración de tortilla (100 g) = ~10 g HC (1 ración) por la patata. El huevo y aceite no cuentan. Varía según la cantidad de patata.",
+        "body": "En el catálogo, 1 porción de tortilla (~180 g) = ~20 g HC (2,0 raciones) por la patata. Una porción más pequeña (~100 g) puede acercarse a ~10 g HC (1 ración). El huevo y el aceite no aportan raciones de HC. Los platos tradicionales varían según receta.",
         "foodId": "tortilla-patata"
       },
       {
         "id": "l4-lesson-2-s3",
         "type": "example",
         "title": "Gazpacho",
-        "body": "1 vaso de gazpacho (250 ml) = ~10 g HC (1 ración) por el tomate, pimiento y pan que lleva. Sin pan añadido, menos HC.",
+        "body": "En el catálogo, 1 bol de gazpacho (~300 g) = ~15 g HC (1,5 raciones). Un vaso de ~250 ml de otra receta puede acercarse a ~10 g HC. Los platos tradicionales presentan variabilidad según receta; usamos una preparación estándar educativa.",
         "foodId": "es-gazpacho"
       },
       {
@@ -555,9 +555,9 @@
       {
         "id": "l4-lesson-3-s3",
         "type": "example",
-        "title": "Pizza",
-        "body": "1 porción de pizza (125 g) = ~30 g HC (3 raciones) por la masa. Cuanto más fina la masa, menos HC. El queso y ingredientes no suman.",
-        "foodId": "pizza"
+        "title": "Pizza (margarita / pepperoni)",
+        "body": "1 porción de pizza margarita (~150 g) = ~30 g HC (3 raciones) por la masa. La pepperoni (~125 g) ≈ 30 g HC. Cuanto más fina la masa, menos HC. El queso y la mayoría de toppings no suman. Valores educativos estándar; varían según pizzería.",
+        "foodId": "es-pizza-es"
       },
       {
         "id": "l4-lesson-3-s4",
@@ -648,7 +648,7 @@
         "id": "l5-lesson-2-s4",
         "type": "example",
         "title": "Cena ligera",
-        "body": "Gazpacho (1 ración) + tortilla francesa (0 raciones) + 1 rebanada de pan (1 ración) = 2 raciones totales. Ideal para la noche.",
+        "body": "Gazpacho (~1–1,5 raciones según porción del catálogo) + tortilla francesa (0 raciones de HC) + 1 rebanada de pan (1 ración) ≈ 2–2,5 raciones. Ideal para la noche.",
         "foodId": "es-gazpacho"
       },
       {
@@ -664,21 +664,21 @@
     "id": "l5-lesson-3",
     "levelId": "nivel-5",
     "orderIndex": 3,
-    "title": "Alcohol, celebraciones y situaciones especiales",
-    "summary": "El alcohol afecta la glucemia y cuenta como carbohidratos. Aprende a manejar cervezas, vino y dulces de celebración.",
+    "title": "Alcohol (riesgo de hipoglucemia tardía), celebraciones y situaciones especiales",
+    "summary": "El alcohol aporta HC y puede causar hipoglucemia tardía (6–12 h después). Aprende a manejar cervezas, vino y dulces de celebración con comida y vigilancia de glucosa.",
     "steps": [
       {
         "id": "l5-lesson-3-s1",
         "type": "example",
         "title": "Cerveza",
-        "body": "1 caña de cerveza (200 ml) = ~10 g HC (1 ración). La cerveza sin alcohol tiene menos HC (~5 g/200 ml). No cuentes solo el alcohol, cuenta los HC.",
+        "body": "1 caña de cerveza lager (200 ml) ≈ 10 g HC (1 ración) — valor educativo estándar. La cerveza sin alcohol está en el catálogo como ficha aparte (~5 g HC / 200 ml tipico). El contenido varía según tipo y marca; cuenta los HC de la bebida, no solo el alcohol.",
         "foodId": "cerveza"
       },
       {
         "id": "l5-lesson-3-s2",
         "type": "example",
         "title": "Vino",
-        "body": "1 copa de vino (100 ml) = ~2-3 g HC (0,2-0,3 raciones). El vino dulce o cava tiene más (hasta 8 g/100 ml).",
+        "body": "1 copa de vino tinto seco (100 ml) ≈ 2–3 g HC (0,2–0,3 raciones) — valor educativo estándar. El vino dulce, generoso o el cava pueden aportar más. Verifica el tipo cuando puedas.",
         "foodId": "vino-tinto"
       },
       {
@@ -691,8 +691,8 @@
       {
         "id": "l5-lesson-3-s4",
         "type": "example",
-        "title": "Consejo de seguridad",
-        "body": "El alcohol puede causar hipoglucemias tardías (6-12 horas después). Si bebes, hazlo con comida y vigila tu glucosa.",
+        "title": "Riesgo de hipoglucemia tardía",
+        "body": "El mensaje educativo más importante: el alcohol puede causar hipoglucemias tardías (6–12 horas después). Si bebes, hazlo con comida, cuenta los HC de la bebida y vigila tu glucosa según las pautas de tu equipo de salud.",
         "foodId": "chocolate-leche",
         "sourceIds": [
           "ada"

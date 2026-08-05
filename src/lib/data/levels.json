@@ -3,35 +3,66 @@
     "id": "nivel-1",
     "orderIndex": 1,
     "name": "Nivel 1 — Fundamentos y metabolismo",
-    "description": "Raciones, etiquetas, moduladores, fibra y alimentos básicos del día a día.",
-    "country": "España"
+    "description": "Conceptos básicos: ración (10 g HC), etiquetas, moduladores, fibra y alimentos cotidianos.",
+    "country": "España",
+    "learningObjectives": [
+      "Definir una ración de HC según la regla española (10 g = 1 ración)",
+      "Distinguir gramos de alimento de gramos de carbohidratos",
+      "Identificar alimentos que no aportan raciones de HC (moduladores) y su efecto en comidas mixtas",
+      "Explicar por qué Migajas usa HC totales por defecto",
+      "Estimar raciones de pan, fruta y lácteos habituales"
+    ]
   },
   {
     "id": "nivel-2",
     "orderIndex": 2,
     "name": "Nivel 2 — Cereales, tubérculos y legumbres",
-    "description": "Arroz, pasta, patata, boniato y legumbres con fibra y proteína.",
-    "country": "España"
+    "description": "Alimentos individuales densos en HC: cereales, tubérculos y legumbres.",
+    "country": "España",
+    "learningObjectives": [
+      "Identificar los principales cereales, tubérculos y legumbres",
+      "Estimar raciones de HC de una porción habitual (taza / plato)",
+      "Diferenciar alimentos con y sin aporte relevante de HC en este grupo",
+      "Usar medidas caseras (taza, plato) de forma coherente con el catálogo"
+    ]
   },
   {
     "id": "nivel-3",
     "orderIndex": 3,
     "name": "Nivel 3 — Verduras y frutas avanzado",
-    "description": "Verduras libres vs las que cuentan, y frutas densas, zumo y almíbar.",
-    "country": "España"
+    "description": "Verduras de bajo HC vs las que se contabilizan; frutas densas y zumo vs pieza.",
+    "country": "España",
+    "learningObjectives": [
+      "Clasificar verduras de bajo HC (habitualmente no contabilizadas) frente a las que sí cuentan en la ficha",
+      "Estimar el impacto del zumo frente a la pieza de fruta",
+      "Reconocer frutas densas vs menos densas en HC",
+      "Aplicar el criterio del catálogo sin asumir «cantidad libre infinita»"
+    ]
   },
   {
     "id": "nivel-4",
     "orderIndex": 4,
     "name": "Nivel 4 — Platos mixtos y cocina española",
-    "description": "Platos compuestos, cocina de casa y comer fuera: tapas, bocadillos y pizza.",
-    "country": "España"
+    "description": "Platos compuestos y cocina real: casa, tapas y restaurante (estimaciones educativas).",
+    "country": "España",
+    "learningObjectives": [
+      "Sumar raciones en un plato compuesto",
+      "Estimar HC en platos típicos españoles (paella, tortilla, gazpacho)",
+      "Identificar el componente que aporta HC al comer fuera",
+      "Entender que las preparaciones tradicionales varían según receta"
+    ]
   },
   {
     "id": "nivel-5",
     "orderIndex": 5,
     "name": "Nivel 5 — Integración y vida real",
-    "description": "Menús completos, grasas y glucemia tardía, alcohol y celebraciones.",
-    "country": "España"
+    "description": "Integración: menús del día, comidas mixtas, alcohol e hipoglucemia tardía.",
+    "country": "España",
+    "learningObjectives": [
+      "Planificar un menú completo estimando raciones totales",
+      "Reconocer el efecto de grasas/proteínas en la respuesta glucémica de comidas mixtas",
+      "Contar HC en bebidas alcohólicas y dulces de celebración",
+      "Describir el riesgo de hipoglucemia tardía asociada al alcohol"
+    ]
   }
 ]

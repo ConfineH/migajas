@@ -29,8 +29,8 @@ describe("calculateMasteryScore", () => {
 
 describe("hasPassed", () => {
   it(`passes at ${PASS_THRESHOLD}% or above`, () => {
-    expect(hasPassed(60)).toBe(true);
-    expect(hasPassed(59)).toBe(false);
+    expect(hasPassed(70)).toBe(true);
+    expect(hasPassed(69)).toBe(false);
   });
 });
 

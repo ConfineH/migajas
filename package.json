@@ -18,7 +18,9 @@
     "ops:smoke:clinical": "node scripts/ops-smoke-clinical.mjs",
     "ops:smoke:deploy": "node scripts/ops-smoke-deploy.mjs",
     "ops:smoke": "node scripts/ops-smoke-deploy.mjs && node scripts/ops-smoke-admin.mjs && node scripts/ops-smoke-clinical.mjs",
-    "pwa:icons": "node scripts/generate-pwa-icons.mjs"
+    "pwa:icons": "node scripts/generate-pwa-icons.mjs",
+    "audit:foods": "node scripts/audit-food-catalog.mjs",
+    "docs:curriculum": "node scripts/generate-curriculum-inventory.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",

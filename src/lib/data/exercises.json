@@ -220,7 +220,7 @@
     "levelId": "nivel-2",
     "type": "multiple_choice",
     "prompt": "¿Cuál de estos alimentos cuenta como carbohidratos (no como verdura libre)?",
-    "explanation": "La patata es un tubérculo, tiene ~17 g HC/100 g (1,7 raciones). La lechuga, pepino y espinacas son verduras libres (<5 g HC/100 g).",
+    "explanation": "La patata es un tubérculo, tiene ~17 g HC/100 g (1,7 raciones). La lechuga, pepino y espinacas son verduras de bajo contenido en HC (habitualmente no contabilizadas) (<5 g HC/100 g).",
     "difficulty": "Baja",
     "foodId": "patata-cocida-150g",
     "correctAnswer": "patata-cocida-150g",
@@ -292,7 +292,7 @@
     "levelId": "nivel-3",
     "type": "identify_portion",
     "prompt": "¿Cuál de estas verduras SÍ cuenta como carbohidratos?",
-    "explanation": "La calabaza cocida tiene ~6 g HC/100 g (0,6 raciones). El brócoli, tomate y judías verdes tienen menos de 5 g HC y se consideran libres.",
+    "explanation": "La calabaza cocida tiene un aporte relevante de HC. El tomate en porción habitual suele no contabilizarse; el brócoli y las judías verdes en porción de 1 taza (~10 g HC) sí se contabilizan en Migajas (no son «libres» infinitas).",
     "difficulty": "Media",
     "foodId": "calabaza",
     "correctAnswer": "calabaza",
@@ -1470,7 +1470,7 @@
     "prompt": "1 porción de pizza (125 g, 30 g HC). ¿Raciones?",
     "explanation": "30 g ÷ 10 = 3,0 raciones.",
     "difficulty": "Alta",
-    "foodId": "pizza",
+    "foodId": "es-pizza-es",
     "correctAnswer": "3.0",
     "options": [
       {

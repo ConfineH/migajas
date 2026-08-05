@@ -1,5 +1,5 @@
-/** Minimum mastery % to pass a level and unlock the next */
-export const PASS_THRESHOLD = 60;
+/** Minimum mastery % to pass a level and unlock the next (institutional default). */
+export const PASS_THRESHOLD = 70;
 
 export interface LevelCompletion {
   levelId: string;

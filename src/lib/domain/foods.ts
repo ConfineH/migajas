@@ -1,8 +1,35 @@
 import { calculateRations, EXCHANGE_UNIT_G } from "./rations";
 import { applyPlainLanguageDo } from "./plain-language-do";
+import type {
+  PortionBasis,
+  ProvenanceCode,
+} from "./catalog-provenance";
+import { provenanceFromDataSource } from "./catalog-provenance";
 
 export type Difficulty = "Baja" | "Media" | "Alta";
 export type ItemType = "base" | "mixed" | "modulator";
+
+/** @deprecated Prefer provenanceCode (B/F/E/R/P). Kept for legacy seeds. */
+export type FoodDataSource =
+  | "bedca_aligned"
+  | "bedca_standard_recipe"
+  | "label_or_typical"
+  | "multi_source"
+  | "pedagogical_estimate";
+
+/**
+ * How Migajas teaches counting for this item.
+ * habitually_uncounted = low-HC veg in usual side portions (not “infinite free”).
+ */
+export type CountingPolicy = "always_count" | "habitually_uncounted";
+
+export const FOOD_DATA_SOURCE_LABELS: Record<FoodDataSource, string> = {
+  bedca_aligned: "BEDCA (tablas ES)",
+  bedca_standard_recipe: "BEDCA + receta estándar",
+  label_or_typical: "Etiquetado fabricante",
+  multi_source: "Media de varias fuentes",
+  pedagogical_estimate: "Estimación pedagógica",
+};
 
 export interface FoodItem {
   id: string;
@@ -18,6 +45,16 @@ export interface FoodItem {
   sourceId?: string;
   /** Grams of fiber for the listed portion (informative only). */
   fiberG?: number;
+  dataSource?: FoodDataSource;
+  /** Closed provenance: B BEDCA · F FEN · E etiquetado · R receta · P pedagógica */
+  provenanceCode?: ProvenanceCode;
+  /** How listed grams relate to the food (edible / cooked / beverage…). */
+  portionBasis?: PortionBasis;
+  countingPolicy?: CountingPolicy;
+}
+
+export function resolveProvenanceCode(food: FoodItem): ProvenanceCode {
+  return food.provenanceCode ?? provenanceFromDataSource(food.dataSource);
 }
 
 export interface EnrichedFoodItem extends FoodItem {

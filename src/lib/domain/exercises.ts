@@ -32,6 +32,8 @@ export interface Level {
   name: string;
   description: string;
   country: string;
+  /** Observable outcomes for educators / buyers (SED-style). */
+  learningObjectives?: string[];
 }
 
 export function getLevels(): Level[] {

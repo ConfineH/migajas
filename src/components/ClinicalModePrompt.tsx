@@ -8,6 +8,9 @@ export function ClinicalModePrompt() {
       <p className="mt-1 text-pretty text-sm text-muted">
         Ya aprobaste el nivel 3. Puedes activar el diario de ingesta para llevar
         un registro de carbohidratos y preparar reportes para tu equipo de salud.
+        El modo clínico no realiza recomendaciones terapéuticas ni cálculos de
+        dosis de insulina; es una herramienta opcional de registro y exportación
+        de datos.
       </p>
       <div className="mt-4">
         <Button href="/onboarding" variant="secondary">

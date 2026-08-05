@@ -83,6 +83,19 @@ export default async function LearnLevelPage({ params }: Props) {
             progressPercent={pct}
           />
 
+          {level.learningObjectives && level.learningObjectives.length > 0 ? (
+            <section className="callout-sage mt-6">
+              <h2 className="text-sm font-semibold text-foreground">
+                Al finalizar este nivel serás capaz de
+              </h2>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted">
+                {level.learningObjectives.map((objective) => (
+                  <li key={objective}>{objective}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           <GuidedPathList levelId={levelId} progress={progress} />
 
           {next ? (

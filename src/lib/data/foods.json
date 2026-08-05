@@ -10,20 +10,28 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 3.5 g fibra/100 g (BEDCA)",
-    "fiberG": 0.9
+    "fiberG": 0.9,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "pan-integral",
     "country": "España",
     "category": "Pan",
-    "name": "Pan integral",
+    "name": "Pan integral (rebanada fina)",
     "portionText": "1 rebanada",
     "grams": 25,
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 7 g fibra/100 g (BEDCA)",
-    "fiberG": 1.8
+    "fiberG": 1.8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "barra-pequena",
@@ -35,7 +43,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "arroz-cocido",
@@ -48,32 +60,44 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 0.4 g fibra/100 g (BEDCA)",
-    "fiberG": 0.2
+    "fiberG": 0.2,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "pasta-cocida",
     "country": "España",
     "category": "Cereales",
-    "name": "Pasta cocida",
+    "name": "Pasta cocida (1/3 taza)",
     "portionText": "1/3 taza",
     "grams": 50,
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 1.8 g fibra/100 g (BEDCA)",
-    "fiberG": 0.9
+    "fiberG": 0.9,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "couscous-cocido",
     "country": "España",
     "category": "Cereales",
-    "name": "Cuscús cocido",
+    "name": "Cuscús cocido (1/2 taza)",
     "portionText": "1/2 taza",
     "grams": 60,
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "patata-cocida",
@@ -85,7 +109,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "patata-frita",
@@ -97,7 +125,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Plato mixto"
+    "notes": "Plato mixto",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "boniato",
@@ -109,33 +141,45 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "lentejas-cocidas",
     "country": "España",
     "category": "Legumbres",
-    "name": "Lentejas cocidas",
+    "name": "Lentejas cocidas (1/2 taza)",
     "portionText": "1/2 taza",
     "grams": 100,
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Plato mixto · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 5
+    "fiberG": 5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "garbanzos-cocidos",
     "country": "España",
     "category": "Legumbres",
-    "name": "Garbanzos cocidos",
+    "name": "Garbanzos cocidos (1/2 taza, 100 g)",
     "portionText": "1/2 taza",
     "grams": 100,
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Plato mixto · 4 g fibra/100 g (BEDCA)",
-    "fiberG": 4
+    "fiberG": 4,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "alubias-cocidas",
@@ -148,7 +192,11 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Plato mixto · 3.5 g fibra/100 g (BEDCA)",
-    "fiberG": 3.5
+    "fiberG": 3.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "leche",
@@ -160,7 +208,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "yogur-natural",
@@ -172,7 +224,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "yogur-azucarado",
@@ -184,7 +240,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "manzana",
@@ -196,8 +256,12 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 2.4
+    "notes": "Base · 2 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 2.4,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "naranja",
@@ -209,7 +273,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "pera",
@@ -221,7 +289,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "platano",
@@ -233,8 +305,12 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 1.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.4
+    "notes": "Base · 1.5 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 1.4,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "uvas",
@@ -246,8 +322,12 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base · 1 g fibra/100 g (BEDCA)",
-    "fiberG": 1
+    "notes": "Base · 1 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 1,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "sandia",
@@ -259,7 +339,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "melon",
@@ -271,7 +355,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "fresas",
@@ -283,8 +371,12 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 3
+    "notes": "Base · 2 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 3,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "zanahoria",
@@ -296,19 +388,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "cebolla",
-    "country": "España",
-    "category": "Verdura",
-    "name": "Cebolla",
-    "portionText": "1/2 taza",
-    "grams": 80,
-    "carbsG": 10,
-    "difficulty": "Media",
-    "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "calabaza",
@@ -320,19 +404,27 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "tomate",
     "country": "España",
     "category": "Verdura",
-    "name": "Tomate",
+    "name": "Tomate (ración grande)",
     "portionText": "ración grande",
     "grams": 300,
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "pollo",
@@ -344,7 +436,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "carne",
@@ -356,7 +452,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "pescado",
@@ -368,7 +468,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "huevo",
@@ -380,31 +484,43 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "tortilla-patata",
     "country": "España",
     "category": "Plato mixto",
     "name": "Tortilla de patata",
-    "portionText": "1 porción",
+    "portionText": "1 porción (~180 g)",
     "grams": 180,
     "carbsG": 20,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Única entrada de tortilla de patata. ~180 g ≈ 20 g HC (2,0 raciones). Una porción menor (~100–150 g) aporta menos según cantidad de patata. Estimación a partir de componentes habituales (patata + huevo); los platos varían según receta.",
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "bocadillo",
     "country": "España",
     "category": "Plato mixto",
-    "name": "Bocadillo",
-    "portionText": "1 unidad",
+    "name": "Bocadillo de barra (estimado)",
+    "portionText": "1 unidad (~100 g de pan)",
     "grams": 150,
-    "carbsG": 30,
+    "carbsG": 50,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Estimación pedagógica: ~100 g de pan de barra ≈ 50 g HC. El relleno sin pan no suma. Varía según panadería.",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "paella",
@@ -416,8 +532,12 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto · 1 g fibra/100 g (BEDCA)",
-    "fiberG": 3
+    "notes": "Estimación educativa de 1 plato (~300 g). Los platos tradicionales varían según receta y cantidad de arroz.",
+    "fiberG": 3,
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "lentejas-estofadas",
@@ -429,8 +549,12 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 15
+    "notes": "Mixto · 5 g fibra/100 g (BEDCA) Estimación de receta estándar a partir de componentes habituales; varía según elaboración.",
+    "fiberG": 15,
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "pasta-tomate",
@@ -442,19 +566,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
-  },
-  {
-    "id": "pizza",
-    "country": "España",
-    "category": "Plato mixto",
-    "name": "Pizza",
-    "portionText": "1 porción",
-    "grams": 150,
-    "carbsG": 25,
-    "difficulty": "Alta",
-    "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "casabe",
@@ -466,7 +582,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "pan-sobao",
@@ -479,7 +599,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1
+    "fiberG": 1,
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "arroz-blanco-do",
@@ -491,7 +615,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "habichuelas-rojas",
@@ -503,7 +631,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "guandules",
@@ -515,7 +647,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "mangu",
@@ -527,7 +663,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "guineo-verde",
@@ -539,7 +679,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "yautia",
@@ -551,7 +695,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "batata-do",
@@ -563,7 +711,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "tostones",
@@ -575,7 +727,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "platano-maduro",
@@ -587,7 +743,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "mango",
@@ -599,7 +759,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "chinola",
@@ -611,7 +775,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "leche-do",
@@ -623,7 +791,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "pollo-do",
@@ -635,7 +807,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "moro-habichuelas",
@@ -647,7 +823,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "la-bandera",
@@ -659,7 +839,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-chapata",
@@ -672,7 +856,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 3 g fibra/100 g (BEDCA)",
-    "fiberG": 1.1
+    "fiberG": 1.1,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-molde-integral",
@@ -685,7 +873,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.3
+    "fiberG": 1.3,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-croissant",
@@ -697,7 +889,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-avena-cocida",
@@ -710,7 +906,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 1.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.8
+    "fiberG": 1.8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-muesli",
@@ -723,7 +923,11 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Base · 6 g fibra/100 g (BEDCA)",
-    "fiberG": 2.4
+    "fiberG": 2.4,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-quinoa",
@@ -736,7 +940,11 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.3
+    "fiberG": 1.3,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-maiz-tortilla",
@@ -748,7 +956,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-galleta-maria",
@@ -760,7 +972,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-galleta-integral",
@@ -773,7 +989,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 4 g fibra/100 g (BEDCA)",
-    "fiberG": 0.8
+    "fiberG": 0.8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pan-rallado",
@@ -785,7 +1005,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pure-patata",
@@ -798,7 +1022,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 1.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.5
+    "fiberG": 1.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-nachos",
@@ -810,20 +1038,28 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-judias-verdes",
     "country": "España",
-    "category": "Legumbres",
+    "category": "Verdura",
     "name": "Judías verdes cocidas",
     "portionText": "1 taza",
     "grams": 80,
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 2
+    "notes": "No se tratan como «libres» en Migajas: 1 taza ≈ 10 g HC (1 ración). Habitualmente no contabilizadas solo en porciones muy pequeñas según protocolo del equipo.",
+    "fiberG": 2,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-soja-cocida",
@@ -836,7 +1072,11 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Base · 3 g fibra/100 g (BEDCA)",
-    "fiberG": 2.7
+    "fiberG": 2.7,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-queso-fresco",
@@ -848,7 +1088,11 @@
     "carbsG": 3,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-leche-desnatada",
@@ -860,7 +1104,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-leche-avena",
@@ -872,7 +1120,11 @@
     "carbsG": 16,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-helado",
@@ -884,7 +1136,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-mandarina",
@@ -896,8 +1152,12 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 2
+    "notes": "Base · 2 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 2,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-kiwi",
@@ -909,8 +1169,12 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.9
+    "notes": "Base · 2.5 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 1.9,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-pina",
@@ -922,8 +1186,12 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 1.5 g fibra/100 g (BEDCA)",
-    "fiberG": 2.1
+    "notes": "Base · 1.5 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 2.1,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-ciruela",
@@ -935,7 +1203,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-cerezas",
@@ -947,7 +1219,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-arandanos",
@@ -959,8 +1235,12 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 3.5
+    "notes": "Base · 2.5 g fibra/100 g (BEDCA) Porción sobre parte comestible habitual.",
+    "fiberG": 3.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-lechuga",
@@ -973,7 +1253,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 1 g fibra/100 g (BEDCA)",
-    "fiberG": 1
+    "fiberG": 1,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-pepino",
@@ -985,7 +1269,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-pimiento",
@@ -997,7 +1285,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-brocoli",
@@ -1009,8 +1301,12 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 2.3
+    "notes": "En guarnición muy pequeña algunos protocolos no las contabilizan; la porción de catálogo (1 taza) aporta ~10 g HC y sí cuenta en Migajas.",
+    "fiberG": 2.3,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-espinacas",
@@ -1023,7 +1319,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 1.8
+    "fiberG": 1.8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-champinones",
@@ -1035,7 +1335,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-atun",
@@ -1047,7 +1351,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-jamon",
@@ -1059,7 +1367,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-queso-curado",
@@ -1071,7 +1383,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-tortilla-francesa",
@@ -1083,7 +1399,11 @@
     "carbsG": 5,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-ensalada-pasta",
@@ -1095,7 +1415,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-sandwich-mixto",
@@ -1107,7 +1431,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-crema-verduras",
@@ -1119,7 +1447,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-lentejas-sopa",
@@ -1132,7 +1464,11 @@
     "difficulty": "Alta",
     "itemType": "mixed",
     "notes": "Mixto · 4 g fibra/100 g (BEDCA)",
-    "fiberG": 12
+    "fiberG": 12,
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-croqueta",
@@ -1144,7 +1480,11 @@
     "carbsG": 15,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-empanada",
@@ -1156,7 +1496,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-churro",
@@ -1168,7 +1512,11 @@
     "carbsG": 20,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-flan",
@@ -1180,7 +1528,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-arroz-leche",
@@ -1192,7 +1544,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-pan-agua",
@@ -1204,7 +1560,11 @@
     "carbsG": 30,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-hallulla",
@@ -1216,7 +1576,11 @@
     "carbsG": 35,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-arepa-maiz",
@@ -1228,7 +1592,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-avena-do",
@@ -1240,7 +1608,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-harina-maiz",
@@ -1252,7 +1624,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-cereal-maiz",
@@ -1264,7 +1640,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-galleta-soda",
@@ -1276,7 +1656,11 @@
     "carbsG": 16,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-pasta-do",
@@ -1288,7 +1672,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-habichuelas-negras",
@@ -1300,7 +1688,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-habichuelas-blancas",
@@ -1312,7 +1704,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-lentejas-do",
@@ -1324,7 +1720,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-yuca",
@@ -1336,7 +1736,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-name",
@@ -1348,7 +1752,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-aoi",
@@ -1360,7 +1768,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-papas-do",
@@ -1372,7 +1784,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-chicharron-platano",
@@ -1384,7 +1800,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-yaniqueque",
@@ -1396,7 +1816,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-leche-condensada",
@@ -1408,7 +1832,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-yogur-do",
@@ -1420,7 +1848,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-queso-frito",
@@ -1432,7 +1864,11 @@
     "carbsG": 2,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-guayaba",
@@ -1444,7 +1880,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-papaya",
@@ -1456,7 +1896,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-banana",
@@ -1468,7 +1912,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-toronja",
@@ -1480,7 +1928,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-zapote",
@@ -1492,7 +1944,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-lechosa",
@@ -1504,7 +1960,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-coco-agua",
@@ -1516,7 +1976,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-aguacate",
@@ -1528,7 +1992,11 @@
     "carbsG": 4,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-berenjena",
@@ -1540,7 +2008,11 @@
     "carbsG": 8,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-ayote",
@@ -1552,7 +2024,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-repollo",
@@ -1564,7 +2040,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-carne-res",
@@ -1576,7 +2056,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-pescado-frito",
@@ -1588,7 +2072,11 @@
     "carbsG": 5,
     "difficulty": "Media",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-huevo-do",
@@ -1600,7 +2088,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-salami",
@@ -1612,7 +2104,11 @@
     "carbsG": 1,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-chicharron",
@@ -1624,7 +2120,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-sancocho",
@@ -1636,7 +2136,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pastelon",
@@ -1648,7 +2152,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-chimi",
@@ -1660,7 +2168,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-yaroa",
@@ -1672,7 +2184,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-empanada-do",
@@ -1684,7 +2200,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pastelito",
@@ -1696,7 +2216,11 @@
     "carbsG": 20,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-arroz-con-leche-do",
@@ -1708,7 +2232,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-habichuelas-con-dulce",
@@ -1720,7 +2248,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-yaniqueques-huevos",
@@ -1732,7 +2264,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-moro-guandules",
@@ -1744,7 +2280,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pescado-escabeche",
@@ -1756,7 +2296,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pollo-guisado",
@@ -1768,7 +2312,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-locrio-pollo",
@@ -1780,7 +2328,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-spaghetti-do",
@@ -1792,7 +2344,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pizza-do",
@@ -1804,7 +2360,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-hamburguesa-do",
@@ -1816,7 +2376,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-dulce-leche",
@@ -1828,7 +2392,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-maiz-cocido",
@@ -1840,7 +2408,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-cafe-con-leche",
@@ -1852,7 +2424,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-jugo-naranja",
@@ -1864,7 +2440,11 @@
     "carbsG": 20,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-coco-rallado",
@@ -1876,7 +2456,11 @@
     "carbsG": 3,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-tostada-casabe",
@@ -1888,7 +2472,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-arepita-maiz",
@@ -1900,7 +2488,11 @@
     "carbsG": 20,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-arroz-integral-do",
@@ -1912,7 +2504,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-frijoles-pintos",
@@ -1924,7 +2520,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-platano-horneado",
@@ -1936,7 +2536,11 @@
     "carbsG": 18,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-calamondin",
@@ -1948,7 +2552,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-tamarindo",
@@ -1960,7 +2568,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "es-barrita-cereal",
@@ -1972,7 +2584,11 @@
     "carbsG": 18,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-tortitas-arroz",
@@ -1984,7 +2600,11 @@
     "carbsG": 14,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pan-pita",
@@ -1997,7 +2617,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 3 g fibra/100 g (BEDCA)",
-    "fiberG": 0.9
+    "fiberG": 0.9,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pan-cristal",
@@ -2009,7 +2633,11 @@
     "carbsG": 6,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-focaccia",
@@ -2021,7 +2649,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-brioche",
@@ -2033,20 +2665,28 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pan-integral",
     "country": "España",
     "category": "Pan",
-    "name": "Pan integral",
+    "name": "Pan integral (rebanada)",
     "portionText": "1 rebanada",
     "grams": 30,
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 7 g fibra/100 g (BEDCA)",
-    "fiberG": 2.1
+    "fiberG": 2.1,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-regañas",
@@ -2058,7 +2698,11 @@
     "carbsG": 14,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pan-tostado",
@@ -2071,7 +2715,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 3.5 g fibra/100 g (BEDCA)",
-    "fiberG": 0.9
+    "fiberG": 0.9,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-bizcocho",
@@ -2083,7 +2731,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-magdalena",
@@ -2095,7 +2747,11 @@
     "carbsG": 22,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-donut",
@@ -2107,7 +2763,11 @@
     "carbsG": 28,
     "difficulty": "Alta",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-waffle",
@@ -2119,7 +2779,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-panecillo",
@@ -2131,19 +2795,27 @@
     "carbsG": 28,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-cuscus",
     "country": "España",
     "category": "Cereales",
-    "name": "Cuscús cocido",
+    "name": "Cuscús cocido (1/3 taza)",
     "portionText": "1/3 taza",
     "grams": 50,
     "carbsG": 18,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-trigo-sarraceno",
@@ -2155,7 +2827,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-semola",
@@ -2167,7 +2843,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-patata-asada",
@@ -2179,7 +2859,11 @@
     "carbsG": 30,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-patata-micro",
@@ -2191,7 +2875,11 @@
     "carbsG": 28,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-boniato",
@@ -2203,7 +2891,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-calabaza",
@@ -2215,7 +2907,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-remolacha",
@@ -2227,33 +2923,28 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "es-garbanzos-cocidos",
-    "country": "España",
-    "category": "Legumbres",
-    "name": "Garbanzos cocidos",
-    "portionText": "1/2 taza",
-    "grams": 90,
-    "carbsG": 18,
-    "difficulty": "Media",
-    "itemType": "base",
-    "notes": "Base · 4 g fibra/100 g (BEDCA)",
-    "fiberG": 3.6
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-alubias",
     "country": "España",
     "category": "Legumbres",
-    "name": "Alubias blancas",
+    "name": "Alubias blancas cocidas",
     "portionText": "1/2 taza",
     "grams": 100,
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
     "notes": "Base · 3.5 g fibra/100 g (BEDCA)",
-    "fiberG": 3.5
+    "fiberG": 3.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-edamame",
@@ -2265,7 +2956,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-hummus",
@@ -2277,7 +2972,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-leche-entera",
@@ -2289,19 +2988,27 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-leche-semidesnatada",
     "country": "España",
     "category": "Lácteos",
-    "name": "Leche semidesnatada",
+    "name": "Leche semidesnatada (1 taza / 250 ml)",
     "portionText": "1 taza",
     "grams": 250,
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-leche-soja",
@@ -2313,7 +3020,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-queso-cottage",
@@ -2325,7 +3036,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-queso-mozzarella",
@@ -2337,7 +3052,11 @@
     "carbsG": 1,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-queso-azul",
@@ -2349,7 +3068,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-mantequilla",
@@ -2361,7 +3084,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-nata",
@@ -2373,7 +3100,11 @@
     "carbsG": 1,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-melocoton",
@@ -2385,7 +3116,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-albaricoque",
@@ -2397,7 +3132,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-higo",
@@ -2409,7 +3148,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-granada",
@@ -2421,7 +3164,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-frambuesa",
@@ -2433,7 +3180,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-mora",
@@ -2445,7 +3196,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-datil",
@@ -2457,7 +3212,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pasas",
@@ -2469,7 +3228,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-compota-manzana",
@@ -2481,7 +3244,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-zanahoria",
@@ -2493,7 +3260,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-cebolla",
@@ -2505,19 +3276,27 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-tomate",
     "country": "España",
     "category": "Verdura",
-    "name": "Tomate",
+    "name": "Tomate (1 taza)",
     "portionText": "1 taza",
     "grams": 180,
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-calabacin",
@@ -2529,7 +3308,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-berenjena-es",
@@ -2541,7 +3324,11 @@
     "carbsG": 8,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-coliflor",
@@ -2553,7 +3340,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "es-apio",
@@ -2565,7 +3356,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "es-pollo-pechuga",
@@ -2577,7 +3372,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-salmon",
@@ -2589,7 +3388,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-merluza",
@@ -2601,7 +3404,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-pavo",
@@ -2613,7 +3420,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-tofu",
@@ -2625,7 +3436,11 @@
     "carbsG": 3,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "es-gazpacho",
@@ -2637,45 +3452,12 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "mixed",
-    "notes": "Mixto · 1 g fibra/100 g (BEDCA)",
-    "fiberG": 3
-  },
-  {
-    "id": "es-paella",
-    "country": "España",
-    "category": "Plato mixto",
-    "name": "Paella",
-    "portionText": "1 plato",
-    "grams": 300,
-    "carbsG": 45,
-    "difficulty": "Alta",
-    "itemType": "mixed",
-    "notes": "Mixto"
-  },
-  {
-    "id": "es-tortilla-patatas",
-    "country": "España",
-    "category": "Plato mixto",
-    "name": "Tortilla de patatas",
-    "portionText": "1 porción",
-    "grams": 150,
-    "carbsG": 20,
-    "difficulty": "Media",
-    "itemType": "mixed",
-    "notes": "Mixto"
-  },
-  {
-    "id": "es-lentejas-estofado",
-    "country": "España",
-    "category": "Plato mixto",
-    "name": "Lentejas estofadas",
-    "portionText": "1 plato",
-    "grams": 300,
-    "carbsG": 30,
-    "difficulty": "Alta",
-    "itemType": "mixed",
-    "notes": "Mixto · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 15
+    "notes": "Preparación estándar educativa (1 bol ~300 g ≈ 15 g HC). Un vaso de 250 ml de otra receta puede acercarse a ~10 g HC; los platos tradicionales varían según receta.",
+    "fiberG": 3,
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-fabada",
@@ -2687,8 +3469,12 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto · 4 g fibra/100 g (BEDCA)",
-    "fiberG": 12
+    "notes": "Mixto · 4 g fibra/100 g (BEDCA) Estimación de receta estándar a partir de componentes habituales; varía según elaboración.",
+    "fiberG": 12,
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-cocido",
@@ -2700,19 +3486,27 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-pulpo-gallega",
     "country": "España",
     "category": "Plato mixto",
-    "name": "Pulpo a la gallega",
+    "name": "Pulpo a la gallega (con patata)",
     "portionText": "1 plato",
     "grams": 200,
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Los ~10 g HC de la porción provienen casi solo de la patata; el pulpo aporta ~0 g HC. Estimación educativa de un plato estándar con patata.",
+    "dataSource": "bedca_standard_recipe",
+    "countingPolicy": "always_count",
+    "provenanceCode": "R",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-pizza-es",
@@ -2724,7 +3518,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Estimación educativa de 1 porción (~150 g). Varía según grosor de masa y pizzería.",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-lasana",
@@ -2736,7 +3534,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-risotto",
@@ -2748,7 +3550,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-tarta-queso",
@@ -2760,7 +3566,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-brownie",
@@ -2772,19 +3582,27 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-chocolate",
     "country": "España",
     "category": "Plato mixto",
-    "name": "Chocolate negro",
+    "name": "Chocolate negro (~50–60 % cacao)",
     "portionText": "2 cuadrados",
     "grams": 20,
     "carbsG": 12,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Valor típico para tableta ~50–60 % cacao. Un 85 % suele aportar menos HC; lee la etiqueta.",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-mermelada",
@@ -2796,7 +3614,11 @@
     "carbsG": 12,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-miel",
@@ -2808,31 +3630,43 @@
     "carbsG": 17,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "es-cafe-solo",
     "country": "España",
-    "category": "Lácteos",
+    "category": "Bebida",
     "name": "Café solo",
     "portionText": "1 taza",
     "grams": 200,
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-te",
     "country": "España",
-    "category": "Lácteos",
+    "category": "Bebida",
     "name": "Té",
     "portionText": "1 taza",
     "grams": 200,
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-zumo-naranja",
@@ -2844,19 +3678,27 @@
     "carbsG": 22,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "es-agua",
     "country": "España",
-    "category": "Lácteos",
+    "category": "Bebida",
     "name": "Agua",
     "portionText": "1 vaso",
     "grams": 250,
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-mangú",
@@ -2868,7 +3710,11 @@
     "carbsG": 35,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-tostones",
@@ -2880,7 +3726,11 @@
     "carbsG": 18,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-mofongo",
@@ -2892,7 +3742,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-yautia",
@@ -2904,7 +3758,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-malanga",
@@ -2916,7 +3774,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-queso-hoja",
@@ -2928,7 +3790,11 @@
     "carbsG": 2,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-dulce-coco",
@@ -2940,7 +3806,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-concon",
@@ -2952,19 +3822,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "do-moro-habichuelas",
-    "country": "República Dominicana",
-    "category": "Plato mixto",
-    "name": "Moro de habichuelas",
-    "portionText": "1 plato",
-    "grams": 250,
-    "carbsG": 45,
-    "difficulty": "Alta",
-    "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-arroz-gandules",
@@ -2976,7 +3838,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pollo-horno",
@@ -2988,7 +3854,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-chivo-guisado",
@@ -3000,7 +3870,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-picapollo",
@@ -3012,7 +3886,11 @@
     "carbsG": 20,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-yaniqueque-huevo",
@@ -3024,7 +3902,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-sandwich-pollo",
@@ -3036,7 +3918,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-hotdog-do",
@@ -3048,7 +3934,11 @@
     "carbsG": 25,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pan-bao",
@@ -3060,7 +3950,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-pan-sobao",
@@ -3072,7 +3966,11 @@
     "carbsG": 28,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-galleta-dulce",
@@ -3084,19 +3982,11 @@
     "carbsG": 16,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "do-dulce-leche-do",
-    "country": "República Dominicana",
-    "category": "Plato mixto",
-    "name": "Dulce de leche",
-    "portionText": "2 cucharadas",
-    "grams": 40,
-    "carbsG": 20,
-    "difficulty": "Media",
-    "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-maiz-tierno",
@@ -3108,7 +3998,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-avena-do2",
@@ -3120,7 +4014,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-jugo-pina",
@@ -3132,7 +4030,11 @@
     "carbsG": 22,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-jugo-chinola",
@@ -3144,7 +4046,11 @@
     "carbsG": 20,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-mamey",
@@ -3156,7 +4062,11 @@
     "carbsG": 18,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-nispero",
@@ -3168,7 +4078,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-cereza-acerola",
@@ -3180,7 +4094,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-coco-fresco",
@@ -3192,7 +4110,11 @@
     "carbsG": 6,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-aguacate-do",
@@ -3204,19 +4126,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "do-berenjena-do",
-    "country": "República Dominicana",
-    "category": "Verdura",
-    "name": "Berenjena guisada",
-    "portionText": "1/2 taza",
-    "grams": 90,
-    "carbsG": 8,
-    "difficulty": "Media",
-    "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-ayote-do",
@@ -3228,7 +4142,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-chayote",
@@ -3240,7 +4158,11 @@
     "carbsG": 6,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-berro",
@@ -3252,7 +4174,11 @@
     "carbsG": 3,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-longaniza",
@@ -3264,7 +4190,11 @@
     "carbsG": 2,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-morcilla",
@@ -3276,7 +4206,11 @@
     "carbsG": 5,
     "difficulty": "Media",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-pollo-guisado-do",
@@ -3288,7 +4222,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-camarones",
@@ -3300,7 +4238,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-pulpo-do",
@@ -3312,7 +4254,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-queso-crema",
@@ -3324,7 +4270,11 @@
     "carbsG": 2,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-leche-evaporada",
@@ -3336,7 +4286,11 @@
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-cafe-mama",
@@ -3348,7 +4302,11 @@
     "carbsG": 2,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-maltin",
@@ -3360,7 +4318,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-refresco",
@@ -3372,7 +4334,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-helado-do",
@@ -3384,7 +4350,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-flan-do",
@@ -3396,7 +4366,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-bizcocho-do",
@@ -3408,7 +4382,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-dona-do",
@@ -3420,7 +4398,11 @@
     "carbsG": 28,
     "difficulty": "Alta",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-pan-de-leche",
@@ -3432,7 +4414,11 @@
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-casabe-tostada",
@@ -3444,7 +4430,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-arepa-dulce",
@@ -3456,7 +4446,11 @@
     "carbsG": 30,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-harina-trigo",
@@ -3468,7 +4462,11 @@
     "carbsG": 22,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-pan-maiz",
@@ -3480,7 +4478,11 @@
     "carbsG": 28,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-guineo-verde",
@@ -3492,7 +4494,11 @@
     "carbsG": 18,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-platano-maduro-frito",
@@ -3504,7 +4510,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "cooked"
   },
   {
     "id": "do-ensalada-rusa",
@@ -3516,7 +4526,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pasta-ensalada",
@@ -3528,7 +4542,11 @@
     "carbsG": 35,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-sopa-criolla",
@@ -3540,7 +4558,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-asopao",
@@ -3552,7 +4574,11 @@
     "carbsG": 40,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pescado-criollo",
@@ -3564,7 +4590,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-mondongo",
@@ -3576,7 +4606,11 @@
     "carbsG": 15,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-rabo-guisado",
@@ -3588,7 +4622,11 @@
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-pollo-frito-do",
@@ -3600,7 +4638,11 @@
     "carbsG": 8,
     "difficulty": "Media",
     "itemType": "mixed",
-    "notes": "Mixto"
+    "notes": "Mixto",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "do-tostada-hallulla",
@@ -3612,7 +4654,11 @@
     "carbsG": 28,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "do-mantequilla-do",
@@ -3624,7 +4670,11 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "beverage"
   },
   {
     "id": "do-queso-amarillo",
@@ -3636,19 +4686,11 @@
     "carbsG": 1,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "do-leche-condensada-do",
-    "country": "República Dominicana",
-    "category": "Lácteos",
-    "name": "Leche condensada",
-    "portionText": "2 cucharadas",
-    "grams": 40,
-    "carbsG": 20,
-    "difficulty": "Media",
-    "itemType": "base",
-    "notes": "Base"
+    "notes": "Base",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-jugo-mora",
@@ -3660,7 +4702,11 @@
     "carbsG": 20,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-sandia",
@@ -3672,7 +4718,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-melon",
@@ -3684,7 +4734,11 @@
     "carbsG": 12,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-uvas-do",
@@ -3696,7 +4750,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-pera-do",
@@ -3708,7 +4766,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-manzana-do",
@@ -3720,7 +4782,11 @@
     "carbsG": 20,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-naranja-do",
@@ -3732,7 +4798,11 @@
     "carbsG": 15,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "do-limon-do",
@@ -3744,19 +4814,11 @@
     "carbsG": 5,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "Base"
-  },
-  {
-    "id": "do-agua-coco",
-    "country": "República Dominicana",
-    "category": "Fruta",
-    "name": "Agua de coco",
-    "portionText": "1 vaso",
-    "grams": 240,
-    "carbsG": 10,
-    "difficulty": "Baja",
-    "itemType": "base",
-    "notes": "Base"
+    "notes": "Base Porción sobre parte comestible habitual.",
+    "dataSource": "multi_source",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "edible"
   },
   {
     "id": "pan-molde",
@@ -3769,7 +4831,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Base · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 0.6
+    "fiberG": 0.6,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "aceite-oliva",
@@ -3781,20 +4847,28 @@
     "carbsG": 0,
     "difficulty": "Baja",
     "itemType": "modulator",
-    "notes": "Modulador"
+    "notes": "Modulador",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "pan-integral-100g",
     "country": "España",
     "category": "Pan",
-    "name": "Pan integral",
+    "name": "Pan integral (100 g)",
     "portionText": "100 g",
     "grams": 100,
     "carbsG": 45,
     "difficulty": "Media",
     "itemType": "base",
     "notes": "8 g fibra/100 g (BEDCA)",
-    "fiberG": 8
+    "fiberG": 8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "arroz-cocido-150g",
@@ -3806,20 +4880,28 @@
     "carbsG": 40,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "pasta-cocida-140g",
     "country": "España",
     "category": "Cereales",
-    "name": "Pasta cocida",
+    "name": "Pasta cocida (1 taza)",
     "portionText": "1 taza (140 g)",
     "grams": 140,
     "carbsG": 35,
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA · 1.8 g fibra/100 g (BEDCA)",
-    "fiberG": 2.5
+    "fiberG": 2.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "arroz-integral-cocido-150g",
@@ -3832,7 +4914,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA · 1.8 g fibra/100 g (BEDCA)",
-    "fiberG": 2.7
+    "fiberG": 2.7,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "patata-cocida-150g",
@@ -3845,7 +4931,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA · 1.8 g fibra/100 g (BEDCA)",
-    "fiberG": 2.7
+    "fiberG": 2.7,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "boniato-asado-130g",
@@ -3858,20 +4948,28 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "BEDCA · 2.5 g fibra/100 g (BEDCA)",
-    "fiberG": 3.3
+    "fiberG": 3.3,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "lentejas-cocidas-200g",
     "country": "España",
     "category": "Legumbres",
-    "name": "Lentejas cocidas",
+    "name": "Lentejas cocidas (1 plato)",
     "portionText": "1 plato (200 g)",
     "grams": 200,
     "carbsG": 24,
     "difficulty": "Media",
     "itemType": "base",
     "notes": "12 g HC/100 g, · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 10
+    "fiberG": 10,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "maiz-grano",
@@ -3884,7 +4982,11 @@
     "difficulty": "Media",
     "itemType": "base",
     "notes": "BEDCA · 2 g fibra/100 g (BEDCA)",
-    "fiberG": 2
+    "fiberG": 2,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "guisantes-cocidos",
@@ -3897,7 +4999,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA · 5 g fibra/100 g (BEDCA)",
-    "fiberG": 5
+    "fiberG": 5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "cooked"
   },
   {
     "id": "pina-almibar",
@@ -3909,7 +5015,11 @@
     "carbsG": 20,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "ensalada-mixta",
@@ -3922,7 +5032,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "Verdura libre · 1.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.5
+    "fiberG": 1.5,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "habitually_uncounted",
+    "provenanceCode": "B",
+    "portionBasis": "edible"
   },
   {
     "id": "ketchup",
@@ -3934,7 +5048,11 @@
     "carbsG": 4,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "calamares-romana",
@@ -3946,7 +5064,11 @@
     "carbsG": 15,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "Rebozado"
+    "notes": "Rebozado",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "pasta-carbonara",
@@ -3958,7 +5080,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "pizza-pepperoni",
@@ -3970,7 +5096,11 @@
     "carbsG": 30,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "BEDCA"
+    "notes": "Estimación educativa de 1 porción (~125 g). Varía según grosor de masa y pizzería.",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "tostadas-pan",
@@ -3983,7 +5113,11 @@
     "difficulty": "Baja",
     "itemType": "base",
     "notes": "BEDCA · 3.5 g fibra/100 g (BEDCA)",
-    "fiberG": 1.8
+    "fiberG": 1.8,
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "nueces",
@@ -3996,31 +5130,43 @@
     "difficulty": "Baja",
     "itemType": "modulator",
     "notes": "Modulador · 7 g fibra/100 g (BEDCA)",
-    "fiberG": 2.1
+    "fiberG": 2.1,
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "cerveza",
     "country": "España",
     "category": "Bebida",
-    "name": "Cerveza",
+    "name": "Cerveza lager (caña)",
     "portionText": "1 caña (200 ml)",
     "grams": 200,
     "carbsG": 10,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "Valor educativo estándar: caña ~200 ml ≈ 10 g HC. El contenido varía según tipo de cerveza (rubia, tostada, sin alcohol, artesana).",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "vino-tinto",
     "country": "España",
     "category": "Bebida",
-    "name": "Vino tinto",
+    "name": "Vino tinto seco",
     "portionText": "1 copa (100 ml)",
     "grams": 100,
     "carbsG": 3,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "Valor educativo estándar: copa ~100 ml ≈ 3 g HC. Vinos dulces, generosos o cava pueden aportar más.",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "tarta-cumpleanos",
@@ -4032,7 +5178,11 @@
     "carbsG": 45,
     "difficulty": "Alta",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "chocolate-leche",
@@ -4044,7 +5194,11 @@
     "carbsG": 50,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "Valor típico por 100 g de chocolate con leche; lee la etiqueta de tu marca.",
+    "dataSource": "label_or_typical",
+    "countingPolicy": "always_count",
+    "provenanceCode": "E",
+    "portionBasis": "beverage"
   },
   {
     "id": "bocadillo-jamon",
@@ -4056,43 +5210,59 @@
     "carbsG": 50,
     "difficulty": "Alta",
     "itemType": "mixed",
-    "notes": "100 g pan de barra"
+    "notes": "Estimación pedagógica alineada con ~100 g de pan (~50 g HC). El jamón no suma raciones de HC.",
+    "dataSource": "pedagogical_estimate",
+    "countingPolicy": "always_count",
+    "provenanceCode": "P",
+    "portionBasis": "prepared_dish"
   },
   {
     "id": "patatas-fritas-150g",
     "country": "España",
     "category": "Tubérculos",
-    "name": "Patatas fritas",
+    "name": "Patatas fritas (ración mediana)",
     "portionText": "ración mediana (150 g)",
     "grams": 150,
     "carbsG": 38,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "patatas-fritas-100g",
     "country": "España",
     "category": "Tubérculos",
-    "name": "Patatas fritas",
+    "name": "Patatas fritas (ración pequeña)",
     "portionText": "ración pequeña (100 g)",
     "grams": 100,
     "carbsG": 25,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "leche-semi-200ml",
     "country": "España",
     "category": "Lácteos",
-    "name": "Leche semidesnatada",
+    "name": "Leche semidesnatada (vaso 200 ml)",
     "portionText": "1 vaso (200 ml)",
     "grams": 200,
     "carbsG": 10,
     "difficulty": "Baja",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "beverage"
   },
   {
     "id": "tomate-frito",
@@ -4104,7 +5274,11 @@
     "carbsG": 6,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "embutido-almidon",
@@ -4116,7 +5290,11 @@
     "carbsG": 8,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA — relleno con fécula"
+    "notes": "BEDCA — relleno con fécula",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
   },
   {
     "id": "salsa-barbacoa",
@@ -4128,6 +5306,26 @@
     "carbsG": 6,
     "difficulty": "Media",
     "itemType": "base",
-    "notes": "BEDCA"
+    "notes": "BEDCA",
+    "dataSource": "bedca_aligned",
+    "countingPolicy": "always_count",
+    "provenanceCode": "B",
+    "portionBasis": "commercial_unit"
+  },
+  {
+    "id": "cerveza-sin-alcohol",
+    "country": "España",
+    "category": "Bebida",
+    "name": "Cerveza sin alcohol",
+    "portionText": "1 caña (200 ml)",
+    "grams": 200,
+    "carbsG": 5,
+    "difficulty": "Media",
+    "itemType": "base",
+    "notes": "Valor educativo estándar (~5 g HC / 200 ml). Varía según marca; lee la etiqueta. Diferenciada de la cerveza lager con alcohol.",
+    "dataSource": "label_or_typical",
+    "provenanceCode": "E",
+    "portionBasis": "beverage",
+    "countingPolicy": "always_count"
   }
 ]

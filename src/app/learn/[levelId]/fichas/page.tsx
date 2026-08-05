@@ -93,7 +93,7 @@ export default async function LevelFlashcardsPage({ params }: Props) {
             backLabel="Volver al nivel"
             eyebrow="Fichas del nivel"
             title={level.name}
-            description={`Repasa ${foodIds.length} alimentos esenciales (${cards.length} fichas) antes del examen. Cada uno cubre porción, carbohidratos y raciones.`}
+            description={`Repasa ${foodIds.length} alimentos esenciales (${cards.length} fichas) antes del examen. Las fichas favorecen el recuerdo con recuperación activa: porción, carbohidratos y raciones.`}
           />
           <FlashcardDeck
             levelId={levelId}

@@ -42,6 +42,23 @@ Cada territorio requiere su propia licencia. No se incluye automáticamente el o
 - **Incluido en licencia base:** entrega de código, documentación, migraciones y seed.
 - **Opcional negociable:** 3–6 meses de soporte básico (despliegue, dudas de admin, bugs críticos).
 
+## Venta B2G (España)
+
+| Documento | Uso |
+|-----------|-----|
+| [OUTREACH-90D-ACTION-PLAN.md](./OUTREACH-90D-ACTION-PLAN.md) | Plan accionable 90 días (sin pipeline: aliados + CCAA + B2B) |
+| [CURRICULUM-INVENTORY.md](./CURRICULUM-INVENTORY.md) | Inventario del curso: lecciones, exámenes, porciones, origen B/F/E/R/P |
+| [CATALOG-METHODOLOGY.md](./CATALOG-METHODOLOGY.md) | Gobernanza del catálogo (cómo se construye el dato) |
+| [AUDIT-BRIEF.md](./AUDIT-BRIEF.md) | Encargo de 1 página para revisor D-N / enfermera educadora |
+| [B2G-ONEPAGER-CCAA.md](./B2G-ONEPAGER-CCAA.md) | Pitch de una página para consejerías y servicios de salud |
+| [B2G-BUYERS-MAP-ES.md](./B2G-BUYERS-MAP-ES.md) | Mapa de compradores por CCAA, portales y priorización |
+| [outreach/B2G-COLD-EMAIL-CCAA.md](./outreach/B2G-COLD-EMAIL-CCAA.md) | Email frío ~150 palabras para educación diabetológica |
+| [kits/](./kits/) | Manuales paciente, profesional y decisión institucional |
+| [kits/madrid/](./kits/madrid/) | Kits adaptados Comunidad de Madrid (SERMAS) |
+| [research/PAIN-POINTS-EDUCACION-DM.md](./research/PAIN-POINTS-EDUCACION-DM.md) | Pain points educación DM y conteo de HC (investigación) |
+
+**Nota:** el comprador habitual en España es la **comunidad autónoma**, no el Ministerio central. Precio orientativo y precedentes (PACAS Asturias, SERGAS Galicia, DiabeCyL) en el one-pager.
+
 ## Contacto del licenciante
 
 `[NOMBRE DEL LICENCIANTE]`  
