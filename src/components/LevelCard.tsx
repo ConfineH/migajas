@@ -1,5 +1,8 @@
 import Link from "next/link";
-import type { LevelCompletion } from "@/lib/domain/progress";
+import {
+  PASS_THRESHOLD,
+  type LevelCompletion,
+} from "@/lib/domain/progress";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 
 export function LevelCard({
@@ -32,7 +35,7 @@ export function LevelCard({
           <StatusBadge variant="locked">Bloqueado</StatusBadge>
         </div>
         <p className="mt-4 text-sm text-muted/80">
-          Completa el nivel anterior con ≥60% para desbloquear.
+          Completa el nivel anterior con ≥{PASS_THRESHOLD}% para desbloquear.
         </p>
       </div>
     );

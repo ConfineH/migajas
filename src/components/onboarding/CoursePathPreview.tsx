@@ -1,3 +1,5 @@
+import { PASS_THRESHOLD } from "@/lib/domain/progress";
+
 const COURSE_STEPS = [
   {
     icon: "📖",
@@ -17,7 +19,7 @@ const COURSE_STEPS = [
   {
     icon: "🎯",
     title: "Examen",
-    description: "Aprueba con al menos 60% para desbloquear el siguiente.",
+    description: `Aprueba con al menos ${PASS_THRESHOLD}% para desbloquear el siguiente.`,
   },
 ] as const;
 

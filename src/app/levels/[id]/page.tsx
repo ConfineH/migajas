@@ -10,7 +10,11 @@ import {
   getExercisesForLevel,
   getLevels,
 } from "@/lib/domain/exercises";
-import { isLevelUnlocked, getFailedExerciseIds } from "@/lib/domain/progress";
+import {
+  isLevelUnlocked,
+  getFailedExerciseIds,
+  PASS_THRESHOLD,
+} from "@/lib/domain/progress";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
@@ -61,8 +65,8 @@ export default async function LevelPage({
                 Nivel bloqueado
               </h1>
               <p className="mt-2 text-muted">
-                Completa el nivel anterior con al menos 60% de aciertos para
-                desbloquear <strong>{level.name}</strong>.
+                Completa el nivel anterior con al menos {PASS_THRESHOLD}% de
+                aciertos para desbloquear <strong>{level.name}</strong>.
               </p>
               <div className="mt-6">
                 <Button href="/levels">Volver a niveles</Button>

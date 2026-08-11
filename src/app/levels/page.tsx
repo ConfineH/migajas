@@ -2,6 +2,7 @@ import { AppNavBar } from "@/components/AppNavBar";
 import { LevelsList } from "@/components/LevelsList";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { PASS_THRESHOLD } from "@/lib/domain/progress";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { requireFreeMode } from "@/lib/free-mode";
 
@@ -21,7 +22,7 @@ export default async function LevelsPage() {
         <AppPageLayout>
           <PageHeader
             title="Practicar"
-            description="Avanza por niveles. Necesitas al menos 60% de aciertos para desbloquear el siguiente."
+            description={`Avanza por niveles. Necesitas al menos ${PASS_THRESHOLD}% de aciertos para desbloquear el siguiente.`}
           />
           <LevelsList progress={progress} attempts={attempts} />
         </AppPageLayout>

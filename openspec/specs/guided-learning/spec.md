@@ -32,7 +32,7 @@ The system SHALL provide a **Fichas del nivel** step after lessons/practices and
 
 ### Requirement: Free mode gate
 
-The system SHALL lock catalog and free practice until the user passes the nivel-1 exam (≥60%).
+The system SHALL lock catalog and free practice until the user passes the nivel-1 exam (≥70%).
 
 #### Scenario: Catalog blocked
 - **GIVEN** a user without free mode

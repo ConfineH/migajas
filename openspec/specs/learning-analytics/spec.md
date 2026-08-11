@@ -13,15 +13,15 @@ The system SHALL emit `lesson_completed` when a user marks a lesson complete via
 
 ### Requirement: Exam passed event
 
-The system SHALL emit `exam_passed` when a level exam is completed with ≥60% mastery.
+The system SHALL emit `exam_passed` when a level exam is completed with ≥70% mastery.
 
 #### Scenario: Pass threshold met
-- **GIVEN** correct answers yielding ≥60%
+- **GIVEN** correct answers yielding ≥70%
 - **WHEN** level progress is saved
 - **THEN** an `exam_passed` event is tracked with level id and score
 
 #### Scenario: Below threshold
-- **GIVEN** correct answers yielding <60%
+- **GIVEN** correct answers yielding <70%
 - **WHEN** level progress is saved
 - **THEN** no `exam_passed` event is emitted
 
