@@ -24,7 +24,7 @@ export const HERO_COPY = {
   subtitle:
     "Un curso guiado con comida real de tu país. Paso a paso, con tranquilidad.",
   ctaPrimary: "Empezar mi curso",
-  ctaSecondary: "Ya empecé — continuar",
+  ctaSecondary: "Ver el curso",
 } as const;
 
 export const ONBOARDING_COPY = {
@@ -148,4 +148,7 @@ export const CONTENT_LIBRARY_FILES = [
   "docs/content-library/common-mistakes.md",
   "docs/content-library/questions.md",
   "docs/content-library/batch-01-instagram.md",
+  "docs/content-library/BATCH-01-PRODUCTION-P03-P09.md",
+  "docs/content-library/prompts.md",
+  "docs/content-library/prompts-chatgpt-images.md",
 ] as const;

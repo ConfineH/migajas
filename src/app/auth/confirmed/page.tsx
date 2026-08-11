@@ -11,7 +11,7 @@ export default async function AuthConfirmedPage({
   searchParams,
 }: ConfirmedPageProps) {
   const params = await searchParams;
-  const nextPath = sanitizePostAuthRedirect(params.next, "/learn");
+  const nextPath = sanitizePostAuthRedirect(params.next, "/inicio");
 
   return (
     <>

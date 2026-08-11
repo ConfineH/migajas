@@ -11,6 +11,7 @@ import { getLevels } from "@/lib/domain/exercises";
 import {
   getHubProgressSummary,
   resolveHubCourseFocus,
+  resolveHubPrimaryCtaLabel,
 } from "@/lib/domain/hub-dashboard";
 import { getLessonsForLevel } from "@/lib/domain/lessons";
 import {
@@ -104,17 +105,23 @@ export default async function InicioPage() {
                   </p>
                 )}
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                   {focus ? (
                     <Button href={focus.continueHref}>
-                      {focus.nextItem
-                        ? "Continuar aprendiendo"
-                        : "Ir al nivel"}
+                      {resolveHubPrimaryCtaLabel({
+                        hasNextItem: Boolean(focus.nextItem),
+                        isFreshStart:
+                          summary.activePercent === 0 &&
+                          summary.passedLevels === 0,
+                      })}
                     </Button>
                   ) : null}
-                  <Button href="/learn" variant="secondary">
-                    Ver todos los niveles
-                  </Button>
+                  <Link
+                    href="/learn"
+                    className="text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
+                  >
+                    Ver todos los niveles →
+                  </Link>
                 </div>
               </section>
 

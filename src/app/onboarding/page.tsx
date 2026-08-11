@@ -6,9 +6,13 @@ import {
   hasPassedNivel3,
   toGuidedProgress,
 } from "@/lib/domain/guided-flow";
+import { localizeLevel } from "@/lib/domain/content-localization";
+import { getLevels } from "@/lib/domain/exercises";
+import { resolveHubCourseFocus } from "@/lib/domain/hub-dashboard";
 import { resolveRegionIdFromOnboarding } from "@/lib/domain/regions";
 import { resolveProgress } from "@/lib/learning-state";
 import { getOnboardingState } from "@/lib/onboarding";
+import { getActiveRegion, getDefaultRegion } from "@/lib/region-server";
 import { createClient } from "@/lib/supabase/server";
 import { getUserProfile } from "@/lib/supabase/user-profile";
 
@@ -26,6 +30,10 @@ export default async function OnboardingPage() {
   const profile = user ? await getUserProfile(user.id) : null;
   const progress = await resolveProgress();
   const guidedProgress = toGuidedProgress(progress);
+  const region = settingsMode ? await getActiveRegion() : getDefaultRegion();
+  const levels = getLevels().map((level) => localizeLevel(level, region));
+  const focus = resolveHubCourseFocus(guidedProgress, levels);
+  const postCompleteHref = focus?.continueHref ?? "/learn";
 
   return (
     <>
@@ -47,6 +55,7 @@ export default async function OnboardingPage() {
             isAuthenticated={Boolean(user)}
             canEnableClinicalMode={hasPassedNivel3(guidedProgress)}
             settingsMode={settingsMode}
+            postCompleteHref={postCompleteHref}
           />
         </AppPageLayout>
       </main>

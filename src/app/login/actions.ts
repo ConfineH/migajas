@@ -58,7 +58,7 @@ export async function signInWithEmail(
   const password = String(formData.get("password") ?? "");
   const nextPath = sanitizePostAuthRedirect(
     String(formData.get("next") ?? ""),
-    "/learn",
+    "/inicio",
   );
 
   if (!email || !password) {
@@ -88,7 +88,7 @@ export async function signUpWithEmail(
   const password = String(formData.get("password") ?? "");
   const nextPath = sanitizePostAuthRedirect(
     String(formData.get("next") ?? ""),
-    "/learn",
+    "/inicio",
   );
 
   if (!email || !password) {
@@ -180,6 +180,6 @@ export async function updatePassword(
     return { error: mapAuthError(error.message) };
   }
 
-  await finalizeAuthenticatedSession("/learn");
+  await finalizeAuthenticatedSession("/inicio");
   return {};
 }

@@ -92,3 +92,47 @@ export function getHubProgressSummary(
     activePercent,
   };
 }
+
+export type HomeHeroCtas = {
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref: string;
+  secondaryLabel: string;
+};
+
+/** Contextual home CTAs: guests start onboarding; returning users deep-link. */
+export function buildHomeHeroCtas(input: {
+  isLoggedIn: boolean;
+  onboardingDone: boolean;
+  continueHref: string | null;
+  startLabel: string;
+  browseLabel: string;
+}): HomeHeroCtas {
+  if (input.isLoggedIn && input.onboardingDone) {
+    return {
+      primaryHref: input.continueHref ?? "/inicio",
+      primaryLabel: input.continueHref
+        ? "Continuar aprendiendo"
+        : "Ir a tu espacio",
+      secondaryHref: "/inicio",
+      secondaryLabel: "Tu espacio",
+    };
+  }
+
+  return {
+    primaryHref: "/onboarding",
+    primaryLabel: input.startLabel,
+    secondaryHref: "/learn",
+    secondaryLabel: input.browseLabel,
+  };
+}
+
+/** Primary CTA label on /inicio for the next guided step. */
+export function resolveHubPrimaryCtaLabel(input: {
+  hasNextItem: boolean;
+  isFreshStart: boolean;
+}): string {
+  if (!input.hasNextItem) return "Ir al nivel";
+  if (input.isFreshStart) return "Empezar el curso";
+  return "Continuar aprendiendo";
+}

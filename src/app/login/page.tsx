@@ -13,7 +13,7 @@ interface LoginPageProps {
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
-  const nextPath = sanitizePostAuthRedirect(params.next, "/learn");
+  const nextPath = sanitizePostAuthRedirect(params.next, "/inicio");
   const configured = isSupabaseConfigured();
 
   const errorMessage =

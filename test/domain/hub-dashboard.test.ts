@@ -1,9 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { getLevels } from "@/lib/domain/exercises";
 import {
+  buildHomeHeroCtas,
   getGuidedItemHref,
   getHubProgressSummary,
   resolveHubCourseFocus,
+  resolveHubPrimaryCtaLabel,
 } from "@/lib/domain/hub-dashboard";
 import type { GuidedProgress } from "@/lib/domain/guided-flow";
 import { completeLesson } from "@/lib/domain/guided-flow";
@@ -65,5 +67,49 @@ describe("getHubProgressSummary", () => {
     expect(summary.passedLevels).toBe(0);
     expect(summary.totalLevels).toBe(levels.length);
     expect(summary.activePercent).toBe(0);
+  });
+});
+
+describe("buildHomeHeroCtas", () => {
+  it("sends guests to onboarding with browse secondary", () => {
+    const ctas = buildHomeHeroCtas({
+      isLoggedIn: false,
+      onboardingDone: false,
+      continueHref: null,
+      startLabel: "Empezar mi curso",
+      browseLabel: "Ver el curso",
+    });
+    expect(ctas.primaryHref).toBe("/onboarding");
+    expect(ctas.primaryLabel).toBe("Empezar mi curso");
+    expect(ctas.secondaryHref).toBe("/learn");
+    expect(ctas.secondaryLabel).toBe("Ver el curso");
+  });
+
+  it("deep-links returning users and secondary to hub", () => {
+    const ctas = buildHomeHeroCtas({
+      isLoggedIn: true,
+      onboardingDone: true,
+      continueHref: "/learn/nivel-1/lessons/leccion-1",
+      startLabel: "Empezar mi curso",
+      browseLabel: "Ver el curso",
+    });
+    expect(ctas.primaryHref).toBe("/learn/nivel-1/lessons/leccion-1");
+    expect(ctas.primaryLabel).toBe("Continuar aprendiendo");
+    expect(ctas.secondaryHref).toBe("/inicio");
+    expect(ctas.secondaryLabel).toBe("Tu espacio");
+  });
+});
+
+describe("resolveHubPrimaryCtaLabel", () => {
+  it("uses start copy for fresh learners", () => {
+    expect(
+      resolveHubPrimaryCtaLabel({ hasNextItem: true, isFreshStart: true }),
+    ).toBe("Empezar el curso");
+  });
+
+  it("uses continue copy after progress", () => {
+    expect(
+      resolveHubPrimaryCtaLabel({ hasNextItem: true, isFreshStart: false }),
+    ).toBe("Continuar aprendiendo");
   });
 });

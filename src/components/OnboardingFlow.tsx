@@ -34,6 +34,8 @@ interface OnboardingFlowProps {
   isAuthenticated?: boolean;
   canEnableClinicalMode?: boolean;
   settingsMode?: boolean;
+  /** Deep link to next guided item after first-time onboarding. */
+  postCompleteHref?: string;
 }
 
 const REGION_EXAMPLES: Record<string, { food: string; detail: string; carbsG: number }> =
@@ -58,6 +60,7 @@ export function OnboardingFlow({
   isAuthenticated = false,
   canEnableClinicalMode = false,
   settingsMode = false,
+  postCompleteHref = "/learn",
 }: OnboardingFlowProps) {
   const router = useRouter();
   const steps = settingsMode ? SETTINGS_STEPS : ONBOARDING_STEPS;
@@ -136,7 +139,7 @@ export function OnboardingFlow({
       }
     }
 
-    router.push(settingsMode ? "/learn" : "/learn");
+    router.push(settingsMode ? "/learn" : postCompleteHref);
     router.refresh();
   }
 

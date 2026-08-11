@@ -14,7 +14,7 @@ Este documento es legible para humanos; si hay conflicto, prevalece el código (
 | `BRAND_ONE_LINER` | Aprende a contar carbohidratos con comida real de tu país — paso a paso, con tranquilidad. | Meta description, onboarding intro |
 | `HERO_COPY.subtitle` | Un curso guiado con comida real de tu país. Paso a paso, con tranquilidad. | Home |
 | `HERO_COPY.ctaPrimary` | Empezar mi curso | Botón home |
-| `HERO_COPY.ctaSecondary` | Ya empecé — continuar | Enlace home |
+| `HERO_COPY.ctaSecondary` | Ver el curso | Enlace home (invitado) |
 | `ONBOARDING_COPY.welcomeTitle` | Bienvenido a Migajas | Paso 1 onboarding |
 | `ONBOARDING_COPY.educationalNote` | Migajas es una herramienta educativa. No sustituye el criterio de tu equipo de salud. | Onboarding |
 | `SEO_COPY.title` | Migajas — Aprende contando carbohidratos | `<title>` default |
