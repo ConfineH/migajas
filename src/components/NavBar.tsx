@@ -24,17 +24,17 @@ export function NavBar({
     ...(user ? [{ href: "/inicio", label: "Inicio" }] : []),
     { href: "/learn", label: "Curso" },
     ...(showDiary ? [{ href: "/diario", label: "Diario" }] : []),
+    { href: "/progress", label: "Progreso" },
+  ];
+
+  const moreLinks = [
+    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
     ...(freeMode
       ? [
           { href: "/levels", label: "Repaso libre" },
           { href: "/catalog", label: "Catálogo" },
         ]
       : []),
-    { href: "/progress", label: "Progreso" },
-  ];
-
-  const moreLinks = [
-    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
     { href: "/onboarding", label: "Configuración" },
     ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
   ];
