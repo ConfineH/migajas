@@ -60,6 +60,19 @@ export default async function InicioPage() {
     user.displayName?.trim() ||
     (user.email ? (user.email.split("@")[0] ?? null) : null);
 
+  const extras = [
+    ...(showDiary
+      ? [{ href: "/diario", label: "Diario" } as const]
+      : []),
+    ...(showGuide ? [{ href: "/guia", label: "Guía" } as const] : []),
+    ...(freeMode || isFreeModeUnlocked(progress)
+      ? ([
+          { href: "/levels", label: "Repaso libre" },
+          { href: "/catalog", label: "Catálogo" },
+        ] as const)
+      : []),
+  ];
+
   return (
     <>
       <AppNavBar />
@@ -71,7 +84,7 @@ export default async function InicioPage() {
                 ¡Hola{greetingName ? `, ${greetingName}` : ""}!
               </h1>
               <p className="text-pretty text-muted">
-                ¿Qué te gustaría hacer hoy?
+                Continúa donde lo dejaste.
               </p>
             </header>
 
@@ -92,7 +105,7 @@ export default async function InicioPage() {
                 {focus?.nextItem ? (
                   <div className="rounded-2xl bg-sage-light/70 px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wide text-sage-strong">
-                      Sigue aprendiendo
+                      Siguiente paso
                     </p>
                     <p className="mt-2 font-medium text-foreground">
                       {focus.nextLabel}
@@ -145,75 +158,27 @@ export default async function InicioPage() {
               </aside>
             </div>
 
-            <section className="space-y-3">
-              <h2 className="font-display text-xl font-medium text-foreground">
-                Accesos rápidos
-              </h2>
-              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <li>
-                  <Link href="/learn" className="card-interactive block p-4">
-                    <p className="font-medium text-foreground">Curso</p>
-                    <p className="mt-1 text-sm text-muted">
-                      Ruta guiada por niveles
-                    </p>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/progress" className="card-interactive block p-4">
-                    <p className="font-medium text-foreground">Progreso</p>
-                    <p className="mt-1 text-sm text-muted">
-                      Aciertos, niveles y repaso
-                    </p>
-                  </Link>
-                </li>
-                {showDiary ? (
-                  <li>
-                    <Link href="/diario" className="card-interactive block p-4">
-                      <p className="font-medium text-foreground">Diario</p>
-                      <p className="mt-1 text-sm text-muted">
-                        Registra tu ingesta diaria
-                      </p>
+            {extras.length > 0 ? (
+              <p className="text-sm text-muted">
+                También puedes abrir{" "}
+                {extras.map((item, index) => (
+                  <span key={item.href}>
+                    {index > 0
+                      ? index === extras.length - 1
+                        ? " o "
+                        : ", "
+                      : null}
+                    <Link
+                      href={item.href}
+                      className="font-medium text-sage-strong underline-offset-2 hover:underline"
+                    >
+                      {item.label}
                     </Link>
-                  </li>
-                ) : null}
-                {showGuide ? (
-                  <li>
-                    <Link href="/guia" className="card-interactive block p-4">
-                      <p className="font-medium text-foreground">Guía</p>
-                      <p className="mt-1 text-sm text-muted">
-                        Consulta rápida de referencia
-                      </p>
-                    </Link>
-                  </li>
-                ) : null}
-                {freeMode || isFreeModeUnlocked(progress) ? (
-                  <>
-                    <li>
-                      <Link
-                        href="/levels"
-                        className="card-interactive block p-4"
-                      >
-                        <p className="font-medium text-foreground">Practicar</p>
-                        <p className="mt-1 text-sm text-muted">
-                          Ejercicios libres por nivel
-                        </p>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/catalog"
-                        className="card-interactive block p-4"
-                      >
-                        <p className="font-medium text-foreground">Catálogo</p>
-                        <p className="mt-1 text-sm text-muted">
-                          Busca alimentos y porciones
-                        </p>
-                      </Link>
-                    </li>
-                  </>
-                ) : null}
-              </ul>
-            </section>
+                  </span>
+                ))}
+                .
+              </p>
+            ) : null}
           </LearnAnimatedSection>
         </AppPageLayout>
       </main>

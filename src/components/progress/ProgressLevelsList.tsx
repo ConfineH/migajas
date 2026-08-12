@@ -52,14 +52,14 @@ export function ProgressLevelsList({ levels }: { levels: ProgressLevelItem[] }) 
           {level.unlocked ? (
             <div className="mt-3 flex flex-wrap gap-3">
               <Link
-                href={`/levels/${level.id}`}
+                href={`/learn/${level.id}`}
                 className="text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
               >
-                {level.hasCompletion ? "Repetir" : "Empezar"} →
+                {level.hasCompletion ? "Repetir" : "Abrir nivel"} →
               </Link>
               {level.failedCount > 0 ? (
                 <Link
-                  href={`/levels/${level.id}?retry=1`}
+                  href={`/learn/${level.id}`}
                   className="text-sm font-medium text-terracotta underline-offset-2 hover:underline"
                 >
                   Repasar {level.failedCount} error

@@ -15,15 +15,10 @@ import {
 } from "@/lib/domain/regions";
 import { ONBOARDING_COPY } from "@/lib/domain/brand-positioning";
 
-type StepId = "welcome" | "country" | "course" | "mode" | "rations" | "clinical";
+type StepId = "welcome" | "country" | "rations" | "clinical";
 
-const ONBOARDING_STEPS: StepId[] = [
-  "welcome",
-  "country",
-  "course",
-  "mode",
-  "rations",
-];
+/** First-time: welcome → country → rations (account optional later). */
+const ONBOARDING_STEPS: StepId[] = ["welcome", "country", "rations"];
 const SETTINGS_STEPS: StepId[] = ["country", "rations", "clinical"];
 
 interface OnboardingFlowProps {
@@ -213,6 +208,9 @@ export function OnboardingFlow({
               <p className="rounded-2xl bg-sage-light/70 px-4 py-3 text-sm text-muted">
                 {ONBOARDING_COPY.educationalNote}
               </p>
+              <div className="text-left">
+                <CoursePathPreview />
+              </div>
               <Button onClick={() => setStepIndex(2)}>Empezar</Button>
             </section>
           </Step>
@@ -253,84 +251,6 @@ export function OnboardingFlow({
           </section>
         </Step>
 
-        {!settingsMode ? (
-          <Step>
-            <section className="space-y-6">
-              <div className="space-y-2 text-center">
-                <h1 className="font-display text-3xl font-medium text-foreground">
-                  Así funciona el curso
-                </h1>
-                <p className="text-pretty text-muted">
-                  Cinco niveles guiados. Avanzas paso a paso; no hace falta
-                  saberlo todo de golpe.
-                </p>
-              </div>
-              <CoursePathPreview />
-              <div className="flex justify-center gap-3">
-                <Button variant="ghost" onClick={() => setStepIndex(2)}>
-                  Atrás
-                </Button>
-                <Button onClick={() => setStepIndex(4)}>Continuar</Button>
-              </div>
-            </section>
-          </Step>
-        ) : null}
-
-        {!settingsMode ? (
-          <Step>
-            <section className="space-y-6 text-center">
-              <div className="space-y-2">
-                <h1 className="font-display text-3xl font-medium text-foreground">
-                  ¿Cómo quieres empezar?
-                </h1>
-                <p className="text-pretty text-muted">
-                  Puedes probar sin cuenta o registrarte para guardar el progreso.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <button
-                  type="button"
-                  onClick={() => setGuestMode(true)}
-                  className={`surface-card-interactive w-full p-5 text-left ${
-                    guestMode ? "surface-card-selected" : ""
-                  }`}
-                >
-                  <p className="font-semibold text-foreground">Modo invitado</p>
-                  <p className="mt-1 text-sm text-muted">
-                    Empieza al momento, sin registrarte.
-                  </p>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setGuestMode(false)}
-                  className={`surface-card-interactive w-full p-5 text-left ${
-                    !guestMode ? "surface-card-selected" : ""
-                  }`}
-                >
-                  <p className="font-semibold text-foreground">Crear cuenta</p>
-                  <p className="mt-1 text-sm text-muted">
-                    Guarda tu progreso entre dispositivos.
-                  </p>
-                </button>
-              </div>
-              <div className="flex justify-center gap-3">
-                <Button variant="ghost" onClick={() => setStepIndex(3)}>
-                  Atrás
-                </Button>
-                <Button
-                  onClick={() =>
-                    guestMode
-                      ? setStepIndex(5)
-                      : router.push("/login?next=/onboarding")
-                  }
-                >
-                  Continuar
-                </Button>
-              </div>
-            </section>
-          </Step>
-        ) : null}
-
         <Step>
           <section className="space-y-6">
             <h1 className="text-center font-display text-3xl font-medium text-foreground">
@@ -363,17 +283,34 @@ export function OnboardingFlow({
                 </p>
               ) : null}
             </div>
+            {!settingsMode ? (
+              <p className="text-center text-sm text-muted">
+                Empiezas como invitado.{" "}
+                <Link
+                  href="/login?next=/onboarding"
+                  className="font-medium text-sage-strong underline-offset-2 hover:underline"
+                >
+                  Crear cuenta
+                </Link>{" "}
+                cuando quieras guardar el progreso.
+              </p>
+            ) : null}
             <div className="flex justify-center gap-3">
               <Button
                 variant="ghost"
-                onClick={() => setStepIndex(settingsMode ? 1 : 4)}
+                onClick={() => setStepIndex(settingsMode ? 1 : 2)}
               >
                 Atrás
               </Button>
               <Button
-                onClick={() =>
-                  settingsMode ? setStepIndex(3) : void completeOnboarding()
-                }
+                onClick={() => {
+                  if (!settingsMode) {
+                    setGuestMode(true);
+                    void completeOnboarding();
+                    return;
+                  }
+                  setStepIndex(3);
+                }}
               >
                 {settingsMode ? "Continuar" : "Empezar el curso"}
               </Button>

@@ -21,8 +21,8 @@ export default async function LevelsPage() {
       <main className="flex flex-1 flex-col">
         <AppPageLayout>
           <PageHeader
-            title="Practicar"
-            description={`Avanza por niveles. Necesitas al menos ${PASS_THRESHOLD}% de aciertos para desbloquear el siguiente.`}
+            title="Repaso libre"
+            description={`Ejercicios libres por nivel. Necesitas al menos ${PASS_THRESHOLD}% de aciertos para desbloquear el siguiente.`}
           />
           <LevelsList progress={progress} attempts={attempts} />
         </AppPageLayout>

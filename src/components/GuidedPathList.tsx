@@ -13,18 +13,35 @@ interface GuidedPathListProps {
   progress: GuidedProgress;
 }
 
-const typeIcons: Record<string, string> = {
-  lesson: "📖",
-  practice: "✏️",
-  flashcards: "🃏",
-  exam: "🎯",
+const TYPE_LABELS: Record<string, string> = {
+  lesson: "Lección",
+  practice: "Práctica",
+  flashcards: "Fichas",
+  exam: "Examen",
 };
 
-function itemHref(levelId: string, item: { type: string; id: string }, examHref: string) {
+function itemHref(
+  levelId: string,
+  item: { type: string; id: string },
+  examHref: string,
+) {
   if (item.type === "lesson") return `/learn/${levelId}/lessons/${item.id}`;
   if (item.type === "practice") return `/learn/${levelId}/practice/${item.id}`;
   if (item.type === "flashcards") return `/learn/${levelId}/fichas`;
   return examHref;
+}
+
+function TypeMark({ type }: { type: string }) {
+  const label = TYPE_LABELS[type] ?? type;
+  const letter = label.charAt(0);
+  return (
+    <span
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface text-sm font-semibold text-sage-strong shadow-soft"
+      aria-hidden
+    >
+      {letter}
+    </span>
+  );
 }
 
 export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
@@ -58,8 +75,7 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                 ? "Repasar fichas"
                 : "Repetir examen";
 
-        const typeLabel =
-          item.type === "flashcards" ? "fichas" : item.type;
+        const typeLabel = TYPE_LABELS[item.type] ?? item.type;
 
         if (done) {
           return (
@@ -68,10 +84,10 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                 href={href}
                 className="flex items-center gap-4 rounded-2xl bg-sage-light/80 px-5 py-4 transition-all duration-200 hover:bg-sage-light"
               >
-                <span className="text-xl">{typeIcons[item.type]}</span>
+                <TypeMark type={item.type} />
                 <div className="flex-1">
                   <p className="font-medium text-sage-strong">{item.title}</p>
-                  <p className="text-xs text-muted">Completado</p>
+                  <p className="text-xs text-muted">Completado · {typeLabel}</p>
                 </div>
                 <span className="text-sm font-medium text-sage-strong">
                   {revisitLabel} →
@@ -88,7 +104,7 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                 className="callout-muted flex items-center gap-4 px-5 py-4"
                 aria-disabled="true"
               >
-                <span className="text-xl">{typeIcons[item.type]}</span>
+                <TypeMark type={item.type} />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">{item.title}</p>
                   <p className="text-xs text-muted">
@@ -101,10 +117,10 @@ export function GuidedPathList({ levelId, progress }: GuidedPathListProps) {
                 href={href}
                 className="card-interactive flex items-center gap-4 px-5 py-4"
               >
-                <span className="text-xl">{typeIcons[item.type]}</span>
+                <TypeMark type={item.type} />
                 <div className="flex-1">
                   <p className="font-semibold text-foreground">{item.title}</p>
-                  <p className="text-xs capitalize text-muted">{typeLabel}</p>
+                  <p className="text-xs text-muted">{typeLabel}</p>
                 </div>
                 <span className="text-sm font-medium text-sage-strong">
                   Continuar →

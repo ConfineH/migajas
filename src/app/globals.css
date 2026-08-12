@@ -82,8 +82,9 @@ body {
 }
 
 .hero-pill {
-  background: var(--sage-light);
+  background: color-mix(in srgb, var(--sage-light) 55%, white);
   border-radius: 3rem;
+  border: 1px solid color-mix(in srgb, var(--sage) 18%, transparent);
 }
 
 .feature-card {

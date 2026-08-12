@@ -6,24 +6,34 @@ import { HERO_COPY } from "@/lib/domain/brand-positioning";
 import AnimatedContent from "@/components/react-bits/AnimatedContent";
 import StaggeredList from "@/components/react-bits/StaggeredList";
 import type { HomeHeroCtas } from "@/lib/domain/hub-dashboard";
+import {
+  FreePracticeIcon,
+  GuidedCourseIcon,
+  ProgressSproutIcon,
+} from "@/components/home/HomeFeatureIcons";
+import type { ComponentType } from "react";
 
-const FEATURES = [
+const FEATURES: {
+  title: string;
+  desc: string;
+  Icon: ComponentType<{ className?: string }>;
+}[] = [
   {
     title: "Curso guiado",
     desc: "Lecciones cortas con ejemplos de alimentos reales de tu país, paso a paso.",
-    icon: "📖",
+    Icon: GuidedCourseIcon,
   },
   {
     title: "Comida de tu país",
     desc: "Ejemplos cotidianos (tostada, arroz, mangú…) para aprender a observar carbohidratos.",
-    icon: "🍽️",
+    Icon: FreePracticeIcon,
   },
   {
     title: "Progreso",
     desc: "Sigue tu avance por niveles y repasa lo que más te cuesta.",
-    icon: "🌱",
+    Icon: ProgressSproutIcon,
   },
-] as const;
+];
 
 export function HomeHero({
   regionLine,
@@ -44,10 +54,10 @@ export function HomeHero({
       duration={0.7}
       className="hero-pill mx-auto w-full max-w-3xl px-8 py-12 text-center sm:px-14 sm:py-16"
     >
-      <h1 className="font-display text-3xl font-medium leading-snug text-foreground sm:text-4xl">
+      <h1 className="font-display text-3xl font-medium leading-snug text-foreground text-balance sm:text-4xl">
         {HERO_COPY.headline}
       </h1>
-      <p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-muted sm:text-lg">
+      <p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-foreground/75 sm:text-lg">
         {HERO_COPY.subtitle}
       </p>
       <div className="mt-8 flex flex-col items-center gap-4">
@@ -60,7 +70,9 @@ export function HomeHero({
         </Link>
       </div>
       {regionLine ? (
-        <p className="mt-6 text-sm text-sage-strong">{regionLine}</p>
+        <p className="mt-6 text-sm font-medium text-foreground/80">
+          {regionLine}
+        </p>
       ) : null}
     </AnimatedContent>
   );
@@ -78,10 +90,10 @@ export function HomeFeatures() {
         className="grid gap-6 sm:grid-cols-3 sm:gap-5"
         itemClassName="h-full"
       >
-        {FEATURES.map(({ title, desc, icon }) => (
+        {FEATURES.map(({ title, desc, Icon }) => (
           <div key={title} className="feature-card px-6 py-8 text-center h-full">
-            <div className="mx-auto flex h-20 items-center justify-center text-4xl">
-              {icon}
+            <div className="mx-auto flex h-20 items-center justify-center text-sage-strong">
+              <Icon className="h-14 w-14" />
             </div>
             <h3 className="mt-4 font-display text-xl font-medium text-foreground">
               {title}

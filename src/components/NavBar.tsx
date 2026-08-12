@@ -26,7 +26,7 @@ export function NavBar({
     ...(showDiary ? [{ href: "/diario", label: "Diario" }] : []),
     ...(freeMode
       ? [
-          { href: "/levels", label: "Practicar" },
+          { href: "/levels", label: "Repaso libre" },
           { href: "/catalog", label: "Catálogo" },
         ]
       : []),
@@ -38,6 +38,24 @@ export function NavBar({
     { href: "/analytics", label: "Actividad" },
     { href: "/onboarding", label: "Configuración" },
     ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
+  ];
+
+  const mobilePinned = user
+    ? [
+        { href: "/inicio", label: "Inicio" },
+        { href: "/learn", label: "Curso" },
+        { href: "/progress", label: "Progreso" },
+      ]
+    : [
+        { href: "/learn", label: "Curso" },
+        { href: "/progress", label: "Progreso" },
+      ];
+
+  const mobileMoreItems = [
+    ...primaryLinks.filter(
+      (link) => !mobilePinned.some((pinned) => pinned.href === link.href),
+    ),
+    ...moreLinks,
   ];
 
   return (
@@ -69,13 +87,13 @@ export function NavBar({
 
         <div className="flex items-center justify-end gap-3 text-sm">
           <ul className="flex items-center gap-0.5 md:hidden">
+            {mobilePinned.map((link) => (
+              <li key={link.href}>
+                <NavLink href={link.href}>{link.label}</NavLink>
+              </li>
+            ))}
             <li>
-              <NavLink href={user ? "/inicio" : "/learn"}>
-                {user ? "Inicio" : "Curso"}
-              </NavLink>
-            </li>
-            <li>
-              <NavMenu label="Más" items={[...primaryLinks.slice(1), ...moreLinks]} />
+              <NavMenu label="Más" items={mobileMoreItems} />
             </li>
           </ul>
           {user ? (

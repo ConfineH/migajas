@@ -64,7 +64,7 @@ export function LevelCard({
           href={`/levels/${id}`}
           className="text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
         >
-          {completion ? "Repetir" : "Practicar"} →
+          {completion ? "Repetir" : "Abrir"} →
         </Link>
         {failedCount > 0 ? (
           <Link

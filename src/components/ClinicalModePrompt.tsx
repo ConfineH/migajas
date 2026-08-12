@@ -4,13 +4,15 @@ import { Button } from "@/components/Button";
 export function ClinicalModePrompt() {
   return (
     <div className="callout-sage mb-6">
-      <p className="font-semibold text-foreground">Seguimiento personal disponible</p>
+      <p className="font-semibold text-foreground">
+        Seguimiento personal disponible
+      </p>
       <p className="mt-1 text-pretty text-sm text-muted">
         Ya aprobaste el nivel 3. Puedes activar el diario de ingesta para llevar
-        un registro de carbohidratos y preparar reportes para tu equipo de salud.
-        El modo clínico no realiza recomendaciones terapéuticas ni cálculos de
-        dosis de insulina; es una herramienta opcional de registro y exportación
-        de datos.
+        un registro de carbohidratos y preparar reportes para tu equipo de
+        salud. El seguimiento personal no realiza recomendaciones terapéuticas
+        ni cálculos de dosis de insulina; es una herramienta opcional de
+        registro y exportación de datos.
       </p>
       <div className="mt-4">
         <Button href="/onboarding" variant="secondary">
@@ -34,16 +36,16 @@ export function ClinicalAccessMessage({
 }) {
   return (
     <div className="hero-pill p-8 text-center">
-      <p className="text-4xl" aria-hidden>
-        📓
-      </p>
-      <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+      <h1 className="font-display text-xl font-medium text-foreground">
         {title}
       </h1>
       <p className="mt-2 text-pretty text-muted">{description}</p>
       {actionHref && actionLabel ? (
         <div className="mt-6">
-          <Link href={actionHref} className="btn-terracotta inline-flex items-center rounded-full px-6 py-2.5 font-medium">
+          <Link
+            href={actionHref}
+            className="btn-terracotta inline-flex items-center rounded-full px-6 py-2.5 font-medium"
+          >
             {actionLabel}
           </Link>
         </div>

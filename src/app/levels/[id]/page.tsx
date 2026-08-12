@@ -58,10 +58,7 @@ export default async function LevelPage({
         <main className="flex flex-1 flex-col">
           <AppPageLayout className="py-12 text-center">
             <div className="hero-pill p-8">
-              <p className="text-4xl" aria-hidden>
-                🔒
-              </p>
-              <h1 className="mt-4 font-display text-xl font-medium text-foreground">
+              <h1 className="font-display text-xl font-medium text-foreground">
                 Nivel bloqueado
               </h1>
               <p className="mt-2 text-muted">
