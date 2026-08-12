@@ -35,7 +35,6 @@ export function NavBar({
 
   const moreLinks = [
     ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
-    { href: "/analytics", label: "Actividad" },
     { href: "/onboarding", label: "Configuración" },
     ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
   ];

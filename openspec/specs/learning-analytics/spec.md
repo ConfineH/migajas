@@ -39,11 +39,16 @@ The system SHALL emit `free_mode_unlocked` once when nivel-1 exam is passed for 
 - **WHEN** nivel-1 exam is passed again
 - **THEN** no duplicate `free_mode_unlocked` event is emitted
 
-### Requirement: User analytics dashboard
+### Requirement: User progress milestones
 
-The system MUST show an analytics dashboard at `/analytics` for authenticated users based on their stored learning events.
+The system MUST show recent learning milestones on `/progress` for authenticated users based on their stored learning events. `/analytics` MUST redirect to `/progress`.
 
-#### Scenario: Signed-in user views dashboard
+#### Scenario: Signed-in user views milestones
 - **GIVEN** an authenticated user with learning events
+- **WHEN** they open `/progress`
+- **THEN** they see a recent milestone timeline below level progress
+
+#### Scenario: Legacy analytics URL
+- **GIVEN** any visitor
 - **WHEN** they open `/analytics`
-- **THEN** they see funnel per level and recent milestone timeline
+- **THEN** they are redirected to `/progress`

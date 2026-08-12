@@ -1,12 +1,11 @@
-import Link from "next/link";
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { ProgressAnimatedSection } from "@/components/progress/ProgressAnimated";
 import { ProgressLevelsList } from "@/components/progress/ProgressLevelsList";
+import { ProgressRecentMilestones } from "@/components/progress/ProgressRecentMilestones";
 import { ProgressStats } from "@/components/progress/ProgressStats";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { LevelProgressCard } from "@/components/ui/LevelProgressCard";
 import {
   getLevels,
   getExercisesForLevel,
@@ -18,20 +17,22 @@ import {
   countPassedLevels,
 } from "@/lib/domain/progress";
 import { accuracyRate } from "@/lib/domain/attempts";
+import { aggregateAnalyticsDashboard } from "@/lib/domain/analytics-dashboard";
+import { getLessonsForLevel } from "@/lib/domain/lessons";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
-import {
-  toGuidedProgress,
-  getLessonProgressPercent,
-} from "@/lib/domain/guided-flow";
+import { getAuthUser } from "@/lib/supabase/auth";
+import { getUserLearningEvents } from "@/lib/supabase/analytics-events";
 
 import { NOINDEX_METADATA } from "@/lib/domain/seo";
 
 export const metadata = NOINDEX_METADATA;
 
 export default async function ProgressPage() {
-  const progress = await resolveProgress();
-  const attempts = await resolveAttempts();
-  const guided = toGuidedProgress(progress);
+  const [progress, attempts, user] = await Promise.all([
+    resolveProgress(),
+    resolveAttempts(),
+    getAuthUser(),
+  ]);
   const levels = getLevels();
   const passed = countPassedLevels(progress);
   const overallAccuracy = accuracyRate(attempts);
@@ -62,6 +63,16 @@ export default async function ProgressPage() {
     };
   });
 
+  const timeline = user
+    ? aggregateAnalyticsDashboard(
+        await getUserLearningEvents(user.id),
+        levels.map((level) => ({
+          id: level.id,
+          lessonCount: getLessonsForLevel(level.id).length,
+        })),
+      ).timeline
+    : [];
+
   return (
     <>
       <AppNavBar />
@@ -69,38 +80,10 @@ export default async function ProgressPage() {
         <AppPageLayout>
           <PageHeader
             title="Mi progreso"
-            description="Curso guiado, niveles aprobados y ejercicios para repasar."
+            description="Resumen de avance, qué repasar y tus hitos recientes."
           />
 
-          <ProgressAnimatedSection className="mb-8 space-y-3">
-            <h2 className="font-display text-xl font-medium text-foreground">
-              Curso guiado
-            </h2>
-            {levels.map((level) => {
-              const pct = getLessonProgressPercent(guided, level.id);
-              const completion = getLevelCompletion(progress, level.id);
-              return (
-                <LevelProgressCard
-                  key={level.id}
-                  title={level.name}
-                  percent={pct}
-                  subtitle={
-                    completion
-                      ? `Examen: ${completion.masteryScore}% ${completion.passed ? "✓" : "(no aprobado)"}`
-                      : undefined
-                  }
-                />
-              );
-            })}
-            <Link
-              href="/learn"
-              className="inline-block text-sm font-medium text-sage-strong underline-offset-2 hover:underline"
-            >
-              Ir al curso →
-            </Link>
-          </ProgressAnimatedSection>
-
-          <ProgressAnimatedSection delay={0.05}>
+          <ProgressAnimatedSection className="mb-8">
             <ProgressStats
               passed={passed}
               totalLevels={levels.length}
@@ -109,11 +92,18 @@ export default async function ProgressPage() {
             />
           </ProgressAnimatedSection>
 
-          <ProgressAnimatedSection className="space-y-4" delay={0.1}>
+          <ProgressAnimatedSection className="mb-8 space-y-4" delay={0.05}>
             <h2 className="font-display text-xl font-medium text-foreground">
-              Niveles
+              Por nivel
             </h2>
             <ProgressLevelsList levels={levelItems} />
+          </ProgressAnimatedSection>
+
+          <ProgressAnimatedSection delay={0.1}>
+            <ProgressRecentMilestones
+              timeline={timeline}
+              signedIn={Boolean(user)}
+            />
           </ProgressAnimatedSection>
 
           <div className="mt-8 text-center">
