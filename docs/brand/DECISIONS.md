@@ -103,7 +103,7 @@ Formato: decisión → contexto → estado → desviaciones conocidas.
 
 **Fecha:** 2026-07-25  
 **Decisión:**
-- **Indexar:** `/`, `/onboarding`, `/learn`, `/learn/nivel-*`, `/guia`, legal.
+- **Indexar:** `/`, `/onboarding`, `/learn`, `/learn/nivel-*`, `/guia`, `/profesionales`, legal.
 - **No indexar:** admin, api, auth, login, diario, analytics, progress, inicio, catalog, levels.
 - JSON-LD `Organization` + `Course` en home.
 - Search Console: enviar `sitemap.xml` tras verificar propiedad.
@@ -111,6 +111,7 @@ Formato: decisión → contexto → estado → desviaciones conocidas.
 **Estado:** Implementado en `seo.ts`, `robots.ts`, `sitemap.ts`.  
 **Desviaciones / matices:**
 - `/guia` está en sitemap pero **redirige** sin onboarding completado → aceptable como URL de descubrimiento; el usuario cae en onboarding.
+- `/profesionales` está en sitemap: página de **prescripción** para equipo de salud (no marketplace, no pitch de licencia).
 - `/catalog` y `/levels` **no** están en sitemap (requieren modo libre) → **intencional**.
 
 ---

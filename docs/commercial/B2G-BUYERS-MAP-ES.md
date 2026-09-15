@@ -26,7 +26,7 @@
 1. **España compra**, pero casi siempre a nivel **autonómico**, no ministerial.  
 2. El formato más cercano a Migajas es **licencia + app educativa + mantenimiento** (PACAS Asturias), no “licencia perpetua de nicho” como categoría CPV.  
 3. También compiten contratos de **desarrollo a medida** (Galicia) y modelos de **convenio + app gratuita** (DiabeCyL).  
-4. **República Dominicana** prioriza **expediente clínico digital**; apps educativas de pacientes tienen menos precedente de compra pública directa.
+4. **República Dominicana** prioriza **expediente clínico digital**; apps educativas de pacientes tienen menos precedente de compra pública directa. Entrada realista: **piloto de prescripción** en SNS (el profesional receta el curso), no marketplace ni licencia nacional de entrada. Material: [kits/rd/](./kits/rd/).
 
 ---
 
@@ -97,14 +97,14 @@
 
 | Actor | Rol | Portal / referencia | Prioridad RD |
 |-------|-----|---------------------|--------------|
-| **MSP** (Ministerio de Salud Pública) | Política sanitaria, EDUS | [msp.gob.do/transparencia](https://msp.gob.do/web/Transparencia/) · [comprasdominicanas.gob.do](https://www.comprasdominicanas.gob.do/) | Baja para licencia app educativa ahora |
-| **SNS** | Red pública, despliegue territorial | [sns.gob.do](https://sns.gob.do/) | Media vía piloto |
-| **OPS/PAHO** | HEARTS, formación, diabetes en AP | [ops.org](https://www.paho.org/) | **Alta** — educación comunitaria |
-| **OGTIC** | Interoperabilidad EDUS | Compromiso [Open Gov DO0069](https://www.opengovpartnership.org/es/members/dominican-republic/commitments/do0069/) | Largo plazo (integración) |
-| **Asociaciones diabetes RD** | Distribución + piloto | Convenio | **Alta** — modelo DiabeCyL |
+| **MSP** (Ministerio de Salud Pública) | Política sanitaria; aprueba marco de piloto | [msp.gob.do/transparencia](https://msp.gob.do/web/Transparencia/) · [comprasdominicanas.gob.do](https://www.comprasdominicanas.gob.do/) | **Activa** — conversación en curso. Pedir referente + 1–3 centros, no licencia |
+| **SNS** | Red que receta: UNAP / nutrición / endocrino | [sns.gob.do](https://sns.gob.do/) | **Alta** — donde vive el piloto |
+| **OPS/PAHO** | HEARTS, formación, diabetes en AP | [ops.org](https://www.paho.org/) | Media — alineación, no partnership hasta que exista |
+| **OGTIC** | Interoperabilidad EDUS | Compromiso [Open Gov DO0069](https://www.opengovpartnership.org/es/members/dominican-republic/commitments/do0069/) | Fuera de alcance del piloto (sin EHR) |
+| **Asociaciones diabetes RD** | Difusión del QR en talleres | Convenio | **Alta** — modelo DiabeCyL |
 
 **Precedente RD:** MSP licitó **desarrollo de software piloto** (Historial Clínico Digital, 2022) — infraestructura, no educación en HC.  
-**Estrategia RD:** grant / OPS / asociación → piloto → eventual inclusión en estrategia salud digital. **No** contar con licencia territorial gubernamental a corto plazo.
+**Estrategia RD (sep 2026):** conversación MSP → piloto de **prescripción** (1 referente, ~20 pacientes, 8–12 semanas) → evidencia → recién entonces convenio / licencia. **No** marketplace público+privado. Ver [PROFESSIONAL-INTEGRATION.md](./PROFESSIONAL-INTEGRATION.md) y [kits/rd/](./kits/rd/).
 
 ---
 
@@ -132,7 +132,7 @@
 |--------|---------|
 | Informe de lecciones aprendidas | Interno |
 | Decisión: licitación vs convenio vs contrato menor | CCAA piloto |
-| Exploración RD vía OPS o asociación | República Dominicana |
+| Exploración RD | Usar [kits/rd/](./kits/rd/) si hay reunión MSP; no abrir marketplace |
 
 ---
 
@@ -157,4 +157,4 @@ Actualizar cuando:
 - Aparezca un precedente nuevo (adjudicación publicada)  
 - Cambie el modelo de precio en [B2G-ONEPAGER-CCAA.md](./B2G-ONEPAGER-CCAA.md)
 
-**Última revisión:** investigación mercado Jul 2026 (PACAS, SERGAS, ProEmpower, DiabeCyL, Madrid IoMT, MSP RD EDUS).
+**Última revisión:** sep 2026 — anexo RD actualizado (conversación MSP, piloto de prescripción, kits/rd). Investigación España: Jul 2026.

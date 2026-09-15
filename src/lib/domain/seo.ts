@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLevels } from "@/lib/domain/exercises";
 import { SEO_COPY, findForbiddenMarketingPhrases } from "@/lib/domain/brand-positioning";
+import { PROFESSIONAL_PAGE } from "@/lib/domain/professional-cycle";
 
 const DEFAULT_SITE_URL = "https://migajas.vercel.app";
 
@@ -22,6 +23,7 @@ export const ROBOTS_DISALLOW_PREFIXES = [
   "/inicio",
   "/catalog",
   "/levels",
+  "/profesional",
 ] as const;
 
 export type PublicPageKey =
@@ -29,6 +31,7 @@ export type PublicPageKey =
   | "onboarding"
   | "learn"
   | "guia"
+  | "profesionales"
   | "privacidad"
   | "terminos"
   | "cookies";
@@ -72,6 +75,13 @@ export const PUBLIC_PAGE_SEO: Record<PublicPageKey, PageSeoEntry> = {
       "Reglas de raciones, calculadora y fuentes para consultar el conteo de carbohidratos con comida real de España y República Dominicana.",
     changeFrequency: "monthly",
     priority: 0.75,
+  },
+  profesionales: {
+    path: PROFESSIONAL_PAGE.path,
+    title: PROFESSIONAL_PAGE.title,
+    description: PROFESSIONAL_PAGE.description,
+    changeFrequency: "monthly",
+    priority: 0.7,
   },
   privacidad: {
     path: "/privacidad",
@@ -120,6 +130,7 @@ export function getSitemapEntries(): PageSeoEntry[] {
     PUBLIC_PAGE_SEO.learn,
     ...levels,
     PUBLIC_PAGE_SEO.guia,
+    PUBLIC_PAGE_SEO.profesionales,
     PUBLIC_PAGE_SEO.privacidad,
     PUBLIC_PAGE_SEO.terminos,
     PUBLIC_PAGE_SEO.cookies,

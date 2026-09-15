@@ -28,7 +28,7 @@ export async function exportAuthenticatedUserData(
     supabase
       .from("user_profiles")
       .select(
-        "user_id, region_id, daily_carb_goal_g, clinical_mode_enabled, updated_at",
+        "user_id, region_id, daily_carb_goal_g, clinical_mode_enabled, is_professional, professional_role, professional_share_code, updated_at",
       )
       .eq("user_id", userId)
       .maybeSingle(),
@@ -66,6 +66,13 @@ export async function deleteAuthenticatedUserData(userId: string): Promise<boole
   }
 
   const service = createServiceClient();
+  const shareDeletes = await Promise.all([
+    service.from("professional_report_shares").delete().eq("patient_user_id", userId),
+    service.from("professional_report_shares").delete().eq("professional_user_id", userId),
+    service.from("professional_contact_messages").delete().eq("professional_user_id", userId),
+  ]);
+  if (shareDeletes.some((result) => result.error)) return false;
+
   const tables = [
     "intake_entries",
     "learning_events",

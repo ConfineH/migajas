@@ -7,8 +7,16 @@ export function SiteFooter() {
         <p className="text-pretty">
           Herramienta educativa. No sustituye el consejo de tu equipo de salud.
         </p>
-        <nav aria-label="Legal">
+        <nav aria-label="Pie de página">
           <ul className="flex flex-wrap gap-x-5 gap-y-1">
+            <li>
+              <Link
+                href="/profesionales"
+                className="text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
+              >
+                Profesionales
+              </Link>
+            </li>
             <li>
               <Link
                 href="/privacidad"

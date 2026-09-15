@@ -55,9 +55,15 @@ Cada territorio requiere su propia licencia. No se incluye automáticamente el o
 | [outreach/B2G-COLD-EMAIL-CCAA.md](./outreach/B2G-COLD-EMAIL-CCAA.md) | Email frío ~150 palabras para educación diabetológica |
 | [kits/](./kits/) | Manuales paciente, profesional y decisión institucional |
 | [kits/madrid/](./kits/madrid/) | Kits adaptados Comunidad de Madrid (SERMAS) |
+| [kits/rd/](./kits/rd/) | Kits MSP / SNS: piloto de prescripción (no marketplace) |
+| [PROFESSIONAL-INTEGRATION.md](./PROFESSIONAL-INTEGRATION.md) | Regla: el profesional prescribe; no hay directorio comercial |
 | [research/PAIN-POINTS-EDUCACION-DM.md](./research/PAIN-POINTS-EDUCACION-DM.md) | Pain points educación DM y conteo de HC (investigación) |
 
 **Nota:** el comprador habitual en España es la **comunidad autónoma**, no el Ministerio central. Precio orientativo y precedentes (PACAS Asturias, SERGAS Galicia, DiabeCyL) en el one-pager.
+
+## Venta B2G (República Dominicana)
+
+Conversación con MSP: **piloto de evidencia** (1 referente, 1–3 centros, ~20 personas), no licencia territorial ni marketplace. Materiales: [kits/rd/](./kits/rd/). El profesional entra recetando el curso entre consultas.
 
 ## Contacto del licenciante
 

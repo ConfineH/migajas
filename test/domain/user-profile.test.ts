@@ -30,6 +30,9 @@ describe("mergeCookieIntoProfile", () => {
       region_id: "es",
       daily_carb_goal_g: 200,
       clinical_mode_enabled: false,
+      is_professional: false,
+      professional_role: null,
+      professional_share_code: null,
     };
     const staleCookie: OnboardingState = {
       ...cookie,

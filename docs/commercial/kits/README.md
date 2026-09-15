@@ -8,6 +8,7 @@ Materiales para repartir en centros de salud, enviar por email o imprimir en rec
 | **Profesional sanitario** | Enfermería AP, educadores en diabetes, endocrinología | [KIT-PROFESIONAL.md](./KIT-PROFESIONAL.md) |
 | **Decisión institucional** | Dirección de cuidados, innovación, contratación, gerencia AP | [KIT-DECISION.md](./KIT-DECISION.md) |
 | **Comunidad de Madrid** | SERMAS, Escuela Madrileña de Salud, piloto AP | [madrid/](./madrid/) |
+| **República Dominicana** | MSP / SNS: piloto de prescripción (no marketplace) | [rd/](./rd/) |
 
 **No incluidos (de momento):**
 
@@ -16,7 +17,8 @@ Materiales para repartir en centros de salud, enviar por email o imprimir en rec
 | Cuidadores como kit aparte | Cubierto en sección «Para familiares» del kit paciente |
 | IT / integración hospitalaria | Fase 1 sin EHR; mención breve solo en kit decisión |
 | Farmacia | Canal secundario; no es quien prescribe educación estructurada |
+| Marketplace de profesionales | Fuera de alcance. Ver [PROFESSIONAL-INTEGRATION.md](../PROFESSIONAL-INTEGRATION.md) |
 
-**Relacionado:** [B2G-ONEPAGER-CCAA.md](../B2G-ONEPAGER-CCAA.md) · [B2G-BUYERS-MAP-ES.md](../B2G-BUYERS-MAP-ES.md) · [research/PAIN-POINTS-EDUCACION-DM.md](../research/PAIN-POINTS-EDUCACION-DM.md)
+**Relacionado:** [B2G-ONEPAGER-CCAA.md](../B2G-ONEPAGER-CCAA.md) · [B2G-BUYERS-MAP-ES.md](../B2G-BUYERS-MAP-ES.md) · [PROFESSIONAL-INTEGRATION.md](../PROFESSIONAL-INTEGRATION.md) · [research/PAIN-POINTS-EDUCACION-DM.md](../research/PAIN-POINTS-EDUCACION-DM.md)
 
 **Antes de imprimir:** sustituir `[URL_MIGAJAS]`, `[QR]` y datos de contacto del centro licenciatario.

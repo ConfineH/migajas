@@ -11,6 +11,7 @@ import { getAllExercises } from "@/lib/domain/exercises";
 import { getAllLessons, getAllExams } from "@/lib/domain/lessons";
 import { isContentAdmin } from "@/lib/domain/admin";
 import { getAuthUser } from "@/lib/supabase/auth";
+import { listAllProfessionalContactsForAdmin } from "@/lib/supabase/professional";
 
 export const metadata = {
   title: "Admin — Migajas",
@@ -24,6 +25,7 @@ export default async function AdminPage() {
   const lessons = getAllLessons();
   const exams = getAllExams();
   const exercises = getAllExercises();
+  const professionalMessages = await listAllProfessionalContactsForAdmin();
 
   return (
     <>
@@ -91,6 +93,32 @@ export default async function AdminPage() {
               </p>
             </Link>
           </div>
+
+          <section className="mt-10">
+            <h2 className="font-display text-xl font-medium text-foreground">
+              Mensajes de profesionales
+            </h2>
+            {professionalMessages.length === 0 ? (
+              <p className="mt-3 text-sm text-muted">
+                No hay mensajes nuevos.
+              </p>
+            ) : (
+              <ul className="mt-4 space-y-3">
+                {professionalMessages.map((message) => (
+                  <li
+                    key={message.id}
+                    className="rounded-2xl bg-sage-light/50 px-4 py-3"
+                  >
+                    <p className="font-medium text-foreground">{message.subject}</p>
+                    <p className="mt-1 text-sm text-muted">{message.body}</p>
+                    <p className="mt-2 text-xs text-muted">
+                      {message.created_at.slice(0, 10)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
 
           <p className="mt-6 text-xs text-muted">
             Fuente activa: {source === "supabase" ? "Supabase" : "JSON local"}

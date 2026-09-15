@@ -11,6 +11,7 @@ interface NavBarProps {
   showAdmin?: boolean;
   showGuide?: boolean;
   showDiary?: boolean;
+  showProfessional?: boolean;
 }
 
 export function NavBar({
@@ -19,6 +20,7 @@ export function NavBar({
   showAdmin = false,
   showGuide = false,
   showDiary = false,
+  showProfessional = false,
 }: NavBarProps) {
   const primaryLinks = [
     ...(user ? [{ href: "/inicio", label: "Inicio" }] : []),
@@ -37,6 +39,10 @@ export function NavBar({
       : []),
     { href: "/onboarding", label: "Configuración" },
     ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
+    { href: "/profesionales", label: "Profesionales" },
+    ...(showProfessional
+      ? [{ href: "/profesional", label: "Perfil profesional" }]
+      : []),
   ];
 
   const mobilePinned = user

@@ -27,6 +27,7 @@ describe("seo", () => {
     expect(paths).toContain("/learn");
     expect(paths).toContain("/learn/nivel-1");
     expect(paths).toContain("/guia");
+    expect(paths).toContain("/profesionales");
     expect(paths).not.toContain("/admin");
     expect(paths).not.toContain("/diario");
   });
@@ -36,6 +37,7 @@ describe("seo", () => {
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/api");
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/login");
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/catalog");
+    expect(ROBOTS_DISALLOW_PREFIXES).toContain("/profesional");
   });
 
   it("builds page metadata with canonical URL", () => {

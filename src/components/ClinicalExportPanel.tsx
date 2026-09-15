@@ -10,6 +10,9 @@ export function ClinicalExportPanel() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [shareCode, setShareCode] = useState("");
+  const [shareBusy, setShareBusy] = useState(false);
+  const [shareDone, setShareDone] = useState(false);
 
   function buildExportUrl(format: "csv" | "pdf"): string | null {
     setError(null);
@@ -31,14 +34,38 @@ export function ClinicalExportPanel() {
     window.location.href = url;
   }
 
+  async function handleShare() {
+    setError(null);
+    setShareDone(false);
+    setShareBusy(true);
+    const response = await fetch("/api/professional/shares", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        share_code: shareCode,
+        range,
+        from: range === "custom" ? from : undefined,
+        to: range === "custom" ? to : undefined,
+      }),
+    });
+    const payload = (await response.json()) as { error?: string };
+    setShareBusy(false);
+    if (!response.ok) {
+      setError(payload.error ?? "No se pudo enviar el informe.");
+      return;
+    }
+    setShareDone(true);
+  }
+
   return (
     <section className="callout-sage space-y-4">
       <div>
         <h2 className="font-display text-lg font-medium text-foreground">
-          Exportar reporte
+          Informe para tu equipo de salud
         </h2>
         <p className="mt-1 text-sm text-muted">
-          Descarga un resumen en CSV o PDF para compartir con tu equipo de salud.
+          Descárgalo o envíaselo a tu profesional con el código que te haya dado.
+          Migajas no lo manda sola.
         </p>
       </div>
 
@@ -88,13 +115,39 @@ export function ClinicalExportPanel() {
         </div>
       ) : null}
 
+      <label className="block space-y-1 text-sm">
+        <span className="font-medium text-foreground">
+          Código de tu profesional
+        </span>
+        <input
+          value={shareCode}
+          onChange={(event) => setShareCode(event.target.value.toUpperCase())}
+          className="field-input font-mono tracking-widest"
+          placeholder="ABCDE2"
+          autoComplete="off"
+          spellCheck={false}
+        />
+      </label>
+
       {error ? <p className="text-sm text-red-700">{error}</p> : null}
+      {shareDone ? (
+        <p className="text-sm text-sage-strong">
+          Informe enviado. Tu profesional lo verá en su perfil.
+        </p>
+      ) : null}
 
       <div className="flex flex-wrap gap-3">
         <Button variant="secondary" onClick={() => handleDownload("csv")}>
           Descargar CSV
         </Button>
         <Button onClick={() => handleDownload("pdf")}>Descargar PDF</Button>
+        <Button
+          variant="ghost"
+          onClick={handleShare}
+          disabled={shareBusy || shareCode.trim().length < 6}
+        >
+          {shareBusy ? "Enviando…" : "Enviar al profesional"}
+        </Button>
       </div>
     </section>
   );

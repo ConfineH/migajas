@@ -9,6 +9,9 @@ export interface UserProfile {
   region_id: RegionId;
   daily_carb_goal_g: number | null;
   clinical_mode_enabled: boolean;
+  is_professional: boolean;
+  professional_role: string | null;
+  professional_share_code: string | null;
   updated_at?: string;
 }
 
@@ -16,6 +19,9 @@ export interface UserProfileUpsert {
   region_id: RegionId;
   daily_carb_goal_g: number | null;
   clinical_mode_enabled: boolean;
+  is_professional?: boolean;
+  professional_role?: string | null;
+  professional_share_code?: string | null;
 }
 
 export interface ProfilePatchInput {
@@ -119,6 +125,9 @@ export function parseUserProfileRow(row: {
   region_id: string;
   daily_carb_goal_g: number | null;
   clinical_mode_enabled: boolean;
+  is_professional?: boolean | null;
+  professional_role?: string | null;
+  professional_share_code?: string | null;
   updated_at?: string;
 }): UserProfile {
   return {
@@ -126,6 +135,9 @@ export function parseUserProfileRow(row: {
     region_id: parseRegionId(row.region_id) ?? "es",
     daily_carb_goal_g: row.daily_carb_goal_g,
     clinical_mode_enabled: row.clinical_mode_enabled,
+    is_professional: row.is_professional === true,
+    professional_role: row.professional_role ?? null,
+    professional_share_code: row.professional_share_code ?? null,
     updated_at: row.updated_at,
   };
 }

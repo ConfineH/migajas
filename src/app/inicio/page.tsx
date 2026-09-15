@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { LearnAnimatedSection } from "@/components/learn/LearnAnimated";
 import { LevelProgressCard } from "@/components/ui/LevelProgressCard";
+import { ConsultVisitCard } from "@/components/ConsultVisitCard";
 import { canShowDiaryLink } from "@/lib/clinical-access";
 import { localizeLevel } from "@/lib/domain/content-localization";
 import { getLevels } from "@/lib/domain/exercises";
@@ -13,6 +14,10 @@ import {
   resolveHubCourseFocus,
   resolveHubPrimaryCtaLabel,
 } from "@/lib/domain/hub-dashboard";
+import {
+  consultVisitBody,
+  latestPassedLevelName,
+} from "@/lib/domain/professional-cycle";
 import { getLessonsForLevel } from "@/lib/domain/lessons";
 import {
   isFreeModeUnlocked,
@@ -148,6 +153,11 @@ export default async function InicioPage() {
                       ? ` · ${summary.activeLevelName}`
                       : ""
                   }`}
+                />
+                <ConsultVisitCard
+                  body={consultVisitBody(
+                    latestPassedLevelName(progress.levelCompletions, levels),
+                  )}
                 />
                 <Link
                   href="/progress"

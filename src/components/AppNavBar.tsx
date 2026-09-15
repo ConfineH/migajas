@@ -4,6 +4,7 @@ import { getFreeModeStatus } from "@/lib/free-mode";
 import { getAuthUser } from "@/lib/supabase/auth";
 import { isContentAdmin } from "@/lib/domain/admin";
 import { hasCompletedOnboarding } from "@/lib/onboarding";
+import { getUserProfile } from "@/lib/supabase/user-profile";
 
 export async function AppNavBar() {
   const [freeMode, user, showGuide, showDiary] = await Promise.all([
@@ -12,6 +13,7 @@ export async function AppNavBar() {
     hasCompletedOnboarding(),
     canShowDiaryLink(),
   ]);
+  const profile = user ? await getUserProfile(user.id) : null;
   return (
     <NavBar
       freeMode={freeMode}
@@ -19,6 +21,7 @@ export async function AppNavBar() {
       showAdmin={isContentAdmin(user?.email)}
       showGuide={showGuide}
       showDiary={showDiary}
+      showProfessional={profile?.is_professional === true}
     />
   );
 }

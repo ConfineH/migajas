@@ -8,6 +8,7 @@ import {
   type Exercise,
 } from "@/lib/domain/exercises";
 import { PASS_THRESHOLD } from "@/lib/domain/progress";
+import { CONSULT_VISIT_COPY } from "@/lib/domain/professional-cycle";
 
 interface ExamRunnerProps {
   exercises: Exercise[];
@@ -111,6 +112,11 @@ export function ExamRunner({
                   : "Nivel aprobado. Puedes continuar al siguiente."
               : `Necesitas al menos ${PASS_THRESHOLD}%. Repasa las lecciones e inténtalo de nuevo.`}
           </p>
+          {passed ? (
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              {CONSULT_VISIT_COPY.examPassed(levelName)}
+            </p>
+          ) : null}
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
           {passed && freeModeUnlocked ? (

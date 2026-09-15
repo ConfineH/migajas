@@ -1,3 +1,4 @@
+import { ConsultVisitCard } from "@/components/ConsultVisitCard";
 import { AppNavBar } from "@/components/AppNavBar";
 import { Button } from "@/components/Button";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
@@ -19,6 +20,10 @@ import {
 import { accuracyRate } from "@/lib/domain/attempts";
 import { aggregateAnalyticsDashboard } from "@/lib/domain/analytics-dashboard";
 import { getLessonsForLevel } from "@/lib/domain/lessons";
+import {
+  consultVisitBody,
+  latestPassedLevelName,
+} from "@/lib/domain/professional-cycle";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
 import { getAuthUser } from "@/lib/supabase/auth";
 import { getUserLearningEvents } from "@/lib/supabase/analytics-events";
@@ -89,6 +94,14 @@ export default async function ProgressPage() {
               totalLevels={levels.length}
               accuracy={overallAccuracy}
               reviewCount={allFailed.length}
+            />
+          </ProgressAnimatedSection>
+
+          <ProgressAnimatedSection className="mb-8" delay={0.03}>
+            <ConsultVisitCard
+              body={consultVisitBody(
+                latestPassedLevelName(progress.completions, levels),
+              )}
             />
           </ProgressAnimatedSection>
 
