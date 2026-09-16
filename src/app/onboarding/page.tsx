@@ -33,7 +33,6 @@ export default async function OnboardingPage() {
   const region = settingsMode ? await getActiveRegion() : getDefaultRegion();
   const levels = getLevels().map((level) => localizeLevel(level, region));
   const focus = resolveHubCourseFocus(guidedProgress, levels);
-  const postCompleteHref = focus?.continueHref ?? "/learn";
 
   return (
     <>
@@ -55,7 +54,9 @@ export default async function OnboardingPage() {
             isAuthenticated={Boolean(user)}
             canEnableClinicalMode={hasPassedNivel3(guidedProgress)}
             settingsMode={settingsMode}
-            postCompleteHref={postCompleteHref}
+            postCompleteHref={
+              settingsMode ? (focus?.continueHref ?? "/learn") : "/primera-racion"
+            }
           />
         </AppPageLayout>
       </main>

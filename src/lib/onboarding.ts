@@ -10,6 +10,7 @@ export interface OnboardingState {
   guestMode: boolean;
   completed: boolean;
   daily_carb_goal_g?: number | null;
+  firstRationDone?: boolean;
 }
 
 export async function getOnboardingState(): Promise<OnboardingState | null> {

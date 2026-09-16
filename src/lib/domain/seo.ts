@@ -24,6 +24,7 @@ export const ROBOTS_DISALLOW_PREFIXES = [
   "/catalog",
   "/levels",
   "/profesional",
+  "/primera-racion",
 ] as const;
 
 export type PublicPageKey =

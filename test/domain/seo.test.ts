@@ -38,6 +38,7 @@ describe("seo", () => {
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/login");
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/catalog");
     expect(ROBOTS_DISALLOW_PREFIXES).toContain("/profesional");
+    expect(ROBOTS_DISALLOW_PREFIXES).toContain("/primera-racion");
   });
 
   it("builds page metadata with canonical URL", () => {
