@@ -6,9 +6,11 @@ import {
 } from "@/lib/supabase/service";
 import type { ClinicalReport } from "@/lib/domain/clinical-report";
 import {
+  addOneMonth,
   parsePatientShareRecipients,
   type PatientRecipientLabelId,
   type PatientShareRecipient,
+  type RecipientRepeatMode,
 } from "@/lib/domain/professional-profile";
 
 export interface ProfessionalShareRow {
@@ -124,19 +126,32 @@ export async function deleteSharesSentToProfessional(
   return !error;
 }
 
-export async function updatePatientRecipientLabel(input: {
+export async function updatePatientRecipientContact(input: {
   patientUserId: string;
   professionalUserId: string;
-  label: PatientRecipientLabelId;
+  label?: PatientRecipientLabelId;
+  repeatMode?: RecipientRepeatMode | null;
 }): Promise<boolean> {
   if (!isSupabaseConfigured()) return false;
   const supabase = await createClient();
+  const patch: {
+    updated_at: string;
+    label?: PatientRecipientLabelId;
+    repeat_mode?: RecipientRepeatMode | null;
+    repeat_due_at?: string | null;
+  } = {
+    updated_at: new Date().toISOString(),
+  };
+  if (input.label !== undefined) patch.label = input.label;
+  if (input.repeatMode !== undefined) {
+    patch.repeat_mode = input.repeatMode;
+    patch.repeat_due_at = input.repeatMode
+      ? addOneMonth(new Date()).toISOString()
+      : null;
+  }
   const { data, error } = await supabase
     .from("patient_professional_contacts")
-    .update({
-      label: input.label,
-      updated_at: new Date().toISOString(),
-    })
+    .update(patch)
     .eq("patient_user_id", input.patientUserId)
     .eq("professional_user_id", input.professionalUserId)
     .select("professional_user_id")

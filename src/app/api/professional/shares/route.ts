@@ -5,10 +5,13 @@ import { getFoodById } from "@/lib/data/foods";
 import {
   formatRecipientLastSent,
   formatRecipientListLabel,
+  formatRepeatDue,
+  isRecipientSendDue,
   normalizeProfessionalUserId,
   normalizeShareCode,
   recipientResendPreview,
-  validateRecipientLabel,
+  sortDiaryRecipients,
+  validateRecipientPatch,
   validateShareConfirmation,
 } from "@/lib/domain/professional-profile";
 import { listIntakeEntries } from "@/lib/supabase/intake";
@@ -16,7 +19,7 @@ import {
   deleteSharesSentToProfessional,
   listPatientShareRecipients,
   shareReportWithProfessional,
-  updatePatientRecipientLabel,
+  updatePatientRecipientContact,
 } from "@/lib/supabase/professional";
 
 function getTodayUtcDate(): string {
@@ -42,8 +45,9 @@ export async function GET() {
     return NextResponse.json({ error: result.error }, { status: 503 });
   }
 
+  const now = new Date();
   return NextResponse.json({
-    recipients: result.map((recipient) => ({
+    recipients: sortDiaryRecipients(result, now).map((recipient) => ({
       professional_user_id: recipient.professionalUserId,
       share_code: recipient.shareCode,
       label_id: recipient.label,
@@ -53,6 +57,9 @@ export async function GET() {
       preview: recipientResendPreview(recipient),
       can_resend: Boolean(recipient.shareCode),
       has_copies: recipient.shareCount > 0,
+      repeat_mode: recipient.repeatMode,
+      repeat_due_label: formatRepeatDue(recipient.repeatDueAt),
+      due: isRecipientSendDue(recipient.repeatDueAt, now),
     })),
   });
 }
@@ -101,19 +108,20 @@ export async function PATCH(request: Request) {
   }
 
   const body = await request.json();
-  const parsed = validateRecipientLabel(body);
+  const parsed = validateRecipientPatch(body);
   if (!parsed.ok) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const updated = await updatePatientRecipientLabel({
+  const updated = await updatePatientRecipientContact({
     patientUserId: access.user.id,
     professionalUserId: parsed.professionalUserId,
     label: parsed.label,
+    repeatMode: parsed.repeatMode,
   });
   if (!updated) {
     return NextResponse.json(
-      { error: "No se pudo guardar cómo es esa persona para ti." },
+      { error: "No se pudo guardar esa preferencia." },
       { status: 400 },
     );
   }

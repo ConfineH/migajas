@@ -51,7 +51,7 @@ export async function exportAuthenticatedUserData(
     listUserConsents(userId),
     supabase
       .from("patient_professional_contacts")
-      .select("professional_user_id, label, created_at, updated_at")
+      .select("professional_user_id, label, repeat_mode, repeat_due_at, created_at, updated_at")
       .eq("patient_user_id", userId),
   ]);
 

@@ -40,9 +40,10 @@ export default function TermsPage() {
             El diario y los reportes son opcionales y requieren consentimiento
             explícito para datos de salud. Un profesional no abre tu diario: solo
             ve el informe si tú se lo envías. En el diario puedes marcar qué es
-            esa persona para ti y retirar el acceso a una persona concreta. Si
-            retiras el consentimiento desde Configuración, borramos todas las
-            copias enviadas.
+            esa persona para ti, marcar un recordatorio el mes que viene o todos
+            los meses, y retirar el acceso a una persona concreta. El diario no
+            envía informes solo. Si retiras el consentimiento desde
+            Configuración, borramos todas las copias enviadas.
           </p>
 
           <h2>4. Limitación de responsabilidad</h2>

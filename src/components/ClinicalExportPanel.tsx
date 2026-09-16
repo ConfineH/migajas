@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import {
   PATIENT_RECIPIENT_LABELS,
   type PatientRecipientLabelId,
+  type RecipientRepeatMode,
 } from "@/lib/domain/professional-profile";
 
 type ExportRange = "7d" | "30d" | "custom";
@@ -19,6 +20,9 @@ interface ShareRecipient {
   preview: string | null;
   can_resend: boolean;
   has_copies: boolean;
+  repeat_mode: RecipientRepeatMode | null;
+  repeat_due_label: string | null;
+  due: boolean;
 }
 
 export function ClinicalExportPanel() {
@@ -160,6 +164,30 @@ export function ClinicalExportPanel() {
     await loadRecipients();
   }
 
+  async function handleRepeatChange(
+    recipient: ShareRecipient,
+    repeatMode: RecipientRepeatMode | null,
+  ) {
+    if (repeatMode === recipient.repeat_mode) return;
+    setError(null);
+    setLabelBusyId(recipient.professional_user_id);
+    const response = await fetch("/api/professional/shares", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        professional_user_id: recipient.professional_user_id,
+        repeat_mode: repeatMode,
+      }),
+    });
+    const payload = (await response.json()) as { error?: string };
+    setLabelBusyId(null);
+    if (!response.ok) {
+      setError(payload.error ?? "No se pudo guardar el recordatorio.");
+      return;
+    }
+    await loadRecipients();
+  }
+
   async function handleRevoke(recipient: ShareRecipient) {
     if (
       !window.confirm(
@@ -198,7 +226,8 @@ export function ClinicalExportPanel() {
         </h2>
         <p className="mt-1 text-sm text-muted">
           Descárgalo o envíaselo a tu profesional con el código que te haya dado.
-          Migajas no lo manda sola.
+          Puedes marcar que te recuerde el mes que viene o todos los meses. Tú
+          envías; Migajas no manda sola.
         </p>
       </div>
 
@@ -216,6 +245,11 @@ export function ClinicalExportPanel() {
                 <p className="text-sm font-medium text-foreground">
                   {recipient.title}
                 </p>
+                {recipient.due ? (
+                  <p className="mt-1 text-sm font-medium text-terracotta-dark">
+                    Toca enviarle el informe de este mes.
+                  </p>
+                ) : null}
                 <label className="mt-2 block space-y-1 text-sm">
                   <span className="text-muted">Para ti es</span>
                   <select
@@ -236,12 +270,47 @@ export function ClinicalExportPanel() {
                     ))}
                   </select>
                 </label>
+                <div className="mt-3 space-y-2">
+                  <label className="flex items-start gap-3 text-sm">
+                    <input
+                      type="checkbox"
+                      className="mt-1"
+                      checked={recipient.repeat_mode === "next_month"}
+                      disabled={labelBusyId === recipient.professional_user_id}
+                      onChange={(event) =>
+                        void handleRepeatChange(
+                          recipient,
+                          event.target.checked ? "next_month" : null,
+                        )
+                      }
+                    />
+                    <span>Mandar otra vez el mes que viene</span>
+                  </label>
+                  <label className="flex items-start gap-3 text-sm">
+                    <input
+                      type="checkbox"
+                      className="mt-1"
+                      checked={recipient.repeat_mode === "monthly"}
+                      disabled={labelBusyId === recipient.professional_user_id}
+                      onChange={(event) =>
+                        void handleRepeatChange(
+                          recipient,
+                          event.target.checked ? "monthly" : null,
+                        )
+                      }
+                    />
+                    <span>Mandar todos los meses</span>
+                  </label>
+                </div>
                 <p className="mt-2 text-xs text-muted">
                   {recipient.has_copies
                     ? `Último envío: ${recipient.last_sent_label}`
                     : "Sin copias ahora"}
                   {recipient.share_count > 1
                     ? ` · ${recipient.share_count} informes`
+                    : ""}
+                  {recipient.repeat_due_label && !recipient.due
+                    ? ` · te lo recuerdo el ${recipient.repeat_due_label}`
                     : ""}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-3">
@@ -251,7 +320,7 @@ export function ClinicalExportPanel() {
                       onClick={() => handleSelectRecipient(recipient)}
                       className="text-sm font-medium text-sage-strong hover:underline"
                     >
-                      Enviar otra vez
+                      Enviar {recipient.due ? "ahora" : "otra vez"}
                     </button>
                   ) : null}
                   {recipient.has_copies ? (

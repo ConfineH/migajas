@@ -33,6 +33,9 @@ export const PATIENT_RECIPIENT_LABELS = [
 
 export type PatientRecipientLabelId = (typeof PATIENT_RECIPIENT_LABELS)[number]["id"];
 
+export const RECIPIENT_REPEAT_MODES = ["next_month", "monthly"] as const;
+export type RecipientRepeatMode = (typeof RECIPIENT_REPEAT_MODES)[number];
+
 export const SHARE_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 export const SHARE_CODE_LENGTH = 6;
 export const CONTACT_SUBJECT_MAX = 120;
@@ -67,6 +70,48 @@ export function patientRecipientLabel(labelId: string | null): string | null {
   return (
     PATIENT_RECIPIENT_LABELS.find((item) => item.id === labelId)?.label ?? null
   );
+}
+
+export function parseRepeatMode(value: unknown): RecipientRepeatMode | null {
+  if (value === "next_month" || value === "monthly") return value;
+  return null;
+}
+
+export function addOneMonth(from: Date): Date {
+  const next = new Date(from);
+  next.setMonth(next.getMonth() + 1);
+  return next;
+}
+
+export function isRecipientSendDue(
+  repeatDueAt: string | null,
+  now: Date = new Date(),
+): boolean {
+  if (!repeatDueAt) return false;
+  const dueAt = new Date(repeatDueAt);
+  if (Number.isNaN(dueAt.getTime())) return false;
+  return now.getTime() >= dueAt.getTime();
+}
+
+export function formatRepeatDue(iso: string | null): string | null {
+  if (!iso) return null;
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("es-ES", { dateStyle: "medium" }).format(date);
+}
+
+export function sortDiaryRecipients<T extends PatientShareRecipient>(
+  recipients: T[],
+  now: Date = new Date(),
+): T[] {
+  return [...recipients].sort((left, right) => {
+    const leftDue = isRecipientSendDue(left.repeatDueAt, now);
+    const rightDue = isRecipientSendDue(right.repeatDueAt, now);
+    if (leftDue !== rightDue) return leftDue ? -1 : 1;
+    const leftTime = left.lastSentAt ? Date.parse(left.lastSentAt) : 0;
+    const rightTime = right.lastSentAt ? Date.parse(right.lastSentAt) : 0;
+    return rightTime - leftTime;
+  });
 }
 
 export interface ProfessionalSharePreview {
@@ -135,6 +180,8 @@ export interface PatientShareRecipient {
   displayName: string | null;
   lastSentAt: string | null;
   shareCount: number;
+  repeatMode: RecipientRepeatMode | null;
+  repeatDueAt: string | null;
 }
 
 export function parsePatientShareRecipient(
@@ -149,6 +196,8 @@ export function parsePatientShareRecipient(
     display_name?: unknown;
     last_sent_at?: unknown;
     share_count?: unknown;
+    repeat_mode?: unknown;
+    repeat_due_at?: unknown;
   };
   const professionalUserId = normalizeProfessionalUserId(
     row.professional_user_id,
@@ -176,6 +225,10 @@ export function parsePatientShareRecipient(
     typeof row.display_name === "string" && row.display_name.trim()
       ? row.display_name.trim().slice(0, 80)
       : null;
+  const repeatDueAt =
+    typeof row.repeat_due_at === "string" && row.repeat_due_at.trim()
+      ? row.repeat_due_at
+      : null;
   return {
     professionalUserId,
     shareCode: normalizeShareCode(row.share_code),
@@ -184,6 +237,8 @@ export function parsePatientShareRecipient(
     displayName,
     lastSentAt,
     shareCount,
+    repeatMode: parseRepeatMode(row.repeat_mode),
+    repeatDueAt,
   };
 }
 
@@ -248,6 +303,59 @@ export function validateRecipientLabel(input: {
     return { ok: false, error: "Elige cómo es esa persona para ti." };
   }
   return { ok: true, professionalUserId, label: input.label };
+}
+
+export function validateRecipientPatch(input: {
+  professional_user_id?: unknown;
+  label?: unknown;
+  repeat_mode?: unknown;
+}):
+  | {
+      ok: true;
+      professionalUserId: string;
+      label?: PatientRecipientLabelId;
+      repeatMode?: RecipientRepeatMode | null;
+    }
+  | { ok: false; error: string } {
+  const professionalUserId = normalizeProfessionalUserId(
+    input.professional_user_id,
+  );
+  if (!professionalUserId) {
+    return { ok: false, error: "No se pudo identificar a ese profesional." };
+  }
+
+  const patch: {
+    professionalUserId: string;
+    label?: PatientRecipientLabelId;
+    repeatMode?: RecipientRepeatMode | null;
+  } = { professionalUserId };
+
+  if ("label" in input && input.label !== undefined) {
+    if (!isPatientRecipientLabelId(input.label)) {
+      return { ok: false, error: "Elige cómo es esa persona para ti." };
+    }
+    patch.label = input.label;
+  }
+
+  if ("repeat_mode" in input) {
+    if (input.repeat_mode === null || input.repeat_mode === "") {
+      patch.repeatMode = null;
+    } else {
+      const repeatMode = parseRepeatMode(input.repeat_mode);
+      if (!repeatMode) {
+        return {
+          ok: false,
+          error: "Elige el mes que viene o todos los meses.",
+        };
+      }
+      patch.repeatMode = repeatMode;
+    }
+  }
+
+  if (patch.label === undefined && patch.repeatMode === undefined) {
+    return { ok: false, error: "No hay nada que actualizar." };
+  }
+  return { ok: true, ...patch };
 }
 
 export function generateProfessionalShareCode(

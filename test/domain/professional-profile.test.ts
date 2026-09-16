@@ -4,6 +4,8 @@ import {
   isProfessionalRoleId,
   normalizeShareCode,
   professionalRoleLabel,
+  isRecipientSendDue,
+  parseRepeatMode,
   patientRecipientLabel,
   formatShareRecipientPreview,
   formatRecipientListLabel,
@@ -11,9 +13,11 @@ import {
   parsePatientShareRecipients,
   parseProfessionalSharePreview,
   recipientResendPreview,
+  sortDiaryRecipients,
   validateProfessionalActivation,
   validateProfessionalContact,
   validateRecipientLabel,
+  validateRecipientPatch,
   validateShareConfirmation,
 } from "@/lib/domain/professional-profile";
 
@@ -108,5 +112,52 @@ describe("professional-profile", () => {
         label: "cardiologo",
       }).ok,
     ).toBe(false);
+  });
+
+  it("reminds next month or every month without sending alone", () => {
+    expect(parseRepeatMode("monthly")).toBe("monthly");
+    expect(parseRepeatMode("weekly")).toBeNull();
+    const professionalUserId = "11111111-1111-4111-8111-111111111111";
+    const now = new Date("2026-10-16T12:00:00.000Z");
+    expect(isRecipientSendDue("2026-10-16T12:00:00.000Z", now)).toBe(true);
+    expect(isRecipientSendDue("2026-10-17T12:00:00.000Z", now)).toBe(false);
+    expect(isRecipientSendDue(null, now)).toBe(false);
+    expect(
+      validateRecipientPatch({
+        professional_user_id: professionalUserId,
+        repeat_mode: "next_month",
+      }),
+    ).toEqual({
+      ok: true,
+      professionalUserId,
+      repeatMode: "next_month",
+    });
+    const due = parsePatientShareRecipients([
+      {
+        professional_user_id: professionalUserId,
+        share_code: "AB23CD",
+        role: "nutricion",
+        label: "nutricion",
+        display_name: "Ana Pérez",
+        last_sent_at: "2026-09-01T12:00:00.000Z",
+        share_count: 1,
+        repeat_mode: "monthly",
+        repeat_due_at: "2026-10-01T12:00:00.000Z",
+      },
+      {
+        professional_user_id: "22222222-2222-4222-8222-222222222222",
+        share_code: "CD45EF",
+        role: "endocrinologia",
+        label: "endocrinologia",
+        display_name: "Luis",
+        last_sent_at: "2026-09-28T12:00:00.000Z",
+        share_count: 1,
+        repeat_mode: "next_month",
+        repeat_due_at: "2026-10-28T12:00:00.000Z",
+      },
+    ]);
+    expect(sortDiaryRecipients(due, now).map((row) => row.displayName)).toEqual(
+      ["Ana Pérez", "Luis"],
+    );
   });
 });

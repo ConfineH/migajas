@@ -55,7 +55,8 @@ export default function PrivacyPage() {
               su perfil. El diario no se envía solo: lo mandas tú, después de
               ver a quién va. En el diario ves quién tiene copias y puedes
               marcar si es tu endocrino, médico de cabecera, enfermería o
-              nutricionista.
+              nutricionista, y marcar si quieres que te recuerde el mes que
+              viene o todos los meses. Migajas no envía sola.
             </li>
           </ul>
 
