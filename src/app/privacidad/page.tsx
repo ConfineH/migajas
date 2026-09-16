@@ -53,7 +53,9 @@ export default function PrivacyPage() {
             <li>
               Si envías un informe a un profesional, una copia de ese resumen en
               su perfil. El diario no se envía solo: lo mandas tú, después de
-              ver a quién va.
+              ver a quién va. En el diario ves quién tiene copias y puedes
+              marcar si es tu endocrino, médico de cabecera, enfermería o
+              nutricionista.
             </li>
           </ul>
 
@@ -66,7 +68,8 @@ export default function PrivacyPage() {
             </li>
             <li>
               Cesión de un informe a un profesional: tu envío confirmado (art.
-              9.2.a). Si retiras el consentimiento, borramos esas copias.
+              9.2.a). Puedes retirar el acceso a una persona concreta o, si
+              retiras el consentimiento de salud, borramos todas esas copias.
             </li>
           </ul>
 

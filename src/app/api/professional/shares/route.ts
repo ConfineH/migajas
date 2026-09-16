@@ -3,11 +3,21 @@ import { requireClinicalAccess } from "@/lib/clinical-access";
 import { buildClinicalReport, parseExportRange } from "@/lib/domain/clinical-report";
 import { getFoodById } from "@/lib/data/foods";
 import {
+  formatRecipientLastSent,
+  formatRecipientListLabel,
+  normalizeProfessionalUserId,
   normalizeShareCode,
+  recipientResendPreview,
+  validateRecipientLabel,
   validateShareConfirmation,
 } from "@/lib/domain/professional-profile";
 import { listIntakeEntries } from "@/lib/supabase/intake";
-import { shareReportWithProfessional } from "@/lib/supabase/professional";
+import {
+  deleteSharesSentToProfessional,
+  listPatientShareRecipients,
+  shareReportWithProfessional,
+  updatePatientRecipientLabel,
+} from "@/lib/supabase/professional";
 
 function getTodayUtcDate(): string {
   const now = new Date();
@@ -16,6 +26,99 @@ function getTodayUtcDate(): string {
   )
     .toISOString()
     .slice(0, 10);
+}
+
+export async function GET() {
+  const access = await requireClinicalAccess();
+  if (!access.ok) {
+    return NextResponse.json(
+      { error: access.error },
+      { status: access.status },
+    );
+  }
+
+  const result = await listPatientShareRecipients();
+  if ("error" in result) {
+    return NextResponse.json({ error: result.error }, { status: 503 });
+  }
+
+  return NextResponse.json({
+    recipients: result.map((recipient) => ({
+      professional_user_id: recipient.professionalUserId,
+      share_code: recipient.shareCode,
+      label_id: recipient.label,
+      title: formatRecipientListLabel(recipient),
+      last_sent_label: formatRecipientLastSent(recipient.lastSentAt),
+      share_count: recipient.shareCount,
+      preview: recipientResendPreview(recipient),
+      can_resend: Boolean(recipient.shareCode),
+      has_copies: recipient.shareCount > 0,
+    })),
+  });
+}
+
+export async function DELETE(request: Request) {
+  const access = await requireClinicalAccess();
+  if (!access.ok) {
+    return NextResponse.json(
+      { error: access.error },
+      { status: access.status },
+    );
+  }
+
+  const body = await request.json();
+  const professionalUserId = normalizeProfessionalUserId(
+    body.professional_user_id,
+  );
+  if (!professionalUserId) {
+    return NextResponse.json(
+      { error: "No se pudo identificar a ese profesional." },
+      { status: 400 },
+    );
+  }
+
+  const deleted = await deleteSharesSentToProfessional(
+    access.user.id,
+    professionalUserId,
+  );
+  if (!deleted) {
+    return NextResponse.json(
+      { error: "No se pudieron borrar las copias enviadas." },
+      { status: 503 },
+    );
+  }
+
+  return NextResponse.json({ ok: true });
+}
+
+export async function PATCH(request: Request) {
+  const access = await requireClinicalAccess();
+  if (!access.ok) {
+    return NextResponse.json(
+      { error: access.error },
+      { status: access.status },
+    );
+  }
+
+  const body = await request.json();
+  const parsed = validateRecipientLabel(body);
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
+  }
+
+  const updated = await updatePatientRecipientLabel({
+    patientUserId: access.user.id,
+    professionalUserId: parsed.professionalUserId,
+    label: parsed.label,
+  });
+  if (!updated) {
+    return NextResponse.json(
+      { error: "No se pudo guardar cómo es esa persona para ti." },
+      { status: 400 },
+    );
+  }
+
+  return NextResponse.json({ ok: true });
 }
 
 export async function POST(request: Request) {

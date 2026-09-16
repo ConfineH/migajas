@@ -23,6 +23,16 @@ export const PROFESSIONAL_ROLES = [
 
 export type ProfessionalRoleId = (typeof PROFESSIONAL_ROLES)[number]["id"];
 
+export const PATIENT_RECIPIENT_LABELS = [
+  { id: "endocrinologia", label: "Endocrino/a" },
+  { id: "medicina_familia", label: "Médico/a de cabecera" },
+  { id: "educacion_diabetes", label: "Enfermería" },
+  { id: "nutricion", label: "Nutricionista" },
+  { id: "otro", label: "Otro" },
+] as const;
+
+export type PatientRecipientLabelId = (typeof PATIENT_RECIPIENT_LABELS)[number]["id"];
+
 export const SHARE_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 export const SHARE_CODE_LENGTH = 6;
 export const CONTACT_SUBJECT_MAX = 120;
@@ -41,6 +51,22 @@ export function isProfessionalRoleId(
 export function professionalRoleLabel(roleId: string | null): string | null {
   if (!roleId) return null;
   return PROFESSIONAL_ROLES.find((role) => role.id === roleId)?.label ?? null;
+}
+
+export function isPatientRecipientLabelId(
+  value: unknown,
+): value is PatientRecipientLabelId {
+  return (
+    typeof value === "string" &&
+    PATIENT_RECIPIENT_LABELS.some((item) => item.id === value)
+  );
+}
+
+export function patientRecipientLabel(labelId: string | null): string | null {
+  if (!labelId) return null;
+  return (
+    PATIENT_RECIPIENT_LABELS.find((item) => item.id === labelId)?.label ?? null
+  );
 }
 
 export interface ProfessionalSharePreview {
@@ -68,11 +94,14 @@ export function parseProfessionalSharePreview(
 export function formatShareRecipientPreview(
   preview: ProfessionalSharePreview,
 ): string {
-  const role = professionalRoleLabel(preview.role) ?? "salud";
+  const role =
+    patientRecipientLabel(preview.role) ??
+    professionalRoleLabel(preview.role) ??
+    "salud";
   if (preview.displayName) {
     return `Vas a enviar el informe a ${preview.displayName} (${role}).`;
   }
-  return `Vas a enviar el informe a un profesional de ${role.toLowerCase()} (código ${preview.code}).`;
+  return `Vas a enviar el informe a ${role} (código ${preview.code}).`;
 }
 
 export function validateShareConfirmation(input: {
@@ -85,6 +114,140 @@ export function validateShareConfirmation(input: {
     };
   }
   return { ok: true };
+}
+
+export function normalizeProfessionalUserId(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const id = value.trim().toLowerCase();
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)
+  ) {
+    return null;
+  }
+  return id;
+}
+
+export interface PatientShareRecipient {
+  professionalUserId: string;
+  shareCode: string | null;
+  role: ProfessionalRoleId;
+  label: PatientRecipientLabelId;
+  displayName: string | null;
+  lastSentAt: string | null;
+  shareCount: number;
+}
+
+export function parsePatientShareRecipient(
+  payload: unknown,
+): PatientShareRecipient | null {
+  if (!payload || typeof payload !== "object") return null;
+  const row = payload as {
+    professional_user_id?: unknown;
+    share_code?: unknown;
+    role?: unknown;
+    label?: unknown;
+    display_name?: unknown;
+    last_sent_at?: unknown;
+    share_count?: unknown;
+  };
+  const professionalUserId = normalizeProfessionalUserId(
+    row.professional_user_id,
+  );
+  const role = isProfessionalRoleId(row.role)
+    ? row.role
+    : isPatientRecipientLabelId(row.label)
+      ? row.label
+      : null;
+  if (!professionalUserId || !role) return null;
+  const label = isPatientRecipientLabelId(row.label) ? row.label : role;
+  const lastSentAt =
+    typeof row.last_sent_at === "string" && row.last_sent_at.trim()
+      ? row.last_sent_at
+      : null;
+  const rawCount =
+    typeof row.share_count === "number"
+      ? row.share_count
+      : typeof row.share_count === "string"
+        ? Number(row.share_count)
+        : 0;
+  const shareCount =
+    Number.isFinite(rawCount) && rawCount >= 0 ? Math.floor(rawCount) : 0;
+  const displayName =
+    typeof row.display_name === "string" && row.display_name.trim()
+      ? row.display_name.trim().slice(0, 80)
+      : null;
+  return {
+    professionalUserId,
+    shareCode: normalizeShareCode(row.share_code),
+    role,
+    label,
+    displayName,
+    lastSentAt,
+    shareCount,
+  };
+}
+
+export function parsePatientShareRecipients(
+  payload: unknown,
+): PatientShareRecipient[] {
+  if (!Array.isArray(payload)) return [];
+  return payload.flatMap((row) => {
+    const parsed = parsePatientShareRecipient(row);
+    return parsed ? [parsed] : [];
+  });
+}
+
+export function formatRecipientListLabel(
+  recipient: PatientShareRecipient,
+): string {
+  const label = patientRecipientLabel(recipient.label) ?? "profesional";
+  if (recipient.displayName) {
+    return recipient.displayName;
+  }
+  if (recipient.shareCode) {
+    return `${label} · ${recipient.shareCode}`;
+  }
+  return label;
+}
+
+export function formatRecipientLastSent(iso: string | null): string {
+  if (!iso) return "Sin copias ahora";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "Sin copias ahora";
+  return new Intl.DateTimeFormat("es-ES", { dateStyle: "medium" }).format(date);
+}
+
+export function recipientResendPreview(
+  recipient: PatientShareRecipient,
+): string | null {
+  if (!recipient.shareCode) return null;
+  return formatShareRecipientPreview({
+    role: recipient.label,
+    displayName: recipient.displayName,
+    code: recipient.shareCode,
+  });
+}
+
+export function validateRecipientLabel(input: {
+  professional_user_id?: unknown;
+  label?: unknown;
+}):
+  | {
+      ok: true;
+      professionalUserId: string;
+      label: PatientRecipientLabelId;
+    }
+  | { ok: false; error: string } {
+  const professionalUserId = normalizeProfessionalUserId(
+    input.professional_user_id,
+  );
+  if (!professionalUserId) {
+    return { ok: false, error: "No se pudo identificar a ese profesional." };
+  }
+  if (!isPatientRecipientLabelId(input.label)) {
+    return { ok: false, error: "Elige cómo es esa persona para ti." };
+  }
+  return { ok: true, professionalUserId, label: input.label };
 }
 
 export function generateProfessionalShareCode(

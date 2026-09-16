@@ -1,9 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/Button";
+import {
+  PATIENT_RECIPIENT_LABELS,
+  type PatientRecipientLabelId,
+} from "@/lib/domain/professional-profile";
 
 type ExportRange = "7d" | "30d" | "custom";
+
+interface ShareRecipient {
+  professional_user_id: string;
+  share_code: string | null;
+  label_id: PatientRecipientLabelId;
+  title: string;
+  last_sent_label: string;
+  share_count: number;
+  preview: string | null;
+  can_resend: boolean;
+  has_copies: boolean;
+}
 
 export function ClinicalExportPanel() {
   const [range, setRange] = useState<ExportRange>("7d");
@@ -15,6 +31,29 @@ export function ClinicalExportPanel() {
   const [confirmed, setConfirmed] = useState(false);
   const [shareBusy, setShareBusy] = useState(false);
   const [shareDone, setShareDone] = useState(false);
+  const [recipients, setRecipients] = useState<ShareRecipient[]>([]);
+  const [recipientsLoaded, setRecipientsLoaded] = useState(false);
+  const [revokeBusyId, setRevokeBusyId] = useState<string | null>(null);
+  const [labelBusyId, setLabelBusyId] = useState<string | null>(null);
+
+  const loadRecipients = useCallback(async () => {
+    const response = await fetch("/api/professional/shares");
+    const payload = (await response.json()) as {
+      error?: string;
+      recipients?: ShareRecipient[];
+    };
+    if (!response.ok) {
+      setRecipients([]);
+      setRecipientsLoaded(true);
+      return;
+    }
+    setRecipients(payload.recipients ?? []);
+    setRecipientsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    void loadRecipients();
+  }, [loadRecipients]);
 
   function resetSharePreview() {
     setPreview(null);
@@ -40,6 +79,15 @@ export function ClinicalExportPanel() {
     const url = buildExportUrl(format);
     if (!url) return;
     window.location.href = url;
+  }
+
+  function handleSelectRecipient(recipient: ShareRecipient) {
+    if (!recipient.share_code || !recipient.preview) return;
+    setError(null);
+    setShareCode(recipient.share_code);
+    setPreview(recipient.preview);
+    setConfirmed(false);
+    setShareDone(false);
   }
 
   async function handleLookup() {
@@ -85,6 +133,61 @@ export function ClinicalExportPanel() {
       return;
     }
     setShareDone(true);
+    await loadRecipients();
+  }
+
+  async function handleLabelChange(
+    recipient: ShareRecipient,
+    label: PatientRecipientLabelId,
+  ) {
+    if (label === recipient.label_id) return;
+    setError(null);
+    setLabelBusyId(recipient.professional_user_id);
+    const response = await fetch("/api/professional/shares", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        professional_user_id: recipient.professional_user_id,
+        label,
+      }),
+    });
+    const payload = (await response.json()) as { error?: string };
+    setLabelBusyId(null);
+    if (!response.ok) {
+      setError(payload.error ?? "No se pudo guardar esa etiqueta.");
+      return;
+    }
+    await loadRecipients();
+  }
+
+  async function handleRevoke(recipient: ShareRecipient) {
+    if (
+      !window.confirm(
+        `¿Retirar el acceso a ${recipient.title}? Se borrarán las copias que tenga. Seguirá en tu lista para poder enviarle otro informe.`,
+      )
+    ) {
+      return;
+    }
+    setError(null);
+    setRevokeBusyId(recipient.professional_user_id);
+    const response = await fetch("/api/professional/shares", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        professional_user_id: recipient.professional_user_id,
+      }),
+    });
+    const payload = (await response.json()) as { error?: string };
+    setRevokeBusyId(null);
+    if (!response.ok) {
+      setError(payload.error ?? "No se pudieron borrar las copias.");
+      return;
+    }
+    if (shareCode && shareCode === recipient.share_code) {
+      resetSharePreview();
+      setShareCode("");
+    }
+    await loadRecipients();
   }
 
   return (
@@ -98,6 +201,82 @@ export function ClinicalExportPanel() {
           Migajas no lo manda sola.
         </p>
       </div>
+
+      {recipientsLoaded && recipients.length > 0 ? (
+        <div className="space-y-2">
+          <h3 className="text-sm font-medium text-foreground">
+            Tu equipo en el diario
+          </h3>
+          <ul className="space-y-2">
+            {recipients.map((recipient) => (
+              <li
+                key={recipient.professional_user_id}
+                className="rounded-2xl bg-surface px-4 py-3"
+              >
+                <p className="text-sm font-medium text-foreground">
+                  {recipient.title}
+                </p>
+                <label className="mt-2 block space-y-1 text-sm">
+                  <span className="text-muted">Para ti es</span>
+                  <select
+                    value={recipient.label_id}
+                    disabled={labelBusyId === recipient.professional_user_id}
+                    onChange={(event) =>
+                      void handleLabelChange(
+                        recipient,
+                        event.target.value as PatientRecipientLabelId,
+                      )
+                    }
+                    className="field-input py-2"
+                  >
+                    {PATIENT_RECIPIENT_LABELS.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <p className="mt-2 text-xs text-muted">
+                  {recipient.has_copies
+                    ? `Último envío: ${recipient.last_sent_label}`
+                    : "Sin copias ahora"}
+                  {recipient.share_count > 1
+                    ? ` · ${recipient.share_count} informes`
+                    : ""}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-3">
+                  {recipient.can_resend ? (
+                    <button
+                      type="button"
+                      onClick={() => handleSelectRecipient(recipient)}
+                      className="text-sm font-medium text-sage-strong hover:underline"
+                    >
+                      Enviar otra vez
+                    </button>
+                  ) : null}
+                  {recipient.has_copies ? (
+                    <button
+                      type="button"
+                      onClick={() => void handleRevoke(recipient)}
+                      disabled={revokeBusyId === recipient.professional_user_id}
+                      className="text-sm font-medium text-red-600 hover:text-red-700 disabled:opacity-50"
+                    >
+                      {revokeBusyId === recipient.professional_user_id
+                        ? "Retirando…"
+                        : "Retirar acceso"}
+                    </button>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : recipientsLoaded ? (
+        <p className="text-sm text-muted">
+          Cuando envíes un informe, esa persona aparecerá aquí. Podrás marcar si
+          es tu endocrino, médico de cabecera, enfermería o nutricionista.
+        </p>
+      ) : null}
 
       <div className="grid gap-3 sm:grid-cols-3">
         {(

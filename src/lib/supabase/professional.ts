@@ -5,6 +5,11 @@ import {
   isServiceRoleConfigured,
 } from "@/lib/supabase/service";
 import type { ClinicalReport } from "@/lib/domain/clinical-report";
+import {
+  parsePatientShareRecipients,
+  type PatientRecipientLabelId,
+  type PatientShareRecipient,
+} from "@/lib/domain/professional-profile";
 
 export interface ProfessionalShareRow {
   id: string;
@@ -89,6 +94,54 @@ export async function deleteSharesSentByPatient(patientUserId: string): Promise<
     .delete()
     .eq("patient_user_id", patientUserId);
   return !error;
+}
+
+export async function listPatientShareRecipients(): Promise<
+  PatientShareRecipient[] | { error: string }
+> {
+  if (!isSupabaseConfigured()) {
+    return { error: "No se pudo cargar a quién has enviado informes." };
+  }
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("list_patient_share_recipients");
+  if (error) {
+    return { error: "No se pudo cargar a quién has enviado informes." };
+  }
+  return parsePatientShareRecipients(data);
+}
+
+export async function deleteSharesSentToProfessional(
+  patientUserId: string,
+  professionalUserId: string,
+): Promise<boolean> {
+  if (!isSupabaseConfigured()) return false;
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("professional_report_shares")
+    .delete()
+    .eq("patient_user_id", patientUserId)
+    .eq("professional_user_id", professionalUserId);
+  return !error;
+}
+
+export async function updatePatientRecipientLabel(input: {
+  patientUserId: string;
+  professionalUserId: string;
+  label: PatientRecipientLabelId;
+}): Promise<boolean> {
+  if (!isSupabaseConfigured()) return false;
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("patient_professional_contacts")
+    .update({
+      label: input.label,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("patient_user_id", input.patientUserId)
+    .eq("professional_user_id", input.professionalUserId)
+    .select("professional_user_id")
+    .maybeSingle();
+  return !error && Boolean(data);
 }
 
 export async function shareReportWithProfessional(input: {

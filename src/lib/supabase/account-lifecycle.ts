@@ -20,11 +20,12 @@ export async function exportAuthenticatedUserData(
       intake_entries: [],
       learning_events: [],
       consents: [],
+      professional_recipients: [],
     };
   }
 
   const supabase = await createClient();
-  const [profile, learningState, intake, events, consents] = await Promise.all([
+  const [profile, learningState, intake, events, consents, recipients] = await Promise.all([
     supabase
       .from("user_profiles")
       .select(
@@ -48,6 +49,10 @@ export async function exportAuthenticatedUserData(
       .select("id, event_type, payload, created_at")
       .eq("user_id", userId),
     listUserConsents(userId),
+    supabase
+      .from("patient_professional_contacts")
+      .select("professional_user_id, label, created_at, updated_at")
+      .eq("patient_user_id", userId),
   ]);
 
   return {
@@ -57,6 +62,7 @@ export async function exportAuthenticatedUserData(
     intake_entries: intake.data ?? [],
     learning_events: events.data ?? [],
     consents,
+    professional_recipients: recipients.data ?? [],
   };
 }
 
@@ -70,6 +76,8 @@ export async function deleteAuthenticatedUserData(userId: string): Promise<boole
     service.from("professional_report_shares").delete().eq("patient_user_id", userId),
     service.from("professional_report_shares").delete().eq("professional_user_id", userId),
     service.from("professional_contact_messages").delete().eq("professional_user_id", userId),
+    service.from("patient_professional_contacts").delete().eq("patient_user_id", userId),
+    service.from("patient_professional_contacts").delete().eq("professional_user_id", userId),
   ]);
   if (shareDeletes.some((result) => result.error)) return false;
 

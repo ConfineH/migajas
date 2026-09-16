@@ -4,10 +4,16 @@ import {
   isProfessionalRoleId,
   normalizeShareCode,
   professionalRoleLabel,
+  patientRecipientLabel,
   formatShareRecipientPreview,
+  formatRecipientListLabel,
+  normalizeProfessionalUserId,
+  parsePatientShareRecipients,
   parseProfessionalSharePreview,
+  recipientResendPreview,
   validateProfessionalActivation,
   validateProfessionalContact,
+  validateRecipientLabel,
   validateShareConfirmation,
 } from "@/lib/domain/professional-profile";
 
@@ -57,13 +63,50 @@ describe("professional-profile", () => {
       "AB12CD",
     );
     expect(formatShareRecipientPreview(named!)).toBe(
-      "Vas a enviar el informe a Ana Pérez (Nutrición clínica).",
+      "Vas a enviar el informe a Ana Pérez (Nutricionista).",
     );
     const anonymous = parseProfessionalSharePreview(
       { role: "endocrinologia", display_name: null },
       "XY34ZT",
     );
-    expect(formatShareRecipientPreview(anonymous!)).toContain("endocrinología");
+    expect(formatShareRecipientPreview(anonymous!)).toContain("Endocrino/a");
     expect(formatShareRecipientPreview(anonymous!)).toContain("XY34ZT");
+  });
+
+  it("lists people who currently hold copies", () => {
+    expect(normalizeProfessionalUserId("not-a-uuid")).toBeNull();
+    const professionalUserId = "11111111-1111-4111-8111-111111111111";
+    const recipients = parsePatientShareRecipients([
+      {
+        professional_user_id: professionalUserId,
+        share_code: "AB23CD",
+        role: "nutricion",
+        label: "nutricion",
+        display_name: "Ana Pérez",
+        last_sent_at: "2026-09-16T12:00:00.000Z",
+        share_count: 2,
+      },
+      { professional_user_id: "bad" },
+    ]);
+    expect(recipients).toHaveLength(1);
+    expect(formatRecipientListLabel(recipients[0])).toBe("Ana Pérez");
+    expect(patientRecipientLabel(recipients[0].label)).toBe("Nutricionista");
+    expect(recipientResendPreview(recipients[0])).toContain("Ana Pérez");
+    expect(
+      validateRecipientLabel({
+        professional_user_id: professionalUserId,
+        label: "medicina_familia",
+      }),
+    ).toEqual({
+      ok: true,
+      professionalUserId,
+      label: "medicina_familia",
+    });
+    expect(
+      validateRecipientLabel({
+        professional_user_id: professionalUserId,
+        label: "cardiologo",
+      }).ok,
+    ).toBe(false);
   });
 });
