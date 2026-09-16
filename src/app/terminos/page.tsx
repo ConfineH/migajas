@@ -14,8 +14,8 @@ export default function TermsPage() {
         <AppPageLayout className="prose prose-stone py-10">
           <h1 className="font-display">Términos y condiciones</h1>
           <p className="text-sm text-muted">
-            Versión {LEGAL_VERSIONS.terms_of_service}. Última actualización: 23
-            de julio de 2026.
+            Versión {LEGAL_VERSIONS.terms_of_service}. Última actualización: 16
+            de septiembre de 2026.
           </p>
 
           <h2>1. Objeto</h2>
@@ -27,7 +27,7 @@ export default function TermsPage() {
 
           <h2>2. Uso aceptable</h2>
           <ul>
-            <li>Usar la app con fines personales de aprendizaje.</li>
+            <li>Usar la app para aprender a contar carbohidratos, como paciente o como profesional que indica el curso.</li>
             <li>No intentar eludir controles de progreso ni acceder a datos ajenos.</li>
             <li>
               No usar Migajas para diagnóstico, ajuste de medicación ni
@@ -38,8 +38,10 @@ export default function TermsPage() {
           <h2>3. Seguimiento personal</h2>
           <p>
             El diario y los reportes son opcionales y requieren consentimiento
-            explícito para datos de salud. Puedes retirar ese consentimiento en
-            cualquier momento desde Configuración.
+            explícito para datos de salud. Un profesional no abre tu diario: solo
+            ve el informe si tú se lo envías. Puedes retirar ese consentimiento
+            en cualquier momento desde Configuración; entonces borramos las
+            copias enviadas.
           </p>
 
           <h2>4. Limitación de responsabilidad</h2>
@@ -51,14 +53,14 @@ export default function TermsPage() {
           <h2>5. Incidencias y contacto</h2>
           <p>
             Para reportar abusos, errores o solicitudes relacionadas con tus
-            datos, contacta al responsable del tratamiento indicado en tu
-            despliegue o licencia. Si operas Migajas en tu organización,
-            sustituye este apartado por el canal acordado en el contrato.
+            datos, usa Configuración o reclama ante la AEPD. Si operas Migajas
+            en tu organización, sustituye este apartado por el canal del
+            contrato.
           </p>
 
           <p className="text-sm text-muted">
-            Plantilla operativa — revisión legal obligatoria antes de uso
-            comercial en la UE.
+            Condiciones de uso de esta instancia pública. La identidad mercantil
+            completa se publicará con la primera licencia.
           </p>
 
           <p>

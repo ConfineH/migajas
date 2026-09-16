@@ -4,8 +4,11 @@ import {
   isProfessionalRoleId,
   normalizeShareCode,
   professionalRoleLabel,
+  formatShareRecipientPreview,
+  parseProfessionalSharePreview,
   validateProfessionalActivation,
   validateProfessionalContact,
+  validateShareConfirmation,
 } from "@/lib/domain/professional-profile";
 
 describe("professional-profile", () => {
@@ -44,5 +47,23 @@ describe("professional-profile", () => {
       body: "Quisiera revisar si el moro está bien estimado en el nivel 4.",
     });
     expect(ok.ok).toBe(true);
+  });
+
+  it("describes the share recipient before sending", () => {
+    expect(validateShareConfirmation({}).ok).toBe(false);
+    expect(validateShareConfirmation({ confirm: true })).toEqual({ ok: true });
+    const named = parseProfessionalSharePreview(
+      { role: "nutricion", display_name: "Ana Pérez" },
+      "AB12CD",
+    );
+    expect(formatShareRecipientPreview(named!)).toBe(
+      "Vas a enviar el informe a Ana Pérez (Nutrición clínica).",
+    );
+    const anonymous = parseProfessionalSharePreview(
+      { role: "endocrinologia", display_name: null },
+      "XY34ZT",
+    );
+    expect(formatShareRecipientPreview(anonymous!)).toContain("endocrinología");
+    expect(formatShareRecipientPreview(anonymous!)).toContain("XY34ZT");
   });
 });

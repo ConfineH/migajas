@@ -60,6 +60,37 @@ export async function getShareForProfessional(
   return data as ProfessionalShareRow;
 }
 
+export async function lookupProfessionalByShareCode(
+  shareCode: string,
+): Promise<{ role: string; display_name: string | null } | { error: string }> {
+  if (!isSupabaseConfigured()) {
+    return { error: "No se pudo comprobar el código." };
+  }
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc(
+    "lookup_professional_by_share_code",
+    { share_code: shareCode },
+  );
+
+  if (error) {
+    return { error: "No se pudo comprobar el código." };
+  }
+  if (!data) {
+    return { error: "Ese código no corresponde a un profesional." };
+  }
+  return data as { role: string; display_name: string | null };
+}
+
+export async function deleteSharesSentByPatient(patientUserId: string): Promise<boolean> {
+  if (!isSupabaseConfigured()) return false;
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("professional_report_shares")
+    .delete()
+    .eq("patient_user_id", patientUserId);
+  return !error;
+}
+
 export async function shareReportWithProfessional(input: {
   shareCode: string;
   rangeFrom: string;

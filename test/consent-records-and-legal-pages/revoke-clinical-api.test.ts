@@ -4,6 +4,7 @@ const mockGetUser = vi.fn();
 const mockRevokeHealthDataConsent = vi.fn();
 const mockGetUserProfile = vi.fn();
 const mockPatchUserProfile = vi.fn();
+const mockDeleteSharesSentByPatient = vi.fn();
 
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
@@ -21,6 +22,11 @@ vi.mock("@/lib/supabase/consent-records", () => ({
 vi.mock("@/lib/supabase/user-profile", () => ({
   getUserProfile: (...args: unknown[]) => mockGetUserProfile(...args),
   patchUserProfile: (...args: unknown[]) => mockPatchUserProfile(...args),
+}));
+
+vi.mock("@/lib/supabase/professional", () => ({
+  deleteSharesSentByPatient: (...args: unknown[]) =>
+    mockDeleteSharesSentByPatient(...args),
 }));
 
 import { POST as revokePost } from "@/app/api/consent/revoke-health-data/route";
@@ -50,6 +56,7 @@ describe("revoke health data consent API", () => {
       clinical_mode_enabled: true,
     });
     mockRevokeHealthDataConsent.mockResolvedValue(true);
+    mockDeleteSharesSentByPatient.mockResolvedValue(true);
     mockPatchUserProfile.mockResolvedValue({
       user_id: "user-1",
       region_id: "es",
@@ -60,6 +67,7 @@ describe("revoke health data consent API", () => {
     const response = await revokePost();
 
     expect(response.status).toBe(200);
+    expect(mockDeleteSharesSentByPatient).toHaveBeenCalledWith("user-1");
     expect(mockRevokeHealthDataConsent).toHaveBeenCalledWith("user-1");
     expect(mockPatchUserProfile).toHaveBeenCalledWith(
       "user-1",

@@ -141,7 +141,7 @@ export function OnboardingFlow({
   async function revokeClinicalConsent() {
     if (
       !window.confirm(
-        "¿Retirar el consentimiento para datos de salud? Se desactivará el seguimiento personal y no podrás usar el diario hasta que vuelvas a consentir.",
+        "¿Retirar el consentimiento para datos de salud? Se desactivará el seguimiento personal, se borrarán los informes que hayas enviado a un profesional y no podrás usar el diario hasta que vuelvas a consentir.",
       )
     ) {
       return;

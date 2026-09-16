@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { requireClinicalAccess } from "@/lib/clinical-access";
 import { buildClinicalReport, parseExportRange } from "@/lib/domain/clinical-report";
 import { getFoodById } from "@/lib/data/foods";
-import { normalizeShareCode } from "@/lib/domain/professional-profile";
+import {
+  normalizeShareCode,
+  validateShareConfirmation,
+} from "@/lib/domain/professional-profile";
 import { listIntakeEntries } from "@/lib/supabase/intake";
 import { shareReportWithProfessional } from "@/lib/supabase/professional";
 
@@ -31,6 +34,11 @@ export async function POST(request: Request) {
       { error: "El código del profesional no es válido." },
       { status: 400 },
     );
+  }
+
+  const confirmation = validateShareConfirmation({ confirm: body.confirm });
+  if (!confirmation.ok) {
+    return NextResponse.json({ error: confirmation.error }, { status: 400 });
   }
 
   const parsedRange = parseExportRange(

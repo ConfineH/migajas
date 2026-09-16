@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { revokeHealthDataConsent } from "@/lib/supabase/consent-records";
+import { deleteSharesSentByPatient } from "@/lib/supabase/professional";
 import { createClient } from "@/lib/supabase/server";
 import { getUserProfile, patchUserProfile } from "@/lib/supabase/user-profile";
 
@@ -18,6 +19,14 @@ export async function POST() {
     return NextResponse.json(
       { error: "No se pudo cargar el perfil" },
       { status: 500 },
+    );
+  }
+
+  const sharesDeleted = await deleteSharesSentByPatient(user.id);
+  if (!sharesDeleted) {
+    return NextResponse.json(
+      { error: "No se pudieron borrar los informes enviados." },
+      { status: 503 },
     );
   }
 

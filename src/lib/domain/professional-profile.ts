@@ -43,6 +43,50 @@ export function professionalRoleLabel(roleId: string | null): string | null {
   return PROFESSIONAL_ROLES.find((role) => role.id === roleId)?.label ?? null;
 }
 
+export interface ProfessionalSharePreview {
+  role: string;
+  displayName: string | null;
+  code: string;
+}
+
+export function parseProfessionalSharePreview(
+  payload: unknown,
+  code: string,
+): ProfessionalSharePreview | null {
+  if (!payload || typeof payload !== "object") return null;
+  const row = payload as { role?: unknown; display_name?: unknown };
+  if (typeof row.role !== "string" || !isProfessionalRoleId(row.role)) {
+    return null;
+  }
+  const displayName =
+    typeof row.display_name === "string" && row.display_name.trim()
+      ? row.display_name.trim().slice(0, 80)
+      : null;
+  return { role: row.role, displayName, code };
+}
+
+export function formatShareRecipientPreview(
+  preview: ProfessionalSharePreview,
+): string {
+  const role = professionalRoleLabel(preview.role) ?? "salud";
+  if (preview.displayName) {
+    return `Vas a enviar el informe a ${preview.displayName} (${role}).`;
+  }
+  return `Vas a enviar el informe a un profesional de ${role.toLowerCase()} (código ${preview.code}).`;
+}
+
+export function validateShareConfirmation(input: {
+  confirm?: unknown;
+}): { ok: true } | { ok: false; error: string } {
+  if (input.confirm !== true) {
+    return {
+      ok: false,
+      error: "Confirma el destinatario antes de enviar el informe.",
+    };
+  }
+  return { ok: true };
+}
+
 export function generateProfessionalShareCode(
   pick: (maxExclusive: number) => number = (maxExclusive) =>
     Math.floor(Math.random() * maxExclusive),
