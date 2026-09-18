@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { RegionFlag } from "@/components/brand/RegionFlag";
 import { useState } from "react";
 import { FoodSearchGrid } from "@/components/FoodSearchGrid";
 import { SourcesPanel } from "@/components/content-sources/SourcesPanel";
@@ -22,7 +22,6 @@ interface ReferenceGuideClientProps {
   foods: EnrichedFoodItem[];
   freeMode: boolean;
   regionName: string;
-  regionFlag: string;
   regionId?: string;
   exchangeUnitG: number;
   tips: string[];
@@ -34,7 +33,6 @@ export function ReferenceGuideClient({
   foods,
   freeMode,
   regionName,
-  regionFlag,
   regionId = "es",
   exchangeUnitG,
   tips,
@@ -94,8 +92,9 @@ export function ReferenceGuideClient({
       {tab === "reglas" ? (
         <section className="space-y-4">
           <div className="callout-sage">
-            <h2 className="font-display text-xl font-medium text-foreground">
-              {regionFlag} {regionName}
+            <h2 className="flex items-center gap-3 font-display text-xl font-medium text-foreground">
+              <RegionFlag regionId={regionId} className="h-6 w-9" />
+              {regionName}
             </h2>
             <p className="mt-2 text-foreground">
               <strong>{exchangeRuleLabel}</strong>

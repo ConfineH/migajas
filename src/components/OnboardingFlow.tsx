@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
 import { MigajasLogo } from "@/components/brand/MigajasLogo";
+import { RegionFlag } from "@/components/brand/RegionFlag";
 import { CoursePathPreview } from "@/components/onboarding/CoursePathPreview";
 import Stepper, { Step } from "@/components/react-bits/Stepper";
 import {
@@ -226,7 +227,11 @@ export function OnboardingFlow({
                 Cada región usa su propia regla de raciones y alimentos habituales.
               </p>
             </div>
-            <div className="space-y-3">
+            <div
+              className="space-y-3"
+              role="radiogroup"
+              aria-label="Región de referencia"
+            >
               {REGIONS.map((item) => (
                 <RegionOption
                   key={item.id}
@@ -444,14 +449,22 @@ function RegionOption({
   return (
     <button
       type="button"
+      role="radio"
+      aria-checked={selected}
       onClick={onSelect}
-      className={`surface-card-interactive w-full p-5 text-left ${
+      className={`surface-card-interactive flex w-full items-center gap-4 p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-strong focus-visible:ring-offset-2 ${
         selected ? "surface-card-selected" : ""
       }`}
     >
-      <p className="text-3xl">{region.flag}</p>
-      <p className="mt-2 text-lg font-semibold text-sage-strong">{region.name}</p>
-      <p className="mt-1 text-sm text-muted">{formatExchangeRule(region)}</p>
+      <RegionFlag regionId={region.id} />
+      <span className="min-w-0">
+        <span className="block font-display text-xl font-medium text-foreground">
+          {region.name}
+        </span>
+        <span className="mt-0.5 block text-sm text-muted">
+          {formatExchangeRule(region)}
+        </span>
+      </span>
     </button>
   );
 }

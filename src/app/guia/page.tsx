@@ -49,7 +49,6 @@ export default async function ReferenceGuidePage({ searchParams }: Props) {
             foods={foods}
             freeMode={freeMode}
             regionName={region.name}
-            regionFlag={region.flag}
             regionId={region.id}
             exchangeUnitG={region.exchangeUnitG}
             tips={buildReferenceTips(region.exchangeUnitG, region.name, region.id)}
