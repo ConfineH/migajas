@@ -48,21 +48,21 @@ describe("level-flashcards", () => {
       10,
     );
     expect(portion.front).toContain("Arroz");
-    expect(portion.back).toContain("1/3 taza");
+    expect(portion.back).toContain("38 g");
 
     const carbs = getFlashcardFace(
       { foodId: "arroz-cocido", mode: "carbs" },
       enriched,
       10,
     );
-    expect(carbs.back).toContain("15 g");
+    expect(carbs.back).toContain("10 g");
 
     const rations = getFlashcardFace(
       { foodId: "arroz-cocido", mode: "rations" },
       enriched,
       10,
     );
-    expect(rations.back).toContain("1,5");
+    expect(rations.back).toContain("1");
   });
 
   it("uses plain language for Dominican fichas", () => {

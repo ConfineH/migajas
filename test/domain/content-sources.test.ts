@@ -23,12 +23,23 @@ describe("content-sources", () => {
     );
   });
 
-  it("includes BEDCA, FEN, ADA, and Migajas methodology", () => {
+  it("includes BEDCA, FEN, ADA, Murillo, and Migajas methodology", () => {
     const ids = getSourcesForRegion("es").map((s) => s.id);
     expect(ids).toContain("bedca");
     expect(ids).toContain("fen");
     expect(ids).toContain("ada");
+    expect(ids).toContain("murillo-raciones");
     expect(ids).toContain("migajas-exchange-unit");
+  });
+
+  it("includes INCAP, USDA, ADA 15 g and MSP for República Dominicana", () => {
+    const ids = getSourcesForRegion("do").map((s) => s.id);
+    expect(ids).toContain("incap-tca");
+    expect(ids).toContain("usda-fdc");
+    expect(ids).toContain("ada-carb-choice");
+    expect(ids).toContain("msp-pilon");
+    expect(ids).toContain("migajas-exchange-unit-do");
+    expect(ids).not.toContain("bedca");
   });
 
   it("groups sources by scope labels", () => {

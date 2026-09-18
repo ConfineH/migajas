@@ -1,8 +1,8 @@
 /**
  * Closed provenance codes for catalog governance (auditor / hospital facing).
- * B = BEDCA · F = FEN · E = etiquetado · R = receta estándar · P = estimación pedagógica
+ * B = BEDCA · F = FEN · E = etiquetado · R = receta estándar · P = estimación pedagógica · I = INCAP/USDA
  */
-export type ProvenanceCode = "B" | "F" | "E" | "R" | "P";
+export type ProvenanceCode = "B" | "F" | "E" | "R" | "P" | "I";
 
 export const PROVENANCE_CODES: Record<
   ProvenanceCode,
@@ -31,7 +31,12 @@ export const PROVENANCE_CODES: Record<
   P: {
     label: "Estimación pedagógica validada",
     description:
-      "Estimación educativa documentada cuando no hay valor oficial único (o tablas multi-fuente RD).",
+      "Estimación educativa documentada cuando no hay valor oficial único.",
+  },
+  I: {
+    label: "INCAP / USDA",
+    description:
+      "Tabla de Composición de Alimentos de Centroamérica (INCAP, cubre RD) o USDA FoodData Central, con raciones a 15 g.",
   },
 };
 
@@ -70,6 +75,9 @@ export function provenanceFromDataSource(
       return "P";
     case "pedagogical_estimate":
       return "P";
+    case "usda_fdc":
+    case "incap_tca":
+      return "I";
     default:
       return "P";
   }
@@ -87,7 +95,7 @@ export interface CatalogGovernance {
 }
 
 export const CATALOG_GOVERNANCE: CatalogGovernance = {
-  version: "2026.08-v4",
+  version: "2026.09-v5",
   exchangeRuleEs: "10 g HC = 1 ración",
   exchangeRuleRd: "15 g HC = 1 ración",
   reviewStatus: "pending_external",

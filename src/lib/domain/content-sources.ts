@@ -47,11 +47,11 @@ const CONTENT_SOURCES: ContentSource[] = [
     id: "ada",
     title: "American Diabetes Association (ADA)",
     publisher: "ADA",
-    url: "https://diabetes.org/",
+    url: "https://diabetes.org/es/alimentos-nutricion/entender-los-carbohidratos/conteo-de-carbohidratos-y-diabetes",
     scope: "clinical-guideline",
     summary:
-      "Orientación sobre carbohidratos, plato equilibrado y elección de alimentos en diabetes.",
-    regionIds: ["es"],
+      "Conteo de carbohidratos y «elecciones» de ~15 g. Referencia clínica para RD y contraste con la ración española de 10 g.",
+    regionIds: ["es", "do"],
   },
   {
     id: "migajas-exchange-unit",
@@ -60,8 +60,18 @@ const CONTENT_SOURCES: ContentSource[] = [
     url: "/guia",
     scope: "methodology",
     summary:
-      "Regla de conversión usada en el curso guiado y en la calculadora de la guía.",
+      "Regla de conversión usada en el curso guiado y en la calculadora de la guía en España.",
     regionIds: ["es"],
+  },
+  {
+    id: "migajas-exchange-unit-do",
+    title: "Ración de carbohidratos en República Dominicana (15 g = 1 ración)",
+    publisher: "Migajas",
+    url: "/guia",
+    scope: "methodology",
+    summary:
+      "En RD una ración son 15 g de carbohidratos (ADA/CDC / uso habitual en Latinoamérica). No se usa la ración española de 10 g.",
+    regionIds: ["do"],
   },
   {
     id: "migajas-fiber-policy",
@@ -71,7 +81,7 @@ const CONTENT_SOURCES: ContentSource[] = [
     scope: "methodology",
     summary:
       "El curso enseña HC netos cuando la etiqueta lo permite, pero Migajas cuenta HC totales por defecto.",
-    regionIds: ["es"],
+    regionIds: ["es", "do"],
   },
   {
     id: "migajas-modulators",
@@ -81,7 +91,7 @@ const CONTENT_SOURCES: ContentSource[] = [
     scope: "methodology",
     summary:
       "Proteínas y grasas puras no aportan raciones de HC; pueden modificar la respuesta glucémica en comidas mixtas.",
-    regionIds: ["es"],
+    regionIds: ["es", "do"],
   },
   {
     id: "migajas-veg-policy",
@@ -90,8 +100,68 @@ const CONTENT_SOURCES: ContentSource[] = [
     url: "/guia",
     scope: "methodology",
     summary:
-      "No usamos «verduras libres» como cantidad infinita. Algunas verduras en guarnición habitual no se contabilizan; otras (p. ej. brócoli o judías en 1 taza) sí según la ficha del catálogo.",
+      "No usamos «verduras libres» como cantidad infinita. Algunas verduras en guarnición habitual no se contabilizan; otras sí según la ficha del catálogo.",
+    regionIds: ["es", "do"],
+  },
+  {
+    id: "murillo-raciones",
+    title: "Tabla de raciones de hidratos de carbono (Serafín Murillo)",
+    publisher: "Fundación para la Salud Novo Nordisk / CIBERDEM",
+    url: "https://www.fundacionparalasalud.org/diamundial/tabla_de_raciones_de_hidratos_de_carbono",
+    scope: "nutrition-data",
+    summary:
+      "3ª edición. 10 g HC = 1 ración. Fuentes: BEDCA, CESNID, Hospital Sant Joan de Déu. Referencia de porciones del catálogo ES.",
     regionIds: ["es"],
+  },
+  {
+    id: "sjd-raciones",
+    title: "Raciones de hidratos de carbono (Hospital Sant Joan de Déu)",
+    publisher: "Hospital Sant Joan de Déu Barcelona",
+    url: "https://diabetes.sjdhospitalbarcelona.org/es/diabetes-tipo-1/raciones-hidratos-carbono",
+    scope: "clinical-guideline",
+    summary:
+      "Documenta los dos sistemas: 1 ración = 10 g (España y gran parte de Europa) y 1 ración = 15 g (México y gran parte de Latinoamérica).",
+    regionIds: ["es", "do"],
+  },
+  {
+    id: "incap-tca",
+    title: "Tabla de Composición de Alimentos de Centroamérica (TCA-INCAP)",
+    publisher: "INCAP / OPS",
+    url: "https://www.fao.org/food-composition/tables-and-databases/detail/(multiple-countries--2018)-tabla-de-composici%C3%B3n-de-alimentos-de-centro-am%C3%A9rica/en",
+    scope: "nutrition-data",
+    summary:
+      "3ª edición 2018. INCAP es el centro de OPS/OMS en alimentación para Centroamérica y República Dominicana. Referencia de composición para el catálogo RD.",
+    regionIds: ["do"],
+  },
+  {
+    id: "usda-fdc",
+    title: "USDA FoodData Central",
+    publisher: "USDA",
+    url: "https://fdc.nal.usda.gov/",
+    scope: "nutrition-data",
+    summary:
+      "Composición analítica por 100 g (arroz cocido, yuca, plátano, habichuelas, frutas). Usada cuando la ficha INCAP no está publicada en abierto.",
+    regionIds: ["do"],
+  },
+  {
+    id: "ada-carb-choice",
+    title: "Elección de carbohidratos ADA / CDC (15 g)",
+    publisher: "ADA / CDC",
+    url: "https://www.cdc.gov/diabetes/es/healthy-eating/contar-carbohidratos.html",
+    scope: "clinical-guideline",
+    summary:
+      "1 ración de carbohidratos ≈ 15 g. Leche: ~12 g por taza. 1/3 taza de arroz, yuca o plátano cocidos ≈ 1 elección.",
+    regionIds: ["do"],
+  },
+  {
+    id: "msp-pilon",
+    title: "Pilón de la alimentación y nutrición",
+    publisher: "Ministerio de Salud Pública de la República Dominicana",
+    url: "https://repositorio.msp.gob.do/bitstream/handle/123456789/270/9789945436457.pdf",
+    scope: "clinical-guideline",
+    summary:
+      "Guía alimentaria oficial dominicana. Usa recomendaciones del INCAP (OPS) y FAO; no define por sí sola la ración de 15 g, pero ancla las tablas de composición al país.",
+    regionIds: ["do"],
   },
   {
     id: "sed-education",
@@ -157,7 +227,10 @@ export function inferFoodSourceId(food: {
 }): string | null {
   if (food.sourceId) return food.sourceId;
   const notes = food.notes?.toUpperCase() ?? "";
-  if (notes.includes("BEDCA")) return "bedca";
+  if (notes.includes("BEDCA") || notes.includes("MURILLO")) return "bedca";
+  if (notes.includes("INCAP")) return "incap-tca";
+  if (notes.includes("USDA")) return "usda-fdc";
+  if (notes.includes("ADA") || notes.includes("CDC")) return "ada-carb-choice";
   return null;
 }
 

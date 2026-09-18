@@ -18,6 +18,8 @@ const VALID = new Set([
   "label_or_typical",
   "multi_source",
   "pedagogical_estimate",
+  "usda_fdc",
+  "incap_tca",
 ]);
 
 function normalizeFoodName(name) {

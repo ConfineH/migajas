@@ -9,13 +9,15 @@ import { provenanceFromDataSource } from "./catalog-provenance";
 export type Difficulty = "Baja" | "Media" | "Alta";
 export type ItemType = "base" | "mixed" | "modulator";
 
-/** @deprecated Prefer provenanceCode (B/F/E/R/P). Kept for legacy seeds. */
+/** @deprecated Prefer provenanceCode (B/F/E/R/P/I). Kept for legacy seeds. */
 export type FoodDataSource =
   | "bedca_aligned"
   | "bedca_standard_recipe"
   | "label_or_typical"
   | "multi_source"
-  | "pedagogical_estimate";
+  | "pedagogical_estimate"
+  | "usda_fdc"
+  | "incap_tca";
 
 /**
  * How Migajas teaches counting for this item.
@@ -29,6 +31,8 @@ export const FOOD_DATA_SOURCE_LABELS: Record<FoodDataSource, string> = {
   label_or_typical: "Etiquetado fabricante",
   multi_source: "Media de varias fuentes",
   pedagogical_estimate: "Estimación pedagógica",
+  usda_fdc: "USDA FoodData Central",
+  incap_tca: "INCAP (TCA Centroamérica)",
 };
 
 export interface FoodItem {
@@ -46,7 +50,7 @@ export interface FoodItem {
   /** Grams of fiber for the listed portion (informative only). */
   fiberG?: number;
   dataSource?: FoodDataSource;
-  /** Closed provenance: B BEDCA · F FEN · E etiquetado · R receta · P pedagógica */
+  /** Closed provenance: B BEDCA · F FEN · E etiquetado · R receta · P pedagógica · I INCAP/USDA */
   provenanceCode?: ProvenanceCode;
   /** How listed grams relate to the food (edible / cooked / beverage…). */
   portionBasis?: PortionBasis;

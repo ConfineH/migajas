@@ -9,7 +9,7 @@
 
 ## Objetivo
 
-Valorar si el catálogo ES y las estimaciones pedagógicas son **adecuadas para educación diabetológica** en un piloto (AP / escuela de pacientes).
+Valorar si los catálogos **ES y RD** y las estimaciones pedagógicas son **adecuadas para educación diabetológica** en un piloto (AP / escuela de pacientes).
 
 **No se pide** demostrar que cada plato compuesto tiene un valor oficial BEDCA.
 
@@ -28,6 +28,8 @@ Valorar si el catálogo ES y las estimaciones pedagógicas son **adecuadas para 
 | Área | Pregunta |
 |------|----------|
 | Regla ES | ¿10 g HC = 1 ración es aceptable para el protocolo local? |
+| Regla RD | ¿15 g HC = 1 ración (ADA/CDC) es aceptable en consulta dominicana? |
+| Habichuelas RD | ¿Contar HC totales (~23 g/100 g = 1,5 raciones) frente al intercambio ADA de 15 g es el criterio correcto? |
 | HC totales | ¿Contar HC totales (sin restar fibra por defecto) es aceptable? |
 | Verduras | ¿La política «habitualmente no contabilizadas» vs ficha es clara? |
 | Platos compuestos | ¿Las estimaciones (paella, tortilla, gazpacho…) son razonables como educativas? |
@@ -49,7 +51,7 @@ Marcar una opción y, si aplica, listar ítems:
 | Revisado por | |
 | Acreditación / centro | |
 | Fecha | |
-| Versión catálogo | `2026.08-v4` |
+| Versión catálogo | `2026.09-v5` |
 
 ---
 

@@ -22,8 +22,8 @@
         "id": "l1-lesson-1-s3",
         "type": "example",
         "title": "Ejemplo rápido",
-        "body": "1 rebanada pequeña de pan = ~10 g HC = 1 ración. 1 manzana mediana = ~15 g HC = 1,5 raciones.",
-        "foodId": "pan-molde"
+        "body": "1 rebanada pequeña de pan blanco (20 g) = 10 g HC = 1 ración. 1 manzana mediana (150 g) = 15 g HC = 1,5 raciones.",
+        "foodId": "pan-blanco"
       },
       {
         "id": "l1-lesson-1-s4",
@@ -181,14 +181,14 @@
         "id": "l1-lesson-5-s1",
         "type": "example",
         "title": "Pan y cereales",
-        "body": "1 rebanada de pan de molde = ~10 g HC (1 ración). 1 rebanada de pan de barra = ~15 g HC (1,5 raciones). El integral tiene más fibra.",
+        "body": "1 rebanada de pan de molde (25 g) = ~12 g HC (1,2 raciones). 1 trozo de barra (30 g) = ~15 g HC (1,5 raciones). El integral tiene más fibra.",
         "foodId": "pan-molde"
       },
       {
         "id": "l1-lesson-5-s2",
         "type": "example",
         "title": "Fruta",
-        "body": "1 manzana mediana = ~15 g HC (1,5 raciones). 1 plátano pequeño = ~20 g HC (2 raciones). El zumo cuenta igual que la fruta entera.",
+        "body": "1 manzana mediana (150 g comestible) = ~15 g HC (1,5 raciones). 1 plátano pequeño (75 g) = ~15 g HC (1,5 raciones). El zumo cuenta igual que la fruta entera.",
         "foodId": "manzana"
       },
       {

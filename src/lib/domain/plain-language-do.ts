@@ -56,5 +56,6 @@ export function buildPlainReferenceTipsDo(exchangeUnitG: number): string[] {
     `En República Dominicana: ${exchangeUnitG} gramos de carbohidratos = 1 ración.`,
     `Puedes contar medias raciones: ${half} g = media ración, ${oneAndHalf} g = 1 ración y media.`,
     "El pollo, el huevo y la carne no suman raciones porque casi no tienen carbohidratos.",
+    "Una taza de leche ronda 12 g de carbohidratos (no 15). Divide 12 entre 15: son 0,8 raciones.",
   ];
 }

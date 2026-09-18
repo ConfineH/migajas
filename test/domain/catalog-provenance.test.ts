@@ -8,11 +8,12 @@ import { resolveProvenanceCode, type FoodItem } from "@/lib/domain/foods";
 import foodsData from "@/lib/data/foods.json";
 
 describe("catalog provenance governance", () => {
-  it("exposes closed B/F/E/R/P codes", () => {
+  it("exposes closed B/F/E/R/P/I codes", () => {
     expect(Object.keys(PROVENANCE_CODES).sort()).toEqual([
       "B",
       "E",
       "F",
+      "I",
       "P",
       "R",
     ]);
@@ -22,7 +23,8 @@ describe("catalog provenance governance", () => {
     expect(provenanceFromDataSource("bedca_aligned")).toBe("B");
     expect(provenanceFromDataSource("bedca_standard_recipe")).toBe("R");
     expect(provenanceFromDataSource("label_or_typical")).toBe("E");
-    expect(provenanceFromDataSource("pedagogical_estimate")).toBe("P");
+    expect(provenanceFromDataSource("usda_fdc")).toBe("I");
+    expect(provenanceFromDataSource("incap_tca")).toBe("I");
   });
 
   it("marks external review as pending until signed", () => {

@@ -27,6 +27,8 @@ const VALID_DATA_SOURCES = new Set([
   "label_or_typical",
   "multi_source",
   "pedagogical_estimate",
+  "usda_fdc",
+  "incap_tca",
 ]);
 
 function normalizeFoodName(name: string): string {
@@ -160,8 +162,11 @@ export function auditFoodCatalog(foods: FoodItem[]): CatalogAuditIssue[] {
       });
     }
 
-    // ES consistency: legumes should not be dry; cereals arroz/pasta should be cooked
-    if (food.country === "España") {
+    // Cooked-portion rule: ES and RD list rice, pasta and legumes as eaten
+    if (
+      food.country === "España" ||
+      food.country === "República Dominicana"
+    ) {
       if (
         food.category === "Legumbres" &&
         !/hummus/i.test(food.name) &&
@@ -170,17 +175,17 @@ export function auditFoodCatalog(foods: FoodItem[]): CatalogAuditIssue[] {
         issues.push({
           code: "absurd_portion",
           foodId: food.id,
-          detail: `${food.name}: legumbre seca/cruda en catálogo ES (debe ser cocida)`,
+          detail: `${food.name}: legumbre seca/cruda (debe ser cocida)`,
         });
       }
       if (
-        /^(arroz|pasta)\b/i.test(food.name) &&
+        /^(arroz|pasta|habichuela|guandul)/i.test(food.name) &&
         /crudo|seco/i.test(food.name)
       ) {
         issues.push({
           code: "absurd_portion",
           foodId: food.id,
-          detail: `${food.name}: arroz/pasta crudos en catálogo ES (debe ser cocido)`,
+          detail: `${food.name}: cereal/legumbre crudos (debe ser cocido)`,
         });
       }
     }

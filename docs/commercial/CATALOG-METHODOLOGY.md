@@ -1,6 +1,6 @@
 # Metodología de construcción del catálogo — Migajas
 
-**Documento de gobernanza del dato** · Versión catálogo `2026.08-v4` · Ago 2026  
+**Documento de gobernanza del dato** · Versión catálogo `2026.09-v5` · Sep 2026  
 **Audiencia:** dietista-nutricionista, enfermera educadora, comité científico / innovación.  
 **Relacionado:** [CURRICULUM-INVENTORY.md](./CURRICULUM-INVENTORY.md) · [AUDIT-BRIEF.md](./AUDIT-BRIEF.md)
 
@@ -14,12 +14,12 @@ El catálogo de Migajas **no pretende** que cada plato compuesto tenga un valor 
 
 ## Principios
 
-1. **Alimento simple** → prioritariamente **BEDCA** (AESAN) u homólogo de tablas españolas.  
-2. Cuando BEDCA no dispone de equivalente → **tablas españolas reconocidas**, **etiquetado nutricional** o estimación documentada.  
-3. **Platos compuestos** → **receta estándar Migajas** con finalidad **exclusivamente educativa** (varían según elaboración real).  
+1. **Alimento simple ES** → **BEDCA** (AESAN) + tabla de raciones de **Serafín Murillo** (Fundación para la Salud / CIBERDEM; fuentes BEDCA, CESNID, HSJD).  
+2. **Alimento simple RD** → **TCA-INCAP 2018** (INCAP/OPS, cubre República Dominicana) y, cuando la ficha no está en abierto, **USDA FoodData Central**. Las porciones de enseñanza de 15 g siguen **ADA / CDC**.  
+3. **Platos compuestos** → **receta estándar Migajas** educativa (varían según elaboración real).  
 4. **Producto comercial** → **etiquetado fabricante** / valor típico de marca.  
-5. Todas las raciones ES se calculan con **10 g HC = 1 ración** (`raciones = carbsG / 10`).  
-6. Migajas cuenta **HC totales** por defecto (no resta fibra salvo indicación del equipo de salud).  
+5. Raciones: **España 10 g HC = 1 ración**; **República Dominicana 15 g HC = 1 ración**. `raciones = carbsG / exchangeUnitG`. No se mezclan los dos sistemas en el mismo país.  
+6. Migajas cuenta **HC totales** por defecto (no resta fibra). En RD eso hace que 100 g de habichuelas sean **~1,5 raciones**, no 1: el intercambio ADA de 15 g aproxima HC disponibles.  
 7. Las estimaciones se **revisan periódicamente**; la revisión externa queda registrada en gobernanza.
 
 ---
@@ -32,7 +32,8 @@ El catálogo de Migajas **no pretende** que cada plato compuesto tenga un valor 
 | **F** | FEN | Criterio u orientación FEN (poco frecuente como fuente de HC) |
 | **E** | Etiquetado fabricante | Producto comercial / valor típico de etiqueta |
 | **R** | Receta estándar Migajas | Plato compuesto a partir de componentes habituales |
-| **P** | Estimación pedagógica validada | Sin valor oficial único, o multi-fuente (p. ej. RD) |
+| **P** | Estimación pedagógica validada | Sin valor oficial único |
+| **I** | INCAP / USDA | Composición RD (TCA-INCAP o FoodData Central) |
 
 En el JSON: campo `provenanceCode`.  
 En el inventario: columna **Origen** muestra el código + etiqueta.
@@ -59,15 +60,27 @@ Campos de gobernanza previstos (por ítem o a nivel de catálogo):
 | `prepared_dish` | Plato / preparación | Paella, gazpacho, tortilla, pizza… |
 | `commercial_unit` | Unidad de venta | Lonchas, bollería, barritas |
 
-### Reglas de consistencia (ES)
+### Reglas de consistencia (ES y RD)
 
 | Grupo | Criterio Migajas |
 |-------|------------------|
 | **Arroz y pasta** | Siempre **cocidos** (nunca crudos en el catálogo guiado) |
-| **Legumbres** | Siempre **cocidas** (o preparaciones tipo hummus); no se mezclan secas y cocidas |
+| **Legumbres / habichuelas** | Siempre **cocidas**; no se mezclan secas y cocidas |
 | **Frutas** | Porción sobre **parte comestible** habitual (pieza / taza comestible), no peso bruto con residuos |
-| **Pan** | Porción = **rebanada / trozo / unidad** tipificada; además existe ficha de 100 g solo como ejemplo de etiqueta |
-| **Bebidas** | Diferenciadas por tipo (agua, café, té, zumo, cerveza lager, vino tinto seco); el alcohol usa valores educativos estándar y nota de variabilidad |
+| **Pan** | Porción = **rebanada / trozo / unidad** tipificada |
+| **Bebidas** | Volumen servido; en RD 1 taza de leche ≈ **12 g HC** (ADA), no 15 |
+| **Yuca, plátano, mangú** | Cocidos / listos para comer; 1 ración RD ≈ ⅓ taza (ADA/CDC) |
+
+### Dos sistemas de ración (no intercambiables)
+
+| País | 1 ración | Fuente de la regla | Fuente de la composición |
+|------|----------|--------------------|---------------------------|
+| España | **10 g HC** | SED / educadores; tabla Murillo 3ª ed.; HSJD | BEDCA (AESAN) + Murillo |
+| República Dominicana | **15 g HC** | ADA, CDC; HSJD (Latinoamérica); uso clínico habitual en RD | INCAP TCA + USDA FDC; MSP Pilón ancla INCAP al país |
+
+El mismo plato físico **no** tiene las mismas raciones en ES y en RD. Ejemplo: 100 g de lentejas/habichuelas cocidas ≈ 20–23 g HC → **2 raciones ES** y **~1,5 raciones RD**.
+
+Detalle numérico: [CATALOG-OFFICIAL-ALIGNMENT.md](./CATALOG-OFFICIAL-ALIGNMENT.md).
 
 ---
 

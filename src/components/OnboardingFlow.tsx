@@ -37,12 +37,12 @@ const REGION_EXAMPLES: Record<string, { food: string; detail: string; carbsG: nu
   {
     es: {
       food: "1 rebanada de pan blanco",
-      detail: "25 g de alimento · 10 g de HC",
+      detail: "20 g de alimento · 10 g de HC",
       carbsG: 10,
     },
     do: {
       food: "1 pieza de casabe",
-      detail: "30 g de alimento · 15 g de carbohidratos",
+      detail: "19 g de alimento · 15 g de carbohidratos",
       carbsG: 15,
     },
   };
