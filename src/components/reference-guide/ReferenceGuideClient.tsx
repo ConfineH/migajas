@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { RegionFlag } from "@/components/brand/RegionFlag";
 import { useState } from "react";
 import { FoodSearchGrid } from "@/components/FoodSearchGrid";
