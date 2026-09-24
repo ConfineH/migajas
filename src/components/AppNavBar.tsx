@@ -22,6 +22,7 @@ export async function AppNavBar() {
       showGuide={showGuide}
       showDiary={showDiary}
       showProfessional={profile?.is_professional === true}
+      courseStarted={showGuide}
     />
   );
 }

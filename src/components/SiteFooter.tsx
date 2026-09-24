@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { hasCompletedOnboarding } from "@/lib/onboarding";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const courseStarted = await hasCompletedOnboarding();
   return (
     <footer className="mt-auto border-t border-border/60">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
@@ -46,7 +48,7 @@ export function SiteFooter() {
                 href="/onboarding"
                 className="text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
               >
-                Configuración
+                {courseStarted ? "Configuración" : "Empezar"}
               </Link>
             </li>
           </ul>

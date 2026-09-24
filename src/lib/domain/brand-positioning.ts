@@ -24,7 +24,6 @@ export const HERO_COPY = {
   subtitle:
     "Un curso guiado con comida real de tu país. Paso a paso, con tranquilidad.",
   ctaPrimary: "Empezar mi curso",
-  ctaSecondary: "Ver el curso",
 } as const;
 
 export const ONBOARDING_COPY = {

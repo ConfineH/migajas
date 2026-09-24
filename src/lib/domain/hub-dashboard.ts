@@ -96,8 +96,8 @@ export function getHubProgressSummary(
 export type HomeHeroCtas = {
   primaryHref: string;
   primaryLabel: string;
-  secondaryHref: string;
-  secondaryLabel: string;
+  secondaryHref: string | null;
+  secondaryLabel: string | null;
 };
 
 /** Contextual home CTAs: guests start onboarding; returning users deep-link. */
@@ -106,7 +106,6 @@ export function buildHomeHeroCtas(input: {
   onboardingDone: boolean;
   continueHref: string | null;
   startLabel: string;
-  browseLabel: string;
 }): HomeHeroCtas {
   if (input.isLoggedIn && input.onboardingDone) {
     return {
@@ -122,8 +121,8 @@ export function buildHomeHeroCtas(input: {
   return {
     primaryHref: "/onboarding",
     primaryLabel: input.startLabel,
-    secondaryHref: "/learn",
-    secondaryLabel: input.browseLabel,
+    secondaryHref: null,
+    secondaryLabel: null,
   };
 }
 

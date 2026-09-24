@@ -4,14 +4,17 @@ import { AppNavBar } from "@/components/AppNavBar";
 import { ProfessionalContactForm } from "@/components/professional/ProfessionalContactForm";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { CopyRecommendLink } from "@/components/professional/CopyRecommendLink";
 import { PROFESSIONAL_CONTENT_LINKS, professionalRoleLabel } from "@/lib/domain/professional-profile";
+import { getRegionById, recommendCourseUrl } from "@/lib/domain/regions";
+import { getSiteUrl, NOINDEX_METADATA } from "@/lib/domain/seo";
+import { recommendCourseQrDataUrl } from "@/lib/recommend-qr";
 import { getAuthUser } from "@/lib/supabase/auth";
 import {
   listProfessionalContacts,
   listSharesForProfessional,
 } from "@/lib/supabase/professional";
 import { getUserProfile } from "@/lib/supabase/user-profile";
-import { NOINDEX_METADATA } from "@/lib/domain/seo";
 
 export const metadata = NOINDEX_METADATA;
 export const dynamic = "force-dynamic";
@@ -32,6 +35,9 @@ export default async function ProfessionalDashboardPage() {
     listProfessionalContacts(user.id),
   ]);
   const roleLabel = professionalRoleLabel(profile.professional_role);
+  const region = getRegionById(profile.region_id);
+  const recommendUrl = recommendCourseUrl(getSiteUrl(), region.id);
+  const recommendQr = await recommendCourseQrDataUrl(recommendUrl);
 
   return (
     <>
@@ -42,14 +48,62 @@ export default async function ProfessionalDashboardPage() {
             title="Tu perfil profesional"
             description={
               roleLabel
-                ? `${roleLabel}. Da este código a quien quiera enviarte un informe.`
-                : "Da este código a quien quiera enviarte un informe."
+                ? `${roleLabel}. Indica el curso con el enlace. El código es solo para el informe.`
+                : "Indica el curso con el enlace. El código es solo para el informe."
             }
           />
 
-          <p className="mb-10 font-mono text-3xl tracking-[0.3em] text-sage-strong">
-            {profile.professional_share_code}
-          </p>
+          <section className="mb-12 grid gap-6 lg:grid-cols-2">
+            <article className="feature-card p-6">
+              <h2 className="font-display text-2xl font-medium text-foreground">
+                Indica el curso
+              </h2>
+              <p className="mt-2 text-sm text-muted">
+                Comparte el enlace o el código QR. Abre Migajas en{" "}
+                {region.name}. La persona puede cambiar el país. No queda
+                vinculada a tu perfil.
+              </p>
+              <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-start">
+                {/* Generated data URL. next/image does not optimize it. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={recommendQr}
+                  alt={`Código QR que abre Migajas en ${region.name}`}
+                  width={140}
+                  height={140}
+                  className="size-36 shrink-0 rounded-2xl"
+                />
+                <div className="min-w-0">
+                  <p className="break-all font-mono text-sm text-foreground">
+                    {recommendUrl}
+                  </p>
+                  <CopyRecommendLink url={recommendUrl} />
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-muted">
+                El país es el de tu cuenta.{" "}
+                <Link
+                  href="/onboarding"
+                  className="font-medium text-sage-strong underline-offset-2 hover:underline"
+                >
+                  Cámbialo en Configuración
+                </Link>
+                .
+              </p>
+            </article>
+
+            <article className="feature-card p-6">
+              <h2 className="font-display text-2xl font-medium text-foreground">
+                Código para el informe
+              </h2>
+              <p className="mt-2 text-sm text-muted">
+                Dáselo a quien quiera enviarte un informe. No abre el curso.
+              </p>
+              <p className="mt-6 font-mono text-3xl tracking-[0.3em] text-sage-strong">
+                {profile.professional_share_code}
+              </p>
+            </article>
+          </section>
 
           <section className="mb-12">
             <h2 className="font-display text-2xl font-medium text-foreground">
@@ -86,7 +140,7 @@ export default async function ProfessionalDashboardPage() {
             </p>
             {shares.length === 0 ? (
               <p className="mt-4 rounded-2xl bg-sage-light/60 px-5 py-4 text-sm text-muted">
-                Aún no te han enviado informes. Comparte tu código en consulta.
+                Aún no te han enviado informes.
               </p>
             ) : (
               <ul className="mt-4 space-y-3">

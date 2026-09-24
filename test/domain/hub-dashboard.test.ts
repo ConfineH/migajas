@@ -71,18 +71,16 @@ describe("getHubProgressSummary", () => {
 });
 
 describe("buildHomeHeroCtas", () => {
-  it("sends guests to onboarding with browse secondary", () => {
+  it("sends guests to onboarding as the only path", () => {
     const ctas = buildHomeHeroCtas({
       isLoggedIn: false,
       onboardingDone: false,
       continueHref: null,
       startLabel: "Empezar mi curso",
-      browseLabel: "Ver el curso",
     });
     expect(ctas.primaryHref).toBe("/onboarding");
     expect(ctas.primaryLabel).toBe("Empezar mi curso");
-    expect(ctas.secondaryHref).toBe("/learn");
-    expect(ctas.secondaryLabel).toBe("Ver el curso");
+    expect(ctas.secondaryHref).toBeNull();
   });
 
   it("deep-links returning users and secondary to hub", () => {
@@ -91,7 +89,6 @@ describe("buildHomeHeroCtas", () => {
       onboardingDone: true,
       continueHref: "/learn/nivel-1/lessons/leccion-1",
       startLabel: "Empezar mi curso",
-      browseLabel: "Ver el curso",
     });
     expect(ctas.primaryHref).toBe("/learn/nivel-1/lessons/leccion-1");
     expect(ctas.primaryLabel).toBe("Continuar aprendiendo");

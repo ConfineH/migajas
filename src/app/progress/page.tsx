@@ -25,6 +25,7 @@ import {
   latestPassedLevelName,
 } from "@/lib/domain/professional-cycle";
 import { resolveAttempts, resolveProgress } from "@/lib/learning-state";
+import { requireOnboarding } from "@/lib/onboarding";
 import { getAuthUser } from "@/lib/supabase/auth";
 import { getUserLearningEvents } from "@/lib/supabase/analytics-events";
 
@@ -33,6 +34,7 @@ import { NOINDEX_METADATA } from "@/lib/domain/seo";
 export const metadata = NOINDEX_METADATA;
 
 export default async function ProgressPage() {
+  await requireOnboarding();
   const [progress, attempts, user] = await Promise.all([
     resolveProgress(),
     resolveAttempts(),

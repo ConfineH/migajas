@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MigajasLogo } from "@/components/brand/MigajasLogo";
 import { formatUserDisplayName, type AuthUserSummary } from "@/lib/domain/auth";
 import { signOut } from "@/app/login/actions";
+import { buildAppNavLinks } from "@/lib/domain/app-nav";
 import { NavLink } from "@/components/ui/NavLink";
 import { NavMenu } from "@/components/ui/NavMenu";
 
@@ -12,6 +13,7 @@ interface NavBarProps {
   showGuide?: boolean;
   showDiary?: boolean;
   showProfessional?: boolean;
+  courseStarted?: boolean;
 }
 
 export function NavBar({
@@ -21,40 +23,18 @@ export function NavBar({
   showGuide = false,
   showDiary = false,
   showProfessional = false,
+  courseStarted = false,
 }: NavBarProps) {
-  const primaryLinks = [
-    ...(user ? [{ href: "/inicio", label: "Inicio" }] : []),
-    { href: "/learn", label: "Curso" },
-    ...(showDiary ? [{ href: "/diario", label: "Diario" }] : []),
-    { href: "/progress", label: "Progreso" },
-  ];
-
-  const moreLinks = [
-    ...(showGuide ? [{ href: "/guia", label: "Guía" }] : []),
-    ...(freeMode
-      ? [
-          { href: "/levels", label: "Repaso libre" },
-          { href: "/catalog", label: "Catálogo" },
-        ]
-      : []),
-    { href: "/onboarding", label: "Configuración" },
-    ...(showAdmin ? [{ href: "/admin", label: "Admin" }] : []),
-    { href: "/profesionales", label: "Profesionales" },
-    ...(showProfessional
-      ? [{ href: "/profesional", label: "Perfil profesional" }]
-      : []),
-  ];
-
-  const mobilePinned = user
-    ? [
-        { href: "/inicio", label: "Inicio" },
-        { href: "/learn", label: "Curso" },
-        { href: "/progress", label: "Progreso" },
-      ]
-    : [
-        { href: "/learn", label: "Curso" },
-        { href: "/progress", label: "Progreso" },
-      ];
+  const { primary: primaryLinks, more: moreLinks, mobilePinned } =
+    buildAppNavLinks({
+      isLoggedIn: Boolean(user),
+      courseStarted,
+      showDiary,
+      showGuide,
+      freeMode,
+      showAdmin,
+      showProfessional,
+    });
 
   const mobileMoreItems = [
     ...primaryLinks.filter(

@@ -44,8 +44,8 @@ export function HomeHero({
 }) {
   const primaryHref = ctas?.primaryHref ?? "/onboarding";
   const primaryLabel = ctas?.primaryLabel ?? HERO_COPY.ctaPrimary;
-  const secondaryHref = ctas?.secondaryHref ?? "/learn";
-  const secondaryLabel = ctas?.secondaryLabel ?? HERO_COPY.ctaSecondary;
+  const secondaryHref = ctas?.secondaryHref ?? null;
+  const secondaryLabel = ctas?.secondaryLabel ?? null;
 
   return (
     <AnimatedContent
@@ -62,12 +62,14 @@ export function HomeHero({
       </p>
       <div className="mt-8 flex flex-col items-center gap-4">
         <Button href={primaryHref}>{primaryLabel}</Button>
-        <Link
-          href={secondaryHref}
-          className="text-sm font-medium text-sage-strong underline-offset-4 transition-colors hover:text-foreground hover:underline"
-        >
-          {secondaryLabel}
-        </Link>
+        {secondaryHref && secondaryLabel ? (
+          <Link
+            href={secondaryHref}
+            className="text-sm font-medium text-sage-strong underline-offset-4 transition-colors hover:text-foreground hover:underline"
+          >
+            {secondaryLabel}
+          </Link>
+        ) : null}
       </div>
       {regionLine ? (
         <p className="mt-6 text-sm font-medium text-foreground/80">

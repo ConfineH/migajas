@@ -57,3 +57,38 @@ export function resolveRegionIdFromOnboarding(state: {
   if (state?.country === "República Dominicana") return "do";
   return DEFAULT_REGION_ID;
 }
+
+/** A recommendation link may only name a region we actually ship. */
+export function regionIdFromQuery(
+  value: string | null | undefined,
+): string | null {
+  if (!value) return null;
+  const id = value.trim().toLowerCase();
+  return REGIONS.some((region) => region.id === id) ? id : null;
+}
+
+/**
+ * Account country wins. A `?region=` link only preselects the first time,
+ * before onboarding is finished. After that, the saved country stays.
+ */
+export function resolveOnboardingRegionId(input: {
+  accountRegionId?: string | null;
+  queryRegion?: string | null;
+  onboardingCompleted?: boolean;
+  state?: { regionId?: string; country?: string } | null;
+}): string {
+  const account = regionIdFromQuery(input.accountRegionId);
+  if (account) return account;
+  if (!input.onboardingCompleted) {
+    const recommended = regionIdFromQuery(input.queryRegion);
+    if (recommended) return recommended;
+  }
+  return resolveRegionIdFromOnboarding(input.state ?? null);
+}
+
+/** Link a professional shares. Uses their account country. */
+export function recommendCourseUrl(siteUrl: string, regionId: string): string {
+  const origin = siteUrl.trim().replace(/\/$/, "");
+  const id = regionIdFromQuery(regionId) ?? DEFAULT_REGION_ID;
+  return `${origin}/onboarding?region=${id}`;
+}

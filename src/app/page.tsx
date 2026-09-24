@@ -29,7 +29,6 @@ export default async function Home() {
     onboardingDone: false,
     continueHref: null,
     startLabel: HERO_COPY.ctaPrimary,
-    browseLabel: HERO_COPY.ctaSecondary,
   });
 
   return (

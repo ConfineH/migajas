@@ -9,7 +9,7 @@ import {
 import { localizeLevel } from "@/lib/domain/content-localization";
 import { getLevels } from "@/lib/domain/exercises";
 import { resolveHubCourseFocus } from "@/lib/domain/hub-dashboard";
-import { resolveRegionIdFromOnboarding } from "@/lib/domain/regions";
+import { resolveOnboardingRegionId } from "@/lib/domain/regions";
 import { resolveProgress } from "@/lib/learning-state";
 import { getOnboardingState } from "@/lib/onboarding";
 import { getActiveRegion, getDefaultRegion } from "@/lib/region-server";
@@ -20,7 +20,12 @@ import { buildPageMetadata, PUBLIC_PAGE_SEO } from "@/lib/domain/seo";
 
 export const metadata = buildPageMetadata(PUBLIC_PAGE_SEO.onboarding);
 
-export default async function OnboardingPage() {
+export default async function OnboardingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ region?: string }>;
+}) {
+  const { region: queryRegion } = await searchParams;
   const state = await getOnboardingState();
   const settingsMode = state?.completed === true;
   const supabase = await createClient();
@@ -45,7 +50,12 @@ export default async function OnboardingPage() {
             </div>
           ) : null}
           <OnboardingFlow
-            initialRegionId={profile?.region_id ?? resolveRegionIdFromOnboarding(state)}
+            initialRegionId={resolveOnboardingRegionId({
+              accountRegionId: profile?.region_id,
+              queryRegion,
+              onboardingCompleted: settingsMode,
+              state,
+            })}
             initialGuestMode={state?.guestMode ?? true}
             initialDailyCarbGoal={
               profile?.daily_carb_goal_g ?? state?.daily_carb_goal_g ?? null
