@@ -46,6 +46,7 @@ export default async function ReferenceGuidePage({ searchParams }: Props) {
             }
           />
           <ReferenceGuideClient
+            key={region.id}
             foods={foods}
             freeMode={freeMode}
             regionName={region.name}

@@ -42,7 +42,7 @@ export function ReferenceGuideClient({
 }: ReferenceGuideClientProps) {
   const [tab, setTab] = useState<TabId>(initialTab ?? "reglas");
   const [carbsInput, setCarbsInput] = useState(String(exchangeUnitG));
-  const [rationsInput, setRationsInput] = useState("1.5");
+  const [rationsInput, setRationsInput] = useState("1");
 
   const table = buildConversionTable(exchangeUnitG, 5, 0.5);
   const carbsValue = Number(carbsInput.replace(",", "."));
@@ -92,20 +92,16 @@ export function ReferenceGuideClient({
 
       {tab === "reglas" ? (
         <section className="space-y-4">
-          <div className="callout-sage">
-            <h2 className="flex items-center gap-3 font-display text-xl font-medium text-foreground">
-              <RegionFlag regionId={regionId} className="h-6 w-9" />
-              {regionName}
-            </h2>
-            <p className="mt-2 text-foreground">
-              <strong>{exchangeRuleLabel}</strong>
-            </p>
-            <p className="mt-2 text-sm text-muted">
-              {regionId === "do"
+          <RegionRuleCallout
+            regionId={regionId}
+            regionName={regionName}
+            exchangeRuleLabel={exchangeRuleLabel}
+            detail={
+              regionId === "do"
                 ? `Divide los gramos de carbohidratos entre ${exchangeUnitG} para obtener raciones.`
-                : `Divide los gramos de HC entre ${exchangeUnitG} para obtener raciones.`}
-            </p>
-          </div>
+                : `Divide los gramos de HC entre ${exchangeUnitG} para obtener raciones.`
+            }
+          />
 
           <div className="feature-card overflow-hidden">
             <table className="w-full text-sm">
@@ -171,48 +167,89 @@ export function ReferenceGuideClient({
       ) : null}
 
       {tab === "calculadora" ? (
-        <section className="grid gap-4 sm:grid-cols-2">
-          <div className="feature-card p-5">
-            <h2 className="font-medium text-foreground">Gramos → raciones</h2>
-            <label className="mt-4 block text-sm text-muted">
-              Carbohidratos (g)
-              <input
-                type="number"
-                min="0"
-                step="0.5"
-                value={carbsInput}
-                onChange={(event) => setCarbsInput(event.target.value)}
-                className="field-input mt-1"
-              />
-            </label>
-            <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
-              {fromCarbs === null
-                ? "Introduce un valor válido"
-                : `${formatCarbsInput(carbsValue)} = ${formatRationsResult(fromCarbs)}`}
-            </p>
-          </div>
+        <section className="space-y-4">
+          <RegionRuleCallout
+            regionId={regionId}
+            regionName={regionName}
+            exchangeRuleLabel={exchangeRuleLabel}
+            detail="Las dos cajas convierten con esta regla, la de tu configuración."
+          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="feature-card p-5">
+              <h2 className="font-medium text-foreground">Gramos → raciones</h2>
+              <label className="mt-4 block text-sm text-muted">
+                Carbohidratos (g)
+                <input
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  value={carbsInput}
+                  onChange={(event) => setCarbsInput(event.target.value)}
+                  className="field-input mt-1"
+                />
+              </label>
+              <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
+                {fromCarbs === null
+                  ? "Introduce un valor válido"
+                  : `${formatCarbsInput(carbsValue)} = ${formatRationsResult(fromCarbs)}`}
+              </p>
+            </div>
 
-          <div className="feature-card p-5">
-            <h2 className="font-medium text-foreground">Raciones → gramos</h2>
-            <label className="mt-4 block text-sm text-muted">
-              Raciones
-              <input
-                type="number"
-                min="0"
-                step="0.5"
-                value={rationsInput}
-                onChange={(event) => setRationsInput(event.target.value)}
-                className="field-input mt-1"
-              />
-            </label>
-            <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
-              {fromRations === null
-                ? "Introduce un valor válido"
-                : `${formatRations(rationsValue)} ración${rationsValue === 1 ? "" : "es"} = ${fromRations} g de HC`}
-            </p>
+            <div className="feature-card p-5">
+              <h2 className="font-medium text-foreground">Raciones → gramos</h2>
+              <label className="mt-4 block text-sm text-muted">
+                Raciones
+                <input
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  value={rationsInput}
+                  onChange={(event) => setRationsInput(event.target.value)}
+                  className="field-input mt-1"
+                />
+              </label>
+              <p className="mt-4 rounded-xl bg-sage-light px-3 py-2 text-sage-strong">
+                {fromRations === null
+                  ? "Introduce un valor válido"
+                  : `${formatRations(rationsValue)} ración${rationsValue === 1 ? "" : "es"} = ${fromRations} g de HC`}
+              </p>
+            </div>
           </div>
         </section>
       ) : null}
+    </div>
+  );
+}
+
+function RegionRuleCallout({
+  regionId,
+  regionName,
+  exchangeRuleLabel,
+  detail,
+}: {
+  regionId: string;
+  regionName: string;
+  exchangeRuleLabel: string;
+  detail: string;
+}) {
+  return (
+    <div className="callout-sage">
+      <h2 className="flex items-center gap-3 font-display text-xl font-medium text-foreground">
+        <RegionFlag regionId={regionId} className="h-6 w-9" />
+        {regionName}
+      </h2>
+      <p className="mt-2 text-foreground">
+        <strong>{exchangeRuleLabel}</strong>
+      </p>
+      <p className="mt-2 text-sm text-muted">{detail}</p>
+      <p className="mt-2 text-sm">
+        <Link
+          href="/onboarding"
+          className="font-medium text-sage-strong underline-offset-2 hover:underline"
+        >
+          Cambiar en configuración
+        </Link>
+      </p>
     </div>
   );
 }
