@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { getFoodById, getFoodsForCountry } from "@/lib/data/foods";
 import { getSourcesForRegion } from "@/lib/domain/content-sources";
+import { formatHabitualMeasure } from "@/lib/domain/foods";
 import { calculateRations } from "@/lib/domain/rations";
 import { resolveRegionalFoodId } from "@/lib/domain/content-localization";
 
@@ -70,6 +71,47 @@ describe("official catalog alignment", () => {
       expect.arrayContaining(["bedca", "murillo-raciones", "migajas-exchange-unit"]),
     );
     expect(esIds).not.toContain("migajas-exchange-unit-do");
+  });
+
+  it("recomputed cups follow BEDCA carbohydrate density", () => {
+    expect(density("es-brocoli")).toBeCloseTo(1.1, 1);
+    expect(density("es-judias-verdes")).toBeCloseTo(4, 0);
+    expect(density("es-zanahoria")).toBeCloseTo(7, 0);
+    expect(density("zanahoria")).toBeCloseTo(5, 0);
+    expect(density("melon")).toBeCloseTo(6, 0);
+    expect(density("sandia")).toBeCloseTo(4.5, 1);
+    expect(density("es-albaricoque")).toBeCloseTo(9.5, 1);
+    expect(density("calabaza")).toBeCloseTo(2.1, 1);
+    expect(density("es-hummus")).toBeCloseTo(10, 0);
+  });
+
+  it("keeps boiled, roasted and fried potato as separate densities", () => {
+    expect(getFoodById("patata-cocida")?.name).toBe("Patata hervida");
+    expect(density("patata-cocida")).toBeCloseTo(15.4, 0);
+    expect(density("es-patata-asada")).toBeCloseTo(46, 0);
+    expect(density("patatas-fritas-100g")).toBeCloseTo(30, 0);
+    expect(density("patatas-fritas-150g")).toBeCloseTo(30, 0);
+    expect(formatHabitualMeasure(getFoodById("patatas-fritas-100g")!)).toBe(
+      "Guarnición (60 g) = 1.8 raciones",
+    );
+  });
+
+  it("computes the household measure from the food density", () => {
+    expect(formatHabitualMeasure(getFoodById("pan-blanco")!)).toBe(
+      "Barra de cuarto (180 g) = 9.0 raciones",
+    );
+    expect(formatHabitualMeasure(getFoodById("arroz-cocido-150g")!)).toBe(
+      "Plato mediano (160 g) = 4.2 raciones",
+    );
+    expect(formatHabitualMeasure(getFoodById("es-judias-verdes")!)).toBe(
+      "Plato grande (250 g) = 1.0 raciones",
+    );
+    expect(formatHabitualMeasure(getFoodById("leche")!)).toBe(
+      "Vaso (200 ml) = 1.0 raciones",
+    );
+    expect(formatHabitualMeasure(getFoodById("es-brocoli")!)).toBe(
+      "Plato grande (300 g) = 0.3 raciones",
+    );
   });
 
   it("maps Spain course foods to real Dominican equivalents", () => {

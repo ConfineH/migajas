@@ -91,6 +91,7 @@ export default async function DiaryPage() {
             localDate={today}
             dailyGoalG={access.profile.daily_carb_goal_g}
             exchangeRuleLabel={formatExchangeRule(region)}
+            exchangeUnitG={region.exchangeUnitG}
           />
         </AppPageLayout>
       </main>

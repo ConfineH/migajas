@@ -104,7 +104,7 @@
         "id": "l1-lesson-3-s3",
         "type": "example",
         "title": "Ejemplo: tortilla española",
-        "body": "1 huevo = 0 g HC. 100 g de patata = ~17 g HC (1,7 raciones). La tortilla tiene HC por la patata, no por el huevo.",
+        "body": "1 huevo = 0 g HC. 100 g de patata hervida = ~15 g HC (1,5 raciones). La tortilla tiene HC por la patata, no por el huevo.",
         "foodId": "huevo"
       },
       {
@@ -224,14 +224,14 @@
         "id": "l2-lesson-1-s1",
         "type": "example",
         "title": "Arroz cocido",
-        "body": "1 taza de arroz cocido (150 g) = ~40 g HC (4 raciones). ½ taza = 2 raciones. Mide con una taza de cocina estándar.",
+        "body": "1 taza de arroz cocido (150 g) = 39 g HC (3,9 raciones). ½ taza ≈ 2 raciones. Un plato mediano (160 g) son unas 4,2 raciones.",
         "foodId": "arroz-cocido-150g"
       },
       {
         "id": "l2-lesson-1-s2",
         "type": "example",
         "title": "Pasta cocida",
-        "body": "1 taza de pasta cocida (140 g) = ~35 g HC (3,5 raciones). La pasta integral tiene más fibra pero similar HC total.",
+        "body": "1 taza de pasta cocida (140 g) = 31 g HC (3,1 raciones). Un plato mediano (180 g) son 4 raciones. La pasta integral tiene más fibra pero similar HC total.",
         "foodId": "pasta-cocida-140g"
       },
       {
@@ -269,9 +269,23 @@
       {
         "id": "l2-lesson-2-s1",
         "type": "example",
-        "title": "Patata cocida",
-        "body": "1 patata mediana cocida (150 g) = ~25 g HC (2,5 raciones). Las patatas fritas tienen más grasa pero similar HC.",
+        "title": "Patata hervida",
+        "body": "1 patata mediana hervida (150 g) = 23 g HC (2,3 raciones). El peso es el de la patata ya cocida.",
         "foodId": "patata-cocida-150g"
+      },
+      {
+        "id": "l2-lesson-2-s1a",
+        "type": "example",
+        "title": "Patata asada",
+        "body": "La misma cantidad ya asada (150 g) = 69 g HC (6,9 raciones). Al horno pierde agua y el hidrato se concentra.",
+        "foodId": "es-patata-asada"
+      },
+      {
+        "id": "l2-lesson-2-s1b",
+        "type": "example",
+        "title": "Patata frita",
+        "body": "100 g de patata frita = 30 g HC (3 raciones). La grasa no se suma como hidrato.",
+        "foodId": "patatas-fritas-100g"
       },
       {
         "id": "l2-lesson-2-s2",
@@ -291,7 +305,7 @@
         "id": "l2-lesson-2-s4",
         "type": "explanation",
         "title": "Consejo de cocción",
-        "body": "Cocer o asar es mejor que freír. La grasa de la fritura no cuenta como HC, pero afecta la absorción (glucemia tardía)."
+        "body": "Freír añade grasa, que no cuenta como hidrato pero retrasa la subida de glucosa. Asar no lleva ese aceite; lo que cambia el número es el agua que pierde."
       },
       {
         "id": "l2-lesson-2-practice",
@@ -354,27 +368,27 @@
     "levelId": "nivel-3",
     "orderIndex": 1,
     "title": "Verduras: bajo contenido en HC vs las que sí se contabilizan",
-    "summary": "Algunas verduras, en cantidades habituales de guarnición, suelen no contabilizarse. Otras (calabaza, zanahoria, maíz, brócoli en ración generosa, judías verdes) sí aportan HC relevantes. Migajas muestra el dato del catálogo para no mezclar «libre» con 0 infinito.",
+    "summary": "Una taza de brócoli o de judías verdes no llega a media ración. La zanahoria y el maíz sí suman. El número es el peso real por la densidad de BEDCA.",
     "steps": [
       {
         "id": "l3-lesson-1-s1",
         "type": "example",
-        "title": "Verduras de bajo HC (habitualmente no contabilizadas)",
-        "body": "Lechuga, espinacas, pepino, tomate, coliflor, apio, calabacín, champiñones y pimiento, en porciones habituales de ensalada o guarnición, suelen no contabilizarse en muchos protocolos. No significa cantidad infinita: el catálogo muestra HC si la porción es grande.",
-        "foodId": "es-lechuga"
+        "title": "Guarnición pequeña",
+        "body": "Lechuga, brócoli (1 taza, 90 g ≈ 1 g HC) y judías verdes (1 taza, 80 g ≈ 3 g HC) quedan por debajo de media ración. Un plato grande de judías verdes (250 g) sí llega a 1 ración. El número de la ficha no es «libre» ni infinito.",
+        "foodId": "es-brocoli"
       },
       {
         "id": "l3-lesson-1-s2",
         "type": "example",
-        "title": "Verduras que SÍ se contabilizan en la porción del catálogo",
-        "body": "Calabaza, zanahoria, maíz, brócoli (1 taza ≈ 10 g HC) y judías verdes (1 taza ≈ 10 g HC) sí suman raciones en Migajas. Una guarnición muy pequeña puede tratarse distinto según el protocolo de tu equipo; aquí usamos el dato de la ficha.",
-        "foodId": "calabaza"
+        "title": "Las que sí suman en una porción normal",
+        "body": "Zanahoria cruda (1 taza, 120 g ≈ 8 g HC) y maíz en grano (100 g ≈ 19 g HC) sí se contabilizan. La calabaza hervida, en una taza de 200 g, queda en unos 4 g HC.",
+        "foodId": "es-zanahoria"
       },
       {
         "id": "l3-lesson-1-s3",
         "type": "example",
         "title": "Truco de cocción",
-        "body": "Las verduras cocidas concentran más los HC que las crudas. 100 g de zanahoria cruda = 5 g HC, cocida = 8 g HC.",
+        "body": "100 g de zanahoria cruda ≈ 7 g HC. 100 g de zanahoria hervida ≈ 5 g HC. Cocerla no la concentra: la hervida lleva más agua.",
         "foodId": "zanahoria"
       },
       {
@@ -457,7 +471,7 @@
         "id": "l4-lesson-1-s2",
         "type": "example",
         "title": "Ejemplo: filete con patatas",
-        "body": "Filete de ternera = 0 raciones (solo proteína). 150 g de patata cocida = 2,5 raciones. Ensalada = 0 raciones. Total = 2,5 raciones.",
+        "body": "Filete de ternera = 0 raciones (solo proteína). 150 g de patata hervida = 2,3 raciones. Ensalada = 0 raciones. Total = 2,3 raciones.",
         "foodId": "patata-cocida-150g"
       },
       {
@@ -549,7 +563,7 @@
         "id": "l4-lesson-3-s2",
         "type": "example",
         "title": "Tapas típicas",
-        "body": "Patatas fritas (ración mediana 150 g) = ~38 g HC (3,8 raciones). Calamares a la romana (rebozados) = ~15 g HC por el rebozado.",
+        "body": "Patatas fritas (ración mediana 150 g) = 45 g HC (4,5 raciones). Calamares a la romana (rebozados) = ~15 g HC por el rebozado.",
         "foodId": "patatas-fritas-150g"
       },
       {
@@ -634,7 +648,7 @@
         "id": "l5-lesson-2-s2",
         "type": "example",
         "title": "Comida completa",
-        "body": "Ensalada (0) + filete con patatas (2,5 raciones) + 1 yogur (0,5 raciones) + 1 fruta (1 ración) = 4 raciones totales.",
+        "body": "Ensalada (0) + filete con patata hervida (2,3 raciones) + 1 yogur (0,5 raciones) + 1 fruta (1 ración) = 3,8 raciones totales.",
         "foodId": "patata-cocida-150g"
       },
       {

@@ -11,7 +11,7 @@ import {
   type IntakeEntry,
   type MealSlot,
 } from "@/lib/domain/intake";
-import type { EnrichedFoodItem } from "@/lib/domain/foods";
+import { formatHabitualMeasure, type EnrichedFoodItem } from "@/lib/domain/foods";
 import { formatRations } from "@/lib/domain/rations";
 
 export interface DiaryEntryView extends IntakeEntry {
@@ -26,6 +26,7 @@ interface DiaryClientProps {
   localDate: string;
   dailyGoalG: number | null;
   exchangeRuleLabel: string;
+  exchangeUnitG: number;
 }
 
 function getLocalDateString(date = new Date()): string {
@@ -41,6 +42,7 @@ export function DiaryClient({
   localDate: initialLocalDate,
   dailyGoalG,
   exchangeRuleLabel,
+  exchangeUnitG,
 }: DiaryClientProps) {
   const [entries, setEntries] = useState(initialEntries);
   const [localDate] = useState(initialLocalDate || getLocalDateString());
@@ -59,6 +61,10 @@ export function DiaryClient({
       .slice(0, 8);
   }, [foods, query]);
 
+  const selectedFood = foods.find((food) => food.id === selectedFoodId);
+  const habitualLine = selectedFood
+    ? formatHabitualMeasure(selectedFood, exchangeUnitG)
+    : null;
   const totalCarbs = sumDailyCarbs(entries, localDate);
   const goalProgress =
     dailyGoalG && dailyGoalG > 0
@@ -202,6 +208,9 @@ export function DiaryClient({
             </option>
           ))}
         </select>
+        {habitualLine ? (
+          <p className="text-sm text-muted">Medida habitual: {habitualLine}</p>
+        ) : null}
         <div className="grid gap-3 sm:grid-cols-2">
           <select
             value={mealSlot}
@@ -237,7 +246,12 @@ export function DiaryClient({
           </p>
         ) : (
           <div className="space-y-3">
-            {entries.map((entry) => (
+            {entries.map((entry) => {
+              const loggedFood = foods.find((food) => food.id === entry.food_id);
+              const loggedHabitual = loggedFood
+                ? formatHabitualMeasure(loggedFood, exchangeUnitG)
+                : null;
+              return (
               <article
                 key={entry.id}
                 className="feature-card p-4"
@@ -249,6 +263,11 @@ export function DiaryClient({
                       {MEAL_SLOT_LABELS[entry.meal_slot]} · {entry.portionText} ·{" "}
                       {entry.carbs_g} g HC · {formatRations(entry.rations)} raciones
                     </p>
+                    {loggedHabitual ? (
+                      <p className="text-sm text-muted">
+                        Medida habitual: {loggedHabitual}
+                      </p>
+                    ) : null}
                   </div>
                   {entry.editable ? (
                     <div className="flex items-center gap-2">
@@ -282,7 +301,8 @@ export function DiaryClient({
                   )}
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         )}
       </section>

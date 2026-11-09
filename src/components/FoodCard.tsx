@@ -1,5 +1,6 @@
-import type { EnrichedFoodItem } from "@/lib/domain/foods";
+import { formatHabitualMeasure, type EnrichedFoodItem } from "@/lib/domain/foods";
 import { formatRations } from "@/lib/domain/rations";
+import { getRegionById } from "@/lib/domain/regions";
 import { inferFoodSourceId } from "@/lib/domain/content-sources";
 import { ContentSourceLink } from "@/components/content-sources/ContentSourceLink";
 import { FoodNutritionExtras } from "@/components/FoodNutritionExtras";
@@ -24,6 +25,10 @@ const typeLabelsDo = {
 export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
   const typeLabels = regionId === "do" ? typeLabelsDo : typeLabelsEs;
   const sourceId = inferFoodSourceId(food);
+  const habitualLine = formatHabitualMeasure(
+    food,
+    getRegionById(regionId).exchangeUnitG,
+  );
   return (
     <article className="feature-card p-5">
       <div className="mb-2 flex items-start justify-between gap-2">
@@ -55,6 +60,9 @@ export function FoodCard({ food, regionId = "es" }: FoodCardProps) {
           </dd>
         </div>
       </dl>
+      {habitualLine ? (
+        <p className="mt-3 text-sm text-muted">Medida habitual: {habitualLine}</p>
+      ) : null}
       <FoodNutritionExtras food={food} regionId={regionId} />
       {sourceId ? (
         <p className="mt-3 border-t border-border/60 pt-3 text-xs">

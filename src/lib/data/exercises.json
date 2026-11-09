@@ -220,7 +220,7 @@
     "levelId": "nivel-2",
     "type": "multiple_choice",
     "prompt": "¿Cuál de estos alimentos cuenta como carbohidratos (no como verdura libre)?",
-    "explanation": "La patata es un tubérculo, tiene ~17 g HC/100 g (1,7 raciones). La lechuga, pepino y espinacas son verduras de bajo contenido en HC (habitualmente no contabilizadas) (<5 g HC/100 g).",
+    "explanation": "La patata hervida es un tubérculo, tiene ~15 g HC/100 g (1,5 raciones). La lechuga, pepino y espinacas son verduras de bajo contenido en HC (habitualmente no contabilizadas) (<5 g HC/100 g).",
     "difficulty": "Baja",
     "foodId": "patata-cocida-150g",
     "correctAnswer": "patata-cocida-150g",
@@ -291,34 +291,34 @@
     "id": "ex-l3-1-vegetable-carb-identify",
     "levelId": "nivel-3",
     "type": "identify_portion",
-    "prompt": "¿Cuál de estas verduras SÍ cuenta como carbohidratos?",
-    "explanation": "La calabaza cocida tiene un aporte relevante de HC. El tomate en porción habitual suele no contabilizarse; el brócoli y las judías verdes en porción de 1 taza (~10 g HC) sí se contabilizan en Migajas (no son «libres» infinitas).",
+    "prompt": "¿Qué porción de verdura se acerca a 1 ración (10 g HC)?",
+    "explanation": "1 taza de brócoli (90 g) ≈ 1 g HC. 1 taza de judías verdes (80 g) ≈ 3 g HC. Un plato grande de judías verdes (250 g) ≈ 10 g HC, 1 ración. 100 g de tomate no llega.",
     "difficulty": "Media",
-    "foodId": "calabaza",
-    "correctAnswer": "calabaza",
+    "foodId": "es-judias-verdes",
+    "correctAnswer": "plato-judias",
     "options": [
       {
         "id": "a",
-        "label": "100 g de brócoli",
+        "label": "1 taza de brócoli (90 g)",
         "value": "es-brocoli",
         "isCorrect": false
       },
       {
         "id": "b",
-        "label": "100 g de calabaza cocida",
-        "value": "calabaza",
-        "isCorrect": true
-      },
-      {
-        "id": "c",
-        "label": "100 g de tomate",
-        "value": "tomate",
+        "label": "1 taza de judías verdes (80 g)",
+        "value": "taza-judias",
         "isCorrect": false
       },
       {
+        "id": "c",
+        "label": "Plato grande de judías verdes (250 g)",
+        "value": "plato-judias",
+        "isCorrect": true
+      },
+      {
         "id": "d",
-        "label": "100 g de judías verdes",
-        "value": "es-judias-verdes",
+        "label": "100 g de tomate",
+        "value": "tomate",
         "isCorrect": false
       }
     ]
@@ -363,11 +363,11 @@
     "id": "ex-l4-1-mixed-plate-sum",
     "levelId": "nivel-4",
     "type": "count_rations",
-    "prompt": "Tu plato tiene: 150 g de patata cocida (17 g HC/100 g), 100 g de filete de ternera (0 g HC) y ensalada (5 g HC/100 g). ¿Cuántas raciones totales?",
-    "explanation": "Patata: 150 g × 17 g HC/100 g = 25,5 g HC (2,5 raciones). Filete = 0. La ensalada se considera libre en Migajas. Total = 2,5 raciones.",
+    "prompt": "Tu plato tiene: 150 g de patata hervida (15 g HC/100 g), 100 g de filete de ternera (0 g HC) y ensalada (5 g HC/100 g). ¿Cuántas raciones totales?",
+    "explanation": "Patata: 150 g × 15 g HC/100 g = 22,5 g HC (2,3 raciones). Filete = 0. La ensalada se considera libre en Migajas. Total = 2,3 raciones.",
     "difficulty": "Alta",
     "foodId": "patata-cocida-150g",
-    "correctAnswer": "2.5",
+    "correctAnswer": "2.3",
     "options": [
       {
         "id": "a",
@@ -377,8 +377,8 @@
       },
       {
         "id": "b",
-        "label": "2,5 raciones",
-        "value": "2.5",
+        "label": "2,3 raciones",
+        "value": "2.3",
         "isCorrect": true
       },
       {
@@ -435,11 +435,11 @@
     "id": "ex-l4-3-tapas-bocadillo-pizza",
     "levelId": "nivel-4",
     "type": "count_rations",
-    "prompt": "Has comido 1 bocadillo de jamón (100 g de pan de barra, 50 g HC/100 g) y 1 ración pequeña de patatas fritas (100 g, 25 g HC/100 g). ¿Cuántas raciones totales?",
-    "explanation": "Bocadillo: 100 g × 50 g HC/100 g = 50 g HC (5 raciones). Patatas: 100 g × 25 g HC/100 g = 25 g HC (2,5 raciones). Total = 5 + 2,5 = 7,5 raciones.",
+    "prompt": "Has comido 1 bocadillo de jamón (100 g de pan de barra, 50 g HC/100 g) y 1 ración pequeña de patatas fritas (100 g, 30 g HC/100 g). ¿Cuántas raciones totales?",
+    "explanation": "Bocadillo: 100 g × 50 g HC/100 g = 50 g HC (5 raciones). Patatas: 100 g × 30 g HC/100 g = 30 g HC (3 raciones). Total = 5 + 3 = 8 raciones.",
     "difficulty": "Alta",
     "foodId": "bocadillo-jamon",
-    "correctAnswer": "7.5",
+    "correctAnswer": "8.0",
     "options": [
       {
         "id": "a",
@@ -457,13 +457,13 @@
         "id": "c",
         "label": "7,5 raciones",
         "value": "7.5",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": "d",
         "label": "8,0 raciones",
         "value": "8.0",
-        "isCorrect": false
+        "isCorrect": true
       }
     ]
   },
@@ -1089,23 +1089,23 @@
     "id": "n3-ex4",
     "levelId": "nivel-3",
     "type": "count_rations",
-    "prompt": "100 g de zanahoria cocida (8 g HC). ¿Raciones?",
-    "explanation": "8 g ÷ 10 = 0,8 raciones.",
+    "prompt": "100 g de zanahoria cocida (5 g HC). ¿Raciones?",
+    "explanation": "5 g ÷ 10 = 0,5 raciones. La hervida no concentra más que la cruda.",
     "difficulty": "Media",
     "foodId": "zanahoria",
-    "correctAnswer": "0.8",
+    "correctAnswer": "0.5",
     "options": [
       {
         "id": "a",
         "label": "0,5 raciones",
         "value": "0.5",
-        "isCorrect": false
+        "isCorrect": true
       },
       {
         "id": "b",
         "label": "0,8 raciones",
         "value": "0.8",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": "c",
@@ -1503,11 +1503,11 @@
     "id": "n4-ex9",
     "levelId": "nivel-4",
     "type": "count_rations",
-    "prompt": "Patatas fritas ración mediana (150 g, 38 g HC). ¿Raciones?",
-    "explanation": "38 g ÷ 10 = 3,8 raciones.",
+    "prompt": "Patatas fritas ración mediana (150 g, 45 g HC). ¿Raciones?",
+    "explanation": "45 g ÷ 10 = 4,5 raciones.",
     "difficulty": "Alta",
     "foodId": "patatas-fritas-150g",
-    "correctAnswer": "3.8",
+    "correctAnswer": "4.5",
     "options": [
       {
         "id": "a",
@@ -1525,13 +1525,13 @@
         "id": "c",
         "label": "3,8 raciones",
         "value": "3.8",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "id": "d",
         "label": "4,5 raciones",
         "value": "4.5",
-        "isCorrect": false
+        "isCorrect": true
       }
     ]
   },
@@ -1575,11 +1575,11 @@
     "id": "n4-ex11",
     "levelId": "nivel-4",
     "type": "count_rations",
-    "prompt": "Filete con 150 g patata (25 g HC) + ensalada libre. ¿Raciones totales?",
-    "explanation": "Solo cuenta la patata: 25 g HC = 2,5 raciones.",
+    "prompt": "Filete con 150 g patata hervida (23 g HC) + ensalada libre. ¿Raciones totales?",
+    "explanation": "Solo cuenta la patata: 23 g HC = 2,3 raciones.",
     "difficulty": "Alta",
     "foodId": "patata-cocida-150g",
-    "correctAnswer": "2.5",
+    "correctAnswer": "2.3",
     "options": [
       {
         "id": "a",
@@ -1595,8 +1595,8 @@
       },
       {
         "id": "c",
-        "label": "2,5 raciones",
-        "value": "2.5",
+        "label": "2,3 raciones",
+        "value": "2.3",
         "isCorrect": true
       },
       {
@@ -2184,8 +2184,8 @@
     "id": "n2-ex12",
     "levelId": "nivel-2",
     "type": "identify_portion",
-    "prompt": "¿Qué porción tiene ~2,5 raciones sin etiqueta?",
-    "explanation": "1 patata mediana cocida ≈ 25 g HC.",
+    "prompt": "¿Qué porción tiene ~2,3 raciones sin etiqueta?",
+    "explanation": "1 patata mediana hervida = 23 g HC.",
     "difficulty": "Media",
     "foodId": "patata-cocida-150g",
     "correctAnswer": "patata-cocida-150g",

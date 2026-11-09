@@ -28,7 +28,7 @@
 | Lecciones | **16** |
 | Ejercicios (banco) | **69** |
 | Exámenes | **5** |
-| Alimentos y preparaciones | **330** (179 España · 151 RD) |
+| Alimentos y preparaciones | **332** (179 España · 153 RD) |
 | Regla ES | **10 g HC = 1 ración** |
 | Regla RD | **15 g HC = 1 ración** (catálogo; curso guiado ES-first) |
 | Aprobado de nivel | **≥ 70 %** de aciertos en el examen (reintentos permitidos) |
@@ -214,7 +214,7 @@ Proteínas y grasas **no aportan raciones de HC**, aunque **pueden modificar la 
 No usamos «verduras libres» como cantidad infinita. Distinguimos:
 
 - **Habitualmente no contabilizadas** — bajo HC en guarnición/ensalada habitual (lechuga, espinacas, pepino, tomate en taza, etc.).
-- **Se contabilizan** — aporte relevante en la porción del catálogo (calabaza, zanahoria, maíz, brócoli 1 taza, judías verdes 1 taza, etc.).
+- **Se contabilizan** — aporte relevante en la porción del catálogo (zanahoria, maíz). Una taza de brócoli o de judías verdes queda por debajo de media ración; un plato grande de judías verdes (250 g) sí llega a 1 ración.
 
 ### Preparaciones tradicionales
 
@@ -524,7 +524,7 @@ El sistema se autoaudita (`npm run audit:foods`). Hallazgos ya abordados en v3:
 | Tema | Estado |
 |------|--------|
 | Verduras «libres» | Unificado: bajo HC / habitualmente no contabilizadas vs ficha |
-| Judías verdes / brócoli | Contabilizan en porción de catálogo (~10 g HC) |
+| Judías verdes / brócoli | Taza por debajo de media ración (BEDCA). Plato grande de judías verdes ≈ 1 ración |
 | Gazpacho / tortilla | Lecciones alineadas con catálogo + nota de variabilidad de receta |
 | Duplicados exactos ES/RD | Eliminados |
 | Agua / café / té | Categoría Bebida |

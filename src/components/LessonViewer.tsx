@@ -8,7 +8,7 @@ import { FoodNutritionExtras } from "@/components/FoodNutritionExtras";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { Lesson } from "@/lib/domain/lessons";
 import { getFoodById } from "@/lib/data/foods";
-import { enrichFoodItem } from "@/lib/domain/foods";
+import { enrichFoodItem, formatHabitualMeasure } from "@/lib/domain/foods";
 import { formatRations } from "@/lib/domain/rations";
 
 interface LessonViewerProps {
@@ -104,6 +104,7 @@ function FoodExample({
   const food = getFoodById(foodId);
   if (!food) return null;
   const enriched = enrichFoodItem(food, exchangeUnitG);
+  const habitualLine = formatHabitualMeasure(enriched, exchangeUnitG);
 
   return (
     <div className="mt-6 rounded-xl bg-sage-light/70 p-4">
@@ -124,6 +125,9 @@ function FoodExample({
           </dd>
         </div>
       </dl>
+      {habitualLine ? (
+        <p className="mt-3 text-sm text-muted">Medida habitual: {habitualLine}</p>
+      ) : null}
       <FoodNutritionExtras food={enriched} compact />
     </div>
   );

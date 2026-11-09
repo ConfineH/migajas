@@ -1,4 +1,4 @@
-import type { Difficulty, FoodItem, ItemType } from "@/lib/domain/foods";
+import type { Difficulty, FoodItem, HabitualMeasure, ItemType } from "@/lib/domain/foods";
 import type { Lesson, LessonStep, LevelExam } from "@/lib/domain/lessons";
 import { defaultQuestionsPerExam, normalizeExamConfig } from "@/lib/domain/exam-session";
 
@@ -13,6 +13,7 @@ export interface FoodRow {
   difficulty: Difficulty;
   item_type: ItemType;
   notes: string;
+  habitual_measure?: HabitualMeasure | null;
 }
 
 export interface LessonRow {
@@ -45,6 +46,7 @@ export function mapFoodRow(row: FoodRow): FoodItem {
     difficulty: row.difficulty,
     itemType: row.item_type,
     notes: row.notes,
+    habitualMeasure: row.habitual_measure ?? undefined,
   };
 }
 

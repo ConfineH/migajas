@@ -1,4 +1,4 @@
-import { calculateRations, EXCHANGE_UNIT_G } from "./rations";
+import { calculateRations, EXCHANGE_UNIT_G, formatRations } from "./rations";
 import { applyPlainLanguageDo } from "./plain-language-do";
 import type {
   PortionBasis,
@@ -24,6 +24,12 @@ export type FoodDataSource =
  * habitually_uncounted = low-HC veg in usual side portions (not “infinite free”).
  */
 export type CountingPolicy = "always_count" | "habitually_uncounted";
+
+/** Same food and state as the card. Rations are computed from the card density. */
+export interface HabitualMeasure {
+  label: string;
+  grams: number;
+}
 
 export const FOOD_DATA_SOURCE_LABELS: Record<FoodDataSource, string> = {
   bedca_aligned: "BEDCA (tablas ES)",
@@ -55,6 +61,19 @@ export interface FoodItem {
   /** How listed grams relate to the food (edible / cooked / beverage…). */
   portionBasis?: PortionBasis;
   countingPolicy?: CountingPolicy;
+  habitualMeasure?: HabitualMeasure;
+}
+
+export function formatHabitualMeasure(
+  food: Pick<FoodItem, "habitualMeasure" | "grams" | "carbsG" | "portionBasis">,
+  exchangeUnitG: number = EXCHANGE_UNIT_G,
+): string | null {
+  const measure = food.habitualMeasure;
+  if (!measure || food.grams <= 0) return null;
+  const carbsG = (measure.grams / food.grams) * food.carbsG;
+  const rations = calculateRations(carbsG, exchangeUnitG);
+  const unit = food.portionBasis === "beverage" ? "ml" : "g";
+  return `${measure.label} (${measure.grams} ${unit}) = ${formatRations(rations)} raciones`;
 }
 
 export function resolveProvenanceCode(food: FoodItem): ProvenanceCode {

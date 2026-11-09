@@ -256,7 +256,7 @@ push(
   "- **Habitualmente no contabilizadas** — bajo HC en guarnición/ensalada habitual (lechuga, espinacas, pepino, tomate en taza, etc.).",
 );
 push(
-  "- **Se contabilizan** — aporte relevante en la porción del catálogo (calabaza, zanahoria, maíz, brócoli 1 taza, judías verdes 1 taza, etc.).",
+  "- **Se contabilizan** — aporte relevante en la porción del catálogo (zanahoria, maíz). Una taza de brócoli o de judías verdes queda por debajo de media ración; un plato grande de judías verdes (250 g) sí llega a 1 ración.",
 );
 push("");
 push("### Preparaciones tradicionales");
@@ -376,7 +376,7 @@ push("|------|--------|");
 push(
   "| Verduras «libres» | Unificado: bajo HC / habitualmente no contabilizadas vs ficha |",
 );
-push("| Judías verdes / brócoli | Contabilizan en porción de catálogo (~10 g HC) |");
+push("| Judías verdes / brócoli | Taza por debajo de media ración (BEDCA). Plato grande de judías verdes ≈ 1 ración |");
 push(
   "| Gazpacho / tortilla | Lecciones alineadas con catálogo + nota de variabilidad de receta |",
 );
