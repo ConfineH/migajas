@@ -45,3 +45,10 @@ skills-lock.json
 next-env.d.ts
 
 .vercel
+
+# local renders and drafts (not the app)
+/brag-output/
+/brag-output-*/
+/assets/
+/public/screenshots/*
+!/public/screenshots/README.md
