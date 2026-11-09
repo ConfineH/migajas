@@ -2,8 +2,10 @@
 
 9 piezas listas para diseñar. Copy por slide, plantilla, territorio y caption.
 
-**Estado:** Listo para diseño (Figma/Canva)  
-**Objetivo:** Validar identidad visual en grid 3×3 antes de publicar.
+**Estado:** Listo para diseño / export  
+**Objetivo:** Validar identidad visual en grid 3×3 antes de publicar.  
+**Producción:** [BATCH-01-PRODUCTION-P03-P09.md](./BATCH-01-PRODUCTION-P03-P09.md) · [prompts.md](./prompts.md) · [prompts-chatgpt-images.md](./prompts-chatgpt-images.md)  
+**Revisión 2026-08-08:** Copy P01–P09 coherente con series y mix; script export en repo pero **PNG aún no generados** en `public/social/batch-01/`; P01/P02 marcados “listos” en docs sin assets versionados; falta screenshot P06 y fotos ChatGPT (hoy Unsplash); cuenta IG pendiente (P-01).
 
 **Tamaño:** 1080×1080 px (feed). Carruseles: un PNG por slide.
 
@@ -45,7 +47,9 @@
 **Slide 4:** Error frecuente: confundir peso neto con porción  
 **Slide 5:** Un dato claro vale más que adivinar · migajas
 
-**Caption:** La etiqueta no es un examen. Es una pista. Hoy una sola línea: carbohidratos por 100 g.
+**Caption:** La etiqueta no es un examen. Es una pista. Tiene varias líneas (grasas, proteínas, hidratos de carbono…). Para contar raciones, empezamos por carbohidratos por 100 g. El resto también importa — lo vemos en su momento.
+
+**Producción P03–P09:** ver [BATCH-01-PRODUCTION-P03-P09.md](./BATCH-01-PRODUCTION-P03-P09.md) · `npm run export:social-batch-p03-p09`
 
 ---
 

@@ -63,6 +63,10 @@ Brief foto slide 1: tostada, mesa madera, luz natural, estilo editorial, sin tex
 
 Calendario completo: `docs/content-library/batch-01-instagram.md`.
 
+**Prompts (estilo Meant To):** [prompts.md](../content-library/prompts.md) · [prompts-chatgpt-images.md](../content-library/prompts-chatgpt-images.md)
+
+**Batch P03–P09 (mismo flujo que Meant To):** `docs/content-library/BATCH-01-PRODUCTION-P03-P09.md` → `npm run export:social-batch-p03-p09` → PNG en `public/social/batch-01/`. P01/P02: producción manual (ChatGPT HTML + foto); confirmar PNG en carpeta antes de dar por cerrado.
+
 ---
 
 ## Checklist antes de exportar
@@ -81,8 +85,10 @@ Ver checklist final en `BRAND_CANVA_TEMPLATES_v0.1.md` y tests de marca:
 
 | Skill | Uso |
 |-------|-----|
-| `find-skills` | Descubrir skills |
-| `seo` | SEO técnico web |
-| `seo-audit` | Auditoría / checklist marketing |
+| `product-marketing` | Contexto en `.agents/product-marketing.md` |
+| `social` | Posts, hooks, batching multiplataforma |
+| `copywriting` / `copy-editing` | Copy y pulido |
+| `content-strategy` | Pilares y calendario |
+| `seo` / `seo-audit` | SEO web |
 
-Ruta local: `.agents/skills/`
+Ruta local: `.agents/skills/` · Contexto marca: `.agents/product-marketing.md`
