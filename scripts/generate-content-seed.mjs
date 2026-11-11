@@ -64,6 +64,10 @@ ON CONFLICT (id) DO UPDATE SET
   steps = EXCLUDED.steps,
   updated_at = now();
 
+alter table public.level_exams
+  add column if not exists pool_exercise_ids jsonb,
+  add column if not exists questions_per_exam integer not null default 4;
+
 INSERT INTO public.level_exams (level_id, title, description, exercise_ids, pool_exercise_ids, questions_per_exam) VALUES
 ${examRows}
 ON CONFLICT (level_id) DO UPDATE SET
