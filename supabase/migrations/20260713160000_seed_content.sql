@@ -377,6 +377,10 @@ ON CONFLICT (id) DO UPDATE SET
   steps = EXCLUDED.steps,
   updated_at = now();
 
+alter table public.level_exams
+  add column if not exists pool_exercise_ids jsonb,
+  add column if not exists questions_per_exam integer not null default 4;
+
 INSERT INTO public.level_exams (level_id, title, description, exercise_ids, pool_exercise_ids, questions_per_exam) VALUES
 ('nivel-1', 'Examen — Nivel 1', 'Fundamentos: raciones, etiquetas, moduladores, fibra y alimentos básicos. 5 preguntas sorteadas de un banco de 15.', '["ex-l1-1-basic-ration","ex-l1-2-label-reading","ex-l1-3-zero-carb-identify","ex-l1-4-fiber-net-carbs","ex-l1-5-fruit-bread-dairy","n1-ex6","n1-ex7","n1-ex8","n1-ex9","n1-ex10","n1-ex11","n1-ex12","n1-ex13","n1-ex14","n1-ex15"]'::jsonb, '["ex-l1-1-basic-ration","ex-l1-2-label-reading","ex-l1-3-zero-carb-identify","ex-l1-4-fiber-net-carbs","ex-l1-5-fruit-bread-dairy","n1-ex6","n1-ex7","n1-ex8","n1-ex9","n1-ex10","n1-ex11","n1-ex12","n1-ex13","n1-ex14","n1-ex15"]'::jsonb, 5),
 ('nivel-2', 'Examen — Nivel 2', 'Cereales, tubérculos y legumbres. 4 preguntas sorteadas de un banco de 12.', '["ex-l2-1-rice-pasta-portions","ex-l2-2-potato-sweet-potato","ex-l2-3-legumes-counting","n2-ex4","n2-ex5","n2-ex6","n2-ex7","n2-ex8","n2-ex9","n2-ex10","n2-ex11","n2-ex12"]'::jsonb, '["ex-l2-1-rice-pasta-portions","ex-l2-2-potato-sweet-potato","ex-l2-3-legumes-counting","n2-ex4","n2-ex5","n2-ex6","n2-ex7","n2-ex8","n2-ex9","n2-ex10","n2-ex11","n2-ex12"]'::jsonb, 4),
