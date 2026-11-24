@@ -7,7 +7,15 @@ const { PGlite } = require("@electric-sql/pglite");
 // Preliminary lock check on an in-memory database.
 // Does not open a network connection, does not start PostgREST, and does not
 // read production data. Passing here is not a production verification.
+// GitHub Actions runs this file on the checked-out commit. Set
+// S1_EXPECT_COMMIT to that SHA and the run fails if HEAD is different.
 const repoRoot = path.resolve(__dirname, "..");
+const pgliteVersion = JSON.parse(
+  fs.readFileSync(
+    path.join(repoRoot, "node_modules/@electric-sql/pglite/package.json"),
+    "utf8",
+  ),
+).version;
 const repoMigrations = path.join(repoRoot, "supabase", "migrations");
 const lockName = "20261124120000_lock_user_profile_professional_columns.sql";
 const lockFile = path.join(repoMigrations, lockName);
@@ -217,6 +225,23 @@ async function privilegeProbe(db) {
 }
 
 async function main() {
+  const declaredPglite = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, "package.json"), "utf8"),
+  ).devDependencies["@electric-sql/pglite"];
+  if (declaredPglite !== "0.5.16" || pgliteVersion !== "0.5.16") {
+    throw new Error(
+      `@electric-sql/pglite must be pinned to 0.5.16, package.json=${declaredPglite}, installed=${pgliteVersion}`,
+    );
+  }
+  const headAtRun = execSync("git rev-parse HEAD", {
+    cwd: repoRoot,
+    encoding: "utf8",
+  }).trim();
+  if (process.env.S1_EXPECT_COMMIT && process.env.S1_EXPECT_COMMIT !== headAtRun) {
+    throw new Error(
+      `S1 test HEAD ${headAtRun} does not match S1_EXPECT_COMMIT ${process.env.S1_EXPECT_COMMIT}`,
+    );
+  }
   const migrationLock = lockSection(lockFile);
   const recoveryLock = lockSection(recoveryFile);
   if (migrationLock !== recoveryLock) {
@@ -970,16 +995,16 @@ async function main() {
   const report = {
     validation: {
       engine: "PGlite",
+      pgliteVersion,
       postgrest: "not run",
       supabase: "not run",
       production: "not verified",
-      note: "Preliminary in-memory result. The control is not verified for production until the same cases pass through PostgREST against an isolated Supabase database with fictional users.",
+      authoritativeRun:
+        "GitHub Actions workflow s1-profile-lock checks out the commit and sets S1_EXPECT_COMMIT to that SHA. This JSON records the HEAD at the moment the file was generated. If that HEAD is an ancestor of the commit that adds the file, the Actions run is the check for the commit itself.",
+      note: "Preliminary in-memory result. The PostgreSQL and PostgREST run is scripts/user_profile_professional_lock.integration.cjs. Neither run is a production verification.",
     },
     engine: version.rows[0].version,
-    headAtRun: execSync("git rev-parse HEAD", {
-      cwd: repoRoot,
-      encoding: "utf8",
-    }).trim(),
+    headAtRun,
     migrationSha256: crypto
       .createHash("sha256")
       .update(fs.readFileSync(lockFile))

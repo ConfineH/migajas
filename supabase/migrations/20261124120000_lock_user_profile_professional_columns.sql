@@ -25,9 +25,16 @@
 -- write their own profile. This file does not insert, update, or delete rows.
 --
 -- Deploy this migration and the app route as separate changes. Either order
--- fails closed. Preferred order: this migration first, then the app. Until
--- the app is deployed, POST /api/professional/activate still attempts the
--- write and the trigger rejects it.
+-- fails closed. Required order for production: apply and validate this
+-- migration first, then deploy the route. Until the app is deployed, the
+-- previous POST /api/professional/activate still attempts the write and the
+-- trigger rejects it.
+--
+-- Merging this file into main does not apply it. The workflow
+-- .github/workflows/s1-profile-lock.yml runs the tests on a throwaway
+-- PostgreSQL service and does not call Supabase. Vercel runs `next build`.
+-- Nothing in this repo runs `supabase db push`. Applying this SQL to
+-- production needs an explicit session and separate authorization.
 --
 -- Do not recover by dropping this trigger or by restoring GRANT ALL.
 -- To put the lock back after a later regression, run
