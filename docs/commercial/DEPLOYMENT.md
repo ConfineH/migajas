@@ -68,6 +68,19 @@ Checklist manual opcional:
 - [ ] Diario `/diario` tras nivel 3 + seguimiento personal activo
 - [ ] Export CSV/PDF desde diario
 
+## S1 — protección del perfil profesional
+
+Fusionar `main` no aplica SQL. El build de Vercel es `next build`. El workflow `.github/workflows/s1-profile-lock.yml` ejecuta pruebas contra un PostgreSQL desechable y no llama a Supabase. No hay `supabase/config.toml` ni un paso que ejecute `supabase db push`.
+
+Orden exigido, con autorización separada para el paso de base de datos:
+
+1. Validar la migración en un PostgreSQL aislado: `npm run test:profile-lock:integration`.
+2. Aplicar únicamente `supabase/migrations/20261124120000_lock_user_profile_professional_columns.sql` en el proyecto autorizado.
+3. Comprobar el catálogo: el trigger existe, `authenticated` conserva solo `SELECT`, `INSERT` y `UPDATE`, y un intento de autoasignación ficticio recibe `42501`.
+4. Después, desplegar la aplicación. `POST /api/professional/activate` responde 403.
+
+Si el bloqueo desaparece más adelante, reponerlo con `supabase/recovery/s1_reassert_user_profile_professional_lock.sql`. Ese archivo no restaura `GRANT ALL` y no reescribe filas.
+
 ## 5. Actualizaciones post-licencia
 
 1. Recibir nueva versión del código (tag Git).

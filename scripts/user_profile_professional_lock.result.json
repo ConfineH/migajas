@@ -1,0 +1,244 @@
+{
+  "validation": {
+    "engine": "PGlite",
+    "pgliteVersion": "0.5.16",
+    "postgrest": "not run",
+    "supabase": "not run",
+    "production": "not verified",
+    "authoritativeRun": "GitHub Actions workflow s1-profile-lock checks out the commit and sets S1_EXPECT_COMMIT to that SHA. This JSON records the HEAD at the moment the file was generated. If that HEAD is an ancestor of the commit that adds the file, the Actions run is the check for the commit itself.",
+    "note": "Preliminary in-memory result. The PostgreSQL and PostgREST run is scripts/user_profile_professional_lock.integration.cjs. Neither run is a production verification."
+  },
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.16) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.13 (e13ee988ce3d87a738dd8f3661d02223308c412a), 32-bit",
+  "headAtRun": "9d257fdc462295922824aaa6685655d24f39e84e",
+  "migrationSha256": "234511fbf6533c7ecedfea22393041fe8bcb61cc369337dbe8c2d58c0dae4eda",
+  "recoveryMatchesMigration": true,
+  "migrationHasNoDataChange": true,
+  "activateRouteHasNoProfileWrite": true,
+  "migrationsAppliedExcept": [
+    {
+      "file": "20260713160000_seed_content.sql",
+      "applied": false,
+      "ok": false,
+      "code": "42703",
+      "message": "column \"pool_exercise_ids\" of relation \"level_exams\" does not exist"
+    },
+    {
+      "file": "20260714160300_lock_admin_rpc.sql",
+      "applied": false,
+      "ok": false,
+      "code": "42883",
+      "message": "function public.get_org_dashboard_stats() does not exist"
+    }
+  ],
+  "identityMechanism": {
+    "exemption": "current_user = 'service_role' AND auth.role() = 'service_role'",
+    "authRole": "coalesce(nullif(request.jwt.claim.role, ''), request.jwt.claims ->> 'role')",
+    "rejected": [
+      "null jwt role",
+      "blank jwt role",
+      "padded service_role claim",
+      "postgres, including postgres with a service_role jwt",
+      "authenticated with a service_role jwt",
+      "service_role session whose jwt role is authenticated"
+    ]
+  },
+  "roleBoundary": {
+    "member": false,
+    "error": {
+      "ok": false,
+      "code": "42501",
+      "message": "permission denied to set role \"service_role\""
+    },
+    "current_user": "authenticated",
+    "session_user": "authenticated"
+  },
+  "privileges": {
+    "afterHistoricalMigrations": {
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "anon_truncate": false,
+      "authenticated_select": true,
+      "authenticated_insert": true,
+      "authenticated_update": true,
+      "authenticated_delete": false,
+      "authenticated_truncate": false,
+      "service_select": false,
+      "service_insert": false,
+      "service_update": false,
+      "service_delete": false,
+      "service_truncate": false,
+      "relacl": "{postgres=arwdDxtm/postgres,authenticated=arw/postgres}"
+    },
+    "afterSimulatedProductionDefaultGrants": {
+      "anon_select": true,
+      "anon_insert": true,
+      "anon_update": true,
+      "anon_delete": true,
+      "anon_truncate": true,
+      "authenticated_select": true,
+      "authenticated_insert": true,
+      "authenticated_update": true,
+      "authenticated_delete": true,
+      "authenticated_truncate": true,
+      "service_select": true,
+      "service_insert": true,
+      "service_update": true,
+      "service_delete": true,
+      "service_truncate": true,
+      "relacl": "{postgres=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,anon=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+    },
+    "afterS1": {
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "anon_truncate": false,
+      "authenticated_select": true,
+      "authenticated_insert": true,
+      "authenticated_update": true,
+      "authenticated_delete": false,
+      "authenticated_truncate": false,
+      "service_select": true,
+      "service_insert": true,
+      "service_update": true,
+      "service_delete": true,
+      "service_truncate": true,
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=arw/postgres}"
+    },
+    "afterSafeRecovery": {
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "anon_truncate": false,
+      "authenticated_select": true,
+      "authenticated_insert": true,
+      "authenticated_update": true,
+      "authenticated_delete": false,
+      "authenticated_truncate": false,
+      "service_select": true,
+      "service_insert": true,
+      "service_update": true,
+      "service_delete": true,
+      "service_truncate": true,
+      "relacl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=arw/postgres}"
+    }
+  },
+  "checks": [
+    [
+      "migration does not change existing rows",
+      true
+    ],
+    [
+      "trigger is invoker and pins search_path",
+      true
+    ],
+    [
+      "no security definer function writes user_profiles",
+      true
+    ],
+    [
+      "anon loses every table privilege",
+      true
+    ],
+    [
+      "authenticated keeps select, insert, and update only",
+      true
+    ],
+    [
+      "service_role keeps delete and truncate",
+      true
+    ],
+    [
+      "anon cannot insert or truncate",
+      true
+    ],
+    [
+      "onboarding insert omits professional columns and stores defaults",
+      true
+    ],
+    [
+      "profile update can change region, goal, and clinical mode",
+      true
+    ],
+    [
+      "existing professional can change region while the same professional attributes are resent",
+      true
+    ],
+    [
+      "existing professional cannot change the share code",
+      true
+    ],
+    [
+      "authenticated self-assignment changes nothing, including the region in the same statement",
+      true
+    ],
+    [
+      "authenticated cannot insert a profile for someone else",
+      true
+    ],
+    [
+      "a service_role JWT does not exempt an authenticated session",
+      true
+    ],
+    [
+      "a service_role JWT does not exempt postgres",
+      true
+    ],
+    [
+      "postgres can change region and cannot change professional columns when the JWT role is null",
+      true
+    ],
+    [
+      "service_role without a JWT role is not exempt",
+      true
+    ],
+    [
+      "a padded service_role claim is not exact and is rejected",
+      true
+    ],
+    [
+      "auth.role() prefers request.jwt.claim.role, so a conflicting JSON role does not exempt",
+      true
+    ],
+    [
+      "service_role is exempt when current_user matches auth.role() from the JSON claim",
+      true
+    ],
+    [
+      "service_role is exempt when both the session and request.jwt.claim.role match",
+      true
+    ],
+    [
+      "authenticated is not a member of service_role and cannot assume it",
+      true
+    ],
+    [
+      "service_role can delete a profile without a JWT, because delete does not use the column exemption",
+      true
+    ],
+    [
+      "authenticated cannot delete its own profile",
+      true
+    ],
+    [
+      "anon cannot call the trigger function directly",
+      true
+    ],
+    [
+      "authenticated cannot call the trigger function directly",
+      true
+    ],
+    [
+      "service_role cannot call the trigger function directly",
+      true
+    ],
+    [
+      "safe recovery relocks without rewriting rows or restoring grant all",
+      true
+    ]
+  ],
+  "passed": true
+}
