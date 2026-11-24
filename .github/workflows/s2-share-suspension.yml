@@ -55,7 +55,7 @@ jobs:
 
       - run: npm ci
       - run: npm run test:share-suspension
-      - run: npx vitest run test/eu-security-compliance/professional-shares-closed.test.ts
+      - run: npx vitest run test/eu-security-compliance/professional-shares-closed.test.ts test/eu-security-compliance/professional-shares-panel.test.tsx
 
       - name: Install PostgREST 16.6
         run: |

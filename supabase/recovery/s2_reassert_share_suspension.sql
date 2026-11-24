@@ -3,8 +3,14 @@
 -- Does not grant INSERT, UPDATE, TRUNCATE, or EXECUTE on
 -- share_report_with_professional or lookup_professional_by_share_code.
 -- Does not change default privileges and does not reopen sharing.
+-- One transaction. SET LOCAL ends at the COMMIT. Do not wrap this file.
+
+begin;
 
 -- LOCK STATEMENTS BEGIN
+set local lock_timeout = '10s';
+set local statement_timeout = '30s';
+
 drop policy if exists "Patients insert own professional contacts"
   on public.patient_professional_contacts;
 
@@ -68,3 +74,5 @@ revoke all on function public.list_patient_share_recipients()
   from public, anon, service_role;
 grant execute on function public.list_patient_share_recipients() to authenticated;
 -- LOCK STATEMENTS END
+
+commit;

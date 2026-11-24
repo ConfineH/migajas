@@ -85,12 +85,16 @@ Si el bloqueo desaparece más adelante, reponerlo con `supabase/recovery/s1_reas
 
 Fusionar `main` no aplica este SQL. El workflow `.github/workflows/s2-share-suspension.yml` prueba la suspensión en un PostgreSQL desechable y no llama a Supabase ni a Vercel.
 
-Orden, con autorización separada para el paso de base de datos:
+Orden, con autorización separada para el paso de base de datos. No ejecutado en este cambio.
 
 1. Validar en un PostgreSQL aislado: `npm run test:share-suspension:integration`.
-2. Aplicar únicamente `supabase/migrations/20261124180000_suspend_professional_shares.sql` en una transacción. No usar `supabase db push`: el historial remoto no coincide con los archivos locales y un push podría ejecutar otras migraciones.
-3. Comprobar el catálogo: `authenticated` conserva `SELECT` y `DELETE` en contactos e informes; `INSERT` y `UPDATE` ya no están; `share_report_with_professional` y `lookup_professional_by_share_code` no tienen `EXECUTE` para `public`, `anon`, `authenticated` ni `service_role`; `list_patient_share_recipients` sigue en `authenticated`.
-4. Registrar solo la versión `20261124180000` con `supabase migration repair 20261124180000 --status applied`. No reparar el resto del historial.
+2. Confirmar que la sesión apunta al proyecto `tqxxdajuguthwljzmqfe` antes de escribir. Aplicar el archivo `supabase/migrations/20261124180000_suspend_professional_shares.sql` tal cual, sin envolverlo en otra transacción. El archivo ya abre una, fija `lock_timeout` a 10s y `statement_timeout` a 30s con `SET LOCAL`, y hace un único `COMMIT` al final. No usar `supabase db push`: el historial remoto no coincide con los archivos locales.
+3. Comprobar la función, el trigger, la política de `INSERT` y los privilegios. El SQL no modifica filas. No uses la igualdad del número de contactos o informes como condición: un paciente puede borrar copias durante la operación. El historial de migraciones anterior permanece intacto.
+4. Registrar solo `20261124180000`, después de ver el destino y antes de que el comando escriba:
+
+   `supabase migration repair 20261124180000 --status applied --remote=tqxxdajuguthwljzmqfe`
+
+   El destino mostrado tiene que ser `Target: project tqxxdajuguthwljzmqfe`. Si es otro, parar. La versión sin `--remote` no sirve. No reparar ninguna otra versión. Este comando no ejecuta el SQL.
 5. Después, desplegar la aplicación. `POST /api/professional/shares`, `PATCH /api/professional/shares` y `POST /api/professional/lookup` responden 403 sin llamar a Supabase. `GET` y `DELETE` de `/api/professional/shares` siguen disponibles.
 
 Si alguien vuelve a conceder `INSERT`, `UPDATE` o `EXECUTE` sobre esas funciones, reponer la suspensión con `supabase/recovery/s2_reassert_share_suspension.sql`. Ese archivo no reabre el envío y no borra filas. La política corregida permanece para que una reapertura futura no recupere la condición tautológica; reaperturar exige un cambio explícito posterior que vuelva a conceder los privilegios.

@@ -29,10 +29,17 @@
 -- TRUNCATE, or the suspended EXECUTE grants back on these objects.
 -- Re-applying the statements below closes a grant that was restored by hand.
 -- It does not grant INSERT, UPDATE, or EXECUTE on the suspended functions.
+--
+-- This file is one transaction. Do not wrap it in another. SET LOCAL applies
+-- only until the single COMMIT at the end. The function body uses BEGIN/END
+-- and does not commit.
 
 begin;
 
 -- LOCK STATEMENTS BEGIN
+set local lock_timeout = '10s';
+set local statement_timeout = '30s';
+
 drop policy if exists "Patients insert own professional contacts"
   on public.patient_professional_contacts;
 

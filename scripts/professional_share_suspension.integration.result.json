@@ -2,9 +2,9 @@
   "kind": "postgres-postgrest",
   "postgresVersion": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
   "postgrestVersion": "PostgREST 16.6",
-  "headAtRun": "84fb7184a7915afe25a4c51d8a84931e42eb5c67",
+  "headAtRun": "27f8cf626a36ad6c3c1db38addaa3b56ae1b4fc5",
   "expectedCommit": null,
-  "migrationSha256": "0d7d1069837c5beb25d8c23a26ef14af7b7c1f96f364c458beb4ce62f918c63c",
+  "migrationSha256": "2ef608b27de85f5e5b2fcfd3852e3958651b6de57ff39690d6241b8213875fe6",
   "migrationNotes": [
     {
       "file": "20260713160000_seed_content.sql",

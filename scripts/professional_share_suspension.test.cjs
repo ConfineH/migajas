@@ -74,6 +74,43 @@ function assertNoDataChange(sql) {
   }
 }
 
+function sqlOutsideFunctions(sql) {
+  return sql
+    .replace(/\$\$[\s\S]*?\$\$/g, "")
+    .replace(/--.*$/gm, "");
+}
+
+function assertSingleTransaction(sql, label) {
+  const outside = sqlOutsideFunctions(sql);
+  const begins = outside.match(/\bbegin\s*;/gi) || [];
+  const commits = outside.match(/\bcommit\s*;/gi) || [];
+  if (begins.length !== 1 || commits.length !== 1) {
+    throw new Error(
+      `${label} has begin=${begins.length} commit=${commits.length}`,
+    );
+  }
+  const lower = outside.toLowerCase();
+  const beginAt = lower.indexOf("begin;");
+  const lockAt = lower.indexOf("set local lock_timeout");
+  const statementAt = lower.indexOf("set local statement_timeout");
+  const dropAt = lower.indexOf("drop policy");
+  const commitAt = lower.lastIndexOf("commit;");
+  if (
+    !(
+      beginAt >= 0 &&
+      beginAt < lockAt &&
+      lockAt < statementAt &&
+      statementAt < dropAt &&
+      dropAt < commitAt
+    )
+  ) {
+    throw new Error(`${label} timeouts are not inside the single transaction`);
+  }
+  if (outside.slice(commitAt + "commit;".length).trim() !== "") {
+    throw new Error(`${label} has SQL after the final commit`);
+  }
+}
+
 async function run(db, sql) {
   try {
     const result = await db.query(sql);
@@ -261,6 +298,8 @@ async function main() {
     throw new Error("recovery SQL does not repeat the migration statements");
   }
   assertNoDataChange(section);
+  assertSingleTransaction(migrationSql, "migration");
+  assertSingleTransaction(recoverySql, "recovery");
   if (
     /\bgrant\s+(insert|update|truncate|execute\s+on\s+function\s+public\.share_report|\s*execute\s+on\s+function\s+public\.lookup)/i.test(
       section,
