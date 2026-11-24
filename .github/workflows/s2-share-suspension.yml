@@ -1,0 +1,68 @@
+name: S2 share suspension
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - cursor/s2-suspend-professional-shares-64af
+
+# This workflow runs tests. It does not apply SQL to production and it does
+# not call Supabase or Vercel.
+jobs:
+  share-suspension:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: s2-local-only
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: s2-local-only
+      POSTGREST_BIN: /tmp/postgrest
+      S2_POSTGREST_PORT: "54322"
+      S2_EXPECT_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out the commit under test
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Record the checked-out commit
+        run: |
+          {
+            echo "checked_out=$(git rev-parse HEAD)"
+            echo "expected=${S2_EXPECT_COMMIT}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - run: npm ci
+      - run: npm run test:share-suspension
+      - run: npx vitest run test/eu-security-compliance/professional-shares-closed.test.ts
+
+      - name: Install PostgREST 16.6
+        run: |
+          curl -fsSL -o /tmp/postgrest.tar.xz \
+            "https://github.com/PostgREST/postgrest/releases/download/v16.6/postgrest-v16.6-linux-static-x86-64.tar.xz"
+          tar -xJf /tmp/postgrest.tar.xz -C /tmp
+          test -x /tmp/postgrest
+          /tmp/postgrest --version
+
+      - run: npm run test:share-suspension:integration

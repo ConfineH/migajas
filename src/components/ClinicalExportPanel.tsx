@@ -225,9 +225,10 @@ export function ClinicalExportPanel() {
           Informe para tu equipo de salud
         </h2>
         <p className="mt-1 text-sm text-muted">
-          Descárgalo o envíaselo a tu profesional con el código que te haya dado.
-          Puedes marcar que te recuerde el mes que viene o todos los meses. Tú
-          envías; Migajas no manda sola.
+          Puedes descargarlo. El envío de informes nuevos está suspendido:
+          comprobar un código o pulsar enviar responde que no está disponible.
+          Si ya enviaste alguno, sigues viendo a quién y puedes retirar ese
+          acceso. La etiqueta y el recordatorio no se pueden cambiar.
         </p>
       </div>
 
@@ -247,7 +248,8 @@ export function ClinicalExportPanel() {
                 </p>
                 {recipient.due ? (
                   <p className="mt-1 text-sm font-medium text-terracotta-dark">
-                    Toca enviarle el informe de este mes.
+                    El recordatorio de este mes sigue visible. El envío nuevo
+                    está suspendido.
                   </p>
                 ) : null}
                 <label className="mt-2 block space-y-1 text-sm">

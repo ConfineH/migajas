@@ -1,0 +1,162 @@
+{
+  "kind": "pglite",
+  "pgliteVersion": "0.5.16",
+  "postgres": "PostgreSQL 18.6 (PGlite 0.5.16) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.13 (e13ee988ce3d87a738dd8f3661d02223308c412a), 32-bit",
+  "headAtRun": "84fb7184a7915afe25a4c51d8a84931e42eb5c67",
+  "expectedCommit": null,
+  "migrationSha256": "0d7d1069837c5beb25d8c23a26ef14af7b7c1f96f364c458beb4ce62f918c63c",
+  "migrationNotes": [
+    {
+      "file": "20260713160000_seed_content.sql",
+      "applied": false,
+      "ok": false,
+      "code": "42703",
+      "message": "column \"pool_exercise_ids\" of relation \"level_exams\" does not exist"
+    },
+    {
+      "file": "20260714160300_lock_admin_rpc.sql",
+      "applied": false,
+      "ok": false,
+      "code": "42883",
+      "message": "function public.get_org_dashboard_stats() does not exist"
+    }
+  ],
+  "privileges": {
+    "anon_contact_select": false,
+    "anon_contact_insert": false,
+    "anon_contact_update": false,
+    "anon_contact_delete": false,
+    "anon_contact_truncate": false,
+    "public_contact_insert": false,
+    "auth_contact_select": true,
+    "auth_contact_insert": false,
+    "auth_contact_update": false,
+    "auth_contact_delete": true,
+    "auth_contact_truncate": false,
+    "service_contact_select": true,
+    "service_contact_insert": false,
+    "service_contact_update": false,
+    "service_contact_delete": true,
+    "service_contact_truncate": false,
+    "anon_share_insert": false,
+    "anon_share_truncate": false,
+    "auth_share_select": true,
+    "auth_share_insert": false,
+    "auth_share_update": false,
+    "auth_share_delete": true,
+    "auth_share_truncate": false,
+    "service_share_select": true,
+    "service_share_insert": false,
+    "service_share_delete": true,
+    "public_share_exec": false,
+    "anon_share_exec": false,
+    "auth_share_exec": false,
+    "service_share_exec": false,
+    "public_lookup_exec": false,
+    "anon_lookup_exec": false,
+    "auth_lookup_exec": false,
+    "service_lookup_exec": false,
+    "public_list_exec": false,
+    "anon_list_exec": false,
+    "auth_list_exec": true,
+    "service_list_exec": false,
+    "auth_profile_select": true,
+    "auth_profile_insert": true,
+    "auth_profile_update": true,
+    "auth_profile_delete": false,
+    "auth_intake_insert": true,
+    "auth_message_insert": true,
+    "auth_message_select": true
+  },
+  "checks": [
+    [
+      "S1 leaves historical contacts unchanged",
+      true
+    ],
+    [
+      "default privileges leave INSERT and EXECUTE open before S2",
+      true
+    ],
+    [
+      "S2 does not rewrite historical shares or contacts",
+      true
+    ],
+    [
+      "privileges match the suspension matrix",
+      true
+    ],
+    [
+      "insert policy binds the contact patient, professional, and share",
+      true
+    ],
+    [
+      "reassignment trigger is invoker with an empty search_path",
+      true
+    ],
+    [
+      "schema default privileges remain and do not reopen these objects",
+      true
+    ],
+    [
+      "authenticated cannot insert a contact",
+      true
+    ],
+    [
+      "authenticated cannot insert a share directly",
+      true
+    ],
+    [
+      "service_role cannot execute share_report_with_professional",
+      true
+    ],
+    [
+      "authenticated cannot execute lookup_professional_by_share_code",
+      true
+    ],
+    [
+      "anon cannot execute lookup_professional_by_share_code",
+      true
+    ],
+    [
+      "list_patient_share_recipients returns only the caller",
+      true
+    ],
+    [
+      "patient export select sees own contacts and another user sees none",
+      true
+    ],
+    [
+      "historical professional read of shares addressed to them still works",
+      true
+    ],
+    [
+      "corrected policy rejects a contact without a share between that pair",
+      true
+    ],
+    [
+      "corrected policy accepts a contact for an existing share of the same pair",
+      true
+    ],
+    [
+      "trigger rejects reassignment and still allows a label change",
+      true
+    ],
+    [
+      "a restored grant reopens insert and execute",
+      true
+    ],
+    [
+      "recovery closes the grants again without rewriting historical rows",
+      true
+    ],
+    [
+      "the patient can revoke own shares and another user cannot",
+      true
+    ],
+    [
+      "service_role account deletion removes the fictional account and keeps the other",
+      true
+    ]
+  ],
+  "passed": true
+}
