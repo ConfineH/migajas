@@ -46,6 +46,13 @@ describe("mergeCookieIntoProfile", () => {
   it("defaults clinical mode to false for new profiles", () => {
     expect(mergeCookieIntoProfile(cookie).clinical_mode_enabled).toBe(false);
   });
+
+  it("does not carry professional attributes into a new profile", () => {
+    const merged = mergeCookieIntoProfile(cookie);
+    expect(merged).not.toHaveProperty("is_professional");
+    expect(merged).not.toHaveProperty("professional_role");
+    expect(merged).not.toHaveProperty("professional_share_code");
+  });
 });
 
 describe("validateDailyCarbGoal", () => {
@@ -82,6 +89,20 @@ describe("validateProfilePatch", () => {
         daily_carb_goal_g: 160,
         clinical_mode_enabled: true,
       });
+    }
+  });
+
+  it("drops a self-declared professional role from a profile update", () => {
+    const result = validateProfilePatch({
+      region_id: "es",
+      is_professional: true,
+      professional_role: "nutricion",
+      professional_share_code: "AAAAAA",
+    } as Parameters<typeof validateProfilePatch>[0]);
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value).toEqual({ region_id: "es" });
     }
   });
 });
