@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:profile-lock": "node scripts/user_profile_professional_lock.test.cjs",
+    "test:clinical-suspension": "node scripts/clinical_surface_suspension.test.cjs",
     "test:profile-lock:integration": "node scripts/user_profile_professional_lock.integration.cjs",
     "test:watch": "vitest",
     "db:seed": "node scripts/generate-content-seed.mjs",

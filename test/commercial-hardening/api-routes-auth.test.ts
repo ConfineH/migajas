@@ -31,6 +31,7 @@ import {
 } from "@/app/api/intake/route";
 import { GET as adminMetricsGet } from "@/app/api/admin/metrics/route";
 import { GET as profileGet, PATCH as profilePatch } from "@/app/api/profile/route";
+import { CLINICAL_SUSPENSION_ERRORS } from "@/lib/domain/user-profile";
 
 const denied403 = {
   ok: false,
@@ -51,35 +52,16 @@ describe("clinical API auth gates", () => {
     mockRequireClinicalAccess.mockReset();
   });
 
-  it("export returns 401 when unauthenticated", async () => {
-    mockRequireClinicalAccess.mockResolvedValue(unauthenticated401);
-
+  it("export stays closed while clinical reports are suspended", async () => {
     const response = await exportGet(
       new Request("http://localhost/api/clinical/export?format=csv&range=7d"),
     );
 
-    expect(response.status).toBe(401);
-    await expect(response.json()).resolves.toEqual({
-      error: unauthenticated401.error,
-    });
-  });
-
-  it("export returns 403 when clinical access denied", async () => {
-    mockRequireClinicalAccess.mockResolvedValue({
-      ok: false,
-      status: 403,
-      error: "Completa el nivel 3 para usar el diario.",
-      reason: "nivel",
-    });
-
-    const response = await exportGet(
-      new Request("http://localhost/api/clinical/export?format=pdf&range=7d"),
-    );
-
     expect(response.status).toBe(403);
     await expect(response.json()).resolves.toEqual({
-      error: "Completa el nivel 3 para usar el diario.",
+      error: CLINICAL_SUSPENSION_ERRORS.clinicalReport,
     });
+    expect(mockRequireClinicalAccess).not.toHaveBeenCalled();
   });
 
   it("intake GET returns 401 when unauthenticated", async () => {
@@ -95,9 +77,7 @@ describe("clinical API auth gates", () => {
     });
   });
 
-  it("intake POST returns 403 when clinical access denied", async () => {
-    mockRequireClinicalAccess.mockResolvedValue(denied403);
-
+  it("intake POST stays closed while diary writes are suspended", async () => {
     const response = await intakePost(
       new Request("http://localhost/api/intake", {
         method: "POST",
@@ -112,12 +92,13 @@ describe("clinical API auth gates", () => {
     );
 
     expect(response.status).toBe(403);
-    await expect(response.json()).resolves.toEqual({ error: denied403.error });
+    await expect(response.json()).resolves.toEqual({
+      error: CLINICAL_SUSPENSION_ERRORS.intakeWrite,
+    });
+    expect(mockRequireClinicalAccess).not.toHaveBeenCalled();
   });
 
-  it("intake PATCH returns 403 when clinical access denied", async () => {
-    mockRequireClinicalAccess.mockResolvedValue(denied403);
-
+  it("intake PATCH stays closed while diary writes are suspended", async () => {
     const response = await intakePatch(
       new Request("http://localhost/api/intake", {
         method: "PATCH",
@@ -131,7 +112,10 @@ describe("clinical API auth gates", () => {
     );
 
     expect(response.status).toBe(403);
-    await expect(response.json()).resolves.toEqual({ error: denied403.error });
+    await expect(response.json()).resolves.toEqual({
+      error: CLINICAL_SUSPENSION_ERRORS.intakeWrite,
+    });
+    expect(mockRequireClinicalAccess).not.toHaveBeenCalled();
   });
 
   it("intake DELETE returns 403 when clinical access denied", async () => {

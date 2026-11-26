@@ -32,6 +32,7 @@ interface OnboardingFlowProps {
   settingsMode?: boolean;
   /** Deep link to next guided item after first-time onboarding. */
   postCompleteHref?: string;
+  clinicalSurfaceSuspended?: boolean;
 }
 
 const REGION_EXAMPLES: Record<string, { food: string; detail: string; carbsG: number }> =
@@ -57,6 +58,7 @@ export function OnboardingFlow({
   canEnableClinicalMode = false,
   settingsMode = false,
   postCompleteHref = "/learn",
+  clinicalSurfaceSuspended = false,
 }: OnboardingFlowProps) {
   const router = useRouter();
   const steps = settingsMode ? SETTINGS_STEPS : ONBOARDING_STEPS;
@@ -103,12 +105,12 @@ export function OnboardingFlow({
         regionId: region.id,
         guestMode,
         completed: true,
-        daily_carb_goal_g: goal,
+        ...(clinicalSurfaceSuspended ? {} : { daily_carb_goal_g: goal }),
       }),
     });
 
     if (isAuthenticated) {
-      if (clinicalModeEnabled && !healthDataConsent) {
+      if (!clinicalSurfaceSuspended && clinicalModeEnabled && !healthDataConsent) {
         setSaveError(
           "Debes dar tu consentimiento explícito para tratar datos de salud.",
         );
@@ -118,14 +120,18 @@ export function OnboardingFlow({
       const profileResponse = await fetch("/api/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          region_id: region.id,
-          daily_carb_goal_g: goal,
-          clinical_mode_enabled: clinicalModeEnabled,
-          ...(clinicalModeEnabled
-            ? { health_data_consent: true }
-            : {}),
-        }),
+        body: JSON.stringify(
+          clinicalSurfaceSuspended
+            ? { region_id: region.id }
+            : {
+                region_id: region.id,
+                daily_carb_goal_g: goal,
+                clinical_mode_enabled: clinicalModeEnabled,
+                ...(clinicalModeEnabled
+                  ? { health_data_consent: true }
+                  : {}),
+              },
+        ),
       });
 
       if (!profileResponse.ok) {
@@ -330,6 +336,33 @@ export function OnboardingFlow({
                 Seguimiento personal
               </h1>
               <div className="space-y-4 rounded-3xl bg-sage-light/70 p-6 shadow-soft">
+                {clinicalSurfaceSuspended ? (
+                  <div className="space-y-3 text-sm text-muted">
+                    <p>
+                      La meta de carbohidratos y el alta de seguimiento personal
+                      están suspendidas. La región sí se guarda.
+                    </p>
+                    <p>
+                      Si ya activaste el seguimiento, puedes retirarlo. Tus
+                      registros anteriores siguen en el diario y en la descarga
+                      de datos de esta página.
+                    </p>
+                    {isAuthenticated && clinicalModeEnabled ? (
+                      <Button
+                        variant="ghost"
+                        onClick={revokeClinicalConsent}
+                        className={
+                          clinicalRevokeBusy
+                            ? "pointer-events-none opacity-50"
+                            : ""
+                        }
+                      >
+                        Retirar consentimiento de seguimiento personal
+                      </Button>
+                    ) : null}
+                  </div>
+                ) : (
+                <>
                 <label className="block space-y-2">
                   <span className="text-sm font-medium text-foreground">
                     Meta diaria de carbohidratos (g)
@@ -420,6 +453,8 @@ export function OnboardingFlow({
                     Inicia sesión para activar el seguimiento personal y sincronizar tu
                     meta entre dispositivos.
                   </p>
+                )}
+                </>
                 )}
               </div>
 

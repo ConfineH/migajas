@@ -1,0 +1,233 @@
+{
+  "migration": "20261125120000_suspend_clinical_surface.sql",
+  "sha256": "f1e96a3aafa43acf01e16479063a053404a835f3245b975b95df90007e6897e0",
+  "passed": true,
+  "checks": [
+    {
+      "name": "historical rows survive the migration",
+      "ok": true,
+      "detail": {
+        "intake": 2,
+        "shares": 1,
+        "contacts": 1,
+        "messages": 1,
+        "profiles": 3
+      }
+    },
+    {
+      "name": "patient reads own intake",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "patient cannot insert intake",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "permission denied for table intake_entries",
+        "rows": []
+      }
+    },
+    {
+      "name": "patient cannot update intake",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "permission denied for table intake_entries",
+        "rows": []
+      }
+    },
+    {
+      "name": "patient can delete own intake",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "patient can read own share",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "patient can delete own share",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "region update stays allowed",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "carb goal change is rejected",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "clinical profile columns are suspended",
+        "rows": []
+      }
+    },
+    {
+      "name": "turning clinical mode off stays allowed",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "another user cannot read the intake",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "turning clinical mode on is rejected",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "clinical profile columns are suspended",
+        "rows": []
+      }
+    },
+    {
+      "name": "educational profile insert stays allowed",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "new profile with a carb goal is rejected",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "clinical profile columns are suspended",
+        "rows": []
+      }
+    },
+    {
+      "name": "professional cannot read the share snapshot",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "professional can read an existing message",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "professional cannot insert a message",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "permission denied for table professional_contact_messages",
+        "rows": []
+      }
+    },
+    {
+      "name": "re-granting insert does not reopen intake",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "writes to intake_entries are suspended",
+        "rows": []
+      }
+    },
+    {
+      "name": "a direct share insert stays rejected",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "writes to professional_report_shares are suspended",
+        "rows": []
+      }
+    },
+    {
+      "name": "service role can delete messages",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "service role with a matching JWT can maintain a goal",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "rows": []
+      }
+    },
+    {
+      "name": "anon cannot insert intake",
+      "ok": true,
+      "detail": {
+        "ok": false,
+        "code": "42501",
+        "message": "permission denied for table intake_entries",
+        "rows": []
+      }
+    },
+    {
+      "name": "professional read policy is gone",
+      "ok": true,
+      "detail": [
+        "intake_entries:Users delete own intake entries",
+        "intake_entries:Users read own intake entries",
+        "patient_professional_contacts:Patients delete own professional contacts",
+        "patient_professional_contacts:Patients read own professional contacts",
+        "professional_contact_messages:Professionals read own contact messages",
+        "professional_report_shares:Patients delete own report shares",
+        "professional_report_shares:Patients read own report shares",
+        "user_profiles:own_profile"
+      ]
+    },
+    {
+      "name": "patient share read policy remains",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "authenticated intake privileges are select and delete",
+      "ok": true,
+      "detail": [
+        "DELETE",
+        "SELECT"
+      ]
+    },
+    {
+      "name": "kept intake row is unchanged",
+      "ok": true,
+      "detail": {
+        "intake": 1,
+        "kept_carbs": "12",
+        "patient_region": "do",
+        "patient_clinical": false,
+        "patient_goal": 160
+      }
+    }
+  ]
+}
