@@ -2,6 +2,10 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const { execSync, spawn, spawnSync } = require("child_process");
+const {
+  excludeFromInitialReplay,
+  runS2S3Composition,
+} = require("./s1_s3_composition.cjs");
 
 // Real PostgreSQL + real PostgREST, on localhost only.
 // Creates and drops a database named migajas_s1_lock. Refuses any host other
@@ -206,7 +210,11 @@ function applyMigrations() {
   const notes = [];
   const files = fs
     .readdirSync(repoMigrations)
-    .filter((name) => name.endsWith(".sql") && name !== lockName)
+    .filter(
+      (name) =>
+        name.endsWith(".sql") &&
+        !excludeFromInitialReplay(repoRoot, name, lockName),
+    )
     .sort();
   for (const name of files) {
     const result = psql(DB, "", ["-f", path.join(repoMigrations, name)]);
@@ -587,6 +595,22 @@ async function main() {
       privileges.service_update === true &&
       privileges.service_delete === true,
   ]);
+
+  checks.push(
+    ...(await runS2S3Composition({
+      repoRoot,
+      patient: PATIENT,
+      professional: PROFESSIONAL,
+      exec: (sql) => {
+        execSql(DB, sql);
+      },
+      query: (sql) =>
+        queryJson(
+          DB,
+          `select coalesce(json_agg(t), '[]'::json) from (${sql}) t`,
+        ),
+    })),
+  );
 
   const report = {
     validation: {
