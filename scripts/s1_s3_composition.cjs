@@ -77,14 +77,14 @@ function snapshotSql() {
 
 function probeSql(patient, professional) {
   return `
-    create temp table if not exists composition_probe (
+    drop table if exists public.s1_composition_probe;
+    create table public.s1_composition_probe (
       name text primary key,
       ok boolean not null,
       detail text
     );
-    truncate composition_probe;
 
-    insert into composition_probe (name, ok, detail)
+    insert into public.s1_composition_probe (name, ok, detail)
     values
       (
         's1 trigger stays enabled',
@@ -150,11 +150,11 @@ function probeSql(patient, professional) {
         update public.user_profiles
         set is_professional = true
         where user_id = '${patient}';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values ('s1 still locks professional columns', false, 'update succeeded');
       exception when others then
         get stacked diagnostics detail = message_text;
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           's1 still locks professional columns',
           detail like '%professional profile columns are locked%',
@@ -169,11 +169,11 @@ function probeSql(patient, professional) {
         update public.user_profiles
         set daily_carb_goal_g = coalesce(daily_carb_goal_g, 0) + 1
         where user_id = '${professional}';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values ('s3 still suspends clinical columns', false, 'update succeeded');
       exception when others then
         get stacked diagnostics detail = message_text;
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           's3 still suspends clinical columns',
           detail like '%clinical profile columns are suspended%',
@@ -187,11 +187,11 @@ function probeSql(patient, professional) {
         ) values (
           '${patient}', 's1-s3-fixture-food', 'comida', '2026-01-02', 10, 1
         );
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values ('s3 still rejects new intake', false, 'insert succeeded');
       exception when others then
         get stacked diagnostics detail = message_text;
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           's3 still rejects new intake',
           detail like '%suspended%',
@@ -206,7 +206,7 @@ function probeSql(patient, professional) {
         delete from public.intake_entries
         where user_id = '${patient}' and food_id = 's1-s3-fixture-food';
         execute 'reset role';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           'patient can still delete historical intake',
           not exists (
@@ -218,7 +218,7 @@ function probeSql(patient, professional) {
       exception when others then
         get stacked diagnostics detail = message_text;
         execute 'reset role';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values ('patient can still delete historical intake', false, detail);
       end;
 
@@ -231,7 +231,7 @@ function probeSql(patient, professional) {
         where patient_user_id = '${patient}'
           and professional_user_id = '${professional}';
         execute 'reset role';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           'service role can still delete historical shares and contacts',
           not exists (
@@ -248,7 +248,7 @@ function probeSql(patient, professional) {
       exception when others then
         get stacked diagnostics detail = message_text;
         execute 'reset role';
-        insert into composition_probe (name, ok, detail)
+        insert into public.s1_composition_probe (name, ok, detail)
         values (
           'service role can still delete historical shares and contacts',
           false,
@@ -276,7 +276,7 @@ async function runS2S3Composition({ exec, query, repoRoot, patient, professional
     ]);
     await exec(probeSql(patient, professional));
     const probes = await query(
-      "select name, ok, detail from composition_probe order by name",
+      "select name, ok, detail from public.s1_composition_probe order by name",
     );
     for (const probe of probes) {
       if (probe.ok !== true) {
