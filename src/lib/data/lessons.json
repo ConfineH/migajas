@@ -68,9 +68,8 @@
       {
         "id": "l1-lesson-2-s4",
         "type": "example",
-        "title": "Ejemplo con yogur",
-        "body": "125 g de yogur natural × 5 g HC/100 g = 6,25 g HC ≈ 0,6 raciones. ¡No son 12,5 raciones!",
-        "foodId": "yogur-natural"
+        "title": "Ejemplo con una etiqueta hipotética",
+        "body": "Etiqueta hipotética, no la ficha de un alimento: 125 g × 5 g HC/100 g = 6,25 g HC ≈ 0,6 raciones. El peso del envase no es el número de raciones."
       },
       {
         "id": "l1-lesson-2-practice",
@@ -195,7 +194,7 @@
         "id": "l1-lesson-5-s3",
         "type": "example",
         "title": "Lácteos",
-        "body": "1 vaso de leche (200 ml) = ~10 g HC (1 ración). 1 yogur natural = ~5-6 g HC (0,5-0,6 raciones). Los lácteos azucarados tienen más.",
+        "body": "1 vaso de leche (200 ml) = ~10 g HC (1 ración). El yogur natural se cuenta con la porción de su ficha; una etiqueta hipotética de 5 g por 100 g no es esa ficha. Los lácteos azucarados tienen más.",
         "foodId": "leche-semi-200ml"
       },
       {
@@ -298,8 +297,7 @@
         "id": "l2-lesson-2-s3",
         "type": "example",
         "title": "Puré instantáneo",
-        "body": "Cuidado: el puré de sobre puede tener leche en polvo y almidones. 100 g de puré preparado = ~12 g HC (1,2 raciones).",
-        "foodId": "es-pure-patata"
+        "body": "El puré de sobre puede llevar leche en polvo y almidones. La cifra de hidratos de esta ficha está en revisión y no se usa en la lección ni en el examen. No cuenta como verdura libre."
       },
       {
         "id": "l2-lesson-2-s4",
@@ -327,15 +325,13 @@
         "id": "l2-lesson-3-s1",
         "type": "example",
         "title": "Lentejas cocidas",
-        "body": "1 plato de lentejas cocidas (200 g) = ~24 g HC (2,4 raciones). Tienen 5 g de fibra, que ayuda a frenar la subida de glucosa.",
-        "foodId": "lentejas-cocidas-200g"
+        "body": "La cifra de un plato de lentejas cocidas está en revisión y no se usa en la lección ni en el examen. Las lentejas cocidas sí cuentan como carbohidratos."
       },
       {
         "id": "l2-lesson-3-s2",
         "type": "example",
         "title": "Garbanzos y alubias",
-        "body": "100 g de garbanzos cocidos = ~16 g HC (1,6 raciones). 100 g de alubias rojas = ~14 g HC (1,4 raciones).",
-        "foodId": "garbanzos-cocidos"
+        "body": "Las cifras de garbanzos y alubias cocidos están en revisión y no se usan en la lección ni en el examen. Cuentan como carbohidratos."
       },
       {
         "id": "l2-lesson-3-s3",
