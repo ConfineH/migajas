@@ -3,7 +3,6 @@ import {
   getResumableExamSession,
   type ExamSession,
 } from "@/lib/domain/exam-session";
-import { getExercisesForLevel } from "@/lib/domain/exercises";
 import {
   canAccessFlashcards,
   getLessonById,
@@ -74,43 +73,28 @@ export function validateLevelCompletion(
   progress: UserProgress,
   attempts: Attempt[],
   levelId: string,
-  levelExerciseIds: string[],
+  _levelExerciseIds: string[],
 ): { ok: true; correct: number; total: number } | { ok: false; error: string; status: number } {
+  void _levelExerciseIds;
   const session = getResumableExamSession(progress.activeExamSessions, levelId);
 
-  if (session) {
-    const score = computeExamScoreFromAttempts(session, attempts);
-    if (!score.complete) {
-      return {
-        ok: false,
-        error: "Completa todas las preguntas del examen.",
-        status: 403,
-      };
-    }
-    return { ok: true, correct: score.correct, total: score.total };
-  }
-
-  const exerciseIds =
-    levelExerciseIds.length > 0
-      ? levelExerciseIds
-      : getExercisesForLevel(levelId).map((exercise) => exercise.id);
-
-  if (exerciseIds.length === 0) {
-    return { ok: false, error: "Nivel no válido.", status: 400 };
-  }
-
-  const latest = computeLatestAttemptPerExercise(attempts, exerciseIds);
-  if (latest.size < exerciseIds.length) {
+  if (!session) {
     return {
       ok: false,
-      error: "Completa todos los ejercicios del nivel.",
+      error: "Solo un examen en curso puede certificar el nivel.",
       status: 403,
     };
   }
 
-  const correct = [...latest.values()].filter((attempt) => attempt.isCorrect)
-    .length;
-  return { ok: true, correct, total: exerciseIds.length };
+  const score = computeExamScoreFromAttempts(session, attempts);
+  if (!score.complete) {
+    return {
+      ok: false,
+      error: "Completa todas las preguntas del examen.",
+      status: 403,
+    };
+  }
+  return { ok: true, correct: score.correct, total: score.total };
 }
 
 type GuidedAction =

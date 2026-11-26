@@ -62,6 +62,32 @@ describe("computeExamScoreFromAttempts", () => {
 });
 
 describe("validateLevelCompletion", () => {
+  it("rejects a full set of correct practice attempts when no exam session exists", () => {
+    const exerciseIds = getExercisesForLevel("nivel-3").map((exercise) => exercise.id);
+    expect(exerciseIds.length).toBeGreaterThan(0);
+    const progress: UserProgress = {
+      completions: [],
+      completedLessons: [],
+      completedPracticeSteps: [],
+      freeModeUnlocked: true,
+    };
+    const attempts = exerciseIds.map((id, index) =>
+      attempt(id, true, `2026-07-17T11:${String(index).padStart(2, "0")}:00.000Z`),
+    );
+
+    const result = validateLevelCompletion(
+      progress,
+      attempts,
+      "nivel-3",
+      exerciseIds,
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.status).toBe(403);
+    }
+  });
+
   it("rejects exam completion without an active session", () => {
     const progress: UserProgress = {
       completions: [],
