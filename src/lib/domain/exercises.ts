@@ -24,6 +24,8 @@ export interface Exercise {
   foodId?: string;
   correctAnswer: string;
   options: ExerciseOption[];
+  /** Kept so older attempts still resolve. Hidden from practice and exams. */
+  retired?: boolean;
 }
 
 export interface Level {
@@ -49,7 +51,9 @@ export function getAllExercises(): Exercise[] {
 }
 
 export function getExercisesForLevel(levelId: string): Exercise[] {
-  return getAllExercises().filter((exercise) => exercise.levelId === levelId);
+  return getAllExercises().filter(
+    (exercise) => exercise.levelId === levelId && exercise.retired !== true,
+  );
 }
 
 export function getExerciseById(id: string): Exercise | undefined {

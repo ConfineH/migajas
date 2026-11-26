@@ -276,8 +276,7 @@
         "id": "l2-lesson-2-s1a",
         "type": "example",
         "title": "Patata asada",
-        "body": "La misma cantidad ya asada (150 g) = 69 g HC (6,9 raciones). Al horno pierde agua y el hidrato se concentra.",
-        "foodId": "es-patata-asada"
+        "body": "La cifra de la patata asada está en revisión y no se enseña como un valor validado. Al horno pierde agua y el hidrato se concentra."
       },
       {
         "id": "l2-lesson-2-s1b",
@@ -355,7 +354,7 @@
         "type": "practice",
         "title": "Practica ahora",
         "body": "Comprueba lo aprendido con un ejercicio rápido.",
-        "exerciseId": "ex-l2-3-legumes-counting"
+        "exerciseId": "ex-l2-3-label-rations"
       }
     ]
   },

@@ -253,28 +253,71 @@
   {
     "id": "ex-l2-3-legumes-counting",
     "levelId": "nivel-2",
-    "type": "multiple_choice",
-    "prompt": "Las lentejas cocidas, ¿cuentan como raciones de carbohidratos?",
-    "explanation": "Sí. La cifra concreta de un plato está en revisión y no se pregunta en este examen.",
+    "type": "count_rations",
+    "prompt": "1 plato de lentejas cocidas (200 g) tiene 12 g de HC por cada 100 g. ¿Cuántas raciones tiene el plato?",
+    "explanation": "200 g × 12 g HC/100 g = 24 g HC. 24 ÷ 10 = 2,4 raciones. Las lentejas tienen mucha fibra, pero contamos HC totales.",
     "difficulty": "Media",
-    "correctAnswer": "yes",
+    "foodId": "lentejas-cocidas-200g",
+    "correctAnswer": "2.4",
     "options": [
       {
         "id": "a",
-        "label": "Sí, cuentan como carbohidratos",
-        "value": "yes",
-        "isCorrect": true
+        "label": "1,2 raciones",
+        "value": "1.2",
+        "isCorrect": false
       },
       {
         "id": "b",
-        "label": "No, son verdura libre",
-        "value": "no",
+        "label": "2,0 raciones",
+        "value": "2.0",
         "isCorrect": false
       },
       {
         "id": "c",
-        "label": "Solo si llevan pan",
-        "value": "bread",
+        "label": "2,4 raciones",
+        "value": "2.4",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "3,0 raciones",
+        "value": "3.0",
+        "isCorrect": false
+      }
+    ],
+    "retired": true
+  },
+  {
+    "id": "ex-l2-3-label-rations",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "Una etiqueta hipotética indica 12 g de hidratos de carbono por cada 100 g. El plato pesa 200 g. ¿Cuántas raciones corresponden a esa etiqueta?",
+    "explanation": "200 g × 12 g HC/100 g = 24 g HC. 24 ÷ 10 = 2,4 raciones. Es un cálculo de etiqueta, no la ficha de un alimento.",
+    "difficulty": "Media",
+    "correctAnswer": "2.4",
+    "options": [
+      {
+        "id": "a",
+        "label": "1,2 raciones",
+        "value": "1.2",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "2,4 raciones",
+        "value": "2.4",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "3,0 raciones",
+        "value": "3.0",
         "isCorrect": false
       }
     ]
@@ -877,6 +920,37 @@
     "id": "n2-ex6",
     "levelId": "nivel-2",
     "type": "identify_portion",
+    "prompt": "¿Qué legumbre aporta ~16 g HC en 100 g cocidos?",
+    "explanation": "Los garbanzos cocidos aportan unos 16 g de HC por 100 g.",
+    "difficulty": "Media",
+    "foodId": "garbanzos-cocidos",
+    "correctAnswer": "garbanzos-cocidos",
+    "options": [
+      {
+        "id": "a",
+        "label": "Garbanzos cocidos",
+        "value": "garbanzos-cocidos",
+        "isCorrect": true
+      },
+      {
+        "id": "b",
+        "label": "Pollo",
+        "value": "pollo",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "Lechuga",
+        "value": "es-lechuga",
+        "isCorrect": false
+      }
+    ],
+    "retired": true
+  },
+  {
+    "id": "n2-ex6-legume-identify",
+    "levelId": "nivel-2",
+    "type": "identify_portion",
     "prompt": "¿Cuál de estos alimentos es una legumbre?",
     "explanation": "Los garbanzos son una legumbre. Esta pregunta no usa gramos de hidratos.",
     "difficulty": "Media",
@@ -905,28 +979,71 @@
   {
     "id": "n2-ex7",
     "levelId": "nivel-2",
-    "type": "multiple_choice",
-    "prompt": "Las alubias cocidas, ¿cuentan como carbohidratos?",
-    "explanation": "Sí. La cifra concreta está en revisión y no se pregunta en este examen.",
+    "type": "count_rations",
+    "prompt": "100 g de alubias rojas cocidas (14 g HC). ¿Raciones?",
+    "explanation": "14 g ÷ 10 = 1,4 raciones.",
     "difficulty": "Media",
-    "correctAnswer": "yes",
+    "foodId": "alubias-cocidas",
+    "correctAnswer": "1.4",
     "options": [
       {
         "id": "a",
-        "label": "Sí, cuentan como carbohidratos",
-        "value": "yes",
-        "isCorrect": true
-      },
-      {
-        "id": "b",
-        "label": "No, son verdura libre",
-        "value": "no",
+        "label": "1,0 raciones",
+        "value": "1.0",
         "isCorrect": false
       },
       {
+        "id": "b",
+        "label": "1,4 raciones",
+        "value": "1.4",
+        "isCorrect": true
+      },
+      {
         "id": "c",
-        "label": "Solo si están fritas",
-        "value": "fried",
+        "label": "1,6 raciones",
+        "value": "1.6",
+        "isCorrect": false
+      },
+      {
+        "id": "d",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": false
+      }
+    ],
+    "retired": true
+  },
+  {
+    "id": "n2-ex7-label-rations",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "Una etiqueta hipotética indica 14 g de hidratos de carbono. ¿Cuántas raciones son?",
+    "explanation": "14 ÷ 10 = 1,4 raciones. Es un cálculo de etiqueta, no la ficha de un alimento.",
+    "difficulty": "Media",
+    "correctAnswer": "1.4",
+    "options": [
+      {
+        "id": "a",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "1,4 raciones",
+        "value": "1.4",
+        "isCorrect": true
+      },
+      {
+        "id": "c",
+        "label": "1,6 raciones",
+        "value": "1.6",
+        "isCorrect": false
+      },
+      {
+        "id": "d",
+        "label": "2,0 raciones",
+        "value": "2.0",
         "isCorrect": false
       }
     ]
@@ -964,28 +1081,71 @@
   {
     "id": "n2-ex9",
     "levelId": "nivel-2",
-    "type": "multiple_choice",
-    "prompt": "El puré de patata, ¿cuenta como verdura libre?",
-    "explanation": "No. La cifra concreta del puré está en revisión y no se pregunta en este examen.",
+    "type": "count_rations",
+    "prompt": "100 g de puré de patata instantáneo (12 g HC). ¿Raciones?",
+    "explanation": "12 g ÷ 10 = 1,2 raciones.",
     "difficulty": "Media",
-    "correctAnswer": "no",
+    "foodId": "es-pure-patata",
+    "correctAnswer": "1.2",
     "options": [
       {
         "id": "a",
-        "label": "Sí, siempre",
-        "value": "yes",
+        "label": "0,5 raciones",
+        "value": "0.5",
         "isCorrect": false
       },
       {
         "id": "b",
-        "label": "No, cuenta como carbohidrato",
-        "value": "no",
-        "isCorrect": true
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
       },
       {
         "id": "c",
-        "label": "Solo si está frito",
-        "value": "fried",
+        "label": "1,2 raciones",
+        "value": "1.2",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "2,0 raciones",
+        "value": "2.0",
+        "isCorrect": false
+      }
+    ],
+    "retired": true
+  },
+  {
+    "id": "n2-ex9-label-rations",
+    "levelId": "nivel-2",
+    "type": "count_rations",
+    "prompt": "Una etiqueta hipotética indica 12 g de hidratos de carbono. ¿Cuántas raciones son?",
+    "explanation": "12 ÷ 10 = 1,2 raciones. Es un cálculo de etiqueta, no la ficha de un alimento.",
+    "difficulty": "Media",
+    "correctAnswer": "1.2",
+    "options": [
+      {
+        "id": "a",
+        "label": "0,5 raciones",
+        "value": "0.5",
+        "isCorrect": false
+      },
+      {
+        "id": "b",
+        "label": "1,0 raciones",
+        "value": "1.0",
+        "isCorrect": false
+      },
+      {
+        "id": "c",
+        "label": "1,2 raciones",
+        "value": "1.2",
+        "isCorrect": true
+      },
+      {
+        "id": "d",
+        "label": "2,0 raciones",
+        "value": "2.0",
         "isCorrect": false
       }
     ]
