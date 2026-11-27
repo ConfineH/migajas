@@ -1,0 +1,29 @@
+name: Nutrition hold
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# Isolated checks. This workflow does not apply SQL to production.
+jobs:
+  nutrition-hold:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the commit under test
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the curriculum migration against the production snapshot
+        run: node scripts/nutrition_hold_curriculum.test.cjs
+
+      - name: Run nutrition content and exam integrity tests
+        run: npx vitest run test/domain/nutrition-hold.test.ts test/domain/food-nutrition.test.ts test/eu-security-compliance/progress-integrity.test.ts
