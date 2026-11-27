@@ -7,6 +7,7 @@ import { requireClinicalAccess } from "@/lib/clinical-access";
 import { getFoodsForCountry, getFoodById } from "@/lib/data/foods";
 import { enrichFoods, localizeFoodDisplay } from "@/lib/domain/foods";
 import { formatExchangeRule, getRegionById } from "@/lib/domain/regions";
+import { CLINICAL_SURFACE_SUSPENDED } from "@/lib/domain/user-profile";
 import { listIntakeEntries } from "@/lib/supabase/intake";
 
 import { NOINDEX_METADATA } from "@/lib/domain/seo";
@@ -83,7 +84,11 @@ export default async function DiaryPage() {
         <AppPageLayout>
           <PageHeader
             title="Diario de ingesta"
-            description="Registra lo que comes hoy para llevar un seguimiento de carbohidratos."
+            description={
+              CLINICAL_SURFACE_SUSPENDED
+                ? "Puedes revisar lo que ya registraste. Los registros nuevos y los informes clínicos están suspendidos."
+                : "Registra lo que comes hoy para llevar un seguimiento de carbohidratos."
+            }
           />
           <DiaryClient
             initialEntries={entries}
@@ -92,6 +97,7 @@ export default async function DiaryPage() {
             dailyGoalG={access.profile.daily_carb_goal_g}
             exchangeRuleLabel={formatExchangeRule(region)}
             exchangeUnitG={region.exchangeUnitG}
+            writesSuspended={CLINICAL_SURFACE_SUSPENDED}
           />
         </AppPageLayout>
       </main>

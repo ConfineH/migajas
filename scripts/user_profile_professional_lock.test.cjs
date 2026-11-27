@@ -3,6 +3,10 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 const { PGlite } = require("@electric-sql/pglite");
+const {
+  excludeFromInitialReplay,
+  runS2S3Composition,
+} = require("./s1_s3_composition.cjs");
 
 // Preliminary lock check on an in-memory database.
 // Does not open a network connection, does not start PostgREST, and does not
@@ -300,7 +304,11 @@ async function main() {
 
   const files = fs
     .readdirSync(repoMigrations)
-    .filter((name) => name.endsWith(".sql") && name !== lockName)
+    .filter(
+      (name) =>
+        name.endsWith(".sql") &&
+        !excludeFromInitialReplay(repoRoot, name, lockName),
+    )
     .sort();
 
   for (const name of files) {
@@ -991,6 +999,20 @@ async function main() {
       recovered.authenticated_truncate === false &&
       recovered.service_delete === true,
   ]);
+
+  checks.push(
+    ...(await runS2S3Composition({
+      repoRoot,
+      patient: PATIENT,
+      professional: PROFESSIONAL,
+      exec: (sql) => db.exec(sql),
+      query: async (sql) => {
+        const result = await run(db, sql);
+        if (!result.ok) throw new Error(result.message || "query failed");
+        return result.rows;
+      },
+    })),
+  );
 
   const report = {
     validation: {

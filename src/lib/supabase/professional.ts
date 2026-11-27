@@ -6,7 +6,6 @@ import {
 } from "@/lib/supabase/service";
 import type { ClinicalReport } from "@/lib/domain/clinical-report";
 import {
-  addOneMonth,
   parsePatientShareRecipients,
   type PatientRecipientLabelId,
   type PatientShareRecipient,
@@ -70,22 +69,8 @@ export async function getShareForProfessional(
 export async function lookupProfessionalByShareCode(
   shareCode: string,
 ): Promise<{ role: string; display_name: string | null } | { error: string }> {
-  if (!isSupabaseConfigured()) {
-    return { error: "No se pudo comprobar el código." };
-  }
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc(
-    "lookup_professional_by_share_code",
-    { share_code: shareCode },
-  );
-
-  if (error) {
-    return { error: "No se pudo comprobar el código." };
-  }
-  if (!data) {
-    return { error: "Ese código no corresponde a un profesional." };
-  }
-  return data as { role: string; display_name: string | null };
+  void shareCode;
+  return { error: "La comprobación de códigos profesionales no está disponible." };
 }
 
 export async function deleteSharesSentByPatient(patientUserId: string): Promise<boolean> {
@@ -132,31 +117,8 @@ export async function updatePatientRecipientContact(input: {
   label?: PatientRecipientLabelId;
   repeatMode?: RecipientRepeatMode | null;
 }): Promise<boolean> {
-  if (!isSupabaseConfigured()) return false;
-  const supabase = await createClient();
-  const patch: {
-    updated_at: string;
-    label?: PatientRecipientLabelId;
-    repeat_mode?: RecipientRepeatMode | null;
-    repeat_due_at?: string | null;
-  } = {
-    updated_at: new Date().toISOString(),
-  };
-  if (input.label !== undefined) patch.label = input.label;
-  if (input.repeatMode !== undefined) {
-    patch.repeat_mode = input.repeatMode;
-    patch.repeat_due_at = input.repeatMode
-      ? addOneMonth(new Date()).toISOString()
-      : null;
-  }
-  const { data, error } = await supabase
-    .from("patient_professional_contacts")
-    .update(patch)
-    .eq("patient_user_id", input.patientUserId)
-    .eq("professional_user_id", input.professionalUserId)
-    .select("professional_user_id")
-    .maybeSingle();
-  return !error && Boolean(data);
+  void input;
+  return false;
 }
 
 export async function shareReportWithProfessional(input: {
@@ -165,24 +127,8 @@ export async function shareReportWithProfessional(input: {
   rangeTo: string;
   snapshot: ClinicalReport;
 }): Promise<{ id: string } | { error: string }> {
-  if (!isSupabaseConfigured()) {
-    return { error: "No se pudo enviar el informe." };
-  }
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("share_report_with_professional", {
-    share_code: input.shareCode,
-    range_from: input.rangeFrom,
-    range_to: input.rangeTo,
-    snapshot: input.snapshot,
-  });
-
-  if (error) {
-    if (error.message.includes("no válido")) {
-      return { error: "Ese código no corresponde a un profesional." };
-    }
-    return { error: "No se pudo enviar el informe." };
-  }
-  return { id: String(data) };
+  void input;
+  return { error: "El envío de informes no está disponible." };
 }
 
 export async function insertProfessionalContact(input: {

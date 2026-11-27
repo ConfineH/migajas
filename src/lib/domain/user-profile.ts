@@ -37,14 +37,45 @@ export function isClinicalFeatureEnabled(
   return envValue !== "false";
 }
 
+/** App-side switch for the educational pilot. The database trigger is the lock. */
+export const CLINICAL_SURFACE_SUSPENDED = true;
+
+export const CLINICAL_SUSPENSION_ERRORS = {
+  intakeWrite:
+    "El diario no admite registros nuevos. Puedes consultar y borrar lo ya guardado, y descargar tus datos desde Configuración.",
+  clinicalReport:
+    "La generación de informes clínicos está suspendida. La descarga de tus datos sigue en Configuración.",
+  shareSend:
+    "El envío de informes está suspendido. Puedes borrar las copias que ya enviaste.",
+  shareLookup: "La búsqueda de profesionales está suspendida.",
+  contact: "Los mensajes nuevos a administración están suspendidos.",
+  profile:
+    "La meta clínica y las altas de seguimiento personal están suspendidas.",
+} as const;
+
+export function clinicalSurfacePatchBlock(body: unknown): string | null {
+  if (!CLINICAL_SURFACE_SUSPENDED || !body || typeof body !== "object") {
+    return null;
+  }
+  const record = body as Record<string, unknown>;
+  if (
+    "daily_carb_goal_g" in record ||
+    record.clinical_mode_enabled === true
+  ) {
+    return CLINICAL_SUSPENSION_ERRORS.profile;
+  }
+  return null;
+}
+
 export function mergeCookieIntoProfile(
   cookie: OnboardingState | null,
   existing?: UserProfile | null,
 ): UserProfileUpsert {
   const region_id = (existing?.region_id ??
     resolveRegionIdFromOnboarding(cookie)) as RegionId;
-  const daily_carb_goal_g =
-    existing?.daily_carb_goal_g != null
+  const daily_carb_goal_g = CLINICAL_SURFACE_SUSPENDED
+    ? (existing?.daily_carb_goal_g ?? null)
+    : existing?.daily_carb_goal_g != null
       ? existing.daily_carb_goal_g
       : (cookie?.daily_carb_goal_g ?? null);
   const clinical_mode_enabled = existing?.clinical_mode_enabled ?? false;
