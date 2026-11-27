@@ -25,16 +25,13 @@ export default async function CookiesPage() {
         <AppPageLayout className="prose prose-stone py-10">
           <h1 className="font-display">Política de cookies</h1>
           <p className="text-sm text-muted">
-            Versión {LEGAL_VERSIONS.cookie_notice}. Última actualización: 23 de
-            julio de 2026.
+            Versión {LEGAL_VERSIONS.cookie_notice}. Última actualización: 11 de
+            noviembre de 2026.
           </p>
           <p>
             Migajas usa cookies y almacenamiento local para ofrecer el curso,
             guardar tu progreso y recordar tus preferencias. No usamos cookies
-            publicitarias ni de seguimiento de terceros en la versión base.
-            En el hosting (Vercel) puede haber medición agregada de visitas
-            (Web Analytics) diseñada sin cookies de publicidad; no identifica
-            a personas con fines comerciales.
+            publicitarias ni de seguimiento de terceros.
           </p>
 
           <h2>Inventario de cookies</h2>

@@ -1,6 +1,6 @@
 export const LEGAL_VERSIONS = {
   privacy_policy: "2026-09-16",
-  cookie_notice: "2026-07-23",
+  cookie_notice: "2026-11-11",
   terms_of_service: "2026-09-16",
   health_data: "2026-07-23",
 } as const;

@@ -15,11 +15,11 @@ describe("mergeCookieIntoProfile", () => {
     daily_carb_goal_g: 180,
   };
 
-  it("inherits cookie region and goal on first login", () => {
+  it("inherits cookie region and does not copy the clinical goal while suspended", () => {
     const merged = mergeCookieIntoProfile(cookie);
     expect(merged).toEqual({
       region_id: "do",
-      daily_carb_goal_g: 180,
+      daily_carb_goal_g: null,
       clinical_mode_enabled: false,
     });
   });

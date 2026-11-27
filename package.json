@@ -9,7 +9,10 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:profile-lock": "node scripts/user_profile_professional_lock.test.cjs",
+    "test:clinical-suspension": "node scripts/clinical_surface_suspension.test.cjs",
     "test:profile-lock:integration": "node scripts/user_profile_professional_lock.integration.cjs",
+    "test:share-suspension": "node scripts/professional_share_suspension.test.cjs",
+    "test:share-suspension:integration": "node scripts/professional_share_suspension.integration.cjs",
     "test:watch": "vitest",
     "db:seed": "node scripts/generate-content-seed.mjs",
     "db:seed:remote": "node scripts/apply-remote-seed.mjs",
@@ -28,7 +31,6 @@
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.2",
-    "@vercel/analytics": "^2.0.1",
     "gsap": "^3.15.0",
     "motion": "^12.42.2",
     "next": "16.2.10",
