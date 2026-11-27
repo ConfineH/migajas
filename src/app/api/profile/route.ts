@@ -4,6 +4,7 @@ import {
   toGuidedProgress,
 } from "@/lib/domain/guided-flow";
 import {
+  clinicalSurfacePatchBlock,
   isClinicalFeatureEnabled,
   mergeCookieIntoProfile,
   validateProfilePatch,
@@ -64,6 +65,10 @@ export async function PATCH(request: Request) {
   }
 
   const body = await request.json();
+  const suspended = clinicalSurfacePatchBlock(body);
+  if (suspended) {
+    return NextResponse.json({ error: suspended }, { status: 403 });
+  }
   const validation = validateProfilePatch(body);
   if (!validation.ok) {
     return NextResponse.json({ error: validation.error }, { status: 400 });

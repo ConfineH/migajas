@@ -10,6 +10,7 @@ import { localizeLevel } from "@/lib/domain/content-localization";
 import { getLevels } from "@/lib/domain/exercises";
 import { resolveHubCourseFocus } from "@/lib/domain/hub-dashboard";
 import { resolveOnboardingRegionId } from "@/lib/domain/regions";
+import { CLINICAL_SURFACE_SUSPENDED } from "@/lib/domain/user-profile";
 import { resolveProgress } from "@/lib/learning-state";
 import { getOnboardingState } from "@/lib/onboarding";
 import { getActiveRegion, getDefaultRegion } from "@/lib/region-server";
@@ -67,6 +68,7 @@ export default async function OnboardingPage({
             postCompleteHref={
               settingsMode ? (focus?.continueHref ?? "/learn") : "/primera-racion"
             }
+            clinicalSurfaceSuspended={CLINICAL_SURFACE_SUSPENDED}
           />
         </AppPageLayout>
       </main>

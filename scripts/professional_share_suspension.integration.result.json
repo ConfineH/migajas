@@ -1,0 +1,102 @@
+{
+  "kind": "postgres-postgrest",
+  "postgresVersion": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+  "postgrestVersion": "PostgREST 16.6",
+  "headAtRun": "27f8cf626a36ad6c3c1db38addaa3b56ae1b4fc5",
+  "expectedCommit": null,
+  "migrationSha256": "2ef608b27de85f5e5b2fcfd3852e3958651b6de57ff39690d6241b8213875fe6",
+  "migrationNotes": [
+    {
+      "file": "20260713160000_seed_content.sql",
+      "applied": false,
+      "message": "psql:/agent/repos/migajas/supabase/migrations/20260713160000_seed_content.sql:392: ERROR:  column \"pool_exercise_ids\" of relation \"level_exams\" does not exist"
+    },
+    {
+      "file": "20260714160300_lock_admin_rpc.sql",
+      "applied": false,
+      "message": "psql:/agent/repos/migajas/supabase/migrations/20260714160300_lock_admin_rpc.sql:2: ERROR:  function public.get_org_dashboard_stats() does not exist"
+    }
+  ],
+  "privileges": {
+    "auth_contact_select": true,
+    "auth_contact_insert": false,
+    "auth_contact_update": false,
+    "auth_contact_delete": true,
+    "anon_contact_insert": false,
+    "anon_contact_truncate": false,
+    "service_contact_insert": false,
+    "service_contact_delete": true,
+    "auth_share_insert": false,
+    "auth_share_delete": true,
+    "service_share_insert": false,
+    "service_share_delete": true,
+    "public_share_exec": false,
+    "anon_share_exec": false,
+    "auth_share_exec": false,
+    "service_share_exec": false,
+    "anon_lookup_exec": false,
+    "auth_lookup_exec": false,
+    "auth_list_exec": true,
+    "anon_list_exec": false,
+    "auth_intake_insert": true
+  },
+  "checks": [
+    [
+      "historical rows survive S1 and S2",
+      true
+    ],
+    [
+      "PostgREST privileges match the suspension",
+      true
+    ],
+    [
+      "anon cannot insert a contact",
+      true
+    ],
+    [
+      "authenticated cannot insert a contact",
+      true
+    ],
+    [
+      "authenticated cannot insert a share",
+      true
+    ],
+    [
+      "share_report_with_professional is closed for anon, authenticated, and service_role",
+      true
+    ],
+    [
+      "lookup_professional_by_share_code is closed",
+      true
+    ],
+    [
+      "list_patient_share_recipients returns only the caller",
+      true
+    ],
+    [
+      "patient can read own contacts and another user cannot",
+      true
+    ],
+    [
+      "professional can still read shares sent to them",
+      true
+    ],
+    [
+      "another user cannot revoke the patient's shares",
+      true
+    ],
+    [
+      "the patient can revoke own shares",
+      true
+    ],
+    [
+      "service_role can delete one fictional account and the other contact remains",
+      true
+    ],
+    [
+      "no blocked share was stored",
+      true
+    ]
+  ],
+  "passed": true
+}

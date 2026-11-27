@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppNavBar } from "@/components/AppNavBar";
-import { ProfessionalContactForm } from "@/components/professional/ProfessionalContactForm";
 import { AppPageLayout } from "@/components/layout/AppPageLayout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CopyRecommendLink } from "@/components/professional/CopyRecommendLink";
@@ -10,10 +9,7 @@ import { getRegionById, recommendCourseUrl } from "@/lib/domain/regions";
 import { getSiteUrl, NOINDEX_METADATA } from "@/lib/domain/seo";
 import { recommendCourseQrDataUrl } from "@/lib/recommend-qr";
 import { getAuthUser } from "@/lib/supabase/auth";
-import {
-  listProfessionalContacts,
-  listSharesForProfessional,
-} from "@/lib/supabase/professional";
+import { listProfessionalContacts } from "@/lib/supabase/professional";
 import { getUserProfile } from "@/lib/supabase/user-profile";
 
 export const metadata = NOINDEX_METADATA;
@@ -30,10 +26,7 @@ export default async function ProfessionalDashboardPage() {
     redirect("/profesional/alta");
   }
 
-  const [shares, messages] = await Promise.all([
-    listSharesForProfessional(user.id),
-    listProfessionalContacts(user.id),
-  ]);
+  const messages = await listProfessionalContacts(user.id);
   const roleLabel = professionalRoleLabel(profile.professional_role);
   const region = getRegionById(profile.region_id);
   const recommendUrl = recommendCourseUrl(getSiteUrl(), region.id);
@@ -94,13 +87,12 @@ export default async function ProfessionalDashboardPage() {
 
             <article className="feature-card p-6">
               <h2 className="font-display text-2xl font-medium text-foreground">
-                Código para el informe
+                Informes
               </h2>
               <p className="mt-2 text-sm text-muted">
-                Dáselo a quien quiera enviarte un informe. No abre el curso.
-              </p>
-              <p className="mt-6 font-mono text-3xl tracking-[0.3em] text-sage-strong">
-                {profile.professional_share_code}
+                La recepción de informes está suspendida. El código de
+                compartición no se muestra. Las copias ya enviadas no se han
+                borrado: quien las envió puede consultarlas y retirarlas.
               </p>
             </article>
           </section>
@@ -135,32 +127,9 @@ export default async function ProfessionalDashboardPage() {
               Informes recibidos
             </h2>
             <p className="mt-2 max-w-prose text-sm text-muted">
-              Solo ves lo que la persona te envía. No es el diario en directo ni
-              la historia clínica.
+              La lectura de informes recibidos está suspendida. No se muestra
+              el contenido. Las copias siguen guardadas para quien las envió.
             </p>
-            {shares.length === 0 ? (
-              <p className="mt-4 rounded-2xl bg-sage-light/60 px-5 py-4 text-sm text-muted">
-                Aún no te han enviado informes.
-              </p>
-            ) : (
-              <ul className="mt-4 space-y-3">
-                {shares.map((share) => (
-                  <li key={share.id}>
-                    <Link
-                      href={`/profesional/informes/${share.id}`}
-                      className="feature-card block p-5 hover:bg-sage-light/40"
-                    >
-                      <p className="font-medium text-foreground">
-                        Del {share.range_from} al {share.range_to}
-                      </p>
-                      <p className="mt-1 text-sm text-muted">
-                        Enviado el {share.created_at.slice(0, 10)}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
           </section>
 
           <section className="grid gap-8 lg:grid-cols-2">
@@ -168,10 +137,10 @@ export default async function ProfessionalDashboardPage() {
               <h2 className="font-display text-2xl font-medium text-foreground">
                 Escribir a administración
               </h2>
-              <p className="mt-2 mb-4 text-sm text-muted">
-                Dudas sobre el catálogo, el curso o el piloto.
+              <p className="mt-2 text-sm text-muted">
+                Los mensajes nuevos están suspendidos. Los que ya enviaste
+                siguen en esta página.
               </p>
-              <ProfessionalContactForm />
             </div>
             <div>
               <h2 className="font-display text-2xl font-medium text-foreground">

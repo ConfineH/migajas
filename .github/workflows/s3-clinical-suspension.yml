@@ -1,0 +1,33 @@
+name: S3 clinical suspension
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - cursor/s3-suspend-clinical-surface-59a4
+
+# This workflow runs isolated tests. It does not apply SQL to production
+# and it does not call Supabase or Vercel.
+jobs:
+  clinical-suspension:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the commit under test
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the isolated database suspension check
+        run: npm run test:clinical-suspension
+
+      - name: Run the app suspension tests
+        run: npx vitest run test/domain/clinical-surface-suspension.test.ts test/domain/user-profile.test.ts test/commercial-hardening/api-routes-auth.test.ts

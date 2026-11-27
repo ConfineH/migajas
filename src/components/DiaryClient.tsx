@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/Button";
 import { ClinicalExportPanel } from "@/components/ClinicalExportPanel";
 import { StatCard } from "@/components/ui/StatCard";
@@ -27,6 +28,7 @@ interface DiaryClientProps {
   dailyGoalG: number | null;
   exchangeRuleLabel: string;
   exchangeUnitG: number;
+  writesSuspended?: boolean;
 }
 
 function getLocalDateString(date = new Date()): string {
@@ -43,6 +45,7 @@ export function DiaryClient({
   dailyGoalG,
   exchangeRuleLabel,
   exchangeUnitG,
+  writesSuspended = false,
 }: DiaryClientProps) {
   const [entries, setEntries] = useState(initialEntries);
   const [localDate] = useState(initialLocalDate || getLocalDateString());
@@ -188,6 +191,16 @@ export function DiaryClient({
         </p>
       ) : null}
 
+      {writesSuspended ? (
+        <p className="rounded-2xl bg-sage-light/70 px-5 py-4 text-sm text-muted">
+          No se pueden añadir alimentos ni cambiar porciones. Para descargar
+          tus datos o borrar la cuenta, abre{" "}
+          <Link href="/onboarding" className="font-medium text-sage-strong underline">
+            Configuración
+          </Link>
+          . Esa descarga no genera un informe clínico.
+        </p>
+      ) : (
       <section className="feature-card space-y-4 p-5">
         <h2 className="font-display text-lg font-medium text-foreground">Añadir alimento</h2>
         <input
@@ -237,6 +250,7 @@ export function DiaryClient({
           Registrar
         </Button>
       </section>
+      )}
 
       <section className="space-y-4">
         <h2 className="font-display text-lg font-medium text-foreground">Hoy</h2>
@@ -271,6 +285,7 @@ export function DiaryClient({
                   </div>
                   {entry.editable ? (
                     <div className="flex items-center gap-2">
+                      {writesSuspended ? null : (
                       <input
                         type="number"
                         min={0.5}
@@ -288,6 +303,7 @@ export function DiaryClient({
                           }
                         }}
                       />
+                      )}
                       <button
                         type="button"
                         onClick={() => void handleDelete(entry.id)}
@@ -307,7 +323,7 @@ export function DiaryClient({
         )}
       </section>
 
-      <ClinicalExportPanel />
+      {writesSuspended ? null : <ClinicalExportPanel />}
     </div>
   );
 }

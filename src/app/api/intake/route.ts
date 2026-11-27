@@ -1,19 +1,14 @@
 import { NextResponse } from "next/server";
 import { requireClinicalAccess } from "@/lib/clinical-access";
-import { getFoodById } from "@/lib/data/foods";
 import {
   assertSameDayEditable,
-  buildIntakeEntry,
-  validateIntakeWrite,
   validateLocalDate,
-  validatePortionMultiplier,
 } from "@/lib/domain/intake";
+import { CLINICAL_SUSPENSION_ERRORS } from "@/lib/domain/user-profile";
 import {
   deleteIntakeEntry,
   getIntakeEntry,
-  insertIntakeEntry,
   listIntakeEntries,
-  updateIntakeEntry,
 } from "@/lib/supabase/intake";
 
 function parseDateRange(url: URL): { from: string; to: string } | null {
@@ -55,99 +50,20 @@ export async function GET(request: Request) {
   return NextResponse.json({ entries });
 }
 
-export async function POST(request: Request) {
-  const access = await requireClinicalAccess();
-  if (!access.ok) {
-    return NextResponse.json(
-      { error: access.error },
-      { status: access.status },
-    );
-  }
-
-  const body = await request.json();
-  const validation = validateIntakeWrite(body);
-  if (!validation.ok) {
-    return NextResponse.json({ error: validation.error }, { status: 400 });
-  }
-
-  const food = getFoodById(validation.value.food_id);
-  if (!food) {
-    return NextResponse.json({ error: "Alimento no encontrado." }, { status: 404 });
-  }
-
-  const draft = buildIntakeEntry(
-    validation.value,
-    food,
-    access.profile.region_id,
+export async function POST(_request: Request) {
+  void _request;
+  return NextResponse.json(
+    { error: CLINICAL_SUSPENSION_ERRORS.intakeWrite },
+    { status: 403 },
   );
-  const entry = await insertIntakeEntry(access.user.id, draft);
-  if (!entry) {
-    return NextResponse.json(
-      { error: "No se pudo guardar la entrada." },
-      { status: 500 },
-    );
-  }
-
-  return NextResponse.json({ entry });
 }
 
-export async function PATCH(request: Request) {
-  const access = await requireClinicalAccess();
-  if (!access.ok) {
-    return NextResponse.json(
-      { error: access.error },
-      { status: access.status },
-    );
-  }
-
-  const body = await request.json();
-  const entryId = typeof body.id === "string" ? body.id : null;
-  const localDate = typeof body.local_date === "string" ? body.local_date : null;
-  const portionMultiplier = validatePortionMultiplier(body.portion_multiplier);
-
-  if (!entryId || validateLocalDate(localDate)) {
-    return NextResponse.json({ error: "Datos no válidos." }, { status: 400 });
-  }
-  if (portionMultiplier === null) {
-    return NextResponse.json({ error: "Porción no válida." }, { status: 400 });
-  }
-
-  const existing = await getIntakeEntry(access.user.id, entryId);
-  if (!existing) {
-    return NextResponse.json({ error: "Entrada no encontrada." }, { status: 404 });
-  }
-
-  const sameDayError = assertSameDayEditable(existing.local_date, localDate!);
-  if (sameDayError) {
-    return NextResponse.json({ error: sameDayError }, { status: 403 });
-  }
-
-  const food = getFoodById(existing.food_id);
-  if (!food) {
-    return NextResponse.json({ error: "Alimento no encontrado." }, { status: 404 });
-  }
-
-  const draft = buildIntakeEntry(
-    {
-      food_id: existing.food_id,
-      meal_slot: existing.meal_slot,
-      local_date: existing.local_date,
-      portion_multiplier: portionMultiplier,
-    },
-    food,
-    access.profile.region_id,
-    { logged_at: existing.logged_at },
+export async function PATCH(_request: Request) {
+  void _request;
+  return NextResponse.json(
+    { error: CLINICAL_SUSPENSION_ERRORS.intakeWrite },
+    { status: 403 },
   );
-
-  const entry = await updateIntakeEntry(access.user.id, entryId, draft);
-  if (!entry) {
-    return NextResponse.json(
-      { error: "No se pudo actualizar la entrada." },
-      { status: 500 },
-    );
-  }
-
-  return NextResponse.json({ entry });
 }
 
 export async function DELETE(request: Request) {

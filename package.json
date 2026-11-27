@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "test:profile-lock": "node scripts/user_profile_professional_lock.test.cjs",
+    "test:clinical-suspension": "node scripts/clinical_surface_suspension.test.cjs",
+    "test:profile-lock:integration": "node scripts/user_profile_professional_lock.integration.cjs",
+    "test:share-suspension": "node scripts/professional_share_suspension.test.cjs",
+    "test:share-suspension:integration": "node scripts/professional_share_suspension.integration.cjs",
     "test:watch": "vitest",
     "db:seed": "node scripts/generate-content-seed.mjs",
     "db:seed:remote": "node scripts/apply-remote-seed.mjs",
@@ -35,6 +40,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.16",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
